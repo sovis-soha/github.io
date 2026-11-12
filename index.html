@@ -208,6 +208,37 @@ td.num,th.num{text-align:right}
 .confirm-box{padding:8px 24px 10px;font-size:14px;line-height:1.6;color:var(--ink2)}
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:14px;font-size:13.5px;font-weight:600;display:none;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.2)}
 
+/* workday calendar */
+.wd-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mnav{display:flex;align-items:center;gap:6px}
+.mnav b{font-size:17px;font-weight:800;min-width:120px;text-align:center;letter-spacing:-.4px}
+.cal-wrap{padding:0 16px 16px}
+.cal-h{display:grid;grid-template-columns:repeat(7,1fr);font-size:12px;font-weight:700;color:var(--mute);padding:10px 0 8px;text-align:center}
+.cal-h span:first-child{color:#e5484d}.cal-h span:last-child{color:var(--blue)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cell{min-height:118px;background:var(--soft);border:1px solid transparent;border-radius:14px;padding:8px 9px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:.12s;overflow:hidden}
+.cell:hover{border-color:#cdd7e3;background:#fff;box-shadow:var(--sh)}
+.cell.out{opacity:.35}
+.cell.today{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(0,108,184,.1)}
+.cell .top3{display:flex;align-items:center;gap:6px}
+.cell .dn{font-weight:800;font-size:14px}
+.cell .dn.sun,.cell .dn.hol{color:#e5484d}.cell .dn.sat{color:var(--blue)}
+.cell .st{margin-left:auto;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:999px}
+.st-open{background:var(--green-s);color:#0b8a5e}.st-short{background:#e6f7f9;color:#1b8796}.st-closed{background:#eef1f5;color:#6b7686}.st-holiday{background:var(--red-s);color:#d12f2f}
+.cell .memo{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.cell .pp{display:flex;flex-wrap:wrap;gap:3px}
+.pc{font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:6px;white-space:nowrap}
+.ps-off{background:var(--red-s);color:#c22}.ps-am,.ps-pm{background:var(--amber-s);color:#a96400}.ps-half{background:#f2edff;color:#6d3fd8}.ps-trip{background:#e8f2fb;color:var(--blue)}.ps-sick{background:#fdeef6;color:#b02a74}.ps-rest{background:#eef1f5;color:#6b7686}.ps-work{background:var(--green-s);color:#0b8a5e}
+.cell .cnt{margin-top:auto;font-size:11px;color:var(--mute);font-weight:600}
+.legend2{display:flex;gap:6px;flex-wrap:wrap;padding:0 20px 14px}
+.prow{display:grid;grid-template-columns:1fr 150px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+.prow:last-child{border:0}
+.prow .pn{font-weight:700}.prow .pn small{color:var(--mute);font-weight:500;margin-left:6px}
+.prow select{padding:8px 10px}
+.srow{display:grid;grid-template-columns:1fr 1fr 70px 40px;gap:8px;align-items:center;margin-bottom:8px}
+.srow input{padding:8px 10px}
+.ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;height:36px;color:var(--red);display:flex;align-items:center;justify-content:center}
+@media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
 @media (max-width:1400px){.bento{grid-template-columns:repeat(4,1fr)}.hero{grid-column:span 4}}
 @media (max-width:1150px){.g3,.g2{grid-template-columns:1fr}}
 @media (max-width:900px){
@@ -270,6 +301,7 @@ td.num,th.num{text-align:right}
     </nav>
     <div class="ng">센터운영관리</div>
     <nav class="nav">
+      <a href="#workday" data-v="workday"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 18h2"/></svg>워킹데이 계획</a>
       <a href="#oxygen" data-v="oxygen"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3M12 3V2"/><path d="M10 12h4"/></svg>산소가스 관리</a>
       <a href="#mail" data-v="mail"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg>등기 발송 관리</a>
     </nav>
@@ -316,7 +348,9 @@ td.num,th.num{text-align:right}
       <div class="g3">
         <div class="card"><div class="ph"><h3>계약 유형별 현황</h3><div class="right"><button class="link" data-go="contracts">전체보기 ›</button></div></div><div class="pb"><div class="donut-wrap"><div class="donut"><svg viewBox="0 0 42 42" width="150" height="150" id="donutSvg"></svg><div class="ctr"><b id="donutN">0</b><small>전체 계약</small></div></div><div class="legend" id="legend"></div></div></div></div>
         <div class="card"><div class="ph"><h3>담당부서별 계약 수</h3><span class="hint" id="deptFoot"></span></div><div class="pb" id="deptBars"></div></div>
-        <div class="card"><div class="ph"><h3>센터운영 현황</h3><span class="hint">이번달</span></div><div class="pb"><div class="ops">
+        <div class="card"><div class="ph"><h3>센터운영 현황</h3><span class="hint">오늘 · 이번달</span></div><div class="pb"><div class="ops">
+          <div class="op" data-go="workday"><div class="ico" style="background:var(--green-s);color:var(--green)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18"/></svg></div><small>오늘 센터</small><b id="opToday">-</b></div>
+          <div class="op" data-go="workday"><div class="ico" style="background:var(--red-s);color:var(--red)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/></svg></div><small>오늘 휴가·반차</small><b id="opTodayOff">0<em>명</em></b></div>
           <div class="op" data-go="oxygen"><div class="ico" style="background:#e6f7f9;color:var(--teal-d)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3"/></svg></div><small>산소 입고 대기</small><b id="opO2Wait">0<em>건</em></b></div>
           <div class="op" data-go="oxygen"><div class="ico" style="background:#e8f2fb;color:var(--blue)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div><small>이번달 산소 발주</small><b id="opO2Month">0<em>병</em></b></div>
           <div class="op" data-go="mail"><div class="ico" style="background:var(--amber-s);color:var(--amber)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg></div><small>등기 발송 대기</small><b id="opMailWait">0<em>건</em></b></div>
@@ -398,6 +432,26 @@ td.num,th.num{text-align:right}
         <div class="pf" id="mFoot"></div>
       </div>
     </section>
+    <!-- WORKDAY -->
+    <section id="v-workday" style="display:none">
+      <div class="bento" style="grid-template-columns:repeat(4,1fr)">
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--green-s);color:var(--green)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M9 15l2 2 4-4"/></svg></div><span class="lb">센터 운영일 (워킹데이)</span></div><div class="v" id="wOpen">0<small>일</small></div><div class="ft" id="wOpenFt">정상 0 · 단축 0</div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:#eef1f5;color:#6b7686"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></svg></div><span class="lb">휴진 · 공휴일</span></div><div class="v" id="wClosed">0<small>일</small></div><div class="ft" id="wClosedFt">공휴일 0일</div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--red-s);color:var(--red)"><svg class="i" viewBox="0 0 24 24"><path d="M17 8a5 5 0 0 0-10 0c0 4 5 9 5 9s5-5 5-9z"/><circle cx="12" cy="8" r="1.5"/></svg></div><span class="lb">연차 · 병가</span></div><div class="v" id="wOff">0<small>건</small></div><div class="ft">행정 인원 합계</div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--amber-s);color:var(--amber)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg></div><span class="lb">반차 · 하프근무</span></div><div class="v" id="wHalf">0<small>건</small></div><div class="ft" id="wStaffFt">행정 인원 0명</div></div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="wPrev" title="이전 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="wTitle"></b><button class="btn btn-ic" id="wNext" title="다음 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="wThis">이번달</button></div>
+          <div class="right"><button class="btn" id="wStaffBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"/></svg>행정 인원 관리</button><button class="btn" id="wCopy"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>월간 요약 복사</button></div>
+        </div>
+        <div class="legend2"><span class="pc st-open">정상운영</span><span class="pc st-short">단축운영</span><span class="pc st-closed">휴진</span><span class="pc st-holiday">공휴일</span><span style="width:10px"></span><span class="pc ps-off">연차</span><span class="pc ps-am">오전반차</span><span class="pc ps-pm">오후반차</span><span class="pc ps-half">하프근무</span><span class="pc ps-trip">출장·교육</span><span class="pc ps-sick">병가·경조</span><span class="pc ps-work">휴일근무</span></div>
+        <div class="cal-wrap"><div class="cal-h"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="cal" id="cal"></div></div>
+      </div>
+      <div class="card">
+        <div class="ph"><h3>행정 인원별 월간 근무</h3><span class="hint">근무일수: 출근·출장 1일, 반차·하프 0.5일</span></div>
+        <div class="tw"><table><thead><tr><th>이름</th><th>파트</th><th class="num">근무일수</th><th class="num">연차</th><th class="num">오전반차</th><th class="num">오후반차</th><th class="num">하프근무</th><th class="num">출장·교육</th><th class="num">병가·경조</th></tr></thead><tbody id="wTable"></tbody></table></div>
+      </div>
+    </section>
   </main>
 </div>
 
@@ -409,7 +463,7 @@ td.num,th.num{text-align:right}
 "use strict";
 const TYPES = ["위수탁계약","MOU협약","유지보수계약","식사권 계약","기타"];
 const TYPE_COLORS = {"위수탁계약":"#006cb8","MOU협약":"#8b5cf6","유지보수계약":"#2aa5b5","식사권 계약":"#f59e0b","기타":"#94a3b8"};
-const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail"};
+const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday"};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -481,7 +535,7 @@ $("loginForm").addEventListener("submit",e=>{ e.preventDefault(); tryLogin(); })
 $("logout").onclick=()=>doLogout();
 
 /* ---------- STORAGE (구글 시트 / 미리보기는 이 브라우저) ---------- */
-const data={contracts:[],oxygen:[],mail:[]};
+const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[]};
 let mode=GAS?"gas":"local", canWrite=true, pollTimer=null;
 function setConn(s){
   const dot=$("connDot"), txt=$("connTxt"), n=$("notice");
@@ -522,6 +576,7 @@ const VIEWS={
   dashboard:{t:"대시보드",d:"계약 현황을 한눈에 확인하세요.",add:"계약 등록",fn:()=>contractForm()},
   contracts:{t:"계약 목록",d:"등록된 전체 계약을 조회하고 수정합니다.",add:"계약 등록",fn:()=>contractForm()},
   alerts:{t:"만료 알림",d:"만료가 다가오거나 지난 계약을 확인하세요.",add:"계약 등록",fn:()=>contractForm()},
+  workday:{t:"워킹데이 계획",d:"날짜별 센터 운영 여부와 행정 인원 근무를 관리합니다.",add:"오늘 근무 입력",fn:()=>dayForm(todayStr())},
   oxygen:{t:"산소가스 관리",d:"발주일 · 입고일 · 요청 수량을 기록합니다.",add:"발주 등록",fn:()=>oxygenForm()},
   mail:{t:"등기 발송 관리",d:"등기 발송 요청과 발송 결과를 기록합니다.",add:"발송 요청",fn:()=>mailForm()}
 };
@@ -596,6 +651,7 @@ function renderDashboard(){
   $("opO2Wait").innerHTML=ox.filter(o=>!o.inDate).length+"<em>건</em>";
   $("opO2Month").innerHTML=oxM.reduce((s,o)=>s+(Number(o.qty)||0),0)+"<em>병 · "+oxM.length+"건</em>";
   $("opMailWait").innerHTML=ml.filter(x=>!x.sentDate).length+"<em>건</em>";
+  try{ const td=todayStr(), tds=dayStatus(td); $("opToday").innerHTML=DSTAT[tds][0]+(dayMemo(td)?"<em>"+esc(dayMemo(td))+"</em>":""); $("opTodayOff").innerHTML=data.staff.filter(p=>{const x=personStat(td,p.id);return x!=="work"&&x!=="rest";}).length+"<em>명</em>"; }catch(e){}
   $("opMailMonth").innerHTML=ml.filter(x=>(x.reqDate||"").slice(0,7)===m).length+"<em>건</em>";
 
   // urgent
@@ -716,7 +772,158 @@ function mailForm(x){
     fd=>fd.sentDate&&fd.sentDate<fd.reqDate?"발송일이 요청일보다 빠릅니다.":"");
 }
 
-function renderAll(){ renderDashboard(); renderContracts(); renderAlerts(); renderOxygen(); renderMail(); }
+/* ---------- WORKDAY (워킹데이 계획) ---------- */
+// 공휴일: 2026년(대체공휴일·지방선거 포함), 2027년 월력요항 기준(노동절·제헌절 포함)
+const HOL={
+ "2026-01-01":"신정","2026-02-16":"설날 연휴","2026-02-17":"설날","2026-02-18":"설날 연휴","2026-03-01":"삼일절","2026-03-02":"대체공휴일(삼일절)",
+ "2026-05-05":"어린이날","2026-05-24":"부처님오신날","2026-05-25":"대체공휴일(부처님오신날)","2026-06-03":"지방선거","2026-06-06":"현충일",
+ "2026-08-15":"광복절","2026-08-17":"대체공휴일(광복절)","2026-09-24":"추석 연휴","2026-09-25":"추석","2026-09-26":"추석 연휴",
+ "2026-10-03":"개천절","2026-10-05":"대체공휴일(개천절)","2026-10-09":"한글날","2026-12-25":"성탄절",
+ "2027-01-01":"신정","2027-02-06":"설날 연휴","2027-02-07":"설날","2027-02-08":"설날 연휴","2027-02-09":"대체공휴일(설날)","2027-03-01":"삼일절",
+ "2027-05-01":"노동절","2027-05-03":"대체공휴일(노동절)","2027-05-05":"어린이날","2027-05-13":"부처님오신날","2027-06-06":"현충일",
+ "2027-07-17":"제헌절","2027-07-19":"대체공휴일(제헌절)","2027-08-15":"광복절","2027-08-16":"대체공휴일(광복절)",
+ "2027-09-14":"추석 연휴","2027-09-15":"추석","2027-09-16":"추석 연휴","2027-10-03":"개천절","2027-10-04":"대체공휴일(개천절)",
+ "2027-10-09":"한글날","2027-10-11":"대체공휴일(한글날)","2027-12-25":"성탄절","2027-12-27":"대체공휴일(성탄절)"
+};
+const DSTAT={open:["정상운영","st-open"],short:["단축운영","st-short"],closed:["휴진","st-closed"],holiday:["공휴일","st-holiday"]};
+const PSTAT={work:["출근","ps-work"],off:["연차","ps-off"],am:["오전반차","ps-am"],pm:["오후반차","ps-pm"],half:["하프근무","ps-half"],trip:["출장·교육","ps-trip"],sick:["병가·경조","ps-sick"],rest:["휴무","ps-rest"]};
+const PORDER=["work","off","am","pm","half","trip","sick","rest"];
+const WEEKK=["일","월","화","수","목","금","토"];
+const isOpenSt=s=>s==="open"||s==="short";
+const dObj=ds=>new Date(ds+"T00:00:00");
+const dStr=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const dayRec=ds=>data.workday.find(w=>w.id===ds)||null;
+function defDayStatus(ds){ if(HOL[ds]) return "holiday"; const w=dObj(ds).getDay(); return (w===0||w===6)?"closed":"open"; }
+function dayStatus(ds){ const r=dayRec(ds); return (r&&DSTAT[r.status])?r.status:defDayStatus(ds); }
+function dayMemo(ds){ const r=dayRec(ds); return (r&&r.memo)||HOL[ds]||""; }
+const defPerson=st=>isOpenSt(st)?"work":"rest";
+function personStat(ds,pid){ const r=dayRec(ds), p=r&&r.people&&r.people[pid]; return PSTAT[p]?p:defPerson(dayStatus(ds)); }
+const staffSorted=()=>data.staff.slice().sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0)||String(a.name).localeCompare(String(b.name)));
+let wMonth=thisMonth();
+function monthDays(ym){ const [y,m]=ym.split("-").map(Number), n=new Date(y,m,0).getDate(); return Array.from({length:n},(_,i)=>ym+"-"+pad(i+1)); }
+function shiftMonth(k){ const [y,m]=wMonth.split("-").map(Number); const d=new Date(y,m-1+k,1); wMonth=d.getFullYear()+"-"+pad(d.getMonth()+1); renderWorkday(); }
+$("wPrev").onclick=()=>shiftMonth(-1); $("wNext").onclick=()=>shiftMonth(1); $("wThis").onclick=()=>{ wMonth=thisMonth(); renderWorkday(); };
+
+function monthStats(){
+  const days=monthDays(wMonth), staff=staffSorted();
+  const st={open:0,short:0,closed:0,holiday:0}; days.forEach(d=>st[dayStatus(d)]++);
+  const per=staff.map(p=>{ const c={work:0,off:0,am:0,pm:0,half:0,trip:0,sick:0,rest:0}; days.forEach(d=>c[personStat(d,p.id)]++);
+    return {p,c,days:c.work+c.trip+0.5*(c.am+c.pm+c.half)}; });
+  return {days,st,per};
+}
+function renderWorkday(){
+  if(!$("cal")) return;
+  const [y,m]=wMonth.split("-").map(Number);
+  $("wTitle").textContent=y+"년 "+m+"월";
+  const {days,st,per}=monthStats(), staff=staffSorted(), td=todayStr();
+  $("wOpen").innerHTML=(st.open+st.short)+"<small>일</small>"; $("wOpenFt").textContent="정상 "+st.open+" · 단축 "+st.short;
+  $("wClosed").innerHTML=(st.closed+st.holiday)+"<small>일</small>"; $("wClosedFt").textContent="공휴일 "+st.holiday+"일 · 휴진 "+st.closed+"일";
+  $("wOff").innerHTML=per.reduce((s,x)=>s+x.c.off+x.c.sick,0)+"<small>건</small>";
+  $("wHalf").innerHTML=per.reduce((s,x)=>s+x.c.am+x.c.pm+x.c.half,0)+"<small>건</small>";
+  $("wStaffFt").textContent="행정 인원 "+staff.length+"명";
+  // calendar cells (6 weeks max)
+  const first=dObj(days[0]), start=new Date(first); start.setDate(1-first.getDay());
+  const last=dObj(days[days.length-1]), cells=Math.ceil((first.getDay()+days.length)/7)*7;
+  let h="";
+  for(let i=0;i<cells;i++){
+    const d=new Date(start); d.setDate(start.getDate()+i); const ds=dStr(d), out=ds.slice(0,7)!==wMonth;
+    const s=dayStatus(ds), memo=dayMemo(ds), w=d.getDay();
+    const ex=staff.map(p=>[p,personStat(ds,p.id)]).filter(([p,x])=>x!==defPerson(s));
+    const working=staff.filter(p=>{const x=personStat(ds,p.id);return x==="work"||x==="trip"||x==="am"||x==="pm"||x==="half";}).length;
+    h+='<div class="cell'+(out?" out":"")+(ds===td?" today":"")+'" data-day="'+ds+'"><div class="top3"><span class="dn'+(w===0?" sun":w===6?" sat":"")+(HOL[ds]?" hol":"")+'">'+d.getDate()+'</span><span class="st '+DSTAT[s][1]+'">'+DSTAT[s][0]+'</span></div>'
+      +(memo?'<div class="memo" title="'+esc(memo)+'">'+esc(memo)+'</div>':'')
+      +'<div class="pp">'+ex.slice(0,4).map(([p,x])=>'<span class="pc '+PSTAT[x][1]+'">'+esc(p.name)+' '+PSTAT[x][0]+'</span>').join("")+(ex.length>4?'<span class="pc ps-rest">+'+(ex.length-4)+'</span>':'')+'</div>'
+      +(staff.length&&(isOpenSt(s)||working)?'<div class="cnt">행정 출근 '+working+'/'+staff.length+'</div>':'')+'</div>';
+  }
+  $("cal").innerHTML=h;
+  $("wTable").innerHTML=per.length?per.map(({p,c,days})=>'<tr><td class="nm">'+esc(p.name)+'</td><td>'+esc(p.part||"-")+'</td><td class="num"><b>'+days+'</b>일</td>'+["off","am","pm","half","trip","sick"].map(k=>'<td class="num">'+(c[k]||'<span style="color:var(--mute)">-</span>')+'</td>').join("")+'</tr>').join("")
+    :'<tr><td colspan="9" class="empty">행정 인원이 없습니다. 오른쪽 위 <b>행정 인원 관리</b>에서 먼저 등록하세요.</td></tr>';
+}
+document.addEventListener("click",e=>{ const c=e.target.closest("[data-day]"); if(c) dayForm(c.dataset.day); });
+
+function dayForm(ds){
+  const d=dObj(ds), s=dayStatus(ds), r=dayRec(ds), staff=staffSorted();
+  const title=(d.getMonth()+1)+"월 "+d.getDate()+"일 ("+WEEKK[d.getDay()]+")"+(HOL[ds]?" · "+HOL[ds]:"");
+  const seg='<div class="seg">'+Object.keys(DSTAT).map(k=>'<label><input type="radio" name="dst" value="'+k+'"'+(k===s?" checked":"")+'>'+DSTAT[k][0]+'</label>').join("")+'</div>';
+  const rows=staff.length?staff.map(p=>{ const v=personStat(ds,p.id), touched=!!(r&&r.people&&r.people[p.id]);
+    return '<div class="prow"><div class="pn">'+esc(p.name)+(p.part?'<small>'+esc(p.part)+'</small>':'')+'</div><select data-pid="'+esc(p.id)+'"'+(touched?' data-touched="1"':'')+'>'+PORDER.map(k=>'<option value="'+k+'"'+(k===v?" selected":"")+'>'+PSTAT[k][0]+'</option>').join("")+'</select></div>'; }).join("")
+    :'<div class="empty" style="padding:16px 0">등록된 행정 인원이 없습니다. <button type="button" class="link" id="goStaff">행정 인원 등록 ›</button></div>';
+  const html='<div class="mh">'+esc(title)+'<button type="button" data-close>'+X+'</button></div><div class="mb">'
+    +'<div class="full"><label>센터 운영</label>'+seg+'</div>'
+    +'<div class="full"><label>메모</label><input id="dMemo" value="'+esc((r&&r.memo)||"")+'" placeholder="'+esc(HOL[ds]||"예: 검진 120명 예약, 대진의 OOO 교수")+'"></div>'
+    +'<div class="full"><label>행정 근무</label>'+rows+'</div></div>'
+    +'<div class="mf">'+(r?'<button type="button" class="btn btn-d" id="dReset">기본값으로</button>':'')+'<span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn" data-close>취소</button><button type="button" class="btn btn-p" id="dSave"'+(canWrite?"":" disabled")+'>저장</button></div>';
+  openModal(html);
+  const M=$("modal");
+  M.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal);
+  if($("goStaff")) $("goStaff").onclick=()=>staffForm();
+  M.querySelectorAll("select[data-pid]").forEach(sel=>sel.onchange=()=>sel.dataset.touched="1");
+  M.querySelectorAll("[name=dst]").forEach(rb=>rb.onchange=()=>{ const nd=defPerson(rb.value); M.querySelectorAll("select[data-pid]").forEach(sel=>{ if(!sel.dataset.touched) sel.value=nd; }); });
+  if($("dReset")) $("dReset").onclick=async()=>{ $("dReset").disabled=true; try{ await deleteItem("workday",ds); toast("기본값으로 되돌렸습니다."); closeModal(); }catch(e){ $("ferr").textContent="실패: 다시 시도하세요."; $("dReset").disabled=false; } };
+  $("dSave").onclick=async()=>{
+    const st=M.querySelector("[name=dst]:checked").value, memo=$("dMemo").value.trim(), nd=defPerson(st), people={};
+    M.querySelectorAll("select[data-pid]").forEach(sel=>{ if(sel.value!==nd) people[sel.dataset.pid]=sel.value; });
+    const b=$("dSave"); b.disabled=true; b.textContent="저장 중…";
+    try{
+      if(st===defDayStatus(ds) && !memo && !Object.keys(people).length){ if(r) await deleteItem("workday",ds); }
+      else await saveItem("workday",{id:ds,date:ds,status:st,memo,people,createdAt:(r&&r.createdAt)||new Date().toISOString()});
+      toast("저장했습니다."); closeModal();
+    }catch(err){ $("ferr").textContent=err.message||"저장 실패"; b.disabled=false; b.textContent="저장"; }
+  };
+}
+
+function staffForm(){
+  const draw=()=>{
+    const list=staffSorted();
+    $("modal").innerHTML='<div class="mh">행정 인원 관리<button type="button" data-close>'+X+'</button></div><div class="mb"><div class="full">'
+      +'<div class="srow" style="font-size:12px;color:var(--mute);font-weight:600"><span>이름</span><span>파트</span><span>순서</span><span></span></div>'
+      +(list.length?list.map(p=>'<div class="srow"><input data-sid="'+esc(p.id)+'" data-f="name" value="'+esc(p.name)+'"><input data-sid="'+esc(p.id)+'" data-f="part" value="'+esc(p.part||"")+'"><input data-sid="'+esc(p.id)+'" data-f="order" type="number" value="'+esc(p.order||0)+'"><button type="button" class="ibtn" data-sdel="'+esc(p.id)+'" title="삭제">'+X+'</button></div>').join("")
+        :'<div class="empty" style="padding:12px 0">아직 등록된 인원이 없습니다.</div>')
+      +'<div class="srow" style="margin-top:14px"><input id="nsName" placeholder="이름"><input id="nsPart" placeholder="파트 (예: 기획·협약)"><input id="nsOrder" type="number" placeholder="순서" value="'+(list.length+1)+'"><button type="button" class="btn btn-p" id="nsAdd" style="height:36px;padding:0;justify-content:center">+</button></div>'
+      +'<div class="subt">이름·파트·순서는 칸을 고친 뒤 다른 곳을 누르면 저장됩니다.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn" data-close>닫기</button></div>';
+    $("modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal);
+    $("modal").querySelectorAll("[data-sid]").forEach(inp=>inp.onchange=async()=>{
+      const p=data.staff.find(x=>x.id===inp.dataset.sid); if(!p) return; const v=inp.dataset.f==="order"?Number(inp.value)||0:inp.value.trim();
+      if(inp.dataset.f==="name"&&!v){ inp.value=p.name; return; }
+      try{ await saveItem("staff",Object.assign({},p,{[inp.dataset.f]:v})); toast("저장했습니다."); }catch(e){ $("ferr").textContent=e.message; }
+    });
+    $("modal").querySelectorAll("[data-sdel]").forEach(b=>b.onclick=async()=>{
+      const p=data.staff.find(x=>x.id===b.dataset.sdel); if(!p) return;
+      if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.style.background="var(--red)"; b.style.color="#fff"; $("ferr").textContent=p.name+" 삭제하려면 한 번 더 누르세요."; return; }
+      b.disabled=true; try{ await deleteItem("staff",p.id); toast("삭제했습니다."); draw(); }catch(e){ $("ferr").textContent="삭제 실패"; }
+    });
+    $("nsAdd").onclick=async()=>{
+      const name=$("nsName").value.trim(); if(!name){ $("ferr").textContent="이름을 입력하세요."; return; }
+      $("nsAdd").disabled=true;
+      try{ await saveItem("staff",{name,part:$("nsPart").value.trim(),order:Number($("nsOrder").value)||0,createdAt:new Date().toISOString()}); toast(name+" 등록했습니다."); draw(); setTimeout(()=>$("nsName")&&$("nsName").focus(),30); }
+      catch(e){ $("ferr").textContent=e.message; $("nsAdd").disabled=false; }
+    };
+    $("nsName").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); $("nsAdd").click(); } };
+  };
+  if($("mask").style.display!=="flex") $("mask").style.display="flex";
+  draw(); setTimeout(()=>$("nsName")&&$("nsName").focus(),40);
+}
+$("wStaffBtn").onclick=()=>staffForm();
+
+$("wCopy").onclick=async()=>{
+  const [y,m]=wMonth.split("-").map(Number), {days,st,per}=monthStats(), staff=staffSorted();
+  const L=["[SOVIS] "+y+"년 "+m+"월 워킹데이 계획","","■ 센터 운영","- 운영일(워킹데이): "+(st.open+st.short)+"일 (정상 "+st.open+"일 / 단축 "+st.short+"일)","- 휴진·공휴일: "+(st.closed+st.holiday)+"일 (공휴일 "+st.holiday+"일 / 휴진 "+st.closed+"일)"];
+  const sp=days.filter(d=>dayStatus(d)==="short"||(dayStatus(d)==="closed"&&!["0","6"].includes(String(dObj(d).getDay())))||(dayStatus(d)==="open"&&[0,6].includes(dObj(d).getDay())));
+  if(sp.length){ L.push("- 특이 운영일"); sp.forEach(d=>{ const x=dObj(d); L.push("  "+pad(x.getMonth()+1)+"/"+pad(x.getDate())+"("+WEEKK[x.getDay()]+") "+DSTAT[dayStatus(d)][0]+(dayMemo(d)?" - "+dayMemo(d):"")); }); }
+  const hol=days.filter(d=>HOL[d]); if(hol.length) L.push("- 공휴일: "+hol.map(d=>{const x=dObj(d);return pad(x.getMonth()+1)+"/"+pad(x.getDate())+" "+HOL[d];}).join(", "));
+  if(per.length){
+    L.push("","■ 행정 인원 근무 ("+staff.length+"명)");
+    per.forEach(({p,c,days})=>{ const parts=["off","am","pm","half","trip","sick"].filter(k=>c[k]).map(k=>PSTAT[k][0]+" "+c[k]); L.push("- "+p.name+(p.part?"("+p.part+")":"")+": 근무 "+days+"일"+(parts.length?" / "+parts.join(", "):"")); });
+    const ev=[]; days.forEach(d=>{ const s=dayStatus(d); staff.forEach(p=>{ const x=personStat(d,p.id); if(x!==defPerson(s)&&x!=="work"){ const o=dObj(d); ev.push("  "+pad(o.getMonth()+1)+"/"+pad(o.getDate())+"("+WEEKK[o.getDay()]+") "+p.name+" "+PSTAT[x][0]); } }); });
+    days.forEach(d=>{ const s=dayStatus(d); if(!isOpenSt(s)) staff.forEach(p=>{ if(personStat(d,p.id)==="work"){ const o=dObj(d); ev.push("  "+pad(o.getMonth()+1)+"/"+pad(o.getDate())+"("+WEEKK[o.getDay()]+") "+p.name+" 휴일근무"); } }); });
+    if(ev.length){ L.push("","■ 휴가·반차·기타 일정"); ev.sort().forEach(x=>L.push(x)); }
+  }
+  const txt=L.join("\n");
+  try{ await navigator.clipboard.writeText(txt); toast("월간 요약을 복사했습니다. 붙여넣기(Ctrl+V) 하세요."); }
+  catch(e){ openModal('<div class="mh">월간 요약<button type="button" data-close>'+X+'</button></div><div class="mb"><div class="full"><textarea style="min-height:320px;font-size:13px" readonly>'+esc(txt)+'</textarea></div></div>'); $("modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal); }
+};
+
+function renderAll(){ renderDashboard(); renderContracts(); renderAlerts(); renderOxygen(); renderMail(); renderWorkday(); }
 renderAll();
 if(PIN && GAS) enter(); else { if(!GAS) PIN=""; setTimeout(()=>pins[0].focus(),60); }
 })();
