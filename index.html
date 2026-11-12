@@ -432,22 +432,35 @@ pins.forEach((p,i)=>{
   p.addEventListener("paste",e=>{ const t=(e.clipboardData.getData("text")||"").replace(/\D/g,"").slice(0,4); if(t){ e.preventDefault(); t.split("").forEach((c,j)=>pins[j].value=c); if(t.length===4) tryLogin(); else pins[t.length].focus(); } });
 });
 let PIN=""; try{ PIN=sessionStorage.getItem("soha_pin")||""; }catch(e){}
-/* ===== 설정: 구글 Apps Script 웹앱 주소를 따옴표 안에 붙여넣으세요 ===== */
-const API_URL = "https://script.google.com/macros/s/AKfycbwRGbq9sXADBb3oZ6c6eiPBgMlaW8HumQSyIqbnDyoEWsjaNlbwThWrxzSkJbROd3o3dA/exec";
-/* ======================================================================= */
-const GAS = !!API_URL;
+/* ===== 설정: Supabase 프로젝트 주소와 공개 키(publishable / anon)를 붙여넣으세요 ===== */
+const SUPABASE_URL = "https://yrrlimyvsqprzezkzntd.supabase.co";
+const SUPABASE_KEY = "sb_publishable_d0voink0Gp_o-m_RkvnyCg_VV0BNUXp";
+/* ============================================================================== */
+const GAS = !!(SUPABASE_URL && SUPABASE_KEY);
+const RPC = {login:"sovis_login", listAll:"sovis_list", save:"sovis_save", remove:"sovis_remove"};
 async function api(fn,...args){
   if(!GAS) throw new Error("NO_API");
-  let r;
+  const body = fn==="login"||fn==="listAll" ? {pin:args[0]}
+             : fn==="save" ? {pin:args[0], kind:args[1], item:args[2]}
+             : {pin:args[0], kind:args[1], item_id:args[2]};
+  const headers={"Content-Type":"application/json","apikey":SUPABASE_KEY};
+  if(SUPABASE_KEY.indexOf("eyJ")===0) headers.Authorization="Bearer "+SUPABASE_KEY;
+  let res, r;
   try{
-    const res=await fetch(API_URL,{method:"POST",body:JSON.stringify({fn,args})});
+    res=await fetch(SUPABASE_URL.replace(/\/+$/,"")+"/rest/v1/rpc/"+RPC[fn],{method:"POST",headers,body:JSON.stringify(body)});
     r=await res.json();
   }catch(e){ throw new Error("NET"); }
-  if(!r.ok){
-    if(String(r.error).indexOf("AUTH")>=0) doLogout("세션이 만료되었습니다. 다시 로그인하세요.");
-    throw new Error(r.error||"ERR");
+  if(!res.ok){
+    const m=String(r&&(r.message||r.error)||"ERR");
+    if(m.indexOf("AUTH")>=0 && fn!=="login") doLogout("세션이 만료되었습니다. 다시 로그인하세요.");
+    throw new Error(m);
   }
-  return r.result;
+  if(r && !Array.isArray(r) && typeof r==="object" && r.error){
+    const m=String(r.error);
+    if(m==="AUTH" && fn!=="login") doLogout("세션이 만료되었습니다. 다시 로그인하세요.");
+    throw new Error(m);
+  }
+  return r;
 }
 function enter(){ $("login").style.display="none"; $("app").style.display="block"; route(); initStore(); }
 async function tryLogin(){
@@ -472,8 +485,8 @@ const data={contracts:[],oxygen:[],mail:[]};
 let mode=GAS?"gas":"local", canWrite=true, pollTimer=null;
 function setConn(s){
   const dot=$("connDot"), txt=$("connTxt"), n=$("notice");
-  if(s==="gas"){ dot.style.background="#10b981"; txt.textContent="연결됨 · 구글 시트 저장"; n.style.display="none"; }
-  else if(s==="local"){ dot.style.background="#f97316"; txt.textContent="미리보기 모드"; n.style.display="block"; n.innerHTML="미리보기 모드입니다 (API 주소 미설정). 입력한 내용은 <b>이 브라우저에만</b> 저장됩니다."; }
+  if(s==="gas"){ dot.style.background="#10b981"; txt.textContent="연결됨 · SOVIS DB"; n.style.display="none"; }
+  else if(s==="local"){ dot.style.background="#f97316"; txt.textContent="미리보기 모드"; n.style.display="block"; n.innerHTML="미리보기 모드입니다 (DB 주소 미설정). 입력한 내용은 <b>이 브라우저에만</b> 저장됩니다."; }
   else if(s==="err"){ dot.style.background="#ef4444"; txt.textContent="연결 오류"; n.style.display="block"; n.textContent="데이터를 불러오지 못했습니다. 잠시 후 새로고침해 주세요."; }
   else if(s==="loading"){ dot.style.background="#cbd5e1"; txt.textContent="불러오는 중…"; }
 }
