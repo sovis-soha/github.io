@@ -239,6 +239,37 @@ td.num,th.num{text-align:right}
 .srow input{padding:8px 10px}
 .ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;height:36px;color:var(--red);display:flex;align-items:center;justify-content:center}
 @media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
+
+/* v1.4 */
+.nav .grp{display:flex;align-items:center;gap:11px;padding:10px 12px;color:var(--ink2);font-weight:700;font-size:14px;margin:2px 0}
+.nav a.sub{padding:8px 12px 8px 41px;font-size:13.5px;position:relative}
+.nav a.sub::before{content:"";position:absolute;left:21px;top:50%;width:6px;height:6px;border-radius:50%;background:#cbd5e1;transform:translateY(-50%)}
+.nav a.sub.on::before{background:#7dd3fc}
+.ntc{border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:12px;background:#fff;transition:.12s}
+.ntc:hover{box-shadow:var(--sh)}
+.ntc.pin{border-color:#bfdcf3;background:linear-gradient(180deg,#f4f9fe,#fff)}
+.ntc .nh{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ntc .nt{font-size:16px;font-weight:800;margin:8px 0 6px;letter-spacing:-.3px}
+.ntc .nb{white-space:pre-wrap;font-size:13.5px;color:var(--ink2);line-height:1.65}
+.ntc .nf{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--mute)}
+.ntc .nf .sp{flex:1}
+.nstrip{display:flex;flex-direction:column}
+.nline{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f1f4f8;cursor:pointer}
+.nline:last-child{border:0}
+.nline .t{font-weight:700;font-size:13.5px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nline .d{font-size:12px;color:var(--mute);white-space:nowrap}
+.pkchips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.pk{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#f2edff;color:#6d3fd8}
+.pklist{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pkopt{display:flex;gap:9px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--soft);cursor:pointer;margin:0!important;font-weight:500!important;color:var(--ink)!important}
+.pkopt:has(input:checked){border-color:#8b5cf6;background:#f6f2ff}
+.pkopt input{width:auto!important;margin-top:3px}
+.pkopt b{display:block;font-size:13.5px}
+.pkopt small{display:block;color:var(--mute);font-size:12px;white-space:pre-wrap;line-height:1.45;margin-top:2px}
+.pkrow{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;display:grid;grid-template-columns:1fr 40px;gap:8px}
+.pkrow textarea{min-height:60px}
+.sechd{grid-column:1/-1;font-size:12px;font-weight:800;color:var(--blue);letter-spacing:.3px;margin-top:4px;padding-top:10px;border-top:1px dashed var(--line)}
+.srow{grid-template-columns:1fr 1fr 1fr 64px 40px!important}
 @media (max-width:1400px){.bento{grid-template-columns:repeat(4,1fr)}.hero{grid-column:span 4}}
 @media (max-width:1150px){.g3,.g2{grid-template-columns:1fr}}
 @media (max-width:900px){
@@ -283,7 +314,7 @@ td.num,th.num{text-align:right}
         <button class="btn-login" type="submit">접속하기 <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </form>
       <div class="err" id="loginErr"></div>
-      <div class="l-foot">v1.3 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v1.4 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -293,21 +324,23 @@ td.num,th.num{text-align:right}
   <aside class="side">
     <img class="lg" src="data:image/png;base64,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" alt="중앙대학교 광명소하검진센터">
     <div class="sys"><b>계약·운영 관리 시스템</b>기획·협약 파트</div>
-    <div class="ng">계약관리</div>
+    <div class="ng">메인</div>
     <nav class="nav">
       <a href="#dashboard" data-v="dashboard"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>대시보드</a>
-      <a href="#contracts" data-v="contracts"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>계약 목록</a>
-      <a href="#alerts" data-v="alerts"><svg class="i" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>만료 알림<span class="badge" id="alertBadge" style="display:none">0</span></a>
+      <a href="#notice" data-v="notice"><svg class="i" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>공지사항</a>
     </nav>
     <div class="ng">센터운영관리</div>
     <nav class="nav">
+      <div class="grp" data-go="contracts" style="cursor:pointer"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>계약관리</div>
+      <a href="#contracts" data-v="contracts" class="sub">계약 목록</a>
+      <a href="#alerts" data-v="alerts" class="sub">만료 알림<span class="badge" id="alertBadge" style="display:none">0</span></a>
       <a href="#workday" data-v="workday"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 18h2"/></svg>워킹데이 계획</a>
       <a href="#oxygen" data-v="oxygen"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3M12 3V2"/><path d="M10 12h4"/></svg>산소가스 관리</a>
       <a href="#mail" data-v="mail"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg>등기 발송 관리</a>
     </nav>
     <div class="side-foot">
       <div class="conn"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v1.3 | 소하검진센터 SEOK</div>
+      <div class="ver">v1.4 | 소하검진센터 SEOK</div>
       <button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button>
     </div>
   </aside>
@@ -345,6 +378,7 @@ td.num,th.num{text-align:right}
         <div class="card kpi"><div class="hd"><div class="ic" style="background:#f2edff;color:var(--violet)"><svg class="i" viewBox="0 0 24 24"><path d="M5 22h14M5 2h14M17 22v-4.2a2 2 0 0 0-.6-1.4L12 12l-4.4 4.4a2 2 0 0 0-.6 1.4V22M7 2v4.2a2 2 0 0 0 .6 1.4L12 12l4.4-4.4a2 2 0 0 0 .6-1.4V2"/></svg></div><span class="lb">90일 내 만료</span></div><div class="v" id="k90">0<small>건</small></div><div class="ft" id="k90t"></div></div>
       </div>
 
+      <div class="card" style="margin-bottom:16px"><div class="ph"><h3>📢 공지사항</h3><div class="right"><button class="link" data-go="notice">전체보기 ›</button></div></div><div class="pb" style="padding-top:4px"><div class="nstrip" id="dNotice"></div></div></div>
       <div class="g3">
         <div class="card"><div class="ph"><h3>계약 유형별 현황</h3><div class="right"><button class="link" data-go="contracts">전체보기 ›</button></div></div><div class="pb"><div class="donut-wrap"><div class="donut"><svg viewBox="0 0 42 42" width="150" height="150" id="donutSvg"></svg><div class="ctr"><b id="donutN">0</b><small>전체 계약</small></div></div><div class="legend" id="legend"></div></div></div></div>
         <div class="card"><div class="ph"><h3>담당부서별 계약 수</h3><span class="hint" id="deptFoot"></span></div><div class="pb" id="deptBars"></div></div>
@@ -377,16 +411,27 @@ td.num,th.num{text-align:right}
     </section>
 
     <!-- CONTRACT LIST -->
+    <!-- NOTICE -->
+    <section id="v-notice" style="display:none">
+      <div class="card">
+        <div class="ph"><h3>공지사항</h3>
+          <div class="right"><div class="chips" id="nChips"></div><label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="nQ" placeholder="제목, 내용 검색"></label></div>
+        </div>
+        <div class="pb" id="nList"></div>
+      </div>
+    </section>
+
     <section id="v-contracts" style="display:none">
       <div class="card">
         <div class="ph"><h3>전체 계약</h3>
           <div class="right">
+            <button class="btn" id="pkBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>패키지 관리</button>
             <select class="sel" id="cType"><option value="">전체 유형</option></select>
             <select class="sel" id="cStatus"><option value="">전체 상태</option><option value="valid">유효</option><option value="expired">만료</option></select>
             <label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cQ" placeholder="계약명, 업체명, 담당자"></label>
           </div>
         </div>
-        <div class="tw"><table><thead><tr><th>계약명</th><th>유형</th><th>담당부서</th><th>담당자</th><th>계약기간</th><th>상태</th><th class="num">계약금액</th><th>자동갱신</th><th></th></tr></thead><tbody id="cTable"></tbody></table></div>
+        <div class="tw"><table><thead><tr><th>계약명</th><th>유형</th><th>담당부서</th><th>담당자</th><th>계약(협약)기간</th><th>상태</th><th class="num">계약금액 / 검진인원</th><th>자동갱신</th><th></th></tr></thead><tbody id="cTable"></tbody></table></div>
         <div class="pf" id="cFoot"></div>
       </div>
     </section>
@@ -402,14 +447,14 @@ td.num,th.num{text-align:right}
     <!-- OXYGEN -->
     <section id="v-oxygen" style="display:none">
       <div class="bento" style="grid-template-columns:repeat(4,1fr)">
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:#e6f7f9;color:var(--teal-d)"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3"/></svg></div><span class="lb">전체 발주</span></div><div class="v" id="oAll">0<small>건</small></div><div class="ft">누적 등록</div></div>
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--amber-s);color:var(--amber)"><svg class="i" viewBox="0 0 24 24"><path d="M10 17h4V5H2v12h3M14 9h4l4 4v4h-3"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg></div><span class="lb">입고 대기</span></div><div class="v" id="oWait">0<small>건</small></div><div class="ft">입고일 미입력</div></div>
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:#e8f2fb;color:var(--blue)"><svg class="i" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div><span class="lb">이번달 요청 수량</span></div><div class="v" id="oMonth">0<small>병</small></div><div class="ft" id="oMonthCnt">발주 0건</div></div>
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:#f2edff;color:var(--violet)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><span class="lb">평균 입고 소요</span></div><div class="v" id="oLead">-<small>일</small></div><div class="ft">발주일 → 입고일</div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:#e6f7f9;color:var(--teal-d)"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3"/></svg></div><span class="lb" id="oCntL">월간 발주</span></div><div class="v" id="oCnt">0<small>건</small></div><div class="ft" id="oCntFt">선택한 달 기준</div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:#e8f2fb;color:var(--blue)"><svg class="i" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div><span class="lb" id="oQtyL">월간 요청 수량</span></div><div class="v" id="oQty">0<small>병</small></div><div class="ft" id="oQtyFt">전월 0병</div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--amber-s);color:var(--amber)"><svg class="i" viewBox="0 0 24 24"><path d="M10 17h4V5H2v12h3M14 9h4l4 4v4h-3"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg></div><span class="lb">입고 대기</span></div><div class="v" id="oWait">0<small>건</small></div><div class="ft">입고일 미입력 (전체)</div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:#f2edff;color:var(--violet)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><span class="lb">평균 입고 소요</span></div><div class="v" id="oLead">-<small>일</small></div><div class="ft">선택한 달 · 발주일 → 입고일</div></div>
       </div>
       <div class="card">
-        <div class="ph"><h3>발주·입고 내역</h3>
-          <div class="right"><div class="chips" id="oChips"></div><input type="month" class="sel" id="oMonthF" title="발주월 필터"></div>
+        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="oPrev" title="이전 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="oTitle"></b><button class="btn btn-ic" id="oNext" title="다음 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="oThis">이번달</button></div>
+          <div class="right"><div class="chips" id="oChips"></div></div>
         </div>
         <div class="tw"><table><thead><tr><th>발주일</th><th>입고일</th><th class="num">요청갯수</th><th>상태</th><th>소요일</th><th>요청자</th><th>비고</th><th></th></tr></thead><tbody id="oTable"></tbody></table></div>
         <div class="pf" id="oFoot"></div>
@@ -428,23 +473,23 @@ td.num,th.num{text-align:right}
         <div class="ph"><h3>등기 발송 내역</h3>
           <div class="right"><div class="chips" id="mChips"></div><label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="mQ" placeholder="제목, 요청자, 수신처"></label></div>
         </div>
-        <div class="tw"><table><thead><tr><th>요청일</th><th>제목</th><th>요청자</th><th>수신처</th><th>발송일</th><th>등기번호</th><th>상태</th><th></th></tr></thead><tbody id="mTable"></tbody></table></div>
+        <div class="tw"><table><thead><tr><th>요청일</th><th>제목</th><th>요청자</th><th>수신처</th><th>발송일</th><th>상태</th><th></th></tr></thead><tbody id="mTable"></tbody></table></div>
         <div class="pf" id="mFoot"></div>
       </div>
     </section>
     <!-- WORKDAY -->
     <section id="v-workday" style="display:none">
       <div class="bento" style="grid-template-columns:repeat(4,1fr)">
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--green-s);color:var(--green)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M9 15l2 2 4-4"/></svg></div><span class="lb" id="wOpenML">센터 운영일 · 월간</span></div><div class="v" id="wOpenM">0<small>일</small></div><div class="ft" id="wOpenMFt"></div></div>
         <div class="card kpi"><div class="hd"><div class="ic" style="background:#e8f2fb;color:var(--blue)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M9 15l2 2 4-4"/></svg></div><span class="lb" id="wOpenYL">센터 운영일 · 연간</span></div><div class="v" id="wOpenY">0<small>일</small></div><div class="ft" id="wOpenYFt"></div></div>
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--red-s);color:var(--red)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></svg></div><span class="lb" id="wOffML">공휴일·휴진 · 월간</span></div><div class="v" id="wOffM">0<small>일</small></div><div class="ft" id="wOffMFt"></div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--green-s);color:var(--green)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M9 15l2 2 4-4"/></svg></div><span class="lb" id="wOpenML">센터 운영일 · 월간</span></div><div class="v" id="wOpenM">0<small>일</small></div><div class="ft" id="wOpenMFt"></div></div>
         <div class="card kpi"><div class="hd"><div class="ic" style="background:#eef1f5;color:#6b7686"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></svg></div><span class="lb" id="wOffYL">공휴일·휴진 · 연간</span></div><div class="v" id="wOffY">0<small>일</small></div><div class="ft" id="wOffYFt"></div></div>
-        </div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--red-s);color:var(--red)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></svg></div><span class="lb" id="wOffML">공휴일·휴진 · 월간</span></div><div class="v" id="wOffM">0<small>일</small></div><div class="ft" id="wOffMFt"></div></div>
+      </div>
       <div class="card" style="margin-bottom:16px">
         <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="wPrev" title="이전 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="wTitle"></b><button class="btn btn-ic" id="wNext" title="다음 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="wThis">이번달</button></div>
           <div class="right"><button class="btn" id="wStaffBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"/></svg>행정 인원 관리</button><button class="btn" id="wCopy"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>월간 요약 복사</button></div>
         </div>
-        <div class="legend2"><span class="pc st-open">정상운영</span><span class="pc st-short">단축운영</span><span class="pc st-closed">휴진</span><span class="pc st-holiday">공휴일</span><span style="width:10px"></span><span class="pc ps-work">출근</span><span class="pc ps-off">연차</span><span class="pc ps-am">오전반차</span><span class="pc ps-pm">오후반차</span><span class="pc ps-half">하프근무</span><span class="pc ps-trip">출장·교육</span><span class="pc ps-sick">병가·경조</span><span class="pc ps-rest">휴무</span></div>
+        <div class="legend2"><span class="pc st-open">정상운영</span><span class="pc st-short">단축운영</span><span class="pc st-closed">휴진</span><span class="pc st-holiday">공휴일</span><span style="width:10px"></span><span class="pc ps-work">출근</span><span class="pc ps-off">연차</span><span class="pc ps-am">오전반차</span><span class="pc ps-pm">오후반차</span><span class="pc ps-trip">출장·교육</span><span class="pc ps-sick">병가·경조</span><span class="pc ps-rest">휴무</span></div>
         <div class="cal-wrap"><div class="cal-h"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="cal" id="cal"></div></div>
       </div>
       </section>
@@ -457,9 +502,11 @@ td.num,th.num{text-align:right}
 <script>
 (function(){
 "use strict";
-const TYPES = ["위수탁계약","MOU협약","유지보수계약","식사권 계약","기타"];
+const TYPES = ["MOU협약","위수탁계약","유지보수계약","식사권 계약","기타"];
+const NCATS = ["무이자 할부","일반","검진 안내","기타"];
+const NCAT_CLS = {"무이자 할부":"t-vio","일반":"t-blu","검진 안내":"t-grn","기타":"t-gry"};
 const TYPE_COLORS = {"위수탁계약":"#006cb8","MOU협약":"#8b5cf6","유지보수계약":"#2aa5b5","식사권 계약":"#f59e0b","기타":"#94a3b8"};
-const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday"};
+const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday", package:"package", notice:"notice"};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -531,7 +578,7 @@ $("loginForm").addEventListener("submit",e=>{ e.preventDefault(); tryLogin(); })
 $("logout").onclick=()=>doLogout();
 
 /* ---------- STORAGE (구글 시트 / 미리보기는 이 브라우저) ---------- */
-const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[]};
+const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[],package:[],notice:[]};
 let mode=GAS?"gas":"local", canWrite=true, pollTimer=null;
 function setConn(s){
   const dot=$("connDot"), txt=$("connTxt"), n=$("notice");
@@ -570,6 +617,7 @@ async function deleteItem(k,id){
 /* ---------- ROUTING ---------- */
 const VIEWS={
   dashboard:{t:"대시보드",d:"계약 현황을 한눈에 확인하세요.",add:"계약 등록",fn:()=>contractForm()},
+  notice:{t:"공지사항",d:"월간 무이자 할부 카드 안내 등 센터 공지를 관리합니다.",add:"공지 작성",fn:()=>noticeForm()},
   contracts:{t:"계약 목록",d:"등록된 전체 계약을 조회하고 수정합니다.",add:"계약 등록",fn:()=>contractForm()},
   alerts:{t:"만료 알림",d:"만료가 다가오거나 지난 계약을 확인하세요.",add:"계약 등록",fn:()=>contractForm()},
   workday:{t:"워킹데이 계획",d:"날짜별 센터 운영 여부와 행정 인원 근무를 관리합니다.",add:"오늘 근무 입력",fn:()=>dayForm(todayStr())},
@@ -612,7 +660,7 @@ chips($("mChips"),[["all","전체"],["wait","발송 대기"],["done","발송 완
 $("dQ").oninput=renderDashTable; $("dDept").onchange=renderDashTable;
 $("cType").innerHTML+=TYPES.map(t=>'<option>'+t+'</option>').join("");
 ["cType","cStatus"].forEach(id=>$(id).onchange=renderContracts); $("cQ").oninput=renderContracts;
-$("oMonthF").onchange=renderOxygen; $("mQ").oninput=renderMail;
+$("mQ").oninput=renderMail;
 
 function renderDashboard(){
   const cs=data.contracts, m=thisMonth();
@@ -647,7 +695,7 @@ function renderDashboard(){
   $("opO2Wait").innerHTML=ox.filter(o=>!o.inDate).length+"<em>건</em>";
   $("opO2Month").innerHTML=oxM.reduce((s,o)=>s+(Number(o.qty)||0),0)+"<em>병 · "+oxM.length+"건</em>";
   $("opMailWait").innerHTML=ml.filter(x=>!x.sentDate).length+"<em>건</em>";
-  try{ const td=todayStr(), tds=dayStatus(td); $("opToday").innerHTML=DSTAT[tds][0]+(dayMemo(td)?"<em>"+esc(dayMemo(td))+"</em>":""); $("opTodayOff").innerHTML=data.staff.filter(p=>{const x=personStat(td,p.id);return x&&x!=="work"&&x!=="rest";}).length+"<em>명</em>"; }catch(e){}
+  try{ const td=todayStr(), tds=dayStatus(td); $("opToday").innerHTML=DSTAT[tds][0]+(dayMemo(td)?"<em style=\"display:block;margin:3px 0 0;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis\">"+esc(dayMemo(td))+"</em>":""); $("opTodayOff").innerHTML=data.staff.filter(p=>{const x=personStat(td,p.id);return x&&x!=="work"&&x!=="rest";}).length+"<em>명</em>"; }catch(e){}
   $("opMailMonth").innerHTML=ml.filter(x=>(x.reqDate||"").slice(0,7)===m).length+"<em>건</em>";
 
   // urgent
@@ -664,12 +712,20 @@ function renderDashTable(){
   $("dTable").innerHTML=rows.length?rows.map(([c,i])=>'<tr style="cursor:pointer" data-edit="'+c.id+'"><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+'</div></td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.end||"-")+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(c.amount?won(c.amount):"-")+'</td></tr>').join("")
     :'<tr><td colspan="6" class="empty">'+(data.contracts.length?"조건에 맞는 계약이 없습니다.":"아직 등록된 계약이 없습니다. 오른쪽 위 <b>계약 등록</b>으로 시작하세요.")+'</td></tr>';
 }
+const isMOU=c=>c.type==="MOU협약";
+const pkName=id=>{ const p=data.package.find(x=>x.id===id); return p?p.name:null; };
+function mouLine(c){
+  if(!isMOU(c)) return "";
+  const pk=(Array.isArray(c.packages)?c.packages:[]).map(pkName).filter(Boolean);
+  return '<div class="subt">검진 '+esc(c.hcStart||"?")+' ~ '+esc(c.hcEnd||"?")+(c.headcount?' · '+Number(c.headcount).toLocaleString("ko-KR")+'명':'')+'</div>'+(pk.length?'<div class="pkchips">'+pk.map(n=>'<span class="pk">'+esc(n)+'</span>').join("")+'</div>':'');
+}
 function renderContracts(){
   const tp=$("cType").value, st=$("cStatus").value, q=$("cQ").value.trim().toLowerCase();
-  const rows=data.contracts.filter(c=>{ const i=cInfo(c); return (!tp||c.type===tp)&&(!st||(st==="valid"?i.valid:i.expired))&&(!q||[c.name,c.vendor,c.manager,c.dept].join(" ").toLowerCase().includes(q)); }).sort((a,b)=>(a.end||"9999").localeCompare(b.end||"9999"));
-  $("cTable").innerHTML=rows.length?rows.map(c=>{ const i=cInfo(c); return '<tr><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+(c.memo?' · '+esc(c.memo):'')+'</div></td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.manager||"-")+'</td><td style="white-space:nowrap">'+esc(c.start||"-")+' → '+esc(c.end||"-")+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(c.amount?won(c.amount):"-")+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'<span style="color:var(--mute)">-</span>')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>'; }).join("")
+  const rows=data.contracts.filter(c=>{ const i=cInfo(c); return (!tp||c.type===tp)&&(!st||(st==="valid"?i.valid:i.expired))&&(!q||[c.name,c.vendor,c.manager,c.dept].join(" ").toLowerCase().includes(q)); }).sort((a,b)=>(TYPES.indexOf(a.type)-TYPES.indexOf(b.type))||(a.end||"9999").localeCompare(b.end||"9999"));
+  $("cTable").innerHTML=rows.length?rows.map(c=>{ const i=cInfo(c); return '<tr><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+(c.memo?' · '+esc(c.memo):'')+'</div>'+mouLine(c)+'</td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.manager||"-")+'</td><td style="white-space:nowrap">'+(c.start||c.end?esc(c.start||"-")+' → '+esc(c.end||"-"):'<span style="color:var(--mute)">-</span>')+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(isMOU(c)?(c.headcount?'<b>'+Number(c.headcount).toLocaleString("ko-KR")+'</b>명':'-'):(c.amount?won(c.amount):"-"))+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'<span style="color:var(--mute)">-</span>')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>'; }).join("")
     :'<tr><td colspan="9" class="empty">표시할 계약이 없습니다.</td></tr>';
-  $("cFoot").innerHTML="총 <b>"+rows.length+"건</b><span>계약금액 합계 <b>"+won(rows.reduce((s,c)=>s+(Number(c.amount)||0),0))+"</b></span>";
+  const mous=rows.filter(isMOU);
+  $("cFoot").innerHTML="총 <b>"+rows.length+"건</b><span>계약금액 합계 <b>"+won(rows.reduce((s,c)=>s+(isMOU(c)?0:(Number(c.amount)||0)),0))+"</b></span>"+(mous.length?"<span>MOU 검진인원 합계 <b>"+mous.reduce((s,c)=>s+(Number(c.headcount)||0),0).toLocaleString("ko-KR")+"명</b></span>":"");
 }
 function renderAlerts(){
   const rows=data.contracts.map(c=>[c,cInfo(c)]).filter(([c,i])=>inRange(i.left,aRange)).sort((a,b)=>a[1].left-b[1].left);
@@ -680,17 +736,24 @@ function renderAlerts(){
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-edit]"); if(b){ const c=data.contracts.find(x=>x.id===b.dataset.edit); if(c) contractForm(c); } });
 
 /* ---------- OXYGEN ---------- */
+let oMonth=thisMonth();
+function oShift(k){ const [y,m]=oMonth.split("-").map(Number); const d=new Date(y,m-1+k,1); oMonth=d.getFullYear()+"-"+pad(d.getMonth()+1); renderOxygen(); }
+$("oPrev").onclick=()=>oShift(-1); $("oNext").onclick=()=>oShift(1); $("oThis").onclick=()=>{ oMonth=thisMonth(); renderOxygen(); };
 function renderOxygen(){
-  const ox=data.oxygen, m=thisMonth(), done=ox.filter(o=>o.inDate&&o.orderDate), oxM=ox.filter(o=>(o.orderDate||"").slice(0,7)===m);
-  $("oAll").innerHTML=ox.length+"<small>건</small>";
+  const ox=data.oxygen, [y,m]=oMonth.split("-").map(Number);
+  const pd=new Date(y,m-2,1), pm=pd.getFullYear()+"-"+pad(pd.getMonth()+1);
+  const oxM=ox.filter(o=>(o.orderDate||"").slice(0,7)===oMonth), oxP=ox.filter(o=>(o.orderDate||"").slice(0,7)===pm);
+  const done=oxM.filter(o=>o.inDate&&o.orderDate), qty=a=>a.reduce((s,o)=>s+(Number(o.qty)||0),0);
+  $("oTitle").textContent=y+"년 "+m+"월";
+  $("oCntL").textContent=m+"월 발주"; $("oQtyL").textContent=m+"월 요청 수량";
+  $("oCnt").innerHTML=oxM.length+"<small>건</small>"; $("oCntFt").textContent="전월 "+oxP.length+"건";
+  $("oQty").innerHTML=qty(oxM)+"<small>병</small>"; $("oQtyFt").textContent="전월 "+qty(oxP)+"병";
   $("oWait").innerHTML=ox.filter(o=>!o.inDate).length+"<small>건</small>";
-  $("oMonth").innerHTML=oxM.reduce((s,o)=>s+(Number(o.qty)||0),0)+"<small>병</small>"; $("oMonthCnt").textContent="발주 "+oxM.length+"건";
   $("oLead").innerHTML=(done.length?(done.reduce((s,o)=>s+dayDiff(o.orderDate,o.inDate),0)/done.length).toFixed(1):"-")+"<small>일</small>";
-  const mf=$("oMonthF").value;
-  const rows=ox.filter(o=>(oFilter==="all"||(oFilter==="wait"?!o.inDate:!!o.inDate))&&(!mf||(o.orderDate||"").startsWith(mf))).sort((a,b)=>(b.orderDate||"").localeCompare(a.orderDate||""));
+  const rows=oxM.filter(o=>(oFilter==="all"||(oFilter==="wait"?!o.inDate:!!o.inDate))).sort((a,b)=>(b.orderDate||"").localeCompare(a.orderDate||""));
   $("oTable").innerHTML=rows.length?rows.map(o=>'<tr><td class="nm">'+esc(o.orderDate)+'</td><td>'+(o.inDate?esc(o.inDate):'<span style="color:var(--mute)">-</span>')+'</td><td class="num"><b style="font-size:15px">'+esc(o.qty)+'</b> 병</td><td>'+(o.inDate?'<span class="tag t-grn">입고 완료</span>':'<span class="tag t-amb">입고 대기</span>')+'</td><td>'+(o.inDate&&o.orderDate?dayDiff(o.orderDate,o.inDate)+"일":"-")+'</td><td>'+esc(o.requester||"-")+'</td><td style="color:var(--ink2)">'+esc(o.memo||"")+'</td><td style="white-space:nowrap">'+(!o.inDate?'<button class="btn btn-sm btn-p" data-oin="'+o.id+'">오늘 입고</button> ':'')+'<button class="btn btn-sm" data-oedit="'+o.id+'">수정</button></td></tr>').join("")
-    :'<tr><td colspan="8" class="empty">'+(ox.length?"조건에 맞는 내역이 없습니다.":"아직 발주 내역이 없습니다. <b>발주 등록</b>으로 시작하세요.")+'</td></tr>';
-  $("oFoot").innerHTML="표시 <b>"+rows.length+"건</b><span>요청 수량 합계 <b>"+rows.reduce((s,o)=>s+(Number(o.qty)||0),0)+"병</b></span>";
+    :'<tr><td colspan="8" class="empty">'+m+'월 발주 내역이 없습니다. <b>발주 등록</b>으로 추가하세요.</td></tr>';
+  $("oFoot").innerHTML=m+"월 표시 <b>"+rows.length+"건</b><span>요청 수량 합계 <b>"+qty(rows)+"병</b></span>";
 }
 document.addEventListener("click",async e=>{
   const a=e.target.closest("[data-oedit]"); if(a){ oxygenForm(data.oxygen.find(x=>x.id===a.dataset.oedit)); return; }
@@ -705,8 +768,8 @@ function renderMail(){
   $("mDone").innerHTML=ml.filter(x=>x.sentDate).length+"<small>건</small>"; $("mMonth").innerHTML=ml.filter(x=>(x.reqDate||"").slice(0,7)===m).length+"<small>건</small>";
   const q=$("mQ").value.trim().toLowerCase();
   const rows=ml.filter(x=>(mFilter==="all"||(mFilter==="wait"?!x.sentDate:!!x.sentDate))&&(!q||[x.title,x.requester,x.to].join(" ").toLowerCase().includes(q))).sort((a,b)=>(b.reqDate||"").localeCompare(a.reqDate||""));
-  $("mTable").innerHTML=rows.length?rows.map(x=>'<tr><td>'+esc(x.reqDate)+'</td><td><div class="nm">'+esc(x.title)+'</div>'+(x.memo?'<div class="subt">'+esc(x.memo)+'</div>':"")+'</td><td>'+esc(x.requester)+'</td><td>'+esc(x.to||"-")+'</td><td>'+esc(x.sentDate||"-")+'</td><td style="font-family:Inter;font-size:12.5px">'+esc(x.trackNo||"-")+'</td><td>'+(x.sentDate?'<span class="tag t-grn">발송 완료</span>':'<span class="tag t-amb">발송 대기</span>')+'</td><td><button class="btn btn-sm" data-medit="'+x.id+'">수정</button></td></tr>').join("")
-    :'<tr><td colspan="8" class="empty">'+(ml.length?"조건에 맞는 내역이 없습니다.":"아직 등기 요청이 없습니다. <b>발송 요청</b>으로 시작하세요.")+'</td></tr>';
+  $("mTable").innerHTML=rows.length?rows.map(x=>'<tr><td>'+esc(x.reqDate)+'</td><td><div class="nm">'+esc(x.title)+'</div>'+(x.memo?'<div class="subt">'+esc(x.memo)+'</div>':"")+'</td><td>'+esc(x.requester)+'</td><td>'+esc(x.to||"-")+'</td><td>'+esc(x.sentDate||"-")+'</td><td>'+(x.sentDate?'<span class="tag t-grn">발송 완료</span>':'<span class="tag t-amb">발송 대기</span>')+'</td><td><button class="btn btn-sm" data-medit="'+x.id+'">수정</button></td></tr>').join("")
+    :'<tr><td colspan="7" class="empty">'+(ml.length?"조건에 맞는 내역이 없습니다.":"아직 등기 요청이 없습니다. <b>발송 요청</b>으로 시작하세요.")+'</td></tr>';
   $("mFoot").innerHTML="표시 <b>"+rows.length+"건</b>";
 }
 document.addEventListener("click",e=>{ const a=e.target.closest("[data-medit]"); if(a) mailForm(data.mail.find(x=>x.id===a.dataset.medit)); });
@@ -729,22 +792,116 @@ function wire(k,item,build,validate){
     const sb=f.querySelector("[type=submit]"); sb.disabled=true; sb.textContent="저장 중…";
     try{ await saveItem(k,build(fd)); toast("저장했습니다."); closeModal(); }catch(err){ $("ferr").textContent=err.message; sb.disabled=false; sb.textContent="저장"; } };
 }
-function contractForm(c){
-  c=c||{}; const ed=!!c.id, depts=[...new Set(data.contracts.map(x=>x.dept).filter(Boolean))];
-  const body=fld("계약명","name",c.name,"text",true,"full")
-   +fld("업체(상대기관)명","vendor",c.vendor,"text",true)
-   +'<div><label>계약유형 <span class="req">*</span></label><select name="type" required>'+TYPES.map(t=>'<option'+(t===(c.type||"")?" selected":"")+'>'+t+'</option>').join("")+'</select></div>'
+function contractForm(c,forceType){
+  c=c||{}; const ed=!!c.id, t=forceType||c.type||TYPES[0], mou=t==="MOU협약", depts=[...new Set(data.contracts.map(x=>x.dept).filter(Boolean))];
+  const pkSel=Array.isArray(c.packages)?c.packages:[];
+  const typeSel='<div><label>계약유형 <span class="req">*</span></label><select name="type" id="cfType" required>'+TYPES.map(x=>'<option'+(x===t?" selected":"")+'>'+x+'</option>').join("")+'</select></div>';
+  const common=fld(mou?"협약명":"계약명","name",c.name,"text",true,"full")
+   +fld(mou?"상대기관(기업)명":"업체(상대기관)명","vendor",c.vendor,"text",true)+typeSel
    +fld("담당부서","dept",c.dept||"소하검진센터","text",false,"",'list="deptList"')+'<datalist id="deptList">'+depts.map(d=>'<option value="'+esc(d)+'">').join("")+'</datalist>'
-   +fld("담당자","manager",c.manager)
-   +fld("계약 시작일","start",c.start,"date",true)+fld("계약 종료일","end",c.end,"date",true)
-   +fld("계약금액 (원)","amount",c.amount?Number(c.amount).toLocaleString("ko-KR"):"","text",false,"",'inputmode="numeric" id="amtIn" placeholder="예: 12,000,000"')
-   +'<div><label>자동갱신</label><select name="autoRenew"><option value="N"'+(c.autoRenew!=="Y"?" selected":"")+'>없음</option><option value="Y"'+(c.autoRenew==="Y"?" selected":"")+'>자동갱신</option></select></div>'
-   +'<div class="full"><label>비고</label><textarea name="memo">'+esc(c.memo||"")+'</textarea></div>';
-  openModal(shell(ed?"계약 수정":"새 계약 등록",body,ed));
-  const ai=$("amtIn"); ai.oninput=()=>{ const v=ai.value.replace(/[^\d]/g,""); ai.value=v?Number(v).toLocaleString("ko-KR"):""; };
-  wire("contracts",c,fd=>({id:c.id,name:fd.name.trim(),vendor:fd.vendor.trim(),type:fd.type,dept:fd.dept.trim(),manager:fd.manager.trim(),start:fd.start,end:fd.end,amount:Number((fd.amount||"").replace(/[^\d]/g,""))||0,autoRenew:fd.autoRenew,memo:fd.memo.trim(),createdAt:c.createdAt||new Date().toISOString()}),
-    fd=>fd.end<fd.start?"종료일이 시작일보다 빠릅니다.":"");
+   +fld("담당자","manager",c.manager);
+  let body;
+  if(mou){
+    const pks=data.package.slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));
+    body=common
+     +'<div class="sechd">검진 정보</div>'
+     +fld("검진 시작일","hcStart",c.hcStart,"date",true)+fld("검진 종료일","hcEnd",c.hcEnd,"date",true)
+     +fld("검진인원 (명)","headcount",c.headcount||"","number",false,"",'min="0" placeholder="예: 120"')+'<div></div>'
+     +'<div class="full"><label>패키지 <button type="button" class="link" id="cfPk" style="float:right">패키지 추가·수정 ›</button></label>'
+       +(pks.length?'<div class="pklist">'+pks.map(p=>'<label class="pkopt"><input type="checkbox" name="pkg" value="'+esc(p.id)+'"'+(pkSel.includes(p.id)?" checked":"")+'><span><b>'+esc(p.name)+'</b>'+(p.items?'<small>'+esc(p.items)+'</small>':'')+'</span></label>').join("")+'</div>'
+        :'<div class="subt" style="padding:8px 0">등록된 패키지가 없습니다. 오른쪽 <b>패키지 추가·수정</b>에서 먼저 만들어 주세요.</div>')+'</div>'
+     +'<div class="sechd">협약 기간 (만료 알림용 · 선택)</div>'
+     +fld("협약 시작일","start",c.start,"date")+fld("협약 종료일","end",c.end,"date")
+     +'<div><label>자동갱신</label><select name="autoRenew"><option value="N"'+(c.autoRenew!=="Y"?" selected":"")+'>없음</option><option value="Y"'+(c.autoRenew==="Y"?" selected":"")+'>자동갱신</option></select></div><div></div>'
+     +'<div class="full"><label>비고</label><textarea name="memo">'+esc(c.memo||"")+'</textarea></div>';
+  } else {
+    body=common
+     +fld("계약 시작일","start",c.start,"date",true)+fld("계약 종료일","end",c.end,"date",true)
+     +fld("계약금액 (원)","amount",c.amount?Number(c.amount).toLocaleString("ko-KR"):"","text",false,"",'inputmode="numeric" id="amtIn" placeholder="예: 12,000,000"')
+     +'<div><label>자동갱신</label><select name="autoRenew"><option value="N"'+(c.autoRenew!=="Y"?" selected":"")+'>없음</option><option value="Y"'+(c.autoRenew==="Y"?" selected":"")+'>자동갱신</option></select></div>'
+     +'<div class="full"><label>비고</label><textarea name="memo">'+esc(c.memo||"")+'</textarea></div>';
+  }
+  openModal(shell((ed?"":"새 ")+(mou?"MOU 협약 ":"계약 ")+(ed?"수정":"등록"),body,ed));
+  const snapshot=()=>{ const f=$("mform"), fd=Object.fromEntries(new FormData(f).entries()); const o=Object.assign({},c,fd);
+    o.packages=[...f.querySelectorAll("[name=pkg]:checked")].map(x=>x.value); if(fd.amount!==undefined) o.amount=Number((fd.amount||"").replace(/[^\d]/g,""))||0; delete o.pkg; return o; };
+  $("cfType").onchange=()=>{ const o=snapshot(); contractForm(o,$("cfType").value); };
+  if($("cfPk")) $("cfPk").onclick=()=>{ const o=snapshot(); packageForm(()=>contractForm(o,"MOU협약")); };
+  const ai=$("amtIn"); if(ai) ai.oninput=()=>{ const v=ai.value.replace(/[^\d]/g,""); ai.value=v?Number(v).toLocaleString("ko-KR"):""; };
+  wire("contracts",c,fd=>{
+    const base={id:c.id,name:fd.name.trim(),vendor:fd.vendor.trim(),type:fd.type,dept:(fd.dept||"").trim(),manager:(fd.manager||"").trim(),start:fd.start||"",end:fd.end||"",autoRenew:fd.autoRenew,memo:(fd.memo||"").trim(),createdAt:c.createdAt||new Date().toISOString()};
+    if(fd.type==="MOU협약") return Object.assign(base,{amount:0,hcStart:fd.hcStart,hcEnd:fd.hcEnd,headcount:Number(fd.headcount)||0,packages:[...$("mform").querySelectorAll("[name=pkg]:checked")].map(x=>x.value)});
+    return Object.assign(base,{amount:Number((fd.amount||"").replace(/[^\d]/g,""))||0});
+  }, fd=>{
+    if(fd.start&&fd.end&&fd.end<fd.start) return "종료일이 시작일보다 빠릅니다.";
+    if(fd.type==="MOU협약"&&fd.hcStart&&fd.hcEnd&&fd.hcEnd<fd.hcStart) return "검진 종료일이 시작일보다 빠릅니다.";
+    return "";
+  });
 }
+
+/* ---------- PACKAGES ---------- */
+function packageForm(onClose){
+  const close=()=>{ if(onClose) onClose(); else closeModal(); };
+  const draw=()=>{
+    const list=data.package.slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));
+    const used=id=>data.contracts.filter(c=>Array.isArray(c.packages)&&c.packages.includes(id)).length;
+    $("modal").innerHTML='<div class="mh">검진 패키지 관리<button type="button" data-pclose>'+X+'</button></div><div class="mb"><div class="full">'
+      +(list.length?list.map(p=>'<div class="pkrow"><div><input data-pid="'+esc(p.id)+'" data-f="name" value="'+esc(p.name)+'" placeholder="패키지명" style="font-weight:700;margin-bottom:8px"><textarea data-pid="'+esc(p.id)+'" data-f="items" placeholder="검사내용">'+esc(p.items||"")+'</textarea><div class="subt">MOU '+used(p.id)+'건에서 사용 중</div></div><button type="button" class="ibtn" data-pdel="'+esc(p.id)+'" title="삭제">'+X+'</button></div>').join("")
+        :'<div class="empty" style="padding:12px 0">아직 등록된 패키지가 없습니다.</div>')
+      +'<div class="pkrow" style="border-style:dashed;background:var(--soft)"><div><input id="npName" placeholder="새 패키지명 (예: 기본 A형)" style="font-weight:700;margin-bottom:8px"><textarea id="npItems" placeholder="검사내용 (예: 기본검사, 위내시경, 복부초음파, 갑상선초음파)"></textarea></div><button type="button" class="btn btn-p" id="npAdd" style="height:40px;padding:0;justify-content:center">+</button></div>'
+      +'<div class="subt">패키지명·검사내용은 칸을 고친 뒤 다른 곳을 누르면 저장됩니다.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn btn-p" data-pclose>'+(onClose?"완료 · 계약으로 돌아가기":"닫기")+'</button></div>';
+    $("modal").querySelectorAll("[data-pclose]").forEach(b=>b.onclick=close);
+    $("modal").querySelectorAll("[data-pid]").forEach(inp=>inp.onchange=async()=>{
+      const p=data.package.find(x=>x.id===inp.dataset.pid); if(!p) return; const v=inp.value.trim();
+      if(inp.dataset.f==="name"&&!v){ inp.value=p.name; return; }
+      try{ await saveItem("package",Object.assign({},p,{[inp.dataset.f]:v})); toast("저장했습니다."); }catch(e){ $("ferr").textContent=e.message; }
+    });
+    $("modal").querySelectorAll("[data-pdel]").forEach(b=>b.onclick=async()=>{
+      const p=data.package.find(x=>x.id===b.dataset.pdel); if(!p) return;
+      if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.style.background="var(--red)"; b.style.color="#fff"; $("ferr").textContent="'"+p.name+"' 삭제하려면 한 번 더 누르세요."+(used(p.id)?" (MOU "+used(p.id)+"건에서 빠집니다)":""); return; }
+      b.disabled=true; try{ await deleteItem("package",p.id); toast("삭제했습니다."); draw(); }catch(e){ $("ferr").textContent="삭제 실패"; }
+    });
+    $("npAdd").onclick=async()=>{
+      const name=$("npName").value.trim(); if(!name){ $("ferr").textContent="패키지명을 입력하세요."; return; }
+      $("npAdd").disabled=true;
+      try{ await saveItem("package",{name,items:$("npItems").value.trim(),createdAt:new Date().toISOString()}); toast(name+" 추가했습니다."); draw(); }
+      catch(e){ $("ferr").textContent=e.message; $("npAdd").disabled=false; }
+    };
+  };
+  if($("mask").style.display!=="flex") $("mask").style.display="flex";
+  draw(); setTimeout(()=>$("npName")&&$("npName").focus(),40);
+}
+$("pkBtn").onclick=()=>packageForm();
+
+/* ---------- NOTICE ---------- */
+let nFilter="all";
+chips($("nChips"),[["all","전체"]].concat(NCATS.map(c=>[c,c])),"all",r=>{nFilter=r;renderNotice();});
+$("nQ").oninput=renderNotice;
+const ymLabel=ym=>{ if(!ym) return ""; const [y,m]=ym.split("-"); return y+"년 "+Number(m)+"월"; };
+const noticeSorted=()=>data.notice.slice().sort((a,b)=>((b.pinned==="Y")-(a.pinned==="Y"))||String(b.month||"").localeCompare(String(a.month||""))||String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+function renderNotice(){
+  const q=$("nQ").value.trim().toLowerCase();
+  const rows=noticeSorted().filter(n=>(nFilter==="all"||n.cat===nFilter)&&(!q||[n.title,n.content,n.author].join(" ").toLowerCase().includes(q)));
+  $("nList").innerHTML=rows.length?rows.map(n=>'<div class="ntc'+(n.pinned==="Y"?" pin":"")+'"><div class="nh">'+(n.pinned==="Y"?'<span class="tag t-red">📌 고정</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span>'+(n.month?'<span class="tag t-gry">'+esc(ymLabel(n.month))+'</span>':'')+'</div>'
+    +'<div class="nt">'+esc(n.title)+'</div>'+(n.content?'<div class="nb">'+esc(n.content)+'</div>':'')
+    +'<div class="nf">'+(n.author?'<span>'+esc(n.author)+'</span> · ':'')+'<span>'+esc((n.createdAt||"").slice(0,10))+'</span><span class="sp"></span><button class="btn btn-sm" data-nedit="'+esc(n.id)+'">수정</button></div></div>').join("")
+    :'<div class="empty">'+(data.notice.length?"조건에 맞는 공지가 없습니다.":"아직 공지가 없습니다. 오른쪽 위 <b>공지 작성</b>으로 시작하세요.")+'</div>';
+  const top=noticeSorted().slice(0,4);
+  if($("dNotice")) $("dNotice").innerHTML=top.length?top.map(n=>'<div class="nline" data-go="notice">'+(n.pinned==="Y"?'<span class="tag t-red">📌</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span><span class="t">'+esc(n.title)+'</span><span class="d">'+esc(n.month?ymLabel(n.month):(n.createdAt||"").slice(0,10))+'</span></div>').join("")
+    :'<div class="empty" style="padding:14px 0">등록된 공지가 없습니다.</div>';
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-nedit]"); if(b) noticeForm(data.notice.find(x=>x.id===b.dataset.nedit)); });
+function noticeForm(n){
+  n=n||{}; const ed=!!n.id, cat=n.cat||NCATS[0];
+  const body='<div><label>분류 <span class="req">*</span></label><select name="cat">'+NCATS.map(c=>'<option'+(c===cat?" selected":"")+'>'+c+'</option>').join("")+'</select></div>'
+   +fld("대상월","month",n.month||thisMonth(),"month")
+   +fld("제목","title",n.title,"text",true,"full",'placeholder="예: 11월 무이자 할부 카드 안내"')
+   +'<div class="full"><label>내용</label><textarea name="content" style="min-height:180px" placeholder="예)\n- 삼성카드: 2~6개월 무이자\n- 신한카드: 2~5개월 무이자\n※ 법인카드·체크카드 제외">'+esc(n.content||"")+'</textarea></div>'
+   +fld("작성자","author",n.author)
+   +'<div><label>상단 고정</label><select name="pinned"><option value="N"'+(n.pinned!=="Y"?" selected":"")+'>고정 안 함</option><option value="Y"'+(n.pinned==="Y"?" selected":"")+'>📌 상단 고정</option></select></div>';
+  openModal(shell(ed?"공지 수정":"공지 작성",body,ed));
+  wire("notice",n,fd=>({id:n.id,cat:fd.cat,month:fd.month||"",title:fd.title.trim(),content:fd.content.replace(/\s+$/,""),author:fd.author.trim(),pinned:fd.pinned,createdAt:n.createdAt||new Date().toISOString()}));
+}
+
 function oxygenForm(o){
   o=o||{}; const ed=!!o.id, q=String(o.qty||"3"), etc=q!=="3"&&q!=="4";
   const body=fld("발주일","orderDate",o.orderDate||todayStr(),"date",true)+fld("입고일","inDate",o.inDate,"date")
@@ -762,9 +919,9 @@ function mailForm(x){
   const body=fld("요청일","reqDate",x.reqDate||todayStr(),"date",true)+fld("요청자","requester",x.requester,"text",true)
    +fld("제목","title",x.title,"text",true,"full",'placeholder="예: 기업검진 결과 통보"')
    +fld("수신처","to",x.to,"text",false,"",'placeholder="받는 기관 / 사람"')+fld("발송일","sentDate",x.sentDate,"date")
-   +fld("등기번호","trackNo",x.trackNo,"text",false,"",'placeholder="우체국 등기번호"')+fld("비고","memo",x.memo);
+   +fld("비고","memo",x.memo,"text",false,"full");
   openModal(shell(ed?"등기 발송 수정":"등기 발송 요청",body,ed));
-  wire("mail",x,fd=>({id:x.id,reqDate:fd.reqDate,requester:fd.requester.trim(),title:fd.title.trim(),to:fd.to.trim(),sentDate:fd.sentDate||"",trackNo:fd.trackNo.trim(),memo:fd.memo.trim(),createdAt:x.createdAt||new Date().toISOString()}),
+  wire("mail",x,fd=>({id:x.id,reqDate:fd.reqDate,requester:fd.requester.trim(),title:fd.title.trim(),to:fd.to.trim(),sentDate:fd.sentDate||"",trackNo:x.trackNo||"",memo:fd.memo.trim(),createdAt:x.createdAt||new Date().toISOString()}),
     fd=>fd.sentDate&&fd.sentDate<fd.reqDate?"발송일이 요청일보다 빠릅니다.":"");
 }
 
@@ -782,8 +939,8 @@ const HOL={
  "2027-10-09":"한글날","2027-10-11":"대체공휴일(한글날)","2027-12-25":"성탄절","2027-12-27":"대체공휴일(성탄절)"
 };
 const DSTAT={open:["정상운영","st-open"],short:["단축운영","st-short"],closed:["휴진","st-closed"],holiday:["공휴일","st-holiday"]};
-const PSTAT={work:["출근","ps-work"],off:["연차","ps-off"],am:["오전반차","ps-am"],pm:["오후반차","ps-pm"],half:["하프근무","ps-half"],trip:["출장·교육","ps-trip"],sick:["병가·경조","ps-sick"],rest:["휴무","ps-rest"]};
-const PORDER=["work","off","am","pm","half","trip","sick","rest"];
+const PSTAT={work:["출근","ps-work"],off:["연차","ps-off"],am:["오전반차","ps-am"],pm:["오후반차","ps-pm"],half:["반차","ps-am"],trip:["출장·교육","ps-trip"],sick:["병가·경조","ps-sick"],rest:["휴무","ps-rest"]};
+const PORDER=["work","off","am","pm","trip","sick","rest"];
 const WEEKK=["일","월","화","수","목","금","토"];
 const isOpenSt=s=>s==="open"||s==="short";
 const dObj=ds=>new Date(ds+"T00:00:00");
@@ -794,26 +951,28 @@ function dayStatus(ds){ const r=dayRec(ds); return (r&&DSTAT[r.status])?r.status
 function dayMemo(ds){ const r=dayRec(ds); return (r&&r.memo)||HOL[ds]||""; }
 const defPerson=st=>"";
 function personStat(ds,pid){ const r=dayRec(ds), p=r&&r.people&&r.people[pid]; return PSTAT[p]?p:""; }
-const staffSorted=()=>data.staff.slice().sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0)||String(a.name).localeCompare(String(b.name)));
+const staffSorted=()=>data.staff.slice().sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0)||String(a.part||"").localeCompare(String(b.part||""))||String(a.name).localeCompare(String(b.name)));
+const staffLabel=p=>[p.part,p.title].filter(Boolean).join(" · ");
 let wMonth=thisMonth();
 function monthDays(ym){ const [y,m]=ym.split("-").map(Number), n=new Date(y,m,0).getDate(); return Array.from({length:n},(_,i)=>ym+"-"+pad(i+1)); }
 function shiftMonth(k){ const [y,m]=wMonth.split("-").map(Number); const d=new Date(y,m-1+k,1); wMonth=d.getFullYear()+"-"+pad(d.getMonth()+1); renderWorkday(); }
 $("wPrev").onclick=()=>shiftMonth(-1); $("wNext").onclick=()=>shiftMonth(1); $("wThis").onclick=()=>{ wMonth=thisMonth(); renderWorkday(); };
 
 function countDays(days){ const st={open:0,short:0,closed:0,holiday:0}; days.forEach(d=>st[dayStatus(d)]++); return st; }
-function yearDays(y){ const out=[]; for(let mm=1;mm<=12;mm++) out.push(...monthDays(y+"-"+pad(mm))); return out; }
+const acadYear=(y,m)=>m>=3?y:y-1;
+function acadDays(ay){ const out=[]; for(let i=0;i<12;i++){ const d=new Date(ay,2+i,1); out.push(...monthDays(d.getFullYear()+"-"+pad(d.getMonth()+1))); } return out; }
 function renderWorkday(){
   if(!$("cal")) return;
   const [y,m]=wMonth.split("-").map(Number);
   $("wTitle").textContent=y+"년 "+m+"월";
   const days=monthDays(wMonth), staff=staffSorted(), td=todayStr();
-  const sm=countDays(days), sy=countDays(yearDays(y));
-  $("wOpenML").textContent="센터 운영일 · "+m+"월"; $("wOpenYL").textContent="센터 운영일 · "+y+"년";
-  $("wOffML").textContent="공휴일·휴진 · "+m+"월"; $("wOffYL").textContent="공휴일·휴진 · "+y+"년";
+  const ay=acadYear(y,m), sm=countDays(days), sy=countDays(acadDays(ay)), ayr=ay+".03 ~ "+(ay+1)+".02";
+  $("wOpenYL").textContent=ay+"학년도 운영일"; $("wOpenML").textContent=m+"월 운영일";
+  $("wOffYL").textContent=ay+"학년도 공휴일·휴진"; $("wOffML").textContent=m+"월 공휴일·휴진";
   $("wOpenM").innerHTML=(sm.open+sm.short)+"<small>일</small>"; $("wOpenMFt").textContent="정상 "+sm.open+" · 단축 "+sm.short;
-  $("wOpenY").innerHTML=(sy.open+sy.short)+"<small>일</small>"; $("wOpenYFt").textContent="정상 "+sy.open+" · 단축 "+sy.short;
+  $("wOpenY").innerHTML=(sy.open+sy.short)+"<small>일</small>"; $("wOpenYFt").textContent=ayr+" · 정상 "+sy.open+" · 단축 "+sy.short;
   $("wOffM").innerHTML=(sm.closed+sm.holiday)+"<small>일</small>"; $("wOffMFt").textContent="공휴일 "+sm.holiday+" · 휴진 "+sm.closed;
-  $("wOffY").innerHTML=(sy.closed+sy.holiday)+"<small>일</small>"; $("wOffYFt").textContent="공휴일 "+sy.holiday+" · 휴진 "+sy.closed;
+  $("wOffY").innerHTML=(sy.closed+sy.holiday)+"<small>일</small>"; $("wOffYFt").textContent=ayr+" · 공휴일 "+sy.holiday+" · 휴진 "+sy.closed;
   // calendar cells (6 weeks max)
   const first=dObj(days[0]), start=new Date(first); start.setDate(1-first.getDay());
   const last=dObj(days[days.length-1]), cells=Math.ceil((first.getDay()+days.length)/7)*7;
@@ -836,7 +995,7 @@ function dayForm(ds){
   const title=(d.getMonth()+1)+"월 "+d.getDate()+"일 ("+WEEKK[d.getDay()]+")"+(HOL[ds]?" · "+HOL[ds]:"");
   const seg='<div class="seg">'+Object.keys(DSTAT).map(k=>'<label><input type="radio" name="dst" value="'+k+'"'+(k===s?" checked":"")+'>'+DSTAT[k][0]+'</label>').join("")+'</div>';
   const rows=staff.length?staff.map(p=>{ const v=personStat(ds,p.id), touched=!!(r&&r.people&&r.people[p.id]);
-    return '<div class="prow"><div class="pn">'+esc(p.name)+(p.part?'<small>'+esc(p.part)+'</small>':'')+'</div><select data-pid="'+esc(p.id)+'"'+(touched?' data-touched="1"':'')+'><option value=""'+(v?"":" selected")+'>— 미기록</option>'+PORDER.map(k=>'<option value="'+k+'"'+(k===v?" selected":"")+'>'+PSTAT[k][0]+'</option>').join("")+'</select></div>'; }).join("")
+    return '<div class="prow"><div class="pn">'+(staffLabel(p)?'<small style="margin:0 6px 0 0">'+esc(staffLabel(p))+'</small>':'')+esc(p.name)+'</div><select data-pid="'+esc(p.id)+'"'+(touched?' data-touched="1"':'')+'><option value=""'+(v?"":" selected")+'>— 미기록</option>'+PORDER.map(k=>'<option value="'+k+'"'+(k===v?" selected":"")+'>'+PSTAT[k][0]+'</option>').join("")+'</select></div>'; }).join("")
     :'<div class="empty" style="padding:16px 0">등록된 행정 인원이 없습니다. <button type="button" class="link" id="goStaff">행정 인원 등록 ›</button></div>';
   const html='<div class="mh">'+esc(title)+'<button type="button" data-close>'+X+'</button></div><div class="mb">'
     +'<div class="full"><label>센터 운영</label>'+seg+'</div>'
@@ -863,14 +1022,15 @@ function dayForm(ds){
 }
 
 function staffForm(){
+  const F=[["part","파트","예: 기획·협약"],["title","직책/직급","예: 서기"],["name","이름","이름"]];
   const draw=()=>{
     const list=staffSorted();
     $("modal").innerHTML='<div class="mh">행정 인원 관리<button type="button" data-close>'+X+'</button></div><div class="mb"><div class="full">'
-      +'<div class="srow" style="font-size:12px;color:var(--mute);font-weight:600"><span>이름</span><span>파트</span><span>순서</span><span></span></div>'
-      +(list.length?list.map(p=>'<div class="srow"><input data-sid="'+esc(p.id)+'" data-f="name" value="'+esc(p.name)+'"><input data-sid="'+esc(p.id)+'" data-f="part" value="'+esc(p.part||"")+'"><input data-sid="'+esc(p.id)+'" data-f="order" type="number" value="'+esc(p.order||0)+'"><button type="button" class="ibtn" data-sdel="'+esc(p.id)+'" title="삭제">'+X+'</button></div>').join("")
+      +'<div class="srow" style="font-size:12px;color:var(--mute);font-weight:600"><span>파트</span><span>직책/직급</span><span>이름</span><span>순서</span><span></span></div>'
+      +(list.length?list.map(p=>'<div class="srow">'+F.map(([f])=>'<input data-sid="'+esc(p.id)+'" data-f="'+f+'" value="'+esc(p[f]||"")+'">').join("")+'<input data-sid="'+esc(p.id)+'" data-f="order" type="number" value="'+esc(p.order||0)+'"><button type="button" class="ibtn" data-sdel="'+esc(p.id)+'" title="삭제">'+X+'</button></div>').join("")
         :'<div class="empty" style="padding:12px 0">아직 등록된 인원이 없습니다.</div>')
-      +'<div class="srow" style="margin-top:14px"><input id="nsName" placeholder="이름"><input id="nsPart" placeholder="파트 (예: 기획·협약)"><input id="nsOrder" type="number" placeholder="순서" value="'+(list.length+1)+'"><button type="button" class="btn btn-p" id="nsAdd" style="height:36px;padding:0;justify-content:center">+</button></div>'
-      +'<div class="subt">이름·파트·순서는 칸을 고친 뒤 다른 곳을 누르면 저장됩니다.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn" data-close>닫기</button></div>';
+      +'<div class="srow" style="margin-top:14px">'+F.map(([f,l,ph])=>'<input id="ns_'+f+'" placeholder="'+ph+'">').join("")+'<input id="ns_order" type="number" placeholder="순서" value="'+(list.length+1)+'"><button type="button" class="btn btn-p" id="nsAdd" style="height:36px;padding:0;justify-content:center">+</button></div>'
+      +'<div class="subt">칸을 고친 뒤 다른 곳을 누르면 저장됩니다. 순서가 작을수록 위에 표시돼요.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn" data-close>닫기</button></div>';
     $("modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal);
     $("modal").querySelectorAll("[data-sid]").forEach(inp=>inp.onchange=async()=>{
       const p=data.staff.find(x=>x.id===inp.dataset.sid); if(!p) return; const v=inp.dataset.f==="order"?Number(inp.value)||0:inp.value.trim();
@@ -883,26 +1043,26 @@ function staffForm(){
       b.disabled=true; try{ await deleteItem("staff",p.id); toast("삭제했습니다."); draw(); }catch(e){ $("ferr").textContent="삭제 실패"; }
     });
     $("nsAdd").onclick=async()=>{
-      const name=$("nsName").value.trim(); if(!name){ $("ferr").textContent="이름을 입력하세요."; return; }
+      const name=$("ns_name").value.trim(); if(!name){ $("ferr").textContent="이름을 입력하세요."; return; }
       $("nsAdd").disabled=true;
-      try{ await saveItem("staff",{name,part:$("nsPart").value.trim(),order:Number($("nsOrder").value)||0,createdAt:new Date().toISOString()}); toast(name+" 등록했습니다."); draw(); setTimeout(()=>$("nsName")&&$("nsName").focus(),30); }
+      try{ await saveItem("staff",{part:$("ns_part").value.trim(),title:$("ns_title").value.trim(),name,order:Number($("ns_order").value)||0,createdAt:new Date().toISOString()}); toast(name+" 등록했습니다."); draw(); setTimeout(()=>$("ns_part")&&$("ns_part").focus(),30); }
       catch(e){ $("ferr").textContent=e.message; $("nsAdd").disabled=false; }
     };
-    $("nsName").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); $("nsAdd").click(); } };
+    $("ns_name").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); $("nsAdd").click(); } };
   };
   if($("mask").style.display!=="flex") $("mask").style.display="flex";
-  draw(); setTimeout(()=>$("nsName")&&$("nsName").focus(),40);
+  draw(); setTimeout(()=>$("ns_part")&&$("ns_part").focus(),40);
 }
 $("wStaffBtn").onclick=()=>staffForm();
 
 $("wCopy").onclick=async()=>{
-  const [y,m]=wMonth.split("-").map(Number), days=monthDays(wMonth), staff=staffSorted(), sm=countDays(days), sy=countDays(yearDays(y));
+  const [y,m]=wMonth.split("-").map(Number), days=monthDays(wMonth), staff=staffSorted(), ay=acadYear(y,m), sm=countDays(days), sy=countDays(acadDays(ay));
   const L=["[SOVIS] "+y+"년 "+m+"월 워킹데이 계획","","■ 센터 운영일",
     "- "+m+"월: "+(sm.open+sm.short)+"일 (정상 "+sm.open+"일 / 단축 "+sm.short+"일)",
-    "- "+y+"년 연간: "+(sy.open+sy.short)+"일 (정상 "+sy.open+"일 / 단축 "+sy.short+"일)",
+    "- "+ay+"학년도("+ay+".03~"+(ay+1)+".02): "+(sy.open+sy.short)+"일 (정상 "+sy.open+"일 / 단축 "+sy.short+"일)",
     "","■ 공휴일·휴진일",
     "- "+m+"월: "+(sm.closed+sm.holiday)+"일 (공휴일 "+sm.holiday+"일 / 휴진 "+sm.closed+"일)",
-    "- "+y+"년 연간: "+(sy.closed+sy.holiday)+"일 (공휴일 "+sy.holiday+"일 / 휴진 "+sy.closed+"일)"];
+    "- "+ay+"학년도: "+(sy.closed+sy.holiday)+"일 (공휴일 "+sy.holiday+"일 / 휴진 "+sy.closed+"일)"];
   const hol=days.filter(d=>HOL[d]); if(hol.length) L.push("- "+m+"월 공휴일: "+hol.map(d=>{const x=dObj(d);return pad(x.getMonth()+1)+"/"+pad(x.getDate())+" "+HOL[d];}).join(", "));
   const sp=days.filter(d=>{ const s=dayStatus(d), w=dObj(d).getDay(); return s==="short"||(s==="closed"&&w!==0&&w!==6)||(s==="open"&&(w===0||w===6)); });
   if(sp.length){ L.push("- 특이 운영일"); sp.forEach(d=>{ const x=dObj(d); L.push("  "+pad(x.getMonth()+1)+"/"+pad(x.getDate())+"("+WEEKK[x.getDay()]+") "+DSTAT[dayStatus(d)][0]+(dayMemo(d)?" - "+dayMemo(d):"")); }); }
@@ -914,7 +1074,7 @@ $("wCopy").onclick=async()=>{
   catch(e){ openModal('<div class="mh">월간 요약<button type="button" data-close>'+X+'</button></div><div class="mb"><div class="full"><textarea style="min-height:320px;font-size:13px" readonly>'+esc(txt)+'</textarea></div></div>'); $("modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal); }
 };
 
-function renderAll(){ renderDashboard(); renderContracts(); renderAlerts(); renderOxygen(); renderMail(); renderWorkday(); }
+function renderAll(){ renderDashboard(); renderContracts(); renderAlerts(); renderOxygen(); renderMail(); renderWorkday(); renderNotice(); }
 renderAll();
 if(PIN && GAS) enter(); else { if(!GAS) PIN=""; setTimeout(()=>pins[0].focus(),60); }
 })();
