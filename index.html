@@ -332,7 +332,7 @@ td.num,th.num{text-align:right}
         <button class="btn-login" type="submit">로그인 <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </form>
       <div class="err" id="loginErr"></div>
-      <div class="l-foot">v1.5 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v1.6 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -359,7 +359,7 @@ td.num,th.num{text-align:right}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v1.5 | 소하검진센터 SEOK</div>
+      <div class="ver">v1.6 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -372,6 +372,7 @@ td.num,th.num{text-align:right}
       </div>
       <div class="right">
         <span class="datechip"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><span id="today"></span></span>
+        <button class="btn btn-ic" id="bkBtn" title="전체 데이터 백업 다운로드" style="display:none"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></button>
         <button class="btn btn-ic" id="gearBtn" title="계정 관리" style="display:none"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
         <button class="btn btn-ic" id="refresh" title="새로고침"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button>
         <button class="btn btn-p" id="topAdd"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 5v14M5 12h14"/></svg><span id="topAddTxt">계약 등록</span></button>
@@ -589,7 +590,7 @@ function can(menu,act){ if(!ME) return false; if(ME.is_admin) return true; const
 function applyPerms(){
   document.querySelectorAll(".nav a[data-v]").forEach(a=>{ const m=VIEWS[a.dataset.v]&&VIEWS[a.dataset.v].menu; a.style.display=(!m||can(m,"view"))?"":"none"; });
   const g=document.querySelector(".nav .grp"); if(g) g.style.display=can("contracts","view")?"":"none";
-  $("gearBtn").style.display=ME&&ME.is_admin?"":"none";
+  $("gearBtn").style.display=ME&&ME.is_admin?"":"none"; $("bkBtn").style.display=ME&&ME.is_admin?"":"none";
   const nm=(ME&&(ME.name||ME.email.split("@")[0]))||"-";
   $("meName").textContent=nm; $("mePart").textContent=ME?((ME.is_admin?"관리자":ME.part||"")+(ME.name?" · "+ME.email:"")):""; $("meAv").textContent=nm.slice(0,1).toUpperCase();
   $("pwBtn").style.display=GAS?"":"none";
@@ -964,6 +965,86 @@ function pwForm(){
     try{ await api("changePw",fd.old,fd.nw); toast("비밀번호를 변경했습니다."); closeModal(); }catch(err){ $("ferr").textContent=errText(err); sb.disabled=false; }
   };
 }
+
+/* ---------- BACKUP (관리자 전용) ---------- */
+/* ===== SOVIS 백업 시트 구성 (화면 다운로드 · 자동 메일 공통) ===== */
+var SOVIS_SHEETS = [
+  ["contracts","계약",[["type","계약유형"],["name","계약(협약)명"],["vendor","업체·상대기관"],["dept","담당부서"],["manager","담당자"],["start","계약시작일"],["end","계약종료일"],["amount","계약금액"],["hcStart","검진시작일"],["hcEnd","검진종료일"],["headcount","검진인원"],["packages","패키지"],["autoRenew","자동갱신"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
+  ["package","검진패키지",[["name","패키지명"],["items","검사내용"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
+  ["notice","공지사항",[["cat","분류"],["month","대상월"],["title","제목"],["content","내용"],["author","작성자"],["pinned","상단고정"],["createdAt","작성일시"],["updatedBy","최종수정자"]]],
+  ["workday","워킹데이",[["date","날짜"],["status","운영상태"],["memo","메모"],["people","행정근무"],["updatedBy","최종수정자"]]],
+  ["staff","행정인원",[["part","파트"],["title","직책/직급"],["name","이름"],["order","순서"]]],
+  ["oxygen","산소가스",[["orderDate","발주일"],["inDate","입고일"],["qty","요청갯수"],["requester","요청자"],["memo","비고"],["updatedBy","최종수정자"]]],
+  ["mail","등기발송",[["reqDate","요청일"],["title","제목"],["requester","요청자"],["to","수신처"],["sentDate","발송일"],["memo","비고"],["updatedBy","최종수정자"]]],
+  ["users","계정",[["email","아이디"],["name","이름"],["part","구분"],["is_admin","관리자"],["active","사용"],["perms","메뉴권한"]]]
+];
+var SOVIS_DSTAT = {open:"정상운영",short:"단축운영",closed:"휴진",holiday:"공휴일"};
+var SOVIS_PSTAT = {work:"출근",off:"연차",am:"오전반차",pm:"오후반차",half:"반차",trip:"출장·교육",sick:"병가·경조",rest:"휴무"};
+var SOVIS_MENUS = {notice:"공지사항",contracts:"계약관리",workday:"워킹데이",oxygen:"산소가스",mail:"등기발송"};
+/** data: {contracts:[...], ...}, users: [...]  →  [[시트명, [[헤더...],[행...],...]], ...] */
+function sovisBuildSheets(data, users){
+  var pk = {}; (data["package"]||[]).forEach(function(p){ pk[p.id]=p.name; });
+  var st = {}; (data.staff||[]).forEach(function(p){ st[p.id]=p.name; });
+  var src = {}; for (var k in data) src[k]=data[k]; src.users = users||[];
+  function cell(kind, key, row){
+    var v = row[key];
+    if (kind==="contracts" && key==="packages") return (Array.isArray(v)?v:[]).map(function(id){ return pk[id]||id; }).join(", ");
+    if (kind==="contracts" && key==="autoRenew") return v==="Y"?"자동갱신":"";
+    if (kind==="notice" && key==="pinned") return v==="Y"?"고정":"";
+    if (kind==="workday" && key==="date") return row.date||row.id||"";
+    if (kind==="workday" && key==="status") return SOVIS_DSTAT[v]||v||"";
+    if (kind==="workday" && key==="people") return Object.keys(v||{}).map(function(id){ return (st[id]||id)+" "+(SOVIS_PSTAT[v[id]]||v[id]); }).join(", ");
+    if (kind==="users" && (key==="is_admin"||key==="active")) return v===false?"아니오":(v?"예":"");
+    if (kind==="users" && key==="perms") { if (row.is_admin) return "전체"; return Object.keys(v||{}).filter(function(m){ return v[m]&&v[m].view; }).map(function(m){ var p=v[m]; return (SOVIS_MENUS[m]||m)+"("+["조회",p.write?"등록":"",p.del?"삭제":""].filter(Boolean).join("·")+")"; }).join(", "); }
+    if (v===null || v===undefined) return "";
+    if (typeof v==="object") return JSON.stringify(v);
+    return v;
+  }
+  return SOVIS_SHEETS.map(function(s){
+    var kind=s[0], cols=s[2], rows=(src[kind]||[]).slice();
+    if (kind==="workday") rows.sort(function(a,b){ return String(a.date||a.id).localeCompare(String(b.date||b.id)); });
+    return [s[1], [cols.map(function(c){ return c[1]; })].concat(rows.map(function(r){ return cols.map(function(c){ return cell(kind,c[0],r); }); }))];
+  });
+}
+
+function stamp(){ const d=new Date(); return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"_"+pad(d.getHours())+pad(d.getMinutes()); }
+function downloadBlob(blob,name){ const u=URL.createObjectURL(blob), a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); }
+let xlsxLoading=null;
+function loadXLSX(){
+  if(window.XLSX) return Promise.resolve(window.XLSX);
+  if(!xlsxLoading) xlsxLoading=new Promise((res,rej)=>{ const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"; sc.onload=()=>res(window.XLSX); sc.onerror=()=>{ xlsxLoading=null; rej(new Error("XLSX")); }; document.head.appendChild(sc); });
+  return xlsxLoading;
+}
+async function freshBackupData(){
+  if(GAS){ const r=await api("listAll"); for(const k in COLS) data[k]=r[k]||[]; renderAll(); USERS=await api("users"); }
+  else { try{ USERS=JSON.parse(localStorage.getItem("soha_users")||"[]"); }catch(e){} }
+  const d={}; for(const k in COLS) d[k]=data[k]; return {data:d,users:USERS};
+}
+function backupMenu(){
+  if(!(ME&&ME.is_admin)) return;
+  const cnt=Object.keys(COLS).reduce((s,k)=>s+data[k].length,0);
+  openModal('<div class="mh">전체 데이터 백업 다운로드<button type="button" data-close>'+X+'</button></div><div class="mb"><div class="full">'
+    +'<div class="subt" style="margin-bottom:12px">계약·패키지·공지·워킹데이·행정인원·산소가스·등기발송·계정 전체를 내려받습니다. (현재 '+cnt+'건, 비밀번호는 포함되지 않아요)</div>'
+    +'<button type="button" class="btn" id="bkX" style="width:100%;justify-content:flex-start;padding:14px 16px;margin-bottom:10px"><b style="font-size:14px">📊 엑셀 (.xlsx)</b><span class="subt" style="margin:0 0 0 auto">메뉴별 시트 · 열어보기용</span></button>'
+    +'<button type="button" class="btn" id="bkJ" style="width:100%;justify-content:flex-start;padding:14px 16px"><b style="font-size:14px">🗂 백업 파일 (.json)</b><span class="subt" style="margin:0 0 0 auto">전체 원본 · 복원용</span></button>'
+    +'<div class="subt" style="margin-top:12px">월 1회 이상 받아서 병원 PC나 공유 드라이브에 보관해 주세요.</div>'
+    +'</div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn" data-close>닫기</button></div>');
+  $("modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal);
+  const run=async(btn,fn)=>{ const t=btn.innerHTML; btn.disabled=true; btn.innerHTML="<b>준비 중…</b>"; $("ferr").textContent="";
+    try{ await fn(); toast("백업 파일을 내려받았습니다."); }catch(e){ $("ferr").textContent=e.message==="XLSX"?"엑셀 도구를 불러오지 못했습니다. 백업 파일(.json)로 받아 주세요.":errText(e); }
+    btn.disabled=false; btn.innerHTML=t; };
+  $("bkX").onclick=()=>run($("bkX"),async()=>{
+    const [XL,b]=await Promise.all([loadXLSX(),freshBackupData()]);
+    const wb=XL.utils.book_new();
+    sovisBuildSheets(b.data,b.users).forEach(([name,rows])=>{ const ws=XL.utils.aoa_to_sheet(rows); ws["!cols"]=rows[0].map((h,i)=>({wch:Math.min(48,Math.max(String(h).length*2+2,...rows.slice(1).map(r=>String(r[i]).length+2)))})); XL.utils.book_append_sheet(wb,ws,name); });
+    XL.writeFile(wb,"SOVIS_백업_"+stamp()+".xlsx");
+  });
+  $("bkJ").onclick=()=>run($("bkJ"),async()=>{
+    const b=await freshBackupData();
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"1.6",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+  });
+}
+$("bkBtn").onclick=backupMenu;
 
 /* ---------- PACKAGES ---------- */
 function packageForm(onClose){
