@@ -240,6 +240,23 @@ td.num,th.num{text-align:right}
 .ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;height:36px;color:var(--red);display:flex;align-items:center;justify-content:center}
 @media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
 
+/* v1.9 */
+.exgrp{margin-bottom:12px}
+.exgrp h5{margin:0 0 6px;font-size:12px;color:var(--mute);font-weight:700;letter-spacing:.2px}
+.exchips{display:flex;flex-wrap:wrap;gap:6px}
+.exchip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--soft);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer;margin:0!important;user-select:none}
+.exchip input{display:none}
+.exchip:has(input:checked){border-color:#8b5cf6;background:#f2edff;color:#6d3fd8}
+.exchip:has(input:checked)::before{content:"✓";font-weight:800}
+.pkcard{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.pkcard .bd{flex:1;min-width:0}
+.pkcard .tt{font-weight:800;font-size:15px}
+.pkcard .pr{font-weight:800;color:var(--blue);margin-left:8px;font-size:14px}
+.erow{display:grid;grid-template-columns:130px 1.4fr 1fr 70px 40px;gap:8px;align-items:center;margin-bottom:8px}
+.erow input{padding:8px 10px}
+.sbrow{display:grid;grid-template-columns:140px 1fr 1.3fr 40px;gap:8px;align-items:center;margin-bottom:8px}
+.sbrow input{padding:9px 10px!important}
+.ctc{font-size:12px;color:var(--ink2);margin-top:3px}
 /* v1.8 billing */
 .pf2{display:grid;grid-template-columns:110px 1fr 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px}
 .pf2 .pt{font-weight:700;font-size:13.5px}
@@ -363,7 +380,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
         <button class="btn-login" type="submit">로그인 <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </form>
       <div class="err" id="loginErr"></div>
-      <div class="l-foot">v1.8 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v1.9 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -391,7 +408,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v1.8 | 소하검진센터 SEOK</div>
+      <div class="ver">v1.9 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -486,6 +503,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       <div class="card">
         <div class="ph"><h3>전체 계약</h3>
           <div class="right">
+            <button class="btn" id="exBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.5 15h9"/></svg>검사 관리</button>
             <button class="btn" id="pkBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>패키지 관리</button>
             <select class="sel" id="cType"><option value="">전체 유형</option></select>
             <select class="sel" id="cStatus"><option value="">전체 상태</option><option value="valid">유효</option><option value="expired">만료</option></select>
@@ -589,7 +607,7 @@ const TYPES = ["MOU협약","위수탁계약","유지보수계약","식사권 계
 const NCATS = ["무이자 할부","일반","검진 안내","기타"];
 const NCAT_CLS = {"무이자 할부":"t-vio","일반":"t-blu","검진 안내":"t-grn","기타":"t-gry"};
 const TYPE_COLORS = {"위수탁계약":"#006cb8","MOU협약":"#8b5cf6","유지보수계약":"#2aa5b5","식사권 계약":"#f59e0b","기타":"#94a3b8"};
-const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday", package:"package", notice:"notice", client:"client", billing:"billing"};
+const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday", package:"package", notice:"notice", client:"client", billing:"billing", exam:"exam"};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -678,7 +696,7 @@ $("logout").onclick=()=>doLogout();
 $("pwBtn").onclick=()=>pwForm();
 
 /* ---------- STORAGE (구글 시트 / 미리보기는 이 브라우저) ---------- */
-const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[],package:[],notice:[],client:[],billing:[]};
+const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[],package:[],notice:[],client:[],billing:[],exam:[]};
 let mode=GAS?"gas":"local", pollTimer=null;
 function setConn(s){
   const dot=$("connDot"), txt=$("connTxt"), n=$("notice");
@@ -821,15 +839,24 @@ function renderDashTable(){
 }
 const isMOU=c=>c.type==="MOU협약";
 const pkName=id=>{ const p=data.package.find(x=>x.id===id); return p?p.name:null; };
+const PLATFORM_PRESETS=["GC케어","어떠케어"];
+const GRADE_PRESETS=["임원","직원","배우자","가족","계약직"];
+const fmtShort=n=>{ n=Number(n)||0; if(n>=10000&&n%10000===0) return (n/10000).toLocaleString("ko-KR")+"만"; return n.toLocaleString("ko-KR"); };
+function mgmtLabel(c){ if(c.mgmtType==="platform") return c.platform?c.platform:"플랫폼"; if(c.mgmtType==="self") return "자체관리"; return ""; }
+function contactLine(c){ const x=[c.contactName,c.contactPhone,c.contactEmail].filter(Boolean); return x.length?'<div class="ctc">👤 '+x.map(esc).join(" · ")+'</div>':""; }
 function mouLine(c){
   if(!isMOU(c)) return "";
   const pk=(Array.isArray(c.packages)?c.packages:[]).map(pkName).filter(Boolean);
-  return '<div class="subt">검진 '+esc(c.hcStart||"?")+' ~ '+esc(c.hcEnd||"?")+(c.headcount?' · '+Number(c.headcount).toLocaleString("ko-KR")+'명':'')+'</div>'+(pk.length?'<div class="pkchips">'+pk.map(n=>'<span class="pk">'+esc(n)+'</span>').join("")+'</div>':'');
+  const sb=(Array.isArray(c.subsidies)?c.subsidies:[]).filter(x=>x.grade||x.amount);
+  const mg=mgmtLabel(c);
+  return '<div class="subt">'+(mg?'<span class="tag '+(c.mgmtType==="platform"?"t-vio":"t-grn")+'" style="margin-right:4px">'+esc(mg)+'</span>':'')+'검진 '+esc(c.hcStart||"?")+' ~ '+esc(c.hcEnd||"?")+(c.headcount?' · '+Number(c.headcount).toLocaleString("ko-KR")+'명':'')+'</div>'
+    +(sb.length?'<div class="subt">지원금 '+sb.map(x=>esc(x.grade||"-")+' '+fmtShort(x.amount)+'원').join(" · ")+'</div>':'')
+    +(pk.length?'<div class="pkchips">'+pk.map(n=>'<span class="pk">'+esc(n)+'</span>').join("")+'</div>':'');
 }
 function renderContracts(){
   const tp=$("cType").value, st=$("cStatus").value, q=$("cQ").value.trim().toLowerCase();
   const rows=data.contracts.filter(c=>{ const i=cInfo(c); return (!tp||c.type===tp)&&(!st||(st==="valid"?i.valid:i.expired))&&(!q||[c.name,c.vendor,c.manager,c.dept].join(" ").toLowerCase().includes(q)); }).sort((a,b)=>(TYPES.indexOf(a.type)-TYPES.indexOf(b.type))||(a.end||"9999").localeCompare(b.end||"9999"));
-  $("cTable").innerHTML=rows.length?rows.map(c=>{ const i=cInfo(c); return '<tr><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+(c.memo?' · '+esc(c.memo):'')+'</div>'+mouLine(c)+'</td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.manager||"-")+'</td><td style="white-space:nowrap">'+(c.start||c.end?esc(c.start||"-")+' → '+esc(c.end||"-"):'<span style="color:var(--mute)">-</span>')+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(isMOU(c)?(c.headcount?'<b>'+Number(c.headcount).toLocaleString("ko-KR")+'</b>명':'-'):(c.amount?won(c.amount):"-"))+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'<span style="color:var(--mute)">-</span>')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>'; }).join("")
+  $("cTable").innerHTML=rows.length?rows.map(c=>{ const i=cInfo(c); return '<tr><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+(c.memo?' · '+esc(c.memo):'')+'</div>'+contactLine(c)+mouLine(c)+'</td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.manager||"-")+'</td><td style="white-space:nowrap">'+(c.start||c.end?esc(c.start||"-")+' → '+esc(c.end||"-"):'<span style="color:var(--mute)">-</span>')+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(isMOU(c)?(c.headcount?'<b>'+Number(c.headcount).toLocaleString("ko-KR")+'</b>명':'-'):(c.amount?won(c.amount):"-"))+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'<span style="color:var(--mute)">-</span>')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>'; }).join("")
     :'<tr><td colspan="9" class="empty">표시할 계약이 없습니다.</td></tr>';
   const mous=rows.filter(isMOU);
   $("cFoot").innerHTML="총 <b>"+rows.length+"건</b><span>계약금액 합계 <b>"+won(rows.reduce((s,c)=>s+(isMOU(c)?0:(Number(c.amount)||0)),0))+"</b></span>"+(mous.length?"<span>MOU 검진인원 합계 <b>"+mous.reduce((s,c)=>s+(Number(c.headcount)||0),0).toLocaleString("ko-KR")+"명</b></span>":"");
@@ -907,47 +934,72 @@ function contractForm(c,forceType){
   const typeSel='<div><label>계약유형 <span class="req">*</span></label><select name="type" id="cfType" required>'+TYPES.map(x=>'<option'+(x===t?" selected":"")+'>'+x+'</option>').join("")+'</select></div>';
   const common=fld(mou?"협약명":"계약명","name",c.name,"text",true,"full")
    +fld(mou?"상대기관(기업)명":"업체(상대기관)명","vendor",c.vendor,"text",true)+typeSel
-   +fld("담당부서","dept",c.dept||"소하검진센터","text",false,"",'list="deptList"')+'<datalist id="deptList">'+depts.map(d=>'<option value="'+esc(d)+'">').join("")+'</datalist>'
-   +fld("담당자","manager",c.manager);
+   +fld("담당부서 (우리)","dept",c.dept||"소하검진센터","text",false,"",'list="deptList"')+'<datalist id="deptList">'+depts.map(d=>'<option value="'+esc(d)+'">').join("")+'</datalist>'
+   +fld("담당자 (우리)","manager",c.manager);
+  const contact='<div class="sechd">상대기관 담당자</div>'
+   +fld("담당자명","contactName",c.contactName,"text",false,"",'placeholder="예: 인사팀 김OO 과장"')
+   +fld("연락처","contactPhone",c.contactPhone,"tel",false,"",'placeholder="예: 02-000-0000"')
+   +fld("이메일","contactEmail",c.contactEmail,"email",false,"full",'placeholder="예: hr@company.com"');
+  const tail='<div class="full"><label>비고</label><textarea name="memo">'+esc(c.memo||"")+'</textarea></div>';
   let body;
   if(mou){
     const pks=data.package.slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));
+    const sbs=Array.isArray(c.subsidies)&&c.subsidies.length?c.subsidies:[{grade:"임원"},{grade:"직원"}];
+    const mt=c.mgmtType||"self";
+    const sbRow=x=>'<div class="sbrow"><input data-sg list="gradeList" placeholder="구분 (예: 임원)" value="'+esc(x.grade||"")+'"><input data-sa inputmode="numeric" placeholder="지원금액 (원)" value="'+(x.amount?fmtMoney(x.amount):"")+'"><input data-sm placeholder="비고 (예: 1인당, 연 1회)" value="'+esc(x.memo||"")+'"><button type="button" class="ibtn" data-sdel2 title="삭제">'+X+'</button></div>';
     body=common
+     +'<div class="sechd">관리주체</div>'
+     +'<div><div class="seg sm" id="mtSeg"><label><input type="radio" name="mgmtType" value="self"'+(mt==="self"?" checked":"")+'>자체관리</label><label><input type="radio" name="mgmtType" value="platform"'+(mt==="platform"?" checked":"")+'>플랫폼 관리</label></div></div>'
+     +'<div id="pfBox" style="display:'+(mt==="platform"?"block":"none")+'"><input name="platform" list="pfList" placeholder="플랫폼명 (예: GC케어)" value="'+esc(c.platform||"")+'"><datalist id="pfList">'+[...new Set(PLATFORM_PRESETS.concat(data.contracts.map(x=>x.platform).filter(Boolean)))].map(x=>'<option value="'+esc(x)+'">').join("")+'</datalist></div>'
      +'<div class="sechd">검진 정보</div>'
      +fld("검진 시작일","hcStart",c.hcStart,"date",true)+fld("검진 종료일","hcEnd",c.hcEnd,"date",true)
      +fld("검진인원 (명)","headcount",c.headcount||"","number",false,"",'min="0" placeholder="예: 120"')+'<div></div>'
-     +'<div class="full"><label>패키지 <button type="button" class="link" id="cfPk" style="float:right">패키지 추가·수정 ›</button></label>'
-       +(pks.length?'<div class="pklist">'+pks.map(p=>'<label class="pkopt"><input type="checkbox" name="pkg" value="'+esc(p.id)+'"'+(pkSel.includes(p.id)?" checked":"")+'><span><b>'+esc(p.name)+'</b>'+(p.items?'<small>'+esc(p.items)+'</small>':'')+'</span></label>').join("")+'</div>'
-        :'<div class="subt" style="padding:8px 0">등록된 패키지가 없습니다. 오른쪽 <b>패키지 추가·수정</b>에서 먼저 만들어 주세요.</div>')+'</div>'
+     +'<div class="full"><label>검진자 구분별 회사지원금</label><datalist id="gradeList">'+GRADE_PRESETS.map(x=>'<option value="'+x+'">').join("")+'</datalist><div id="sbRows">'+sbs.map(sbRow).join("")+'</div><button type="button" class="btn btn-sm" id="sbAdd">+ 구분 추가</button></div>'
+     +'<div class="full"><label>패키지 '+(can("contracts","write")?'<button type="button" class="link" id="cfPk" style="float:right">패키지·검사 관리 ›</button>':'')+'</label>'
+       +(pks.length?'<div class="pklist">'+pks.map(p=>{ const ex=pkExamNames(p); return '<label class="pkopt"><input type="checkbox" name="pkg" value="'+esc(p.id)+'"'+(pkSel.includes(p.id)?" checked":"")+'><span><b>'+esc(p.name)+(p.price?' <span style="color:var(--blue)">'+fmtMoney(p.price)+'원</span>':'')+'</b>'+(ex.length?'<small>'+esc(ex.join(", "))+'</small>':(p.items?'<small>'+esc(p.items)+'</small>':''))+'</span></label>'; }).join("")+'</div>'
+        :'<div class="subt" style="padding:8px 0">등록된 패키지가 없습니다. 오른쪽 <b>패키지·검사 관리</b>에서 먼저 만들어 주세요.</div>')+'</div>'
+     +contact
      +'<div class="sechd">협약 기간 (만료 알림용 · 선택)</div>'
      +fld("협약 시작일","start",c.start,"date")+fld("협약 종료일","end",c.end,"date")
      +'<div><label>자동갱신</label><select name="autoRenew"><option value="N"'+(c.autoRenew!=="Y"?" selected":"")+'>없음</option><option value="Y"'+(c.autoRenew==="Y"?" selected":"")+'>자동갱신</option></select></div><div></div>'
-     +'<div class="full"><label>비고</label><textarea name="memo">'+esc(c.memo||"")+'</textarea></div>';
+     +tail;
   } else {
     body=common
      +fld("계약 시작일","start",c.start,"date",true)+fld("계약 종료일","end",c.end,"date",true)
      +fld("계약금액 (원)","amount",c.amount?Number(c.amount).toLocaleString("ko-KR"):"","text",false,"",'inputmode="numeric" id="amtIn" placeholder="예: 12,000,000"')
      +'<div><label>자동갱신</label><select name="autoRenew"><option value="N"'+(c.autoRenew!=="Y"?" selected":"")+'>없음</option><option value="Y"'+(c.autoRenew==="Y"?" selected":"")+'>자동갱신</option></select></div>'
-     +'<div class="full"><label>비고</label><textarea name="memo">'+esc(c.memo||"")+'</textarea></div>';
+     +contact+tail;
   }
   openModal(shell((ed?"":"새 ")+(mou?"MOU 협약 ":"계약 ")+(ed?"수정":"등록"),body,ed));
-  const snapshot=()=>{ const f=$("mform"), fd=Object.fromEntries(new FormData(f).entries()); const o=Object.assign({},c,fd);
-    o.packages=[...f.querySelectorAll("[name=pkg]:checked")].map(x=>x.value); if(fd.amount!==undefined) o.amount=Number((fd.amount||"").replace(/[^\d]/g,""))||0; delete o.pkg; return o; };
+  const F=$("mform");
+  const subsNow=()=>[...F.querySelectorAll("#sbRows .sbrow")].map(r=>({grade:r.querySelector("[data-sg]").value.trim(),amount:money(r.querySelector("[data-sa]").value),memo:r.querySelector("[data-sm]").value.trim()})).filter(x=>x.amount||x.memo);
+  const wireSb=r=>{ bindMoney(r.querySelector("[data-sa]")); r.querySelector("[data-sdel2]").onclick=()=>r.remove(); };
+  F.querySelectorAll("#sbRows .sbrow").forEach(wireSb);
+  if($("sbAdd")) $("sbAdd").onclick=()=>{ const tmp=document.createElement("div"); tmp.innerHTML='<div class="sbrow"><input data-sg list="gradeList" placeholder="구분"><input data-sa inputmode="numeric" placeholder="지원금액 (원)"><input data-sm placeholder="비고"><button type="button" class="ibtn" data-sdel2 title="삭제">'+X+'</button></div>'; const r=tmp.firstChild; $("sbRows").appendChild(r); wireSb(r); r.querySelector("[data-sg]").focus(); };
+  F.querySelectorAll("[name=mgmtType]").forEach(r=>r.onchange=()=>{ $("pfBox").style.display=r.value==="platform"&&r.checked?"block":"none"; });
+  const snapshot=()=>{ const fd=Object.fromEntries(new FormData(F).entries()); const o=Object.assign({},c,fd);
+    o.packages=[...F.querySelectorAll("[name=pkg]:checked")].map(x=>x.value); if(F.querySelector("#sbRows")) o.subsidies=subsNow();
+    if(fd.amount!==undefined) o.amount=money(fd.amount); delete o.pkg; return o; };
   $("cfType").onchange=()=>{ const o=snapshot(); contractForm(o,$("cfType").value); };
   if($("cfPk")&&!can("contracts","write")) $("cfPk").style.display="none";
   if($("cfPk")) $("cfPk").onclick=()=>{ const o=snapshot(); packageForm(()=>contractForm(o,"MOU협약")); };
-  const ai=$("amtIn"); if(ai) ai.oninput=()=>{ const v=ai.value.replace(/[^\d]/g,""); ai.value=v?Number(v).toLocaleString("ko-KR"):""; };
+  const ai=$("amtIn"); if(ai) bindMoney(ai);
   wire("contracts",c,fd=>{
-    const base={id:c.id,name:fd.name.trim(),vendor:fd.vendor.trim(),type:fd.type,dept:(fd.dept||"").trim(),manager:(fd.manager||"").trim(),start:fd.start||"",end:fd.end||"",autoRenew:fd.autoRenew,memo:(fd.memo||"").trim(),createdAt:c.createdAt||new Date().toISOString()};
-    if(fd.type==="MOU협약") return Object.assign(base,{amount:0,hcStart:fd.hcStart,hcEnd:fd.hcEnd,headcount:Number(fd.headcount)||0,packages:[...$("mform").querySelectorAll("[name=pkg]:checked")].map(x=>x.value)});
-    return Object.assign(base,{amount:Number((fd.amount||"").replace(/[^\d]/g,""))||0});
+    const base=Object.assign({},c,{id:c.id,name:fd.name.trim(),vendor:fd.vendor.trim(),type:fd.type,dept:(fd.dept||"").trim(),manager:(fd.manager||"").trim(),start:fd.start||"",end:fd.end||"",autoRenew:fd.autoRenew,memo:(fd.memo||"").trim(),
+      contactName:(fd.contactName||"").trim(),contactPhone:(fd.contactPhone||"").trim(),contactEmail:(fd.contactEmail||"").trim(),createdAt:c.createdAt||new Date().toISOString()});
+    delete base.updatedBy; delete base.updatedAt;
+    if(fd.type==="MOU협약") return Object.assign(base,{amount:0,hcStart:fd.hcStart,hcEnd:fd.hcEnd,headcount:Number(fd.headcount)||0,
+      mgmtType:fd.mgmtType||"self",platform:fd.mgmtType==="platform"?(fd.platform||"").trim():"",subsidies:subsNow(),
+      packages:[...F.querySelectorAll("[name=pkg]:checked")].map(x=>x.value)});
+    ["hcStart","hcEnd","headcount","mgmtType","platform","subsidies","packages"].forEach(k=>delete base[k]);
+    return Object.assign(base,{amount:money(fd.amount)});
   }, fd=>{
     if(fd.start&&fd.end&&fd.end<fd.start) return "종료일이 시작일보다 빠릅니다.";
     if(fd.type==="MOU협약"&&fd.hcStart&&fd.hcEnd&&fd.hcEnd<fd.hcStart) return "검진 종료일이 시작일보다 빠릅니다.";
+    if(fd.type==="MOU협약"&&fd.mgmtType==="platform"&&!(fd.platform||"").trim()) return "플랫폼명을 입력하세요. (예: GC케어)";
     return "";
   });
 }
-
 /* ---------- ACCOUNTS (관리자 전용) ---------- */
 let USERS=[];
 const PART_PRESETS=["관리자","기획협약파트","기획예약파트","예약파트","수납파트","원무파트"];
@@ -1024,10 +1076,11 @@ function pwForm(){
 /* ---------- BACKUP (관리자 전용) ---------- */
 /* ===== SOVIS 백업 시트 구성 (화면 다운로드 · 자동 메일 공통) ===== */
 var SOVIS_SHEETS = [
-  ["contracts","계약",[["type","계약유형"],["name","계약(협약)명"],["vendor","업체·상대기관"],["dept","담당부서"],["manager","담당자"],["start","계약시작일"],["end","계약종료일"],["amount","계약금액"],["hcStart","검진시작일"],["hcEnd","검진종료일"],["headcount","검진인원"],["packages","패키지"],["autoRenew","자동갱신"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
+  ["contracts","계약",[["type","계약유형"],["name","계약(협약)명"],["vendor","업체·상대기관"],["contactName","상대 담당자"],["contactPhone","상대 연락처"],["contactEmail","상대 이메일"],["mgmtType","관리주체"],["subsidies","검진자구분별 지원금"],["dept","담당부서"],["manager","담당자"],["start","계약시작일"],["end","계약종료일"],["amount","계약금액"],["hcStart","검진시작일"],["hcEnd","검진종료일"],["headcount","검진인원"],["packages","패키지"],["autoRenew","자동갱신"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
   ["client","거래처",[["code","기업코드"],["name","거래처명"],["mgmt","관리구분"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["billing","청구",[["billDate","청구일"],["code","기업코드"],["name","거래처명"],["mgmt","관리구분"],["target","대상기간"],["amount","청구금액"],["tax","계산서금액"],["taxIssue","계산서 발행일"],["taxIssued","계산서 발급일"],["cash","현금영수증금액"],["cashIssue","현금영수증 발행일"],["cashIssued","현금영수증 발급일"],["unissued","미발행금액"],["paid","입금합계"],["due","미수금"],["deposits","입금내역(입금일 금액 적요)"],["memo","비고"],["updatedBy","최종수정자"]]],
-  ["package","검진패키지",[["name","패키지명"],["items","검사내용"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
+  ["package","검진패키지",[["name","패키지명"],["price","금액"],["exams","검사항목"],["examCount","검사수"],["items","기존 검사내용(글)"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
+  ["exam","검사항목",[["cat","분류"],["name","검사명"],["memo","비고"],["pkgCount","사용 패키지 수"],["pkgNames","사용 패키지"]]],
   ["notice","공지사항",[["cat","분류"],["month","대상월"],["title","제목"],["content","내용"],["author","작성자"],["pinned","상단고정"],["createdAt","작성일시"],["updatedBy","최종수정자"]]],
   ["workday","워킹데이",[["date","날짜"],["status","운영상태"],["memo","메모"],["people","행정근무"],["updatedBy","최종수정자"]]],
   ["staff","행정인원",[["part","파트"],["title","직책/직급"],["name","이름"],["order","순서"]]],
@@ -1043,9 +1096,15 @@ function sovisBuildSheets(data, users){
   var pk = {}; (data["package"]||[]).forEach(function(p){ pk[p.id]=p.name; });
   var st = {}; (data.staff||[]).forEach(function(p){ st[p.id]=p.name; });
   var cl = {}; (data.client||[]).forEach(function(c){ cl[c.id]=c; });
+  var ex = {}; (data.exam||[]).forEach(function(e){ ex[e.id]=e; });
   var src = {}; for (var k in data) src[k]=data[k]; src.users = users||[];
   function cell(kind, key, row){
     var v = row[key];
+    if (kind==="contracts" && key==="mgmtType") return row.type!=="MOU협약" ? "" : (v==="platform" ? "플랫폼(" + (row.platform||"") + ")" : (v==="self" ? "자체관리" : ""));
+    if (kind==="contracts" && key==="subsidies") return (Array.isArray(v)?v:[]).map(function(x){ return (x.grade||"") + " " + (Number(x.amount)||0).toLocaleString("ko-KR") + "원" + (x.memo ? "(" + x.memo + ")" : ""); }).join(", ");
+    if (kind==="package" && key==="exams") return (Array.isArray(v)?v:[]).map(function(id){ return ex[id] ? ex[id].name : ""; }).filter(Boolean).join(", ");
+    if (kind==="package" && key==="examCount") return (Array.isArray(row.exams)?row.exams:[]).filter(function(id){ return ex[id]; }).length;
+    if (kind==="exam" && (key==="pkgCount"||key==="pkgNames")) { var ps=(data["package"]||[]).filter(function(p){ return Array.isArray(p.exams) && p.exams.indexOf(row.id)>=0; }); return key==="pkgCount" ? ps.length : ps.map(function(p){ return p.name; }).join(", "); }
     if (kind==="contracts" && key==="packages") return (Array.isArray(v)?v:[]).map(function(id){ return pk[id]||id; }).join(", ");
     if (kind==="billing") {
       var c = cl[row.clientId] || {}, deps = Array.isArray(row.deposits) ? row.deposits : [];
@@ -1120,7 +1179,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"1.8",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"1.9",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1296,37 +1355,93 @@ function clientForm(onClose){
   draw(); setTimeout(()=>$("nc_code")&&$("nc_code").focus(),40);
 }
 
-/* ---------- PACKAGES ---------- */
-function packageForm(onClose){
+/* ---------- EXAMS (검사 관리) ---------- */
+const EXAM_CATS=["기본검사","혈액·소변","영상검사","초음파","내시경","심장·폐기능","암검사","기타"];
+const examSorted=()=>data.exam.slice().sort((a,b)=>{ const ia=EXAM_CATS.indexOf(a.cat), ib=EXAM_CATS.indexOf(b.cat); return ((ia<0?99:ia)-(ib<0?99:ib))||String(a.cat||"").localeCompare(String(b.cat||""))||(Number(a.order)||0)-(Number(b.order)||0)||String(a.name).localeCompare(String(b.name)); });
+const pkExamNames=p=>{ const ids=Array.isArray(p.exams)?p.exams:[]; return examSorted().filter(e=>ids.includes(e.id)).map(e=>e.name); };
+function examForm(onClose){
   const close=()=>{ if(onClose) onClose(); else closeModal(); };
   const draw=()=>{
-    const list=data.package.slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));
-    const used=id=>data.contracts.filter(c=>Array.isArray(c.packages)&&c.packages.includes(id)).length;
-    $("modal").innerHTML='<div class="mh">검진 패키지 관리<button type="button" data-pclose>'+X+'</button></div><div class="mb"><div class="full">'
-      +(list.length?list.map(p=>'<div class="pkrow"><div><input data-pid="'+esc(p.id)+'" data-f="name" value="'+esc(p.name)+'" placeholder="패키지명" style="font-weight:700;margin-bottom:8px"><textarea data-pid="'+esc(p.id)+'" data-f="items" placeholder="검사내용">'+esc(p.items||"")+'</textarea><div class="subt">MOU '+used(p.id)+'건에서 사용 중</div></div><button type="button" class="ibtn" data-pdel="'+esc(p.id)+'" title="삭제">'+X+'</button></div>').join("")
-        :'<div class="empty" style="padding:12px 0">아직 등록된 패키지가 없습니다.</div>')
-      +'<div class="pkrow" style="border-style:dashed;background:var(--soft)"><div><input id="npName" placeholder="새 패키지명 (예: 기본 A형)" style="font-weight:700;margin-bottom:8px"><textarea id="npItems" placeholder="검사내용 (예: 기본검사, 위내시경, 복부초음파, 갑상선초음파)"></textarea></div><button type="button" class="btn btn-p" id="npAdd" style="height:40px;padding:0;justify-content:center">+</button></div>'
-      +'<div class="subt">패키지명·검사내용은 칸을 고친 뒤 다른 곳을 누르면 저장됩니다.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn btn-p" data-pclose>'+(onClose?"완료 · 계약으로 돌아가기":"닫기")+'</button></div>';
-    $("modal").querySelectorAll("[data-pclose]").forEach(b=>b.onclick=close);
-    $("modal").querySelectorAll("[data-pid]").forEach(inp=>inp.onchange=async()=>{
-      const p=data.package.find(x=>x.id===inp.dataset.pid); if(!p) return; const v=inp.value.trim();
-      if(inp.dataset.f==="name"&&!v){ inp.value=p.name; return; }
-      try{ await saveItem("package",Object.assign({},p,{[inp.dataset.f]:v})); toast("저장했습니다."); }catch(e){ $("ferr").textContent=e.message; }
+    const list=examSorted(), used=id=>data.package.filter(p=>Array.isArray(p.exams)&&p.exams.includes(id)).length;
+    const cats=[...new Set(EXAM_CATS.concat(data.exam.map(e=>e.cat).filter(Boolean)))];
+    $("modal").innerHTML='<div class="mh">검사 관리<button type="button" data-xclose>'+X+'</button></div><div class="mb"><div class="full"><datalist id="exCatList">'+cats.map(x=>'<option value="'+esc(x)+'">').join("")+'</datalist>'
+      +'<div class="erow" style="font-size:12px;color:var(--mute);font-weight:600"><span>분류</span><span>검사명</span><span>비고</span><span>사용</span><span></span></div>'
+      +(list.length?list.map(e=>'<div class="erow"><input data-eid="'+esc(e.id)+'" data-f="cat" list="exCatList" value="'+esc(e.cat||"")+'"><input data-eid="'+esc(e.id)+'" data-f="name" value="'+esc(e.name)+'"><input data-eid="'+esc(e.id)+'" data-f="memo" value="'+esc(e.memo||"")+'"><span class="subt" style="margin:0">패키지 '+used(e.id)+'</span><button type="button" class="ibtn" data-edel="'+esc(e.id)+'" title="삭제">'+X+'</button></div>').join("")
+        :'<div class="empty" style="padding:12px 0">아직 등록된 검사가 없습니다.</div>')
+      +'<div class="erow" style="margin-top:14px"><input id="ne_cat" list="exCatList" placeholder="분류 (예: 내시경)"><input id="ne_name" placeholder="검사명 (예: 위내시경)"><input id="ne_memo" placeholder="비고 (예: 수면)"><span></span><button type="button" class="btn btn-p" id="neAdd" style="height:36px;padding:0;justify-content:center">+</button></div>'
+      +'<div class="subt">분류는 목록에서 고르거나 새로 입력하면 추가돼요. 엔터로 연속 등록할 수 있어요.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn btn-p" data-xclose>'+(onClose?"완료 · 돌아가기":"닫기")+'</button></div>';
+    $("modal").querySelectorAll("[data-xclose]").forEach(b=>b.onclick=close);
+    $("modal").querySelectorAll("[data-eid]").forEach(inp=>inp.onchange=async()=>{
+      const e=data.exam.find(x=>x.id===inp.dataset.eid); if(!e) return; const v=inp.value.trim();
+      if(inp.dataset.f==="name"&&!v){ inp.value=e.name; return; }
+      try{ await saveItem("exam",Object.assign({},e,{[inp.dataset.f]:v})); toast("저장했습니다."); }catch(er){ $("ferr").textContent=er.message; }
     });
-    $("modal").querySelectorAll("[data-pdel]").forEach(b=>b.onclick=async()=>{
-      const p=data.package.find(x=>x.id===b.dataset.pdel); if(!p) return;
-      if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.style.background="var(--red)"; b.style.color="#fff"; $("ferr").textContent="'"+p.name+"' 삭제하려면 한 번 더 누르세요."+(used(p.id)?" (MOU "+used(p.id)+"건에서 빠집니다)":""); return; }
-      b.disabled=true; try{ await deleteItem("package",p.id); toast("삭제했습니다."); draw(); }catch(e){ $("ferr").textContent="삭제 실패"; }
+    $("modal").querySelectorAll("[data-edel]").forEach(b=>b.onclick=async()=>{
+      const e=data.exam.find(x=>x.id===b.dataset.edel); if(!e) return;
+      if(!can("contracts","del")){ $("ferr").textContent=ERRMSG.FORBIDDEN; return; }
+      if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.style.background="var(--red)"; b.style.color="#fff"; $("ferr").textContent="'"+e.name+"' 삭제하려면 한 번 더 누르세요."+(used(e.id)?" (패키지 "+used(e.id)+"개에서 빠집니다)":""); return; }
+      b.disabled=true; try{ await deleteItem("exam",e.id); toast("삭제했습니다."); draw(); }catch(er){ $("ferr").textContent=er.message||"삭제 실패"; }
     });
-    $("npAdd").onclick=async()=>{
-      const name=$("npName").value.trim(); if(!name){ $("ferr").textContent="패키지명을 입력하세요."; return; }
-      $("npAdd").disabled=true;
-      try{ await saveItem("package",{name,items:$("npItems").value.trim(),createdAt:new Date().toISOString()}); toast(name+" 추가했습니다."); draw(); }
-      catch(e){ $("ferr").textContent=e.message; $("npAdd").disabled=false; }
+    $("neAdd").onclick=async()=>{
+      const name=$("ne_name").value.trim(), cat=$("ne_cat").value.trim(); if(!name){ $("ferr").textContent="검사명을 입력하세요."; return; }
+      if(data.exam.some(e=>e.name===name&&(e.cat||"")===cat)){ $("ferr").textContent="이미 등록된 검사입니다: "+name; return; }
+      $("neAdd").disabled=true;
+      try{ await saveItem("exam",{cat,name,memo:$("ne_memo").value.trim(),createdAt:new Date().toISOString()}); toast(name+" 추가했습니다."); draw(); $("ne_cat").value=cat; setTimeout(()=>$("ne_name")&&$("ne_name").focus(),30); }
+      catch(er){ $("ferr").textContent=er.message; $("neAdd").disabled=false; }
     };
+    ["ne_name","ne_memo"].forEach(id=>$(id).onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); $("neAdd").click(); } });
   };
   if($("mask").style.display!=="flex") $("mask").style.display="flex";
-  draw(); setTimeout(()=>$("npName")&&$("npName").focus(),40);
+  draw(); setTimeout(()=>$("ne_cat")&&$("ne_cat").focus(),40);
+}
+$("exBtn").onclick=()=>{ if(!can("contracts","write")) return toast(ERRMSG.FORBIDDEN); examForm(); };
+
+/* ---------- PACKAGES (패키지별 관리) ---------- */
+function packageForm(onClose){
+  const close=()=>{ if(onClose) onClose(); else closeModal(); };
+  const list=data.package.slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));
+  const used=id=>data.contracts.filter(c=>Array.isArray(c.packages)&&c.packages.includes(id)).length;
+  if($("mask").style.display!=="flex") $("mask").style.display="flex";
+  $("modal").innerHTML='<div class="mh">검진 패키지 관리<button type="button" data-pclose>'+X+'</button></div><div class="mb"><div class="full">'
+    +(list.length?list.map(p=>{ const ex=pkExamNames(p); return '<div class="pkcard"><div class="bd"><div><span class="tt">'+esc(p.name)+'</span>'+(p.price?'<span class="pr">'+fmtMoney(p.price)+'원</span>':'')+'</div>'
+      +(ex.length?'<div class="exchips" style="margin-top:6px">'+ex.map(n=>'<span class="pk" style="background:#eef1f5;color:var(--ink2)">'+esc(n)+'</span>').join("")+'</div>':(p.items?'<div class="mini2">기존 검사내용(글): '+esc(p.items)+'</div>':'<div class="mini2">검사 미지정</div>'))
+      +'<div class="mini2">검사 '+ex.length+'개 · MOU '+used(p.id)+'건 사용'+(p.memo?' · '+esc(p.memo):'')+'</div></div><button type="button" class="btn btn-sm" data-pkedit="'+esc(p.id)+'">수정</button></div>'; }).join("")
+      :'<div class="empty" style="padding:12px 0">아직 등록된 패키지가 없습니다.</div>')
+    +'<div style="display:flex;gap:8px;margin-top:6px"><button type="button" class="btn btn-p" id="pkNew">+ 새 패키지</button><button type="button" class="btn" id="pkEx">검사 관리 ›</button></div>'
+    +'</div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn btn-p" data-pclose>'+(onClose?"완료 · 계약으로 돌아가기":"닫기")+'</button></div>';
+  $("modal").querySelectorAll("[data-pclose]").forEach(b=>b.onclick=close);
+  $("modal").querySelectorAll("[data-pkedit]").forEach(b=>b.onclick=()=>packageEdit(data.package.find(x=>x.id===b.dataset.pkedit),onClose));
+  $("pkNew").onclick=()=>packageEdit(null,onClose);
+  $("pkEx").onclick=()=>examForm(()=>packageForm(onClose));
+}
+function packageEdit(p,onClose,keep){
+  p=p||{}; const ed=!!p.id, cur=Object.assign({},p,keep||{}), sel=new Set(Array.isArray(cur.exams)?cur.exams:[]);
+  const used=data.contracts.filter(c=>Array.isArray(c.packages)&&c.packages.includes(p.id)).length;
+  const groups={}; examSorted().forEach(e=>{ (groups[e.cat||"기타"]=groups[e.cat||"기타"]||[]).push(e); });
+  const exHtml=Object.keys(groups).length?Object.keys(groups).map(g=>'<div class="exgrp"><h5>'+esc(g)+'</h5><div class="exchips">'+groups[g].map(e=>'<label class="exchip"><input type="checkbox" data-ex="'+esc(e.id)+'"'+(sel.has(e.id)?" checked":"")+'>'+esc(e.name)+(e.memo?' <span style="opacity:.6;font-weight:500">('+esc(e.memo)+')</span>':'')+'</label>').join("")+'</div></div>').join("")
+    :'<div class="subt" style="padding:8px 0">등록된 검사가 없습니다. 오른쪽 <b>검사 관리</b>에서 먼저 검사를 등록하세요.</div>';
+  $("modal").innerHTML='<div class="mh">'+(ed?"패키지 수정":"새 패키지")+'<button type="button" id="peBack">'+X+'</button></div><div class="mb">'
+    +'<div class="full"><label>패키지명 <span class="req">*</span></label><input id="pe_name" value="'+esc(cur.name||"")+'" placeholder="예: 기본 A형"></div>'
+    +'<div><label>금액 (원)</label><input id="pe_price" inputmode="numeric" value="'+(cur.price?fmtMoney(cur.price):"")+'" placeholder="예: 250,000"></div>'
+    +'<div><label>비고</label><input id="pe_memo" value="'+esc(cur.memo||"")+'" placeholder="예: 남녀 공통"></div>'
+    +'<div class="full"><label>검사 항목 <span id="pe_cnt" style="font-weight:500;color:var(--mute)"></span> <button type="button" class="link" id="peEx" style="float:right">검사 관리 ›</button></label>'+exHtml
+    +(cur.items?'<div class="mini2" style="margin-top:6px">기존 검사내용(글): '+esc(cur.items)+' — 위에서 검사를 선택하면 저장 시 이 글은 정리됩니다.</div>':'')+'</div>'
+    +'</div><div class="mf">'+(ed&&can("contracts","del")?'<button type="button" class="btn btn-d" id="peDel">삭제</button>':'')+'<span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn" id="peCancel">목록으로</button>'+(can("contracts","write")?'<button type="button" class="btn btn-p" id="peSave">저장</button>':'')+'</div>';
+  const back=()=>packageForm(onClose);
+  $("peBack").onclick=back; $("peCancel").onclick=back;
+  bindMoney($("pe_price"));
+  const cnt=()=>{ $("pe_cnt").textContent="("+$("modal").querySelectorAll("[data-ex]:checked").length+"개 선택)"; };
+  $("modal").querySelectorAll("[data-ex]").forEach(x=>x.onchange=cnt); cnt();
+  const snap=()=>({name:$("pe_name").value.trim(),price:money($("pe_price").value),memo:$("pe_memo").value.trim(),exams:[...$("modal").querySelectorAll("[data-ex]:checked")].map(x=>x.dataset.ex)});
+  $("peEx").onclick=()=>{ const k=snap(); examForm(()=>packageEdit(p,onClose,k)); };
+  if($("peDel")) $("peDel").onclick=async()=>{ const b=$("peDel");
+    if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.textContent="정말 삭제"; $("ferr").textContent="'"+p.name+"' 삭제하려면 한 번 더 누르세요."+(used?" (MOU "+used+"건에서 빠집니다)":""); return; }
+    b.disabled=true; try{ await deleteItem("package",p.id); toast("삭제했습니다."); back(); }catch(e){ $("ferr").textContent=e.message||"삭제 실패"; b.disabled=false; } };
+  if($("peSave")) $("peSave").onclick=async()=>{
+    const k=snap(); if(!k.name){ $("ferr").textContent="패키지명을 입력하세요."; return; }
+    const o=Object.assign({},p,k,{createdAt:p.createdAt||new Date().toISOString()}); if(k.exams.length) delete o.items; delete o.updatedBy; delete o.updatedAt;
+    $("peSave").disabled=true; try{ await saveItem("package",o); toast("저장했습니다."); back(); }catch(e){ $("ferr").textContent=e.message; $("peSave").disabled=false; } };
+  setTimeout(()=>$("pe_name").focus(),40);
 }
 $("pkBtn").onclick=()=>{ if(!can("contracts","write")) return toast(ERRMSG.FORBIDDEN); packageForm(); };
 
