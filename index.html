@@ -240,6 +240,25 @@ td.num,th.num{text-align:right}
 .ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;height:36px;color:var(--red);display:flex;align-items:center;justify-content:center}
 @media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
 
+/* v1.8 billing */
+.pf2{display:grid;grid-template-columns:110px 1fr 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px}
+.pf2 .pt{font-weight:700;font-size:13.5px}
+.pf2 input{padding:9px 10px!important}
+.chkrow{display:flex;gap:8px}
+.chkrow label{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--line);border-radius:12px;padding:11px;cursor:pointer;margin:0!important;font-size:14px!important;font-weight:700!important;color:var(--ink2)!important;background:var(--soft)}
+.chkrow label:has(input:checked){border-color:var(--blue);background:#e8f2fb;color:var(--blue)!important}
+.chkrow input{width:auto!important;accent-color:var(--blue)}
+.unis{display:flex;align-items:center;justify-content:space-between;border:1.5px dashed #f5c26b;background:var(--amber-s);border-radius:12px;padding:10px 12px;font-weight:700;color:#a96400;margin-top:2px}
+.unis.ok{border-color:#9be3c4;background:var(--green-s);color:#0b8a5e}
+.unis.bad{border-color:#f3a6a6;background:var(--red-s);color:#c22}
+.chk{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.chk div{display:flex;justify-content:space-between;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px}
+.chk .ok{background:var(--green-s);color:#0b8a5e}.chk .warn{background:var(--amber-s);color:#a96400}.chk .bad{background:var(--red-s);color:#c22}
+.prf{font-size:12.5px;line-height:1.55;white-space:nowrap}
+.prf .un{color:#c26a00;font-weight:800}
+.basis{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:12px;border:1px solid var(--line)}
+.basis button{border:0;background:transparent;border-radius:9px;padding:6px 12px;font-size:12.5px;color:var(--ink2);font-weight:600}
+.basis button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(16,24,40,.12)}
 /* v1.7 billing */
 .dep{display:grid;grid-template-columns:150px 1fr 1.3fr 40px;gap:8px;align-items:center;margin-bottom:8px}
 .dep input{padding:9px 10px!important}
@@ -344,7 +363,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
         <button class="btn-login" type="submit">로그인 <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </form>
       <div class="err" id="loginErr"></div>
-      <div class="l-foot">v1.7 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v1.8 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -372,7 +391,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v1.7 | 소하검진센터 SEOK</div>
+      <div class="ver">v1.8 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -528,7 +547,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
         <div class="card kpi"><div class="hd"><div class="ic" style="background:#f2edff;color:var(--violet)"><svg class="i" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div><span class="lb">전체 누적 미수금</span></div><div class="v" id="bDueAll">0<small>원</small></div><div class="ft" id="bDueAllFt">모든 청구월 합계</div></div>
       </div>
       <div class="card">
-        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="bPrev" title="이전 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="bTitle"></b><button class="btn btn-ic" id="bNext" title="다음 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="bThis">이번달</button><button class="btn btn-sm" id="bAll">전체 기간</button></div>
+        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="bPrev" title="이전 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="bTitle"></b><button class="btn btn-ic" id="bNext" title="다음 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="bThis">이번달</button><button class="btn btn-sm" id="bAll">전체 기간</button><div class="basis" id="bBasis"><button data-b="bill" class="on">청구일 기준</button><button data-b="target">대상월 기준</button></div></div>
           <div class="right">
             <button class="btn" id="clBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M9 17h1M14 17h1"/></svg>거래처 관리</button>
             <select class="sel" id="bMgmt"><option value="">전체 관리구분</option></select>
@@ -536,7 +555,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
             <label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="bQ" placeholder="거래처명, 기업코드, 적요"></label>
           </div>
         </div>
-        <div class="tw"><table><thead><tr><th>기업코드</th><th>거래처명</th><th>청구월</th><th>청구일</th><th class="num">청구금액</th><th>증빙</th><th class="num">입금</th><th class="num">미수금</th><th>상태</th><th></th></tr></thead><tbody id="bTable"></tbody></table></div>
+        <div class="tw"><table><thead><tr><th>청구일</th><th>기업코드</th><th>거래처명</th><th>대상기간</th><th class="num">청구금액</th><th>증빙</th><th class="num">입금</th><th class="num">미수금</th><th>상태</th><th></th></tr></thead><tbody id="bTable"></tbody></table></div>
         <div class="pf" id="bFoot"></div>
       </div>
     </section>
@@ -1007,7 +1026,7 @@ function pwForm(){
 var SOVIS_SHEETS = [
   ["contracts","계약",[["type","계약유형"],["name","계약(협약)명"],["vendor","업체·상대기관"],["dept","담당부서"],["manager","담당자"],["start","계약시작일"],["end","계약종료일"],["amount","계약금액"],["hcStart","검진시작일"],["hcEnd","검진종료일"],["headcount","검진인원"],["packages","패키지"],["autoRenew","자동갱신"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
   ["client","거래처",[["code","기업코드"],["name","거래처명"],["mgmt","관리구분"],["memo","비고"],["updatedBy","최종수정자"]]],
-  ["billing","청구",[["code","기업코드"],["name","거래처명"],["mgmt","관리구분"],["month","청구월"],["billDate","청구일"],["amount","청구금액"],["proofType","증빙구분"],["proofAmount","증빙금액"],["issueDate","발행일"],["issuedDate","발급일"],["paid","입금합계"],["due","미수금"],["deposits","입금내역(입금일 금액 적요)"],["memo","비고"],["updatedBy","최종수정자"]]],
+  ["billing","청구",[["billDate","청구일"],["code","기업코드"],["name","거래처명"],["mgmt","관리구분"],["target","대상기간"],["amount","청구금액"],["tax","계산서금액"],["taxIssue","계산서 발행일"],["taxIssued","계산서 발급일"],["cash","현금영수증금액"],["cashIssue","현금영수증 발행일"],["cashIssued","현금영수증 발급일"],["unissued","미발행금액"],["paid","입금합계"],["due","미수금"],["deposits","입금내역(입금일 금액 적요)"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["package","검진패키지",[["name","패키지명"],["items","검사내용"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
   ["notice","공지사항",[["cat","분류"],["month","대상월"],["title","제목"],["content","내용"],["author","작성자"],["pinned","상단고정"],["createdAt","작성일시"],["updatedBy","최종수정자"]]],
   ["workday","워킹데이",[["date","날짜"],["status","운영상태"],["memo","메모"],["people","행정근무"],["updatedBy","최종수정자"]]],
@@ -1031,6 +1050,17 @@ function sovisBuildSheets(data, users){
     if (kind==="billing") {
       var c = cl[row.clientId] || {}, deps = Array.isArray(row.deposits) ? row.deposits : [];
       var paid = deps.reduce(function(s,d){ return s + (Number(d.amount)||0); }, 0);
+      var pr = Array.isArray(row.proofs) ? row.proofs : ((row.proofType==="계산서"||row.proofType==="현금영수증") ? [{type:row.proofType,amount:row.proofAmount,issueDate:row.issueDate,issuedDate:row.issuedDate}] : []);
+      var tx = pr.filter(function(p){ return p.type==="계산서"; })[0] || {}, cs = pr.filter(function(p){ return p.type==="현금영수증"; })[0] || {};
+      var tf = row.targetFrom || row.month || "", tt = row.targetTo || tf;
+      if (key==="target") return tf===tt ? tf : tf + " ~ " + tt;
+      if (key==="tax") return tx.amount ? Number(tx.amount) : "";
+      if (key==="taxIssue") return tx.issueDate || "";
+      if (key==="taxIssued") return tx.issuedDate || "";
+      if (key==="cash") return cs.amount ? Number(cs.amount) : "";
+      if (key==="cashIssue") return cs.issueDate || "";
+      if (key==="cashIssued") return cs.issuedDate || "";
+      if (key==="unissued") return (Number(row.amount)||0) - pr.reduce(function(s,p){ return s + (Number(p.amount)||0); }, 0);
       if (key==="code") return c.code || row.clientCode || "";
       if (key==="name") return c.name || row.clientName || "";
       if (key==="mgmt") return c.mgmt || row.clientMgmt || "";
@@ -1090,7 +1120,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"1.7",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"1.8",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1104,87 +1134,127 @@ const clientOf=b=>data.client.find(c=>c.id===b.clientId)||{code:b.clientCode,nam
 const billPaid=b=>(Array.isArray(b.deposits)?b.deposits:[]).reduce((s,d)=>s+(Number(d.amount)||0),0);
 function billStatus(b){ const a=Number(b.amount)||0, p=billPaid(b); if(p<=0) return a>0?"미입금":"완납"; if(p<a) return "부분입금"; if(p>a) return "과입금"; return "완납"; }
 const BST_CLS={"미입금":"t-red","부분입금":"t-amb","완납":"t-grn","과입금":"t-vio"};
+const PROOF_TYPES=["계산서","현금영수증"];
+function getProofs(b){
+  if(Array.isArray(b.proofs)) return b.proofs.filter(p=>PROOF_TYPES.includes(p.type));
+  if(PROOF_TYPES.includes(b.proofType)) return [{type:b.proofType,amount:Number(b.proofAmount)||0,issueDate:b.issueDate||"",issuedDate:b.issuedDate||""}];
+  return [];
+}
+const proofSum=b=>getProofs(b).reduce((s,p)=>s+(Number(p.amount)||0),0);
+const unissued=b=>(Number(b.amount)||0)-proofSum(b);
+const tFrom=b=>b.targetFrom||b.month||"", tTo=b=>b.targetTo||b.targetFrom||b.month||"";
+const ymDot=ym=>ym?ym.replace("-","."):"";
+function targetLabel(b){ const f=tFrom(b), t=tTo(b); if(!f) return "-"; if(!t||t===f) return ymDot(f); return f.slice(0,4)===t.slice(0,4)?ymDot(f)+"~"+t.slice(5):ymDot(f)+"~"+ymDot(t); }
 const mgmtList=()=>[...new Set(MGMT_PRESETS.concat(data.client.map(c=>c.mgmt).filter(Boolean)))];
-let bMonth=thisMonth(), bAllMode=false, bFilter="all";
+let bMonth=thisMonth(), bAllMode=false, bFilter="all", bBasis="bill";
+try{ bBasis=localStorage.getItem("sovis_bbasis")||"bill"; }catch(e){}
+function inBasis(b){ if(bAllMode) return true; if(bBasis==="bill") return (b.billDate||"").slice(0,7)===bMonth; const f=tFrom(b), t=tTo(b)||f; return !!f && f<=bMonth && bMonth<=t; }
 function bShift(k){ const [y,m]=bMonth.split("-").map(Number); const d=new Date(y,m-1+k,1); bMonth=d.getFullYear()+"-"+pad(d.getMonth()+1); bAllMode=false; renderBilling(); }
 $("bPrev").onclick=()=>bShift(-1); $("bNext").onclick=()=>bShift(1);
 $("bThis").onclick=()=>{ bMonth=thisMonth(); bAllMode=false; renderBilling(); };
 $("bAll").onclick=()=>{ bAllMode=!bAllMode; renderBilling(); };
-chips($("bChips"),[["all","전체"],["미입금","미입금"],["부분입금","부분입금"],["완납","완납"]],"all",r=>{bFilter=r;renderBilling();});
+$("bBasis").onclick=e=>{ const x=e.target.closest("[data-b]"); if(!x) return; bBasis=x.dataset.b; try{localStorage.setItem("sovis_bbasis",bBasis);}catch(er){} renderBilling(); };
+chips($("bChips"),[["all","전체"],["미입금","미입금"],["부분입금","부분입금"],["완납","완납"],["미발행","미발행 있음"]],"all",r=>{bFilter=r;renderBilling();});
 $("bQ").oninput=renderBilling; $("bMgmt").onchange=renderBilling;
 $("clBtn").onclick=()=>{ if(!can("billing","write")) return toast(ERRMSG.FORBIDDEN); clientForm(); };
+function proofCell(b){
+  const ps=getProofs(b), un=unissued(b);
+  let h=ps.map(p=>'<div><span class="tag '+(p.type==="계산서"?"t-blu":"t-vio")+'">'+p.type+'</span> '+fmtMoney(p.amount)+(p.issueDate||p.issuedDate?' <span class="mini2" style="display:inline">발행 '+esc(p.issueDate||"-")+' · 발급 '+esc(p.issuedDate||"-")+'</span>':'')+'</div>').join("");
+  if(un>0) h+='<div class="un"><span class="tag t-amb">미발행</span> '+fmtMoney(un)+'</div>';
+  if(un<0) h+='<div class="un" style="color:var(--red)"><span class="tag t-red">초과</span> '+fmtMoney(-un)+'</div>';
+  return '<div class="prf">'+(h||'<span class="tag t-gry">-</span>')+'</div>';
+}
 function renderBilling(){
   if(!$("bTable")) return;
   const [y,m]=bMonth.split("-").map(Number);
   $("bTitle").textContent=bAllMode?"전체 기간":y+"년 "+m+"월";
   $("bAll").classList.toggle("btn-p",bAllMode);
-  const inMonth=data.billing.filter(b=>bAllMode||b.month===bMonth);
-  const amt=inMonth.reduce((s,b)=>s+(Number(b.amount)||0),0), paid=inMonth.reduce((s,b)=>s+billPaid(b),0);
-  const lbl=bAllMode?"전체":m+"월";
-  $("bAmtL").textContent=lbl+" 청구액"; $("bPaidL").textContent=lbl+" 입금액"; $("bDueL").textContent=lbl+" 미수금";
-  $("bAmt").innerHTML=fmtMoney(amt)+"<small>원</small>"; $("bAmtFt").textContent="청구 "+inMonth.length+"건 (청구월 기준)";
+  document.querySelectorAll("#bBasis [data-b]").forEach(x=>x.classList.toggle("on",x.dataset.b===bBasis));
+  const inM=data.billing.filter(inBasis);
+  const amt=inM.reduce((s,b)=>s+(Number(b.amount)||0),0), paid=inM.reduce((s,b)=>s+billPaid(b),0), un=inM.reduce((s,b)=>s+Math.max(0,unissued(b)),0);
+  const lbl=(bAllMode?"전체":m+"월")+" ", bl=bBasis==="bill"?"청구일 기준":"대상월 기준";
+  $("bAmtL").textContent=lbl+"청구액"; $("bPaidL").textContent=lbl+"입금액"; $("bDueL").textContent=lbl+"미수금";
+  $("bAmt").innerHTML=fmtMoney(amt)+"<small>원</small>"; $("bAmtFt").innerHTML=inM.length+"건 · "+bl+(un>0?' · <b style="color:#c26a00">미발행 '+fmtMoney(un)+'</b>':'');
   $("bPaid").innerHTML=fmtMoney(paid)+"<small>원</small>"; $("bPaidFt").textContent="입금률 "+(amt?Math.round(paid/amt*100):0)+"%";
   $("bDue").innerHTML=fmtMoney(amt-paid)+"<small>원</small>";
-  $("bDueFt").textContent="미입금 "+inMonth.filter(b=>billStatus(b)==="미입금").length+" · 부분입금 "+inMonth.filter(b=>billStatus(b)==="부분입금").length;
+  $("bDueFt").textContent="미입금 "+inM.filter(b=>billStatus(b)==="미입금").length+" · 부분입금 "+inM.filter(b=>billStatus(b)==="부분입금").length;
   const dueAll=data.billing.reduce((s,b)=>s+Math.max(0,(Number(b.amount)||0)-billPaid(b)),0);
   $("bDueAll").innerHTML=fmtMoney(dueAll)+"<small>원</small>"; $("bDueAllFt").textContent="미수 거래처 "+new Set(data.billing.filter(b=>(Number(b.amount)||0)>billPaid(b)).map(b=>b.clientId)).size+"곳";
   const cm=$("bMgmt").value; $("bMgmt").innerHTML='<option value="">전체 관리구분</option>'+mgmtList().map(x=>'<option'+(x===cm?" selected":"")+'>'+esc(x)+'</option>').join("");
   const q=$("bQ").value.trim().toLowerCase();
-  const rows=inMonth.filter(b=>{ const c=clientOf(b); return (bFilter==="all"||billStatus(b)===bFilter||(bFilter==="완납"&&billStatus(b)==="과입금"))&&(!cm||c.mgmt===cm)&&(!q||[c.name,c.code,b.memo,...(b.deposits||[]).map(d=>d.memo)].join(" ").toLowerCase().includes(q)); })
-    .sort((a,b)=>String(b.month||"").localeCompare(String(a.month||""))||String(clientOf(a).name||"").localeCompare(String(clientOf(b).name||"")));
+  const rows=inM.filter(b=>{ const c=clientOf(b), st=billStatus(b);
+      const okF=bFilter==="all"||(bFilter==="미발행"?unissued(b)>0:(st===bFilter||(bFilter==="완납"&&st==="과입금")));
+      return okF&&(!cm||c.mgmt===cm)&&(!q||[c.name,c.code,b.memo,...(b.deposits||[]).map(d=>d.memo)].join(" ").toLowerCase().includes(q)); })
+    .sort((a,b)=>String(b.billDate||"").localeCompare(String(a.billDate||""))||String(clientOf(a).name||"").localeCompare(String(clientOf(b).name||"")));
   $("bTable").innerHTML=rows.length?rows.map(b=>{ const c=clientOf(b), p=billPaid(b), due=(Number(b.amount)||0)-p, st=billStatus(b), deps=b.deposits||[];
-    const proof=b.proofType&&b.proofType!=="미발행"?'<span class="tag '+(b.proofType==="계산서"?"t-blu":"t-vio")+'">'+esc(b.proofType)+'</span> '+fmtMoney(b.proofAmount)+'<div class="mini2">발행 '+esc(b.issueDate||"-")+' · 발급 '+esc(b.issuedDate||"-")+'</div>':'<span class="tag t-gry">미발행</span>';
-    return '<tr><td style="font-family:Inter;font-size:12.5px">'+esc(c.code||"-")+'</td><td><div class="nm">'+esc(c.name||"(삭제된 거래처)")+'</div>'+(c.mgmt?'<div class="mini2">'+esc(c.mgmt)+'</div>':'')+'</td><td>'+esc((b.month||"").replace("-","."))+'</td><td>'+esc(b.billDate||"-")+'</td><td class="money"><b>'+fmtMoney(b.amount)+'</b></td><td>'+proof+'</td>'
-      +'<td class="money">'+fmtMoney(p)+(deps.length?'<div class="mini2">'+deps.length+'회 · 최근 '+esc(deps.map(d=>d.date||"").sort().pop()||"-")+'</div>':'')+'</td><td class="money" style="color:'+(due>0?"var(--red)":"var(--ink2)")+';font-weight:700">'+fmtMoney(due)+'</td><td><span class="tag '+BST_CLS[st]+'">'+st+'</span></td><td><button class="btn btn-sm" data-bedit="'+esc(b.id)+'">수정</button></td></tr>'; }).join("")
+    return '<tr><td class="nm" style="white-space:nowrap">'+esc(b.billDate||"-")+'</td><td style="font-family:Inter;font-size:12.5px">'+esc(c.code||"-")+'</td><td><div class="nm">'+esc(c.name||"(삭제된 거래처)")+'</div>'+(c.mgmt?'<div class="mini2">'+esc(c.mgmt)+'</div>':'')+'</td><td style="white-space:nowrap">'+esc(targetLabel(b))+'</td><td class="money"><b>'+fmtMoney(b.amount)+'</b></td><td>'+proofCell(b)+'</td>'
+      +'<td class="money">'+fmtMoney(p)+(deps.length?'<div class="mini2">'+deps.length+'회 · 최근 '+esc(deps.map(d=>d.date||"").sort().pop()||"-")+'</div>':'')+'</td><td class="money" style="color:'+(due>0?"var(--red)":due<0?"var(--violet)":"var(--ink2)")+';font-weight:700">'+fmtMoney(due)+'</td><td><span class="tag '+BST_CLS[st]+'">'+st+'</span></td><td><button class="btn btn-sm" data-bedit="'+esc(b.id)+'">수정</button></td></tr>'; }).join("")
     :'<tr><td colspan="10" class="empty">'+(data.billing.length?"조건에 맞는 청구가 없습니다.":"아직 청구 내역이 없습니다. "+(data.client.length?"오른쪽 위 <b>청구 등록</b>으로 시작하세요.":"먼저 <b>거래처 관리</b>에서 거래처를 등록하세요."))+'</td></tr>';
-  const ra=rows.reduce((s,b)=>s+(Number(b.amount)||0),0), rp=rows.reduce((s,b)=>s+billPaid(b),0);
-  $("bFoot").innerHTML="표시 <b>"+rows.length+"건</b><span>청구 <b>"+fmtMoney(ra)+"원</b></span><span>입금 <b>"+fmtMoney(rp)+"원</b></span><span>미수금 <b style=\"color:var(--red)\">"+fmtMoney(ra-rp)+"원</b></span>";
+  const ra=rows.reduce((s,b)=>s+(Number(b.amount)||0),0), rp=rows.reduce((s,b)=>s+billPaid(b),0), ru=rows.reduce((s,b)=>s+Math.max(0,unissued(b)),0);
+  $("bFoot").innerHTML="표시 <b>"+rows.length+"건</b><span>청구 <b>"+fmtMoney(ra)+"원</b></span><span>입금 <b>"+fmtMoney(rp)+"원</b></span><span>미수금 <b style=\"color:var(--red)\">"+fmtMoney(ra-rp)+"원</b></span>"+(ru?"<span>미발행 <b style=\"color:#c26a00\">"+fmtMoney(ru)+"원</b></span>":"");
 }
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-bedit]"); if(b) billingForm(data.billing.find(x=>x.id===b.dataset.bedit)); });
 
 function billingForm(b,keep){
   FORM_MENU="billing";
-  b=b||{}; const ed=!!b.id, k=keep||{};
-  const cur=Object.assign({},b,k);
+  b=b||{}; const ed=!!b.id, cur=Object.assign({},b,keep||{});
   const clients=data.client.slice().sort((a,c)=>String(a.name).localeCompare(String(c.name)));
-  const pt=cur.proofType||"계산서";
+  const prs=keep&&keep.proofs?keep.proofs:getProofs(cur), pmap={}; prs.forEach(p=>pmap[p.type]=p);
   const deps=Array.isArray(cur.deposits)?cur.deposits:[];
   const depRow=(d)=>'<div class="dep"><input type="date" data-dd value="'+esc(d.date||"")+'"><input data-da inputmode="numeric" placeholder="입금금액" value="'+(d.amount?fmtMoney(d.amount):"")+'"><input data-dm placeholder="적요 (통장 표기)" value="'+esc(d.memo||"")+'"><button type="button" class="ibtn" data-ddel title="삭제">'+X+'</button></div>';
-  const body='<div class="full"><label>거래처 <span class="req">*</span>'+(can("billing","write")?' <button type="button" class="link" id="bfCl" style="float:right">거래처 추가·수정 ›</button>':'')+'</label>'
+  const prRow=t=>{ const p=pmap[t]||{}; return '<div class="pf2" data-pr="'+t+'" style="display:'+(pmap[t]?"grid":"none")+'"><span class="pt">'+t+'</span><input data-pa inputmode="numeric" placeholder="금액" value="'+(p.amount?fmtMoney(p.amount):"")+'"><input type="date" data-pi value="'+esc(p.issueDate||"")+'" title="발행일 (발행한 날)"><input type="date" data-pd value="'+esc(p.issuedDate||"")+'" title="발급일 (증빙상 일자)"></div>'; };
+  const body=fld("청구일","billDate",cur.billDate||todayStr(),"date",true)
+   +'<div><label>대상기간 <span class="req">*</span> <span style="font-weight:500;color:var(--mute)">(분기·연간이면 종료월까지)</span></label><div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center"><input type="month" name="targetFrom" required value="'+esc(tFrom(cur)||thisMonth())+'"><span style="color:var(--mute)">~</span><input type="month" name="targetTo" value="'+esc(tTo(cur)&&tTo(cur)!==tFrom(cur)?tTo(cur):"")+'"></div></div>'
+   +'<div class="full"><label>거래처 <span class="req">*</span>'+(can("billing","write")?' <button type="button" class="link" id="bfCl" style="float:right">거래처 추가·수정 ›</button>':'')+'</label>'
      +(clients.length?'<select name="clientId" required><option value="">거래처 선택</option>'+clients.map(c=>'<option value="'+esc(c.id)+'"'+(c.id===cur.clientId?" selected":"")+'>'+esc(c.name)+(c.code?" ("+esc(c.code)+")":"")+(c.mgmt?" · "+esc(c.mgmt):"")+'</option>').join("")+'</select>'
        :'<div class="subt" style="padding:8px 0">등록된 거래처가 없습니다. 오른쪽 <b>거래처 추가·수정</b>에서 먼저 등록하세요.</div>')+'</div>'
-   +fld("청구월 (대상월)","month",cur.month||thisMonth(),"month",true)
-   +fld("청구일","billDate",cur.billDate||todayStr(),"date")
    +fld("청구금액 (원)","amount",cur.amount?fmtMoney(cur.amount):"","text",true,"full",'inputmode="numeric" id="bfAmt" placeholder="예: 5,000,000"')
-   +'<div class="sechd">증빙</div>'
-   +'<div class="full"><div class="seg sm">'+["계산서","현금영수증","미발행"].map(x=>'<label><input type="radio" name="proofType" value="'+x+'"'+(x===pt?" checked":"")+'>'+x+'</label>').join("")+'</div></div>'
-   +'<div class="full" id="bfProof" style="display:'+(pt==="미발행"?"none":"grid")+';grid-template-columns:1fr 1fr 1fr;gap:14px">'
-     +'<div><label>증빙금액 <button type="button" class="link" id="bfSame" style="float:right;padding:0">청구금액과 동일</button></label><input name="proofAmount" id="bfPAmt" inputmode="numeric" value="'+(cur.proofAmount?fmtMoney(cur.proofAmount):"")+'"></div>'
-     +'<div><label>발행일 (발행한 날)</label><input type="date" name="issueDate" value="'+esc(cur.issueDate||"")+'"></div>'
-     +'<div><label>발급일 (증빙상 일자)</label><input type="date" name="issuedDate" value="'+esc(cur.issuedDate||"")+'"></div></div>'
+   +'<div class="sechd">증빙 <span style="font-weight:500;color:var(--mute)">(복수 선택 가능 · 남는 금액은 미발행)</span></div>'
+   +'<div class="full"><div class="chkrow">'+PROOF_TYPES.map(t=>'<label><input type="checkbox" data-pt="'+t+'"'+(pmap[t]?" checked":"")+'>'+t+'</label>').join("")+'</div></div>'
+   +'<div class="full"><div class="pf2" style="font-size:12px;color:var(--mute);font-weight:600;margin-bottom:4px" id="bfPH"><span>구분</span><span>증빙금액</span><span>발행일 (발행한 날)</span><span>발급일 (증빙상 일자)</span></div>'+PROOF_TYPES.map(prRow).join("")
+     +'<div class="unis" id="bfUn"><span>미발행</span><span id="bfUnV">0원</span></div></div>'
    +'<div class="sechd">입금 내역</div>'
    +'<div class="full"><div class="dep" style="font-size:12px;color:var(--mute);font-weight:600;margin-bottom:4px"><span>입금일</span><span>입금금액</span><span>적요</span><span></span></div><div id="bfDeps">'+(deps.length?deps:[{}]).map(depRow).join("")+'</div>'
      +'<button type="button" class="btn btn-sm" id="bfAddDep" style="margin-top:2px">+ 입금 추가</button>'
-     +'<div class="bsum"><div><small>청구금액</small><b id="bsA">0</b></div><div><small>입금 합계</small><b id="bsP">0</b></div><div><small>미수금</small><b id="bsD" style="color:var(--red)">0</b></div></div></div>'
+     +'<div class="chk"><div id="ckP"></div><div id="ckD"></div></div></div>'
    +'<div class="full"><label>비고</label><input name="memo" value="'+esc(cur.memo||"")+'"></div>';
   openModal(shell(ed?"청구 수정":"청구 등록",body,ed));
   const F=$("mform");
-  const recalc=()=>{ const a=money($("bfAmt").value), p=[...F.querySelectorAll("[data-da]")].reduce((s,i)=>s+money(i.value),0); $("bsA").textContent=fmtMoney(a)+"원"; $("bsP").textContent=fmtMoney(p)+"원"; $("bsD").textContent=fmtMoney(a-p)+"원"; $("bsD").style.color=a-p>0?"var(--red)":"var(--green)"; };
+  const proofsNow=()=>PROOF_TYPES.filter(t=>F.querySelector('[data-pt="'+t+'"]').checked).map(t=>{ const r=F.querySelector('[data-pr="'+t+'"]'); return {type:t,amount:money(r.querySelector("[data-pa]").value),issueDate:r.querySelector("[data-pi]").value,issuedDate:r.querySelector("[data-pd]").value}; });
+  const depsNow=()=>[...F.querySelectorAll("#bfDeps .dep")].map(r=>({date:r.querySelector("[data-dd]").value,amount:money(r.querySelector("[data-da]").value),memo:r.querySelector("[data-dm]").value.trim()})).filter(d=>d.date||d.amount||d.memo);
+  const recalc=()=>{
+    const a=money($("bfAmt").value), ps=proofsNow(), pa=ps.reduce((s,p)=>s+p.amount,0), un=a-pa, pd=depsNow().reduce((s,d)=>s+d.amount,0);
+    $("bfPH").style.display=ps.length?"grid":"none";
+    $("bfUnV").textContent=fmtMoney(un)+"원"; $("bfUn").className="unis"+(un===0?" ok":un<0?" bad":"");
+    $("bfUn").firstChild.textContent=un<0?"증빙 초과":un===0?"미발행 없음 ✓":"미발행";
+    const ckP=$("ckP"), ckD=$("ckD");
+    ckP.className=un===0?"ok":un<0?"bad":"warn"; ckP.innerHTML='<span>청구액 = 계산서 + 현금영수증 + 미발행</span><span>'+(un===0?"✓ 일치":un<0?"⚠ 증빙이 "+fmtMoney(-un)+"원 많음":"⚠ 미발행 "+fmtMoney(un)+"원")+'</span>';
+    ckD.className=pd===a?"ok":pd>a?"bad":"warn"; ckD.innerHTML='<span>입금 합계 '+fmtMoney(pd)+'원</span><span>'+(pd===a?"✓ 청구액과 일치":pd>a?"⚠ "+fmtMoney(pd-a)+"원 초과 입금":"⚠ 미수금 "+fmtMoney(a-pd)+"원")+'</span>';
+  };
+  PROOF_TYPES.forEach(t=>{ const cb=F.querySelector('[data-pt="'+t+'"]'), r=F.querySelector('[data-pr="'+t+'"]'), ai=r.querySelector("[data-pa]");
+    bindMoney(ai,recalc);
+    cb.onchange=()=>{ r.style.display=cb.checked?"grid":"none";
+      if(cb.checked&&!ai.value){ const a=money($("bfAmt").value), other=proofsNow().filter(p=>p.type!==t).reduce((s,p)=>s+p.amount,0); if(a-other>0) ai.value=fmtMoney(a-other); }
+      recalc(); }; });
   const wireDep=row=>{ bindMoney(row.querySelector("[data-da]"),recalc); row.querySelector("[data-ddel]").onclick=()=>{ row.remove(); recalc(); }; };
   F.querySelectorAll("#bfDeps .dep").forEach(wireDep);
-  $("bfAddDep").onclick=()=>{ const t=document.createElement("div"); t.innerHTML=depRow({date:todayStr()}); const r=t.firstChild; $("bfDeps").appendChild(r); wireDep(r); r.querySelector("[data-da]").focus(); };
-  bindMoney($("bfAmt"),recalc); bindMoney($("bfPAmt"));
-  $("bfSame").onclick=()=>{ $("bfPAmt").value=$("bfAmt").value; };
-  F.querySelectorAll("[name=proofType]").forEach(r=>r.onchange=()=>{ $("bfProof").style.display=r.value==="미발행"&&r.checked?"none":"grid"; });
+  $("bfAddDep").onclick=()=>{ const t=document.createElement("div"); t.innerHTML=depRow({date:todayStr()}); const r=t.firstChild; $("bfDeps").appendChild(r); wireDep(r);
+    const a=money($("bfAmt").value), pd=depsNow().reduce((s,d)=>s+d.amount,0); if(a-pd>0) r.querySelector("[data-da]").value=fmtMoney(a-pd); recalc(); r.querySelector("[data-da]").focus(); };
+  bindMoney($("bfAmt"),recalc);
   recalc();
-  const snapshot=()=>{ const fd=Object.fromEntries(new FormData(F).entries()); return {clientId:fd.clientId,month:fd.month,billDate:fd.billDate,amount:money(fd.amount),proofType:fd.proofType,proofAmount:money(fd.proofAmount),issueDate:fd.issueDate||"",issuedDate:fd.issuedDate||"",memo:fd.memo||"",
-    deposits:[...F.querySelectorAll("#bfDeps .dep")].map(r=>({date:r.querySelector("[data-dd]").value,amount:money(r.querySelector("[data-da]").value),memo:r.querySelector("[data-dm]").value.trim()})).filter(d=>d.date||d.amount||d.memo)}; };
+  const snapshot=()=>{ const fd=Object.fromEntries(new FormData(F).entries());
+    const tf=fd.targetFrom||"", tt=fd.targetTo&&fd.targetTo>=tf?fd.targetTo:tf;
+    return {clientId:fd.clientId,billDate:fd.billDate,targetFrom:tf,targetTo:tt,month:tf,amount:money(fd.amount),proofs:proofsNow(),memo:fd.memo||"",deposits:depsNow()}; };
   if($("bfCl")) $("bfCl").onclick=()=>{ const sn=snapshot(); clientForm(()=>billingForm(b,sn)); };
   wire("billing",b,fd=>{ const sn=snapshot(), c=data.client.find(x=>x.id===sn.clientId)||{};
-    if(sn.proofType==="미발행"){ sn.proofAmount=0; sn.issueDate=""; sn.issuedDate=""; }
-    return Object.assign({id:b.id,createdAt:b.createdAt||new Date().toISOString(),clientCode:c.code||"",clientName:c.name||"",clientMgmt:c.mgmt||""},sn); },
-    fd=>{ if(!fd.clientId) return "거래처를 선택하세요."; if(!money(fd.amount)) return "청구금액을 입력하세요.";
-      const bad=[...F.querySelectorAll("#bfDeps .dep")].some(r=>{ const a=money(r.querySelector("[data-da]").value), d=r.querySelector("[data-dd]").value; return (a&&!d)||(d&&!a); });
+    const o=Object.assign({},b,{id:b.id,createdAt:b.createdAt||new Date().toISOString(),clientCode:c.code||"",clientName:c.name||"",clientMgmt:c.mgmt||""},sn);
+    delete o.proofType; delete o.proofAmount; delete o.issueDate; delete o.issuedDate; delete o.updatedBy; delete o.updatedAt;
+    return o; },
+    fd=>{ if(!fd.clientId) return "거래처를 선택하세요."; const a=money(fd.amount); if(!a) return "청구금액을 입력하세요.";
+      if(fd.targetTo&&fd.targetTo<fd.targetFrom) return "대상기간 종료월이 시작월보다 빠릅니다.";
+      const ps=proofsNow(); if(ps.some(p=>!p.amount)) return "체크한 증빙의 금액을 입력하세요.";
+      if(ps.reduce((s,p)=>s+p.amount,0)>a) return "증빙 합계가 청구금액보다 많습니다.";
+      const bad=[...F.querySelectorAll("#bfDeps .dep")].some(r=>{ const am=money(r.querySelector("[data-da]").value), d=r.querySelector("[data-dd]").value; return (am&&!d)||(d&&!am); });
       return bad?"입금 내역은 입금일과 입금금액을 함께 입력하세요.":""; });
 }
 
