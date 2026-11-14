@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SOVIS · 소하검진센터 계약·운영 관리 시스템</title>
+<title>SOVIS · 소하검진센터 센터 운영관리 시스템</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -240,6 +240,28 @@ td.num,th.num{text-align:right}
 .ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;height:36px;color:var(--red);display:flex;align-items:center;justify-content:center}
 @media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
 
+/* v2.0 dashboard */
+.dsec{margin-bottom:16px}
+.dsec .ph h3{font-size:16.5px}
+.ops6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.dstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.dst{background:var(--soft);border-radius:14px;padding:13px 15px}
+.dst small{display:block;font-size:12px;color:var(--mute);font-weight:600}
+.dst b{display:block;font-size:22px;font-weight:800;margin-top:4px;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.dst b em{font-style:normal;font-size:12.5px;color:var(--mute);font-weight:600;margin-left:2px}
+.dst .s2{font-size:11.5px;color:var(--mute);margin-top:2px}
+.dgrid2{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-top:14px}
+.dlist .row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f1f4f8;cursor:pointer}
+.dlist .row:last-child{border:0}
+.dlist .row .t{flex:1;min-width:0;font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dlist .row .v{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dlist h5{margin:0 0 4px;font-size:12px;color:var(--mute);font-weight:700}
+.kpi.clk{cursor:pointer;transition:.12s}.kpi.clk:hover{border-color:#cdd7e3}.kpi.clk.on{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,108,184,.1)}
+tr.exp30 td:first-child{box-shadow:inset 3px 0 0 var(--red)}
+tr.exp60 td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
+tr.exp90 td:first-child{box-shadow:inset 3px 0 0 var(--violet)}
+tr.expd td:first-child{box-shadow:inset 3px 0 0 #b8c0cc}
+@media (max-width:1150px){.ops6{grid-template-columns:repeat(3,1fr)}.dstats{grid-template-columns:repeat(2,1fr)}.dgrid2{grid-template-columns:1fr}}
 /* v1.9 */
 .exgrp{margin-bottom:12px}
 .exgrp h5{margin:0 0 6px;font-size:12px;color:var(--mute);font-weight:700;letter-spacing:.2px}
@@ -356,15 +378,15 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 <div id="login">
   <div class="l-art">
     <div class="l-grid"></div>
-    <div class="l-chip"><i></i>광명소하검진센터 · 기획·협약 파트</div>
+    <div class="l-chip"><i></i>광명소하검진센터 · 센터 운영관리</div>
     <div>
-      <h1 class="l-head">계약부터 센터 운영까지,<br><span>한 화면에서</span> 관리하세요.</h1>
-      <div class="l-desc">위수탁·MOU·유지보수·식사권 계약의 만료 일정과<br>산소가스·등기 발송 현황을 함께 확인합니다.</div>
+      <h1 class="l-head">센터 운영의 모든 것을,<br><span>한 화면에서</span> 관리하세요.</h1>
+      <div class="l-desc">공지사항 · 워킹데이 · 산소가스 · 등기 발송부터<br>청구와 계약 만료까지 함께 확인합니다.</div>
     </div>
     <div class="l-stats">
+      <div class="l-stat"><b>센터운영관리</b><small>워킹데이 · 산소가스 · 등기</small></div>
+      <div class="l-stat"><b>청구관리</b><small>청구 · 증빙 · 미수금</small></div>
       <div class="l-stat"><b>계약 만료 알림</b><small>30 · 60 · 90일 단위</small></div>
-      <div class="l-stat"><b>센터운영관리</b><small>산소가스 · 등기 발송</small></div>
-      <div class="l-stat"><b>실시간 공유</b><small>팀원과 같은 데이터</small></div>
     </div>
   </div>
   <div class="l-form">
@@ -380,7 +402,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
         <button class="btn-login" type="submit">로그인 <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </form>
       <div class="err" id="loginErr"></div>
-      <div class="l-foot">v1.9 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.0 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -389,7 +411,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 <div id="app">
   <aside class="side">
     <img class="lg" src="data:image/png;base64,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" alt="중앙대학교 광명소하검진센터">
-    <div class="sys"><b>계약·운영 관리 시스템</b>기획·협약 파트</div>
+    <div class="sys"><b>센터 운영관리 시스템</b>광명소하검진센터</div>
     <div class="ng">메인</div>
     <nav class="nav">
       <a href="#dashboard" data-v="dashboard"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>대시보드</a>
@@ -397,9 +419,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     </nav>
     <div class="ng">센터운영관리</div>
     <nav class="nav">
-      <div class="grp" data-go="contracts" style="cursor:pointer"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>계약관리</div>
-      <a href="#contracts" data-v="contracts" class="sub">계약 목록</a>
-      <a href="#alerts" data-v="alerts" class="sub">만료 알림<span class="badge" id="alertBadge" style="display:none">0</span></a>
+      <a href="#contracts" data-v="contracts"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>계약관리<span class="badge" id="alertBadge" style="display:none">0</span></a>
       <a href="#billing" data-v="billing"><svg class="i" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>청구관리</a>
       <a href="#workday" data-v="workday"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 18h2"/></svg>워킹데이 계획</a>
       <a href="#oxygen" data-v="oxygen"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3M12 3V2"/><path d="M10 12h4"/></svg>산소가스 관리</a>
@@ -408,7 +428,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v1.9 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.0 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -432,27 +452,9 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 
     <!-- DASHBOARD -->
     <section id="v-dashboard">
-      <div class="bento">
-        <div class="hero">
-          <div class="lb">총 계약금액 · 유효 계약 기준</div>
-          <div class="big" id="kAmt">0<small>원</small></div>
-          <div class="row">
-            <div class="sub"><small>유효 계약</small><b id="kValid">0건</b></div>
-            <div class="sub"><small>유효율</small><b id="kValidPct">0%</b></div>
-            <div class="sub"><small>이번달 신규</small><b id="kNew">0건</b></div>
-          </div>
-        </div>
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:#e8f2fb;color:var(--blue)"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></div><span class="lb">전체 계약</span></div><div class="v" id="kAll">0<small>건</small></div><div class="ft" id="kAllFt">만료 0건 포함</div></div>
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--red-s);color:var(--red)"><svg class="i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div><span class="lb">30일 내 만료</span></div><div class="v" id="k30">0<small>건</small></div><div class="ft" id="k30t"></div></div>
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--amber-s);color:var(--amber)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M22 6l-3-3"/></svg></div><span class="lb">60일 내 만료</span></div><div class="v" id="k60">0<small>건</small></div><div class="ft" id="k60t"></div></div>
-        <div class="card kpi"><div class="hd"><div class="ic" style="background:#f2edff;color:var(--violet)"><svg class="i" viewBox="0 0 24 24"><path d="M5 22h14M5 2h14M17 22v-4.2a2 2 0 0 0-.6-1.4L12 12l-4.4 4.4a2 2 0 0 0-.6 1.4V22M7 2v4.2a2 2 0 0 0 .6 1.4L12 12l4.4-4.4a2 2 0 0 0 .6-1.4V2"/></svg></div><span class="lb">90일 내 만료</span></div><div class="v" id="k90">0<small>건</small></div><div class="ft" id="k90t"></div></div>
-      </div>
+      <div class="card dsec" id="dsNotice"><div class="ph"><h3>📢 공지사항</h3><div class="right"><button class="link" data-go="notice">전체보기 ›</button></div></div><div class="pb" style="padding-top:4px"><div class="nstrip" id="dNotice"></div></div></div>
 
-      <div class="card" style="margin-bottom:16px"><div class="ph"><h3>📢 공지사항</h3><div class="right"><button class="link" data-go="notice">전체보기 ›</button></div></div><div class="pb" style="padding-top:4px"><div class="nstrip" id="dNotice"></div></div></div>
-      <div class="g3">
-        <div class="card"><div class="ph"><h3>계약 유형별 현황</h3><div class="right"><button class="link" data-go="contracts">전체보기 ›</button></div></div><div class="pb"><div class="donut-wrap"><div class="donut"><svg viewBox="0 0 42 42" width="150" height="150" id="donutSvg"></svg><div class="ctr"><b id="donutN">0</b><small>전체 계약</small></div></div><div class="legend" id="legend"></div></div></div></div>
-        <div class="card"><div class="ph"><h3>담당부서별 계약 수</h3><span class="hint" id="deptFoot"></span></div><div class="pb" id="deptBars"></div></div>
-        <div class="card"><div class="ph"><h3>센터운영 현황</h3><span class="hint">오늘 · 이번달</span></div><div class="pb"><div class="ops">
+      <div class="card dsec" id="dsOps"><div class="ph"><h3>🏥 센터운영 현황</h3><span class="hint">오늘 · 이번달</span></div><div class="pb"><div class="ops ops6">
           <div class="op" data-go="workday"><div class="ico" style="background:var(--green-s);color:var(--green)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18"/></svg></div><small>오늘 센터</small><b id="opToday">-</b></div>
           <div class="op" data-go="workday"><div class="ico" style="background:var(--red-s);color:var(--red)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/></svg></div><small>오늘 휴가·반차</small><b id="opTodayOff">0<em>명</em></b></div>
           <div class="op" data-go="oxygen"><div class="ico" style="background:#e6f7f9;color:var(--teal-d)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3"/></svg></div><small>산소 입고 대기</small><b id="opO2Wait">0<em>건</em></b></div>
@@ -460,22 +462,31 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
           <div class="op" data-go="mail"><div class="ico" style="background:var(--amber-s);color:var(--amber)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg></div><small>등기 발송 대기</small><b id="opMailWait">0<em>건</em></b></div>
           <div class="op" data-go="mail"><div class="ico" style="background:#f2edff;color:var(--violet)"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></div><small>이번달 등기 요청</small><b id="opMailMonth">0<em>건</em></b></div>
         </div></div></div>
+
+      <div class="card dsec" id="dsBill"><div class="ph"><h3>🧾 청구관리</h3><span class="hint" id="dbBasis"></span><div class="right"><button class="link" data-go="billing">전체보기 ›</button></div></div>
+        <div class="pb">
+          <div class="dstats">
+            <div class="dst"><small id="dbAmtL">이번달 청구액</small><b id="dbAmt">0<em>원</em></b><div class="s2" id="dbAmtS"></div></div>
+            <div class="dst"><small id="dbPaidL">이번달 입금액</small><b id="dbPaid">0<em>원</em></b><div class="s2" id="dbPaidS"></div></div>
+            <div class="dst"><small id="dbDueL">이번달 미수금</small><b id="dbDue" style="color:var(--red)">0<em>원</em></b><div class="s2" id="dbDueS"></div></div>
+            <div class="dst"><small>전체 누적 미수금</small><b id="dbDueAll">0<em>원</em></b><div class="s2" id="dbDueAllS"></div></div>
+          </div>
+          <div class="dgrid2">
+            <div class="dlist"><h5>미수금 많은 기관</h5><div id="dbTop"></div></div>
+            <div class="dlist"><h5>미발행 증빙</h5><div id="dbUn"></div></div>
+          </div>
+        </div>
       </div>
 
-      <div class="g2">
-        <div class="card">
-          <div class="ph"><h3>계약 만료 예정 현황</h3>
-            <div class="right"><select class="sel" id="dDept"><option value="">전체부서</option></select><label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="dQ" placeholder="계약명, 업체명 검색"></label></div>
+      <div class="card dsec" id="dsCtr"><div class="ph"><h3>📄 계약관리</h3><span class="hint">만료 예정</span><div class="right"><button class="link" data-go="contracts">전체보기 ›</button></div></div>
+        <div class="pb">
+          <div class="dstats">
+            <div class="dst" data-go="contracts" style="cursor:pointer"><small>30일 내 만료</small><b id="dc30" style="color:var(--red)">0<em>건</em></b></div>
+            <div class="dst" data-go="contracts" style="cursor:pointer"><small>60일 내 만료</small><b id="dc60" style="color:#b46d00">0<em>건</em></b></div>
+            <div class="dst" data-go="contracts" style="cursor:pointer"><small>90일 내 만료</small><b id="dc90" style="color:var(--violet)">0<em>건</em></b></div>
+            <div class="dst" data-go="contracts" style="cursor:pointer"><small>만료됨</small><b id="dcExp" style="color:#5b6577">0<em>건</em></b></div>
           </div>
-          <div class="pb" style="padding-bottom:4px"><div class="chips" id="dChips" style="width:max-content;max-width:100%;overflow:auto"></div></div>
-          <div class="tw"><table><thead><tr><th>계약명</th><th>유형</th><th>부서</th><th>종료일</th><th>남은 기간</th><th class="num">계약금액</th></tr></thead><tbody id="dTable"></tbody></table></div>
-        </div>
-        <div class="card">
-          <div class="ph"><h3>조치 필요 계약</h3><div class="right"><button class="link" data-go="alerts">전체보기 ›</button></div></div>
-          <div class="pb">
-            <div class="sumline"><div style="background:var(--red-s);color:#d12f2f"><small>30일 이내</small><b id="act30">0</b></div><div style="background:#f1f4f8;color:#5b6577"><small>만료됨</small><b id="actExp">0</b></div></div>
-            <div id="urgList"></div>
-          </div>
+          <div class="dlist" style="margin-top:14px"><div id="urgList"></div></div>
         </div>
       </div>
     </section>
@@ -500,26 +511,24 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     </section>
 
     <section id="v-contracts" style="display:none">
+      <div class="bento" style="grid-template-columns:repeat(4,1fr)">
+        <div class="card kpi clk" data-cf="all"><div class="hd"><div class="ic" style="background:#e8f2fb;color:var(--blue)"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></div><span class="lb">전체 계약</span></div><div class="v" id="kAll">0<small>건</small></div><div class="ft" id="kAllFt"></div></div>
+        <div class="card kpi clk" data-cf="30"><div class="hd"><div class="ic" style="background:var(--red-s);color:var(--red)"><svg class="i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div><span class="lb">30일 내 만료</span></div><div class="v" id="k30">0<small>건</small></div><div class="ft" id="k30t"></div></div>
+        <div class="card kpi clk" data-cf="60"><div class="hd"><div class="ic" style="background:var(--amber-s);color:var(--amber)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M22 6l-3-3"/></svg></div><span class="lb">60일 내 만료</span></div><div class="v" id="k60">0<small>건</small></div><div class="ft" id="k60t"></div></div>
+        <div class="card kpi clk" data-cf="90"><div class="hd"><div class="ic" style="background:#f2edff;color:var(--violet)"><svg class="i" viewBox="0 0 24 24"><path d="M5 22h14M5 2h14M17 22v-4.2a2 2 0 0 0-.6-1.4L12 12l-4.4 4.4a2 2 0 0 0-.6 1.4V22M7 2v4.2a2 2 0 0 0 .6 1.4L12 12l4.4-4.4a2 2 0 0 0 .6-1.4V2"/></svg></div><span class="lb">90일 내 만료</span></div><div class="v" id="k90">0<small>건</small></div><div class="ft" id="k90t"></div></div>
+      </div>
       <div class="card">
-        <div class="ph"><h3>전체 계약</h3>
+        <div class="ph"><h3 style="white-space:nowrap">계약 목록</h3>
           <div class="right">
             <button class="btn" id="exBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.5 15h9"/></svg>검사 관리</button>
             <button class="btn" id="pkBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>패키지 관리</button>
             <select class="sel" id="cType"><option value="">전체 유형</option></select>
-            <select class="sel" id="cStatus"><option value="">전체 상태</option><option value="valid">유효</option><option value="expired">만료</option></select>
+            <div class="chips" id="cChips"></div>
             <label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cQ" placeholder="계약명, 업체명, 담당자"></label>
           </div>
         </div>
         <div class="tw"><table><thead><tr><th>계약명</th><th>유형</th><th>담당부서</th><th>담당자</th><th>계약(협약)기간</th><th>상태</th><th class="num">계약금액 / 검진인원</th><th>자동갱신</th><th></th></tr></thead><tbody id="cTable"></tbody></table></div>
         <div class="pf" id="cFoot"></div>
-      </div>
-    </section>
-
-    <!-- ALERTS -->
-    <section id="v-alerts" style="display:none">
-      <div class="card">
-        <div class="ph"><h3>만료 알림</h3><div class="right"><div class="chips" id="aChips"></div></div></div>
-        <div class="tw"><table><thead><tr><th>구분</th><th>계약명</th><th>유형</th><th>담당자</th><th>종료일</th><th>남은 기간</th><th>자동갱신</th><th></th></tr></thead><tbody id="aTable"></tbody></table></div>
       </div>
     </section>
 
@@ -567,13 +576,13 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       <div class="card">
         <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="bPrev" title="이전 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="bTitle"></b><button class="btn btn-ic" id="bNext" title="다음 달"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="bThis">이번달</button><button class="btn btn-sm" id="bAll">전체 기간</button><div class="basis" id="bBasis"><button data-b="bill" class="on">청구일 기준</button><button data-b="target">대상월 기준</button></div></div>
           <div class="right">
-            <button class="btn" id="clBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M9 17h1M14 17h1"/></svg>거래처 관리</button>
+            <button class="btn" id="clBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M9 17h1M14 17h1"/></svg>기관 관리</button>
             <select class="sel" id="bMgmt"><option value="">전체 관리구분</option></select>
             <div class="chips" id="bChips"></div>
-            <label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="bQ" placeholder="거래처명, 기업코드, 적요"></label>
+            <label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="bQ" placeholder="기관(기업)명, 기업코드, 적요"></label>
           </div>
         </div>
-        <div class="tw"><table><thead><tr><th>청구일</th><th>기업코드</th><th>거래처명</th><th>대상기간</th><th class="num">청구금액</th><th>증빙</th><th class="num">입금</th><th class="num">미수금</th><th>상태</th><th></th></tr></thead><tbody id="bTable"></tbody></table></div>
+        <div class="tw"><table><thead><tr><th>청구일</th><th>기업코드</th><th>기관(기업)명</th><th>대상기간</th><th class="num">청구금액</th><th>증빙</th><th class="num">입금</th><th class="num">미수금</th><th>상태</th><th></th></tr></thead><tbody id="bTable"></tbody></table></div>
         <div class="pf" id="bFoot"></div>
       </div>
     </section>
@@ -734,21 +743,20 @@ async function deleteItem(k,id){
 
 /* ---------- ROUTING ---------- */
 const VIEWS={
-  dashboard:{t:"대시보드",d:"계약 현황을 한눈에 확인하세요.",add:"계약 등록",fn:()=>contractForm(),addMenu:"contracts"},
+  dashboard:{t:"대시보드",d:"센터 운영 현황을 한눈에 확인하세요.",add:"공지 작성",fn:()=>noticeForm(),addMenu:"notice"},
   accounts:{t:"계정 관리",d:"계정을 등록·삭제하고 메뉴별 권한을 지정합니다. (관리자 전용)",add:"계정 추가",fn:()=>userForm(),admin:true},
   notice:{t:"공지사항",d:"월간 무이자 할부 카드 안내 등 센터 공지를 관리합니다.",add:"공지 작성",fn:()=>noticeForm(),menu:"notice"},
-  contracts:{t:"계약 목록",d:"등록된 전체 계약을 조회하고 수정합니다.",add:"계약 등록",fn:()=>contractForm(),menu:"contracts"},
-  alerts:{t:"만료 알림",d:"만료가 다가오거나 지난 계약을 확인하세요.",add:"계약 등록",fn:()=>contractForm(),menu:"contracts"},
-  billing:{t:"청구관리",d:"거래처별 청구 · 증빙 · 입금 내역과 미수금을 관리합니다.",add:"청구 등록",fn:()=>billingForm(),menu:"billing"},
+  contracts:{t:"계약관리",d:"계약·협약 목록입니다. 만료가 가까운 계약이 위에 표시됩니다.",add:"계약 등록",fn:()=>contractForm(),menu:"contracts"},
+  billing:{t:"청구관리",d:"기관별 청구 · 증빙 · 입금 내역과 미수금을 관리합니다.",add:"청구 등록",fn:()=>billingForm(),menu:"billing"},
   workday:{t:"워킹데이 계획",d:"날짜별 센터 운영 여부와 행정 인원 근무를 관리합니다.",add:"오늘 근무 입력",fn:()=>dayForm(todayStr()),menu:"workday"},
   oxygen:{t:"산소가스 관리",d:"발주일 · 입고일 · 요청 수량을 기록합니다.",add:"발주 등록",fn:()=>oxygenForm(),menu:"oxygen"},
   mail:{t:"등기 발송 관리",d:"등기 발송 요청과 발송 결과를 기록합니다.",add:"발송 요청",fn:()=>mailForm(),menu:"mail"}
 };
 let cur="dashboard";
-function go(v){ cur=VIEWS[v]?v:"dashboard"; route(true); }
+function go(v){ if(v==="alerts") v="contracts"; cur=VIEWS[v]?v:"dashboard"; route(true); }
 function viewOk(v){ const V=VIEWS[v]; if(!V) return false; if(V.admin) return !!(ME&&ME.is_admin); return !V.menu||can(V.menu,"view"); }
 function route(keep){
-  if(!keep){ const h=(location.hash||"").replace("#",""); cur=VIEWS[h]?h:"dashboard"; }
+  if(!keep){ let h=(location.hash||"").replace("#",""); if(h==="alerts") h="contracts"; cur=VIEWS[h]?h:"dashboard"; }
   if(!viewOk(cur)) cur="dashboard";
   const am=VIEWS[cur].admin?null:(VIEWS[cur].menu||VIEWS[cur].addMenu); $("topAdd").style.display=(VIEWS[cur].admin?(ME&&ME.is_admin):can(am,"write"))?"":"none";
   if(cur==="accounts") loadUsers();
@@ -777,65 +785,57 @@ function leftTag(l){
 const typeDot=t=>'<span class="dd" style="color:'+(TYPE_COLORS[t]||"#64748b")+'"><i style="background:'+(TYPE_COLORS[t]||"#94a3b8")+'"></i>'+esc(t||"-")+'</span>';
 function inRange(l,r){ if(r==="all") return l===null||l>=0; if(l===null) return false; if(r==="exp") return l<0; if(r==="over") return l>90; return l>=0&&l<=Number(r); }
 function chips(el,list,def,cb){ el.innerHTML=list.map(r=>'<button class="chip'+(r[0]===def?" on":"")+'" data-r="'+r[0]+'">'+r[1]+'</button>').join(""); el.onclick=e=>{ const b=e.target.closest("[data-r]"); if(!b) return; [...el.children].forEach(x=>x.classList.toggle("on",x===b)); cb(b.dataset.r); }; }
-let dRange="all", aRange="30", oFilter="all", mFilter="all";
-chips($("dChips"),[["all","전체"],["30","30일"],["60","60일"],["90","90일"],["over","90일+"],["exp","만료"]],"all",r=>{dRange=r;renderDashTable();});
-chips($("aChips"),[["30","30일 이내"],["60","60일 이내"],["90","90일 이내"],["exp","만료"]],"30",r=>{aRange=r;renderAlerts();});
+let cRange="all", oFilter="all", mFilter="all";
+chips($("cChips"),[["all","전체"],["30","30일 이내"],["60","60일 이내"],["90","90일 이내"],["exp","만료"]],"all",r=>{cRange=r;renderContracts();});
+document.addEventListener("click",e=>{ const k=e.target.closest("[data-cf]"); if(!k) return; cRange=k.dataset.cf; [...$("cChips").children].forEach(x=>x.classList.toggle("on",x.dataset.r===cRange)); renderContracts(); });
 chips($("oChips"),[["all","전체"],["wait","입고 대기"],["done","입고 완료"]],"all",r=>{oFilter=r;renderOxygen();});
 chips($("mChips"),[["all","전체"],["wait","발송 대기"],["done","발송 완료"]],"all",r=>{mFilter=r;renderMail();});
-$("dQ").oninput=renderDashTable; $("dDept").onchange=renderDashTable;
 $("cType").innerHTML+=TYPES.map(t=>'<option>'+t+'</option>').join("");
-["cType","cStatus"].forEach(id=>$(id).onchange=renderContracts); $("cQ").oninput=renderContracts;
+$("cType").onchange=renderContracts; $("cQ").oninput=renderContracts;
 $("mQ").oninput=renderMail;
 
+function expCounts(){
+  const L=data.contracts.map(c=>cInfo(c).left);
+  const w=d=>L.filter(l=>l!==null&&l>=0&&l<=d).length;
+  return {c30:w(30),c60:w(60),c90:w(90),exp:L.filter(l=>l!==null&&l<0).length,all:data.contracts.length};
+}
 function renderDashboard(){
-  const cs=data.contracts, m=thisMonth();
-  const valid=cs.filter(c=>cInfo(c).valid), expN=cs.length-valid.length;
-  const within=d=>valid.filter(c=>{const l=cInfo(c).left; return l!==null&&l>=0&&l<=d;}).length;
-  const c30=within(30), c60=within(60)-c30, c90=within(90)-within(60);
-  const amt=valid.reduce((s,c)=>s+(Number(c.amount)||0),0);
-  $("kAmt").innerHTML=splitUnit(bigWon(amt));
-  $("kValid").textContent=valid.length+"건"; $("kValidPct").textContent=(cs.length?Math.round(valid.length/cs.length*100):0)+"%";
-  $("kNew").textContent=cs.filter(c=>(c.createdAt||"").slice(0,7)===m).length+"건";
-  $("kAll").innerHTML=cs.length+"<small>건</small>"; $("kAllFt").textContent="만료 "+expN+"건 포함";
-  $("k30").innerHTML=c30+"<small>건</small>"; $("k30t").innerHTML=c30?'<span class="tag t-red">긴급</span>즉시 조치 필요':'<span class="tag t-grn">양호</span>';
-  $("k60").innerHTML=c60+"<small>건</small>"; $("k60t").innerHTML=c60?'<span class="tag t-amb">확인</span>31~60일':'<span class="tag t-grn">양호</span>';
-  $("k90").innerHTML=c90+"<small>건</small>"; $("k90t").innerHTML=c90?'<span class="tag t-vio">검토</span>61~90일':'<span class="tag t-grn">양호</span>';
-
-  // donut
-  const counts=TYPES.map(t=>cs.filter(c=>c.type===t).length), tot=counts.reduce((a,b)=>a+b,0);
-  const R=15.915; let off=0, segs='<circle cx="21" cy="21" r="'+R+'" fill="none" stroke="#eef2f7" stroke-width="5"/>';
-  if(tot) TYPES.forEach((t,i)=>{ const p=counts[i]/tot*100; if(!p) return; const gap=tot>1&&counts.filter(Boolean).length>1?0.8:0; segs+='<circle cx="21" cy="21" r="'+R+'" fill="none" stroke="'+TYPE_COLORS[t]+'" stroke-width="5" stroke-linecap="butt" stroke-dasharray="'+Math.max(p-gap,0.1)+' '+(100-Math.max(p-gap,0.1))+'" stroke-dashoffset="'+(-off)+'"/>'; off+=p; });
-  $("donutSvg").innerHTML=segs; $("donutN").textContent=cs.length;
-  $("legend").innerHTML=TYPES.map((t,i)=>{ const a=valid.filter(c=>c.type===t).reduce((s,c)=>s+(Number(c.amount)||0),0); return '<div class="lg-row"><span class="d" style="background:'+TYPE_COLORS[t]+'"></span><span class="n">'+t+'</span><span class="a">'+(a?bigWon(a):"-")+'</span><span class="c">'+counts[i]+'</span></div>'; }).join("");
-
-  // dept
-  const depts={}; cs.forEach(c=>{ const d=c.dept||"미지정"; depts[d]=(depts[d]||0)+1; });
-  const rows=Object.entries(depts).sort((a,b)=>b[1]-a[1]), mx=Math.max(1,...rows.map(r=>r[1]));
-  $("deptBars").innerHTML=rows.length?rows.slice(0,6).map(([n,c])=>'<div class="hb"><div class="top2"><span>'+esc(n)+'</span><b>'+c+'건</b></div><div class="tr"><i style="width:'+(c/mx*100)+'%"></i></div></div>').join(""):'<div class="empty">등록된 계약이 없습니다.</div>';
-  $("deptFoot").textContent="합계 "+cs.length+"건";
-  const cd=$("dDept").value; $("dDept").innerHTML='<option value="">전체부서</option>'+Object.keys(depts).sort().map(d=>'<option'+(d===cd?" selected":"")+'>'+esc(d)+'</option>').join("");
-
-  // ops
+  const m=thisMonth(), sec=(id,ok)=>{ const el=$(id); if(el) el.style.display=ok?"":"none"; };
+  sec("dsNotice",can("notice","view")); sec("dsBill",can("billing","view")); sec("dsCtr",can("contracts","view"));
+  sec("dsOps",can("workday","view")||can("oxygen","view")||can("mail","view"));
+  // 센터운영
   const ox=data.oxygen, ml=data.mail, oxM=ox.filter(o=>(o.orderDate||"").slice(0,7)===m);
   $("opO2Wait").innerHTML=ox.filter(o=>!o.inDate).length+"<em>건</em>";
   $("opO2Month").innerHTML=oxM.reduce((s,o)=>s+(Number(o.qty)||0),0)+"<em>병 · "+oxM.length+"건</em>";
   $("opMailWait").innerHTML=ml.filter(x=>!x.sentDate).length+"<em>건</em>";
-  try{ const td=todayStr(), tds=dayStatus(td); $("opToday").innerHTML=DSTAT[tds][0]+(dayMemo(td)?"<em style=\"display:block;margin:3px 0 0;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis\">"+esc(dayMemo(td))+"</em>":""); $("opTodayOff").innerHTML=data.staff.filter(p=>{const x=personStat(td,p.id);return x&&x!=="work"&&x!=="rest";}).length+"<em>명</em>"; }catch(e){}
   $("opMailMonth").innerHTML=ml.filter(x=>(x.reqDate||"").slice(0,7)===m).length+"<em>건</em>";
-
-  // urgent
-  $("act30").textContent=c30; $("actExp").textContent=expN;
-  $("alertBadge").textContent=c30; $("alertBadge").style.display=c30?"":"none";
-  const urg=cs.map(c=>[c,cInfo(c)]).filter(([c,i])=>i.left!==null&&i.left<=60).sort((a,b)=>a[1].left-b[1].left).slice(0,5);
-  $("urgList").innerHTML=urg.length?urg.map(([c,i])=>{ const l=i.left, col=l<0?["#f1f4f8","#5b6577"]:l<=30?["#fef0f0","#d12f2f"]:["#fff7e6","#b46d00"]; return '<div class="urg" data-edit="'+c.id+'"><div class="dbox" style="background:'+col[0]+';color:'+col[1]+'">'+(l<0?"만료":"D-"+l)+'<small>'+esc((c.end||"").slice(5).replace("-","."))+'</small></div><div><div class="t">'+esc(c.name)+'</div><div class="s">'+esc(c.vendor)+' · '+esc(c.type)+'</div></div></div>'; }).join("")
-    :'<div class="empty" style="padding:24px 0">60일 안에 만료되는 계약이 없습니다 ✨</div>';
-  renderDashTable();
-}
-function renderDashTable(){
-  const q=$("dQ").value.trim().toLowerCase(), dep=$("dDept").value;
-  const rows=data.contracts.map(c=>[c,cInfo(c)]).filter(([c,i])=>inRange(i.left,dRange)&&(!dep||(c.dept||"미지정")===dep)&&(!q||((c.name||"")+" "+(c.vendor||"")).toLowerCase().includes(q))).sort((a,b)=>(a[1].left??99999)-(b[1].left??99999));
-  $("dTable").innerHTML=rows.length?rows.map(([c,i])=>'<tr style="cursor:pointer" data-edit="'+c.id+'"><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+'</div></td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.end||"-")+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(c.amount?won(c.amount):"-")+'</td></tr>').join("")
-    :'<tr><td colspan="6" class="empty">'+(data.contracts.length?"조건에 맞는 계약이 없습니다.":"아직 등록된 계약이 없습니다. 오른쪽 위 <b>계약 등록</b>으로 시작하세요.")+'</td></tr>';
+  try{ const td=todayStr(), tds=dayStatus(td); $("opToday").innerHTML=DSTAT[tds][0]+(dayMemo(td)?"<em style=\"display:block;margin:3px 0 0;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis\">"+esc(dayMemo(td))+"</em>":"");
+    const offs=data.staff.filter(p=>{const x=personStat(td,p.id);return x&&x!=="work"&&x!=="rest";});
+    $("opTodayOff").innerHTML=offs.length+"<em>명</em>"+(offs.length?"<em style=\"display:block;margin:3px 0 0;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis\">"+offs.map(p=>esc(p.name)+" "+PSTAT[personStat(td,p.id)][0]).join(", ")+"</em>":""); }catch(e){}
+  // 청구
+  try{
+    const basis=bBasis, inB=b=>{ if(basis==="bill") return (b.billDate||"").slice(0,7)===m; const f=tFrom(b), t=tTo(b)||f; return !!f&&f<=m&&m<=t; };
+    const bm=data.billing.filter(inB), amt=bm.reduce((s,b)=>s+(Number(b.amount)||0),0), paid=bm.reduce((s,b)=>s+billPaid(b),0);
+    const mm=Number(m.slice(5)); $("dbBasis").textContent=basis==="bill"?"청구일 기준":"대상월 기준";
+    $("dbAmtL").textContent=mm+"월 청구액"; $("dbPaidL").textContent=mm+"월 입금액"; $("dbDueL").textContent=mm+"월 미수금";
+    $("dbAmt").innerHTML=fmtMoney(amt)+"<em>원</em>"; $("dbAmtS").textContent=bm.length+"건";
+    $("dbPaid").innerHTML=fmtMoney(paid)+"<em>원</em>"; $("dbPaidS").textContent="입금률 "+(amt?Math.round(paid/amt*100):0)+"%";
+    $("dbDue").innerHTML=fmtMoney(amt-paid)+"<em>원</em>"; $("dbDueS").textContent="미입금 "+bm.filter(b=>billStatus(b)==="미입금").length+" · 부분입금 "+bm.filter(b=>billStatus(b)==="부분입금").length;
+    const dueBy={}; data.billing.forEach(b=>{ const d=(Number(b.amount)||0)-billPaid(b); if(d>0){ const c=clientOf(b), k=b.clientId||c.name; dueBy[k]=dueBy[k]||{name:c.name||"(삭제된 기관)",due:0,n:0}; dueBy[k].due+=d; dueBy[k].n++; } });
+    const tops=Object.values(dueBy).sort((a,b)=>b.due-a.due), dueAll=tops.reduce((s,x)=>s+x.due,0);
+    $("dbDueAll").innerHTML=fmtMoney(dueAll)+"<em>원</em>"; $("dbDueAllS").textContent="미수 기관 "+tops.length+"곳";
+    $("dbTop").innerHTML=tops.length?tops.slice(0,5).map(x=>'<div class="row" data-go="billing"><span class="t">'+esc(x.name)+' <span class="mini2" style="display:inline">'+x.n+'건</span></span><span class="v" style="color:var(--red)">'+fmtMoney(x.due)+'원</span></div>').join(""):'<div class="empty" style="padding:14px 0">미수금이 없습니다 ✨</div>';
+    const uns=data.billing.filter(b=>unissued(b)>0).sort((a,b)=>String(b.billDate||"").localeCompare(String(a.billDate||"")));
+    $("dbUn").innerHTML=uns.length?uns.slice(0,5).map(b=>'<div class="row" data-go="billing"><span class="t">'+esc(clientOf(b).name||"-")+' <span class="mini2" style="display:inline">'+esc(b.billDate||"")+'</span></span><span class="v" style="color:#c26a00">'+fmtMoney(unissued(b))+'원</span></div>').join("")+(uns.length>5?'<div class="mini2" style="padding-top:6px">외 '+(uns.length-5)+'건</div>':''):'<div class="empty" style="padding:14px 0">미발행 증빙이 없습니다 ✨</div>';
+  }catch(e){}
+  // 계약
+  const ec=expCounts();
+  $("dc30").innerHTML=ec.c30+"<em>건</em>"; $("dc60").innerHTML=ec.c60+"<em>건</em>"; $("dc90").innerHTML=ec.c90+"<em>건</em>"; $("dcExp").innerHTML=ec.exp+"<em>건</em>";
+  $("alertBadge").textContent=ec.c30; $("alertBadge").style.display=ec.c30&&can("contracts","view")?"":"none";
+  const urg=data.contracts.map(c=>[c,cInfo(c)]).filter(([c,i])=>i.left!==null&&i.left<=90&&i.left>=-30).sort((a,b)=>a[1].left-b[1].left).slice(0,6);
+  $("urgList").innerHTML=urg.length?urg.map(([c,i])=>{ const l=i.left, col=l<0?["#f1f4f8","#5b6577"]:l<=30?["#fef0f0","#d12f2f"]:l<=60?["#fff7e6","#b46d00"]:["#f2edff","#6d3fd8"];
+      return '<div class="urg" data-edit="'+c.id+'"><div class="dbox" style="background:'+col[0]+';color:'+col[1]+'">'+(l<0?"만료":"D-"+l)+'<small>'+esc((c.end||"").slice(5).replace("-","."))+'</small></div><div><div class="t">'+esc(c.name)+'</div><div class="s">'+esc(c.vendor)+' · '+esc(c.type)+'</div></div></div>'; }).join("")
+    :'<div class="empty" style="padding:18px 0">90일 안에 만료되는 계약이 없습니다 ✨</div>';
 }
 const isMOU=c=>c.type==="MOU협약";
 const pkName=id=>{ const p=data.package.find(x=>x.id===id); return p?p.name:null; };
@@ -853,19 +853,23 @@ function mouLine(c){
     +(sb.length?'<div class="subt">지원금 '+sb.map(x=>esc(x.grade||"-")+' '+fmtShort(x.amount)+'원').join(" · ")+'</div>':'')
     +(pk.length?'<div class="pkchips">'+pk.map(n=>'<span class="pk">'+esc(n)+'</span>').join("")+'</div>':'');
 }
+function cPri(l){ if(l===null) return [3,0]; if(l>=0&&l<=90) return [0,l]; if(l<0) return [1,-l]; return [2,l]; }
 function renderContracts(){
-  const tp=$("cType").value, st=$("cStatus").value, q=$("cQ").value.trim().toLowerCase();
-  const rows=data.contracts.filter(c=>{ const i=cInfo(c); return (!tp||c.type===tp)&&(!st||(st==="valid"?i.valid:i.expired))&&(!q||[c.name,c.vendor,c.manager,c.dept].join(" ").toLowerCase().includes(q)); }).sort((a,b)=>(TYPES.indexOf(a.type)-TYPES.indexOf(b.type))||(a.end||"9999").localeCompare(b.end||"9999"));
-  $("cTable").innerHTML=rows.length?rows.map(c=>{ const i=cInfo(c); return '<tr><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+(c.memo?' · '+esc(c.memo):'')+'</div>'+contactLine(c)+mouLine(c)+'</td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.manager||"-")+'</td><td style="white-space:nowrap">'+(c.start||c.end?esc(c.start||"-")+' → '+esc(c.end||"-"):'<span style="color:var(--mute)">-</span>')+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(isMOU(c)?(c.headcount?'<b>'+Number(c.headcount).toLocaleString("ko-KR")+'</b>명':'-'):(c.amount?won(c.amount):"-"))+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'<span style="color:var(--mute)">-</span>')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>'; }).join("")
+  const ec=expCounts();
+  $("kAll").innerHTML=ec.all+"<small>건</small>"; $("kAllFt").textContent="만료 "+ec.exp+"건 포함";
+  $("k30").innerHTML=ec.c30+"<small>건</small>"; $("k30t").innerHTML=ec.c30?'<span class="tag t-red">긴급</span>즉시 조치 필요':'<span class="tag t-grn">양호</span>';
+  $("k60").innerHTML=ec.c60+"<small>건</small>"; $("k60t").innerHTML=ec.c60?'<span class="tag t-amb">확인</span>31~60일 '+(ec.c60-ec.c30)+'건 포함':'<span class="tag t-grn">양호</span>';
+  $("k90").innerHTML=ec.c90+"<small>건</small>"; $("k90t").innerHTML=ec.c90?'<span class="tag t-vio">검토</span>61~90일 '+(ec.c90-ec.c60)+'건 포함':'<span class="tag t-grn">양호</span>';
+  document.querySelectorAll("[data-cf]").forEach(k=>k.classList.toggle("on",k.dataset.cf===cRange&&cRange!=="all"));
+  const tp=$("cType").value, q=$("cQ").value.trim().toLowerCase();
+  const okR=l=>cRange==="all"||(cRange==="exp"?(l!==null&&l<0):(l!==null&&l>=0&&l<=Number(cRange)));
+  const rows=data.contracts.filter(c=>{ const i=cInfo(c); return (!tp||c.type===tp)&&okR(i.left)&&(!q||[c.name,c.vendor,c.manager,c.dept,c.contactName].join(" ").toLowerCase().includes(q)); })
+    .sort((a,b)=>{ const pa=cPri(cInfo(a).left), pb=cPri(cInfo(b).left); return (pa[0]-pb[0])||(pa[1]-pb[1])||(TYPES.indexOf(a.type)-TYPES.indexOf(b.type)); });
+  const rc=l=>l===null?"":l<0?"expd":l<=30?"exp30":l<=60?"exp60":l<=90?"exp90":"";
+  $("cTable").innerHTML=rows.length?rows.map(c=>{ const i=cInfo(c); return '<tr class="'+rc(i.left)+'"><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+(c.memo?' · '+esc(c.memo):'')+'</div>'+contactLine(c)+mouLine(c)+'</td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.manager||"-")+'</td><td style="white-space:nowrap">'+(c.start||c.end?esc(c.start||"-")+' → '+esc(c.end||"-"):'<span style="color:var(--mute)">-</span>')+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(isMOU(c)?(c.headcount?'<b>'+Number(c.headcount).toLocaleString("ko-KR")+'</b>명':'-'):(c.amount?won(c.amount):"-"))+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'<span style="color:var(--mute)">-</span>')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>'; }).join("")
     :'<tr><td colspan="9" class="empty">표시할 계약이 없습니다.</td></tr>';
   const mous=rows.filter(isMOU);
   $("cFoot").innerHTML="총 <b>"+rows.length+"건</b><span>계약금액 합계 <b>"+won(rows.reduce((s,c)=>s+(isMOU(c)?0:(Number(c.amount)||0)),0))+"</b></span>"+(mous.length?"<span>MOU 검진인원 합계 <b>"+mous.reduce((s,c)=>s+(Number(c.headcount)||0),0).toLocaleString("ko-KR")+"명</b></span>":"");
-}
-function renderAlerts(){
-  const rows=data.contracts.map(c=>[c,cInfo(c)]).filter(([c,i])=>inRange(i.left,aRange)).sort((a,b)=>a[1].left-b[1].left);
-  const lab=l=>l<0?'<span class="tag t-gry">만료</span>':l<=30?'<span class="tag t-red">긴급</span>':l<=60?'<span class="tag t-amb">확인</span>':'<span class="tag t-vio">검토</span>';
-  $("aTable").innerHTML=rows.length?rows.map(([c,i])=>'<tr><td>'+lab(i.left)+'</td><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+'</div></td><td>'+typeDot(c.type)+'</td><td>'+esc(c.manager||"-")+'</td><td>'+esc(c.end)+'</td><td>'+leftTag(i.left)+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'-')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>').join("")
-    :'<tr><td colspan="8" class="empty">해당 기간에 만료되는 계약이 없습니다 ✨</td></tr>';
 }
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-edit]"); if(b){ const c=data.contracts.find(x=>x.id===b.dataset.edit); if(c) contractForm(c); } });
 
@@ -1077,8 +1081,8 @@ function pwForm(){
 /* ===== SOVIS 백업 시트 구성 (화면 다운로드 · 자동 메일 공통) ===== */
 var SOVIS_SHEETS = [
   ["contracts","계약",[["type","계약유형"],["name","계약(협약)명"],["vendor","업체·상대기관"],["contactName","상대 담당자"],["contactPhone","상대 연락처"],["contactEmail","상대 이메일"],["mgmtType","관리주체"],["subsidies","검진자구분별 지원금"],["dept","담당부서"],["manager","담당자"],["start","계약시작일"],["end","계약종료일"],["amount","계약금액"],["hcStart","검진시작일"],["hcEnd","검진종료일"],["headcount","검진인원"],["packages","패키지"],["autoRenew","자동갱신"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
-  ["client","거래처",[["code","기업코드"],["name","거래처명"],["mgmt","관리구분"],["memo","비고"],["updatedBy","최종수정자"]]],
-  ["billing","청구",[["billDate","청구일"],["code","기업코드"],["name","거래처명"],["mgmt","관리구분"],["target","대상기간"],["amount","청구금액"],["tax","계산서금액"],["taxIssue","계산서 발행일"],["taxIssued","계산서 발급일"],["cash","현금영수증금액"],["cashIssue","현금영수증 발행일"],["cashIssued","현금영수증 발급일"],["unissued","미발행금액"],["paid","입금합계"],["due","미수금"],["deposits","입금내역(입금일 금액 적요)"],["memo","비고"],["updatedBy","최종수정자"]]],
+  ["client","기관",[["code","기업코드"],["name","기관(기업)명"],["mgmt","관리구분"],["memo","비고"],["updatedBy","최종수정자"]]],
+  ["billing","청구",[["billDate","청구일"],["code","기업코드"],["name","기관(기업)명"],["mgmt","관리구분"],["target","대상기간"],["amount","청구금액"],["tax","계산서금액"],["taxIssue","계산서 발행일"],["taxIssued","계산서 발급일"],["cash","현금영수증금액"],["cashIssue","현금영수증 발행일"],["cashIssued","현금영수증 발급일"],["unissued","미발행금액"],["paid","입금합계"],["due","미수금"],["deposits","입금내역(입금일 금액 적요)"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["package","검진패키지",[["name","패키지명"],["price","금액"],["exams","검사항목"],["examCount","검사수"],["items","기존 검사내용(글)"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
   ["exam","검사항목",[["cat","분류"],["name","검사명"],["memo","비고"],["pkgCount","사용 패키지 수"],["pkgNames","사용 패키지"]]],
   ["notice","공지사항",[["cat","분류"],["month","대상월"],["title","제목"],["content","내용"],["author","작성자"],["pinned","상단고정"],["createdAt","작성일시"],["updatedBy","최종수정자"]]],
@@ -1179,7 +1183,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"1.9",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.0",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1238,7 +1242,7 @@ function renderBilling(){
   $("bDue").innerHTML=fmtMoney(amt-paid)+"<small>원</small>";
   $("bDueFt").textContent="미입금 "+inM.filter(b=>billStatus(b)==="미입금").length+" · 부분입금 "+inM.filter(b=>billStatus(b)==="부분입금").length;
   const dueAll=data.billing.reduce((s,b)=>s+Math.max(0,(Number(b.amount)||0)-billPaid(b)),0);
-  $("bDueAll").innerHTML=fmtMoney(dueAll)+"<small>원</small>"; $("bDueAllFt").textContent="미수 거래처 "+new Set(data.billing.filter(b=>(Number(b.amount)||0)>billPaid(b)).map(b=>b.clientId)).size+"곳";
+  $("bDueAll").innerHTML=fmtMoney(dueAll)+"<small>원</small>"; $("bDueAllFt").textContent="미수 기관 "+new Set(data.billing.filter(b=>(Number(b.amount)||0)>billPaid(b)).map(b=>b.clientId)).size+"곳";
   const cm=$("bMgmt").value; $("bMgmt").innerHTML='<option value="">전체 관리구분</option>'+mgmtList().map(x=>'<option'+(x===cm?" selected":"")+'>'+esc(x)+'</option>').join("");
   const q=$("bQ").value.trim().toLowerCase();
   const rows=inM.filter(b=>{ const c=clientOf(b), st=billStatus(b);
@@ -1246,9 +1250,9 @@ function renderBilling(){
       return okF&&(!cm||c.mgmt===cm)&&(!q||[c.name,c.code,b.memo,...(b.deposits||[]).map(d=>d.memo)].join(" ").toLowerCase().includes(q)); })
     .sort((a,b)=>String(b.billDate||"").localeCompare(String(a.billDate||""))||String(clientOf(a).name||"").localeCompare(String(clientOf(b).name||"")));
   $("bTable").innerHTML=rows.length?rows.map(b=>{ const c=clientOf(b), p=billPaid(b), due=(Number(b.amount)||0)-p, st=billStatus(b), deps=b.deposits||[];
-    return '<tr><td class="nm" style="white-space:nowrap">'+esc(b.billDate||"-")+'</td><td style="font-family:Inter;font-size:12.5px">'+esc(c.code||"-")+'</td><td><div class="nm">'+esc(c.name||"(삭제된 거래처)")+'</div>'+(c.mgmt?'<div class="mini2">'+esc(c.mgmt)+'</div>':'')+'</td><td style="white-space:nowrap">'+esc(targetLabel(b))+'</td><td class="money"><b>'+fmtMoney(b.amount)+'</b></td><td>'+proofCell(b)+'</td>'
+    return '<tr><td class="nm" style="white-space:nowrap">'+esc(b.billDate||"-")+'</td><td style="font-family:Inter;font-size:12.5px">'+esc(c.code||"-")+'</td><td><div class="nm">'+esc(c.name||"(삭제된 기관)")+'</div>'+(c.mgmt?'<div class="mini2">'+esc(c.mgmt)+'</div>':'')+'</td><td style="white-space:nowrap">'+esc(targetLabel(b))+'</td><td class="money"><b>'+fmtMoney(b.amount)+'</b></td><td>'+proofCell(b)+'</td>'
       +'<td class="money">'+fmtMoney(p)+(deps.length?'<div class="mini2">'+deps.length+'회 · 최근 '+esc(deps.map(d=>d.date||"").sort().pop()||"-")+'</div>':'')+'</td><td class="money" style="color:'+(due>0?"var(--red)":due<0?"var(--violet)":"var(--ink2)")+';font-weight:700">'+fmtMoney(due)+'</td><td><span class="tag '+BST_CLS[st]+'">'+st+'</span></td><td><button class="btn btn-sm" data-bedit="'+esc(b.id)+'">수정</button></td></tr>'; }).join("")
-    :'<tr><td colspan="10" class="empty">'+(data.billing.length?"조건에 맞는 청구가 없습니다.":"아직 청구 내역이 없습니다. "+(data.client.length?"오른쪽 위 <b>청구 등록</b>으로 시작하세요.":"먼저 <b>거래처 관리</b>에서 거래처를 등록하세요."))+'</td></tr>';
+    :'<tr><td colspan="10" class="empty">'+(data.billing.length?"조건에 맞는 청구가 없습니다.":"아직 청구 내역이 없습니다. "+(data.client.length?"오른쪽 위 <b>청구 등록</b>으로 시작하세요.":"먼저 <b>기관 관리</b>에서 기관를 등록하세요."))+'</td></tr>';
   const ra=rows.reduce((s,b)=>s+(Number(b.amount)||0),0), rp=rows.reduce((s,b)=>s+billPaid(b),0), ru=rows.reduce((s,b)=>s+Math.max(0,unissued(b)),0);
   $("bFoot").innerHTML="표시 <b>"+rows.length+"건</b><span>청구 <b>"+fmtMoney(ra)+"원</b></span><span>입금 <b>"+fmtMoney(rp)+"원</b></span><span>미수금 <b style=\"color:var(--red)\">"+fmtMoney(ra-rp)+"원</b></span>"+(ru?"<span>미발행 <b style=\"color:#c26a00\">"+fmtMoney(ru)+"원</b></span>":"");
 }
@@ -1264,9 +1268,9 @@ function billingForm(b,keep){
   const prRow=t=>{ const p=pmap[t]||{}; return '<div class="pf2" data-pr="'+t+'" style="display:'+(pmap[t]?"grid":"none")+'"><span class="pt">'+t+'</span><input data-pa inputmode="numeric" placeholder="금액" value="'+(p.amount?fmtMoney(p.amount):"")+'"><input type="date" data-pi value="'+esc(p.issueDate||"")+'" title="발행일 (발행한 날)"><input type="date" data-pd value="'+esc(p.issuedDate||"")+'" title="발급일 (증빙상 일자)"></div>'; };
   const body=fld("청구일","billDate",cur.billDate||todayStr(),"date",true)
    +'<div><label>대상기간 <span class="req">*</span> <span style="font-weight:500;color:var(--mute)">(분기·연간이면 종료월까지)</span></label><div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center"><input type="month" name="targetFrom" required value="'+esc(tFrom(cur)||thisMonth())+'"><span style="color:var(--mute)">~</span><input type="month" name="targetTo" value="'+esc(tTo(cur)&&tTo(cur)!==tFrom(cur)?tTo(cur):"")+'"></div></div>'
-   +'<div class="full"><label>거래처 <span class="req">*</span>'+(can("billing","write")?' <button type="button" class="link" id="bfCl" style="float:right">거래처 추가·수정 ›</button>':'')+'</label>'
-     +(clients.length?'<select name="clientId" required><option value="">거래처 선택</option>'+clients.map(c=>'<option value="'+esc(c.id)+'"'+(c.id===cur.clientId?" selected":"")+'>'+esc(c.name)+(c.code?" ("+esc(c.code)+")":"")+(c.mgmt?" · "+esc(c.mgmt):"")+'</option>').join("")+'</select>'
-       :'<div class="subt" style="padding:8px 0">등록된 거래처가 없습니다. 오른쪽 <b>거래처 추가·수정</b>에서 먼저 등록하세요.</div>')+'</div>'
+   +'<div class="full"><label>기관(기업)명 <span class="req">*</span>'+(can("billing","write")?' <button type="button" class="link" id="bfCl" style="float:right">기관 추가·수정 ›</button>':'')+'</label>'
+     +(clients.length?'<select name="clientId" required><option value="">기관(기업) 선택</option>'+clients.map(c=>'<option value="'+esc(c.id)+'"'+(c.id===cur.clientId?" selected":"")+'>'+esc(c.name)+(c.code?" ("+esc(c.code)+")":"")+(c.mgmt?" · "+esc(c.mgmt):"")+'</option>').join("")+'</select>'
+       :'<div class="subt" style="padding:8px 0">등록된 기관가 없습니다. 오른쪽 <b>기관 추가·수정</b>에서 먼저 등록하세요.</div>')+'</div>'
    +fld("청구금액 (원)","amount",cur.amount?fmtMoney(cur.amount):"","text",true,"full",'inputmode="numeric" id="bfAmt" placeholder="예: 5,000,000"')
    +'<div class="sechd">증빙 <span style="font-weight:500;color:var(--mute)">(복수 선택 가능 · 남는 금액은 미발행)</span></div>'
    +'<div class="full"><div class="chkrow">'+PROOF_TYPES.map(t=>'<label><input type="checkbox" data-pt="'+t+'"'+(pmap[t]?" checked":"")+'>'+t+'</label>').join("")+'</div></div>'
@@ -1309,7 +1313,7 @@ function billingForm(b,keep){
     const o=Object.assign({},b,{id:b.id,createdAt:b.createdAt||new Date().toISOString(),clientCode:c.code||"",clientName:c.name||"",clientMgmt:c.mgmt||""},sn);
     delete o.proofType; delete o.proofAmount; delete o.issueDate; delete o.issuedDate; delete o.updatedBy; delete o.updatedAt;
     return o; },
-    fd=>{ if(!fd.clientId) return "거래처를 선택하세요."; const a=money(fd.amount); if(!a) return "청구금액을 입력하세요.";
+    fd=>{ if(!fd.clientId) return "기관(기업)을 선택하세요."; const a=money(fd.amount); if(!a) return "청구금액을 입력하세요.";
       if(fd.targetTo&&fd.targetTo<fd.targetFrom) return "대상기간 종료월이 시작월보다 빠릅니다.";
       const ps=proofsNow(); if(ps.some(p=>!p.amount)) return "체크한 증빙의 금액을 입력하세요.";
       if(ps.reduce((s,p)=>s+p.amount,0)>a) return "증빙 합계가 청구금액보다 많습니다.";
@@ -1323,11 +1327,11 @@ function clientForm(onClose){
     const list=data.client.slice().sort((a,b)=>String(a.code||"").localeCompare(String(b.code||""))||String(a.name).localeCompare(String(b.name)));
     const used=id=>data.billing.filter(x=>x.clientId===id).length;
     const ml='<datalist id="mgmtList">'+mgmtList().map(x=>'<option value="'+esc(x)+'">').join("")+'</datalist>';
-    $("modal").innerHTML='<div class="mh">거래처 관리<button type="button" data-cclose>'+X+'</button></div><div class="mb"><div class="full">'+ml
-      +'<div class="crow" style="font-size:12px;color:var(--mute);font-weight:600"><span>기업코드</span><span>거래처명</span><span>관리구분</span><span>비고</span><span></span></div>'
+    $("modal").innerHTML='<div class="mh">기관 관리<button type="button" data-cclose>'+X+'</button></div><div class="mb"><div class="full">'+ml
+      +'<div class="crow" style="font-size:12px;color:var(--mute);font-weight:600"><span>기업코드</span><span>기관(기업)명</span><span>관리구분</span><span>비고</span><span></span></div>'
       +(list.length?list.map(c=>'<div class="crow">'+[["code",""],["name",""],["mgmt",' list="mgmtList"'],["memo",""]].map(([f,ex])=>'<input data-cid="'+esc(c.id)+'" data-f="'+f+'" value="'+esc(c[f]||"")+'"'+ex+'>').join("")+'<button type="button" class="ibtn" data-cdel="'+esc(c.id)+'" title="삭제">'+X+'</button></div>').join("")
-        :'<div class="empty" style="padding:12px 0">아직 등록된 거래처가 없습니다.</div>')
-      +'<div class="crow" style="margin-top:14px"><input id="nc_code" placeholder="기업코드"><input id="nc_name" placeholder="거래처명"><input id="nc_mgmt" list="mgmtList" placeholder="관리구분 (예: GC케어)"><input id="nc_memo" placeholder="비고"><button type="button" class="btn btn-p" id="ncAdd" style="height:36px;padding:0;justify-content:center">+</button></div>'
+        :'<div class="empty" style="padding:12px 0">아직 등록된 기관가 없습니다.</div>')
+      +'<div class="crow" style="margin-top:14px"><input id="nc_code" placeholder="기업코드"><input id="nc_name" placeholder="기관(기업)명"><input id="nc_mgmt" list="mgmtList" placeholder="관리구분 (예: GC케어)"><input id="nc_memo" placeholder="비고"><button type="button" class="btn btn-p" id="ncAdd" style="height:36px;padding:0;justify-content:center">+</button></div>'
       +'<div class="subt">관리구분은 목록에서 고르거나 새 이름을 직접 입력하면 추가됩니다. 칸을 고친 뒤 다른 곳을 누르면 저장돼요.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn btn-p" data-cclose>'+(onClose?"완료 · 청구로 돌아가기":"닫기")+'</button></div>';
     $("modal").querySelectorAll("[data-cclose]").forEach(b=>b.onclick=close);
     $("modal").querySelectorAll("[data-cid]").forEach(inp=>inp.onchange=async()=>{
@@ -1338,11 +1342,11 @@ function clientForm(onClose){
     $("modal").querySelectorAll("[data-cdel]").forEach(b=>b.onclick=async()=>{
       const c=data.client.find(x=>x.id===b.dataset.cdel); if(!c) return;
       if(!can("billing","del")){ $("ferr").textContent=ERRMSG.FORBIDDEN; return; }
-      if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.style.background="var(--red)"; b.style.color="#fff"; $("ferr").textContent="'"+c.name+"' 삭제하려면 한 번 더 누르세요."+(used(c.id)?" (청구 "+used(c.id)+"건은 그대로 남고 거래처명만 기록으로 표시됩니다)":""); return; }
+      if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.style.background="var(--red)"; b.style.color="#fff"; $("ferr").textContent="'"+c.name+"' 삭제하려면 한 번 더 누르세요."+(used(c.id)?" (청구 "+used(c.id)+"건은 그대로 남고 기관(기업)명만 기록으로 표시됩니다)":""); return; }
       b.disabled=true; try{ await deleteItem("client",c.id); toast("삭제했습니다."); draw(); }catch(e){ $("ferr").textContent=e.message||"삭제 실패"; }
     });
     $("ncAdd").onclick=async()=>{
-      const name=$("nc_name").value.trim(); if(!name){ $("ferr").textContent="거래처명을 입력하세요."; return; }
+      const name=$("nc_name").value.trim(); if(!name){ $("ferr").textContent="기관(기업)명을 입력하세요."; return; }
       const code=$("nc_code").value.trim();
       if(code&&data.client.some(c=>String(c.code||"").trim()===code)){ $("ferr").textContent="이미 등록된 기업코드입니다: "+code; return; }
       $("ncAdd").disabled=true;
@@ -1650,7 +1654,7 @@ $("wCopy").onclick=async()=>{
   catch(e){ openModal('<div class="mh">월간 요약<button type="button" data-close>'+X+'</button></div><div class="mb"><div class="full"><textarea style="min-height:320px;font-size:13px" readonly>'+esc(txt)+'</textarea></div></div>'); $("modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal); }
 };
 
-function renderAll(){ renderDashboard(); renderContracts(); renderAlerts(); renderOxygen(); renderMail(); renderWorkday(); renderNotice(); renderBilling(); }
+function renderAll(){ renderDashboard(); renderContracts(); renderOxygen(); renderMail(); renderWorkday(); renderNotice(); renderBilling(); }
 renderAll();
 if(GAS && TOKEN){ api("me").then(u=>{ ME=u; enter(); }).catch(()=>{ TOKEN=""; try{sessionStorage.removeItem("sovis_token");}catch(e){} setTimeout(()=>$("lgEmail").focus(),60); }); }
 else setTimeout(()=>$("lgEmail").focus(),60);
