@@ -240,6 +240,18 @@ td.num,th.num{text-align:right}
 .ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;height:36px;color:var(--red);display:flex;align-items:center;justify-content:center}
 @media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
 
+/* v2.1 demo */
+.tag{white-space:nowrap}.btn-sm{white-space:nowrap}
+#bTable .nm{white-space:nowrap}
+#bTable .prf .mini2{display:block!important;margin:0 0 3px}
+#bTable td{padding:11px 9px}
+.btn-demo{width:100%;max-width:340px;height:52px;margin-top:12px;background:#fff;color:var(--ink);border:1.5px dashed #b9c6d6;border-radius:14px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
+.btn-demo:hover{border-color:var(--blue);color:var(--blue);background:#f4f9fe}
+.btn-demo small{font-weight:500;color:var(--mute);font-size:12px}
+.or{display:flex;align-items:center;gap:10px;max-width:340px;color:var(--mute);font-size:12px;margin-top:18px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.notice.demo{background:linear-gradient(90deg,#f2edff,#e8f2fb);border-color:#d9ccfb;color:#4c2fa0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.notice.demo button{margin-left:auto;border:0;background:#6d3fd8;color:#fff;border-radius:10px;padding:7px 12px;font-weight:700;font-size:12.5px}
 /* v2.0 dashboard */
 .dsec{margin-bottom:16px}
 .dsec .ph h3{font-size:16.5px}
@@ -402,7 +414,9 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
         <button class="btn-login" type="submit">로그인 <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </form>
       <div class="err" id="loginErr"></div>
-      <div class="l-foot">v2.0 · 소하검진센터 SEOK</div>
+      <div class="or">처음이신가요?</div>
+      <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
+      <div class="l-foot">v2.1 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -428,7 +442,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.0 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.1 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -674,7 +688,7 @@ function applyPerms(){
   $("gearBtn").style.display=ME&&ME.is_admin?"":"none"; $("bkBtn").style.display=ME&&ME.is_admin?"":"none";
   const nm=(ME&&(ME.name||ME.email.split("@")[0]))||"-";
   $("meName").textContent=nm; $("mePart").textContent=ME?((ME.is_admin?"관리자":ME.part||"")+(ME.name?" · "+ME.email:"")):""; $("meAv").textContent=nm.slice(0,1).toUpperCase();
-  $("pwBtn").style.display=GAS?"":"none";
+  $("pwBtn").style.display=GAS&&mode!=="demo"?"":"none";
 }
 function enter(){ $("login").style.display="none"; $("app").style.display="block"; applyPerms(); route(); initStore(); }
 async function tryLogin(){
@@ -694,7 +708,8 @@ async function tryLogin(){
   }
 }
 function doLogout(msg){
-  if(GAS && TOKEN && !msg){ api("logout").catch(()=>{}); }
+  if(GAS && TOKEN && !msg && mode!=="demo"){ api("logout").catch(()=>{}); }
+  if(mode==="demo"){ mode=GAS?"gas":"local"; USERS=[]; }
   TOKEN=""; ME=null; try{sessionStorage.removeItem("sovis_token");}catch(e){}
   clearInterval(pollTimer); for(const k in data) data[k]=[];
   $("app").style.display="none"; $("login").style.display="";
@@ -713,16 +728,20 @@ function setConn(s){
   else if(s==="local"){ dot.style.background="#f97316"; txt.textContent="미리보기 모드"; n.style.display="block"; n.innerHTML="미리보기 모드입니다 (DB 주소 미설정). 입력한 내용은 <b>이 브라우저에만</b> 저장됩니다."; }
   else if(s==="err"){ dot.style.background="#ef4444"; txt.textContent="연결 오류"; n.style.display="block"; n.textContent="데이터를 불러오지 못했습니다. 잠시 후 새로고침해 주세요."; }
   else if(s==="loading"){ dot.style.background="#cbd5e1"; txt.textContent="불러오는 중…"; }
+  else if(s==="demo"){ dot.style.background="#8b5cf6"; txt.textContent="체험 모드 · 저장 안 됨"; n.style.display="flex"; n.className="notice demo"; n.innerHTML="<span>👀 <b>체험 모드</b>입니다. 모든 데이터는 예시이며, 입력·수정·삭제해도 <b>실제로 저장되지 않아요.</b> 새로고침하거나 나가면 처음 상태로 돌아갑니다.</span><button type=\"button\" id=\"demoExit\">로그인하러 가기</button>"; $("demoExit").onclick=()=>doLogout(); return; }
+  n.className="notice";
 }
 function localLoad(){ for(const k in COLS){ try{ data[k]=JSON.parse(localStorage.getItem("soha_"+k)||"[]"); }catch(e){ data[k]=[]; } } }
-function localSave(k){ try{ localStorage.setItem("soha_"+k, JSON.stringify(data[k])); }catch(e){} }
+function localSave(k){ if(mode==="demo") return; try{ localStorage.setItem("soha_"+k, JSON.stringify(data[k])); }catch(e){} }
 async function loadAll(silent){
+  if(mode==="demo"){ renderAll(); return; }
   if(mode==="local"){ localLoad(); renderAll(); return; }
   if(!silent) setConn("loading");
   try{ const r=await api("listAll"); for(const k in COLS) data[k]=r[k]||[]; setConn("gas"); renderAll(); }
   catch(e){ if(String(e.message).indexOf("AUTH")<0) setConn("err"); }
 }
 function initStore(){
+  if(mode==="demo"){ clearInterval(pollTimer); setConn("demo"); renderAll(); return; }
   if(mode==="local"){ setConn("local"); loadAll(); return; }
   loadAll();
   clearInterval(pollTimer);
@@ -1009,6 +1028,7 @@ let USERS=[];
 const PART_PRESETS=["관리자","기획협약파트","기획예약파트","예약파트","수납파트","원무파트"];
 async function loadUsers(){
   if(!(ME&&ME.is_admin)) return;
+  if(mode==="demo"){ renderUsers(); return; }
   if(!GAS){ try{ USERS=JSON.parse(localStorage.getItem("soha_users")||"[]"); }catch(e){ USERS=[]; } if(!USERS.length) USERS=[{id:"preview",email:ME.email,name:"",part:"관리자",is_admin:true,perms:{},active:true}]; renderUsers(); return; }
   try{ USERS=await api("users"); renderUsers(); }catch(e){ toast(errText(e)); }
 }
@@ -1045,7 +1065,7 @@ function userForm(u){
   if($("uDel")) $("uDel").onclick=async()=>{
     const b=$("uDel"); if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.textContent="정말 삭제"; $("ferr").textContent=u.email+" 계정을 삭제하려면 한 번 더 누르세요."; return; }
     b.disabled=true;
-    try{ if(GAS) USERS=await api("userDelete",u.id); else { USERS=USERS.filter(x=>x.id!==u.id); localStorage.setItem("soha_users",JSON.stringify(USERS)); } renderUsers(); toast("삭제했습니다."); closeModal(); }
+    try{ if(mode==="gas") USERS=await api("userDelete",u.id); else { USERS=USERS.filter(x=>x.id!==u.id); if(mode!=="demo") localStorage.setItem("soha_users",JSON.stringify(USERS)); } renderUsers(); toast("삭제했습니다."); closeModal(); }
     catch(e){ $("ferr").textContent=errText(e); b.disabled=false; }
   };
   F.onsubmit=async e=>{ e.preventDefault();
@@ -1055,10 +1075,10 @@ function userForm(u){
     if(acct.password&&acct.password.length<8){ $("ferr").textContent=ERRMSG.SHORTPW; return; }
     const sb=F.querySelector("[type=submit]"); sb.disabled=true; sb.textContent="저장 중…";
     try{
-      if(GAS) USERS=await api("userSave",acct);
-      else { const row=Object.assign({},acct,{id:acct.id||uid()}); delete row.password; const i=USERS.findIndex(x=>x.id===row.id); if(i>=0) USERS[i]=row; else USERS.push(row); localStorage.setItem("soha_users",JSON.stringify(USERS)); }
+      if(mode==="gas") USERS=await api("userSave",acct);
+      else { const row=Object.assign({},acct,{id:acct.id||uid()}); delete row.password; const i=USERS.findIndex(x=>x.id===row.id); if(i>=0) USERS[i]=row; else USERS.push(row); if(mode!=="demo") localStorage.setItem("soha_users",JSON.stringify(USERS)); }
       renderUsers(); toast("저장했습니다."); closeModal();
-      if(self&&GAS){ try{ ME=await api("me"); applyPerms(); }catch(e){} }
+      if(self&&mode==="gas"){ try{ ME=await api("me"); applyPerms(); }catch(e){} }
     }catch(err){ $("ferr").textContent=errText(err); sb.disabled=false; sb.textContent="저장"; }
   };
 }
@@ -1158,7 +1178,8 @@ function loadXLSX(){
   return xlsxLoading;
 }
 async function freshBackupData(){
-  if(GAS){ const r=await api("listAll"); for(const k in COLS) data[k]=r[k]||[]; renderAll(); USERS=await api("users"); }
+  if(mode==="gas"){ const r=await api("listAll"); for(const k in COLS) data[k]=r[k]||[]; renderAll(); USERS=await api("users"); }
+  else if(mode==="demo"){ }
   else { try{ USERS=JSON.parse(localStorage.getItem("soha_users")||"[]"); }catch(e){} }
   const d={}; for(const k in COLS) d[k]=data[k]; return {data:d,users:USERS};
 }
@@ -1183,7 +1204,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.0",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.1",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1399,6 +1420,87 @@ function examForm(onClose){
   draw(); setTimeout(()=>$("ne_cat")&&$("ne_cat").focus(),40);
 }
 $("exBtn").onclick=()=>{ if(!can("contracts","write")) return toast(ERRMSG.FORBIDDEN); examForm(); };
+
+/* ---------- DEMO (구경하러 가기 · 예시 데이터) ---------- */
+function demoData(){
+  const T=new Date(), D=n=>{ const d=new Date(T); d.setDate(d.getDate()+n); return dStr(d); }, M=n=>{ const d=new Date(T.getFullYear(),T.getMonth()+n,1); return d.getFullYear()+"-"+pad(d.getMonth()+1); };
+  const thisM=M(0), lastM=M(-1), prevM=M(-2);
+  const dayIn=(ym,dd)=>ym+"-"+pad(dd);
+  const now=new Date().toISOString(), by="demo@sovis";
+  const exam=[["기본검사","신체계측"],["기본검사","시력·청력"],["기본검사","혈압"],["혈액·소변","일반혈액"],["혈액·소변","간기능"],["혈액·소변","소변검사"],["영상검사","흉부 X-ray"],["영상검사","유방촬영"],["초음파","복부초음파"],["초음파","갑상선초음파"],["초음파","유방초음파"],["내시경","위내시경","수면"],["내시경","대장내시경","수면"],["심장·폐기능","심전도"],["심장·폐기능","폐기능검사"],["암검사","자궁경부암검사"],["영상검사","저선량 폐CT"]]
+    .map((e,i)=>({id:"ex"+i,cat:e[0],name:e[1],memo:e[2]||""}));
+  const ex=n=>exam.find(e=>e.name===n).id;
+  const pk=[
+    {id:"pk1",name:"기본 A형",price:150000,exams:["신체계측","시력·청력","혈압","일반혈액","간기능","소변검사","흉부 X-ray","위내시경"].map(ex)},
+    {id:"pk2",name:"정밀 B형",price:450000,exams:["신체계측","시력·청력","혈압","일반혈액","간기능","소변검사","흉부 X-ray","위내시경","복부초음파","갑상선초음파","심전도"].map(ex)},
+    {id:"pk3",name:"여성 C형",price:380000,exams:["신체계측","혈압","일반혈액","간기능","위내시경","유방촬영","유방초음파","자궁경부암검사"].map(ex),memo:"여성 전용"},
+    {id:"pk4",name:"프리미엄 D형",price:900000,exams:exam.filter(e=>e.name!=="유방촬영").map(e=>e.id),memo:"대장내시경·저선량 CT 포함"}];
+  const contracts=[
+    {id:"c1",type:"MOU협약",name:"임직원 종합검진 협약",vendor:"(예시) 소하산업㈜",dept:"소하검진센터",manager:"홍길동",mgmtType:"platform",platform:"GC케어",hcStart:dayIn(M(-4),"01"),hcEnd:dayIn(M(2),"28"),headcount:420,
+      subsidies:[{grade:"임원",amount:800000},{grade:"직원",amount:400000},{grade:"배우자",amount:200000,memo:"1인당"}],packages:["pk2","pk4"],contactName:"인사팀 김OO 과장",contactPhone:"02-000-1234",contactEmail:"hr@soha-demo.co.kr",start:D(-200),end:D(160),autoRenew:"Y"},
+    {id:"c2",type:"MOU협약",name:"교직원 건강검진 협약",vendor:"(예시) 광명시립학교",dept:"소하검진센터",manager:"김민지",mgmtType:"self",hcStart:dayIn(thisM,"01"),hcEnd:dayIn(M(3),"28"),headcount:85,
+      subsidies:[{grade:"직원",amount:250000}],packages:["pk1","pk3"],contactName:"행정실 이OO 주무관",contactPhone:"02-000-5678",contactEmail:"office@school-demo.kr",start:D(-10),end:D(120)},
+    {id:"c3",type:"MOU협약",name:"물류센터 특수·일반검진 협약",vendor:"(예시) 광명물류㈜",dept:"소하검진센터",manager:"홍길동",mgmtType:"platform",platform:"어떠케어",hcStart:dayIn(M(-1),"01"),hcEnd:dayIn(M(1),"30"),headcount:160,
+      subsidies:[{grade:"직원",amount:300000},{grade:"계약직",amount:150000}],packages:["pk1"],contactName:"총무팀 박OO 대리",contactPhone:"031-000-1111",contactEmail:"ga@logis-demo.co.kr",start:D(-60),end:D(25)},
+    {id:"c4",type:"위수탁계약",name:"외주검사 위수탁계약",vendor:"(예시) 검사의학재단",dept:"소하검진센터",manager:"홍길동",start:D(-345),end:D(20),amount:48000000,contactName:"영업팀 최OO",contactPhone:"1588-0000"},
+    {id:"c5",type:"위수탁계약",name:"영상 외주판독 위수탁",vendor:"(예시) 원격판독센터",dept:"소하검진센터",manager:"김민지",start:D(-300),end:D(65),amount:36000000},
+    {id:"c6",type:"유지보수계약",name:"내시경 장비 유지보수",vendor:"(예시) 의료기기㈜",dept:"소하검진센터",manager:"홍길동",start:D(-280),end:D(85),amount:32000000,contactName:"서비스팀 정OO",contactPhone:"02-000-7777",contactEmail:"cs@medi-demo.com"},
+    {id:"c7",type:"유지보수계약",name:"초음파 장비 유지보수",vendor:"(예시) 메디컬솔루션",dept:"소하검진센터",manager:"홍길동",start:D(-30),end:D(335),amount:18000000,autoRenew:"Y"},
+    {id:"c8",type:"식사권 계약",name:"수검자 식사권",vendor:"(예시) 푸드서비스",dept:"소하검진센터",manager:"이서연",start:D(-250),end:D(45),amount:12000000},
+    {id:"c9",type:"기타",name:"복합기 임차",vendor:"(예시) 사무기기",dept:"소하검진센터",manager:"홍길동",start:D(-380),end:D(-15),amount:3600000}];
+  const client=[
+    {id:"cl1",code:"C1001",name:"(예시) 소하산업㈜",mgmt:"GC케어"},{id:"cl2",code:"C1002",name:"(예시) 광명물류㈜",mgmt:"어떠케어"},
+    {id:"cl3",code:"C1003",name:"(예시) 광명시립학교",mgmt:"자체관리"},{id:"cl4",code:"C1004",name:"(예시) 하안건설",mgmt:"GC케어"},
+    {id:"cl5",code:"C1005",name:"(예시) 철산전자",mgmt:"자체관리"},{id:"cl6",code:"C1006",name:"(예시) 소하복지재단",mgmt:"어떠케어"}];
+  const P=(t,a,i,s2)=>({type:t,amount:a,issueDate:i||"",issuedDate:s2||i||""});
+  const billing=[
+    {id:"b1",clientId:"cl1",billDate:dayIn(thisM,"05"),targetFrom:lastM,targetTo:lastM,amount:12400000,proofs:[P("계산서",12400000,dayIn(thisM,"05"),dayIn(lastM,"28"))],deposits:[{date:dayIn(thisM,"12"),amount:12400000,memo:"소하산업 검진비"}]},
+    {id:"b2",clientId:"cl2",billDate:dayIn(thisM,"05"),targetFrom:lastM,targetTo:lastM,amount:6800000,proofs:[P("계산서",5000000,dayIn(thisM,"06"))],deposits:[{date:dayIn(thisM,"10"),amount:3000000,memo:"광명물류(주)"}]},
+    {id:"b3",clientId:"cl3",billDate:dayIn(thisM,"08"),targetFrom:lastM,targetTo:lastM,amount:2125000,proofs:[P("계산서",1800000,dayIn(thisM,"08")),P("현금영수증",325000,dayIn(thisM,"08"))],deposits:[]},
+    {id:"b4",clientId:"cl4",billDate:dayIn(thisM,"03"),targetFrom:M(-3),targetTo:lastM,amount:15600000,proofs:[P("계산서",15600000,dayIn(thisM,"03"))],deposits:[{date:dayIn(thisM,"09"),amount:15600000,memo:"하안건설 3분기"}],memo:"분기 청구"},
+    {id:"b5",clientId:"cl5",billDate:dayIn(thisM,"10"),targetFrom:lastM,targetTo:lastM,amount:980000,proofs:[],deposits:[]},
+    {id:"b6",clientId:"cl1",billDate:dayIn(lastM,"05"),targetFrom:prevM,targetTo:prevM,amount:11200000,proofs:[P("계산서",11200000,dayIn(lastM,"05"))],deposits:[{date:dayIn(lastM,"14"),amount:11200000,memo:"소하산업 검진비"}]},
+    {id:"b7",clientId:"cl2",billDate:dayIn(lastM,"06"),targetFrom:prevM,targetTo:prevM,amount:7300000,proofs:[P("계산서",7300000,dayIn(lastM,"06"))],deposits:[{date:dayIn(lastM,"20"),amount:4000000,memo:"광명물류(주)"},{date:dayIn(thisM,"02"),amount:2000000,memo:"광명물류 잔금"}]},
+    {id:"b8",clientId:"cl6",billDate:dayIn(lastM,"12"),targetFrom:prevM,targetTo:prevM,amount:3450000,proofs:[P("현금영수증",3450000,dayIn(lastM,"12"))],deposits:[{date:dayIn(lastM,"25"),amount:3450000,memo:"소하복지재단"}]},
+    {id:"b9",clientId:"cl3",billDate:dayIn(lastM,"08"),targetFrom:prevM,targetTo:prevM,amount:1700000,proofs:[P("계산서",1700000,dayIn(lastM,"08"))],deposits:[{date:dayIn(lastM,"30")>dayIn(lastM,"28")?dayIn(lastM,"28"):dayIn(lastM,"28"),amount:1700000,memo:"광명시립학교"}]},
+    {id:"b10",clientId:"cl4",billDate:dayIn(M(-3),"03"),targetFrom:M(-6),targetTo:M(-4),amount:14200000,proofs:[P("계산서",14200000,dayIn(M(-3),"03"))],deposits:[{date:dayIn(M(-3),"15"),amount:14200000,memo:"하안건설 2분기"}],memo:"분기 청구"}];
+  billing.forEach(b=>{ const c=client.find(x=>x.id===b.clientId)||{}; b.clientCode=c.code; b.clientName=c.name; b.clientMgmt=c.mgmt; b.month=b.targetFrom; });
+  const staff=[{id:"s1",part:"기획·협약",title:"서기",name:"홍길동",order:1},{id:"s2",part:"기획·협약",title:"주임",name:"김민지",order:2},{id:"s3",part:"예약",title:"주임",name:"이서연",order:3},
+    {id:"s4",part:"예약",title:"사원",name:"박준호",order:4},{id:"s5",part:"수납",title:"주임",name:"최유나",order:5},{id:"s6",part:"원무",title:"대리",name:"정다은",order:6}];
+  const workday=[];
+  const openOff=(off,dir)=>{ let o=off, g=0; while(defDayStatus(D(o))!=="open"&&g++<10) o+=dir||1; return o; };
+  const addW=(off,obj,dir)=>{ const o=openOff(off,dir), ds=D(o); if(workday.some(w=>w.id===ds)) return; workday.push(Object.assign({id:ds,date:ds,status:"open"},obj)); };
+  const b0=openOff(0), b1=openOff(b0+1), b2=openOff(b1+2);
+  addW(b0,{memo:"검진 135명 예약",people:{s2:"am",s5:"off"}});
+  addW(b1,{memo:"",people:{s3:"pm"}});
+  addW(b2,{memo:"대진의 섭외 (오후)",people:{s1:"trip"}});
+  addW(-1,{memo:"",people:{s4:"off",s6:"sick"}},-1);
+  addW(7,{memo:"",people:{s1:"off",s2:"off"}});
+  const sat=new Date(T); sat.setDate(T.getDate()+((6-T.getDay()+7)%7||7)); const satS=dStr(sat);
+  if(!workday.some(w=>w.id===satS)) workday.push({id:satS,date:satS,status:"short",memo:"토요 검진 (09~13시)",people:{s3:"work",s5:"work",s6:"work"}});
+  const oxygen=[{id:"o1",orderDate:dayIn(thisM,"03"),inDate:dayIn(thisM,"05"),qty:3,requester:"정다은"},{id:"o2",orderDate:dayIn(thisM,"10"),inDate:dayIn(thisM,"11"),qty:4,requester:"정다은"},
+    {id:"o3",orderDate:D(-1),inDate:"",qty:3,requester:"정다은",memo:"긴급 요청"},{id:"o4",orderDate:dayIn(lastM,"04"),inDate:dayIn(lastM,"06"),qty:4},{id:"o5",orderDate:dayIn(lastM,"12"),inDate:dayIn(lastM,"13"),qty:3},
+    {id:"o6",orderDate:dayIn(lastM,"20"),inDate:dayIn(lastM,"22"),qty:4},{id:"o7",orderDate:dayIn(lastM,"27"),inDate:dayIn(lastM,"28"),qty:3}];
+  const mail=[{id:"m1",reqDate:D(-1),title:"기업검진 결과 통보서",requester:"이서연",to:"(예시) 소하산업㈜ 인사팀",sentDate:""},{id:"m2",reqDate:D(-3),title:"협약서 원본 송부",requester:"홍길동",to:"(예시) 광명시립학교",sentDate:D(-2)},
+    {id:"m3",reqDate:D(-6),title:"세금계산서 원본",requester:"최유나",to:"(예시) 하안건설",sentDate:D(-5)},{id:"m4",reqDate:D(0),title:"재검 안내문",requester:"박준호",to:"수검자 12명",sentDate:"",memo:"개인정보 봉투 사용"},
+    {id:"m5",reqDate:dayIn(lastM,"18"),title:"외주검사 정산서",requester:"홍길동",to:"(예시) 검사의학재단",sentDate:dayIn(lastM,"19")}];
+  const notice=[{id:"n1",cat:"무이자 할부",month:thisM,title:Number(thisM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~6개월 무이자\n- B카드: 2~5개월 무이자\n- C카드: 2~3개월 무이자\n※ 법인카드·체크카드·기프트카드 제외\n※ 카드사 사정에 따라 변경될 수 있음",author:"기획·협약 파트",pinned:"Y",createdAt:dayIn(thisM,"01")+"T09:00:00"},
+    {id:"n2",cat:"검진 안내",month:thisM,title:"연말 검진 예약 마감 일정 안내",content:"연말 검진 수요 증가로 12월 예약은 셋째 주 금요일까지 접수합니다.\n당일 접수는 받지 않습니다.",author:"예약 파트",pinned:"N",createdAt:D(-4)+"T09:00:00"},
+    {id:"n3",cat:"일반",month:thisM,title:"토요 검진 근무자 확인 요청",content:"이번 주 토요 검진 근무자는 워킹데이 계획에서 확인해 주세요.",author:"원무",pinned:"N",createdAt:D(-2)+"T09:00:00"},
+    {id:"n4",cat:"무이자 할부",month:lastM,title:Number(lastM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~5개월 무이자\n- B카드: 2~3개월 무이자",author:"기획·협약 파트",pinned:"N",createdAt:dayIn(lastM,"01")+"T09:00:00"}];
+  const all={contracts,oxygen,mail,staff,workday,package:pk,notice,client,billing,exam};
+  Object.values(all).forEach(arr=>arr.forEach(x=>{ x.createdAt=x.createdAt||now; x.updatedBy=by; }));
+  const users=[{id:"demo",email:"demo@sovis",name:"체험 사용자",part:"관리자",is_admin:true,perms:{},active:true},
+    {id:"u2",email:"plan@example.com",name:"김민지",part:"기획예약파트",is_admin:false,active:true,perms:{notice:{view:true,write:true},contracts:{view:true,write:true},billing:{view:true},workday:{view:true,write:true},oxygen:{view:true,write:true},mail:{view:true,write:true}}},
+    {id:"u3",email:"pay@example.com",name:"최유나",part:"수납파트",is_admin:false,active:true,perms:{notice:{view:true},billing:{view:true,write:true},workday:{view:true}}}];
+  return {data:all,users};
+}
+function enterDemo(){
+  mode="demo"; TOKEN=""; ME={id:"demo",email:"demo@sovis",name:"체험 사용자",part:"관리자",is_admin:true,perms:{}};
+  const d=demoData(); for(const k in COLS) data[k]=d.data[k]||[]; USERS=d.users;
+  location.hash=""; cur="dashboard"; $("loginErr").textContent=""; enter();
+}
+$("demoBtn").onclick=enterDemo;
 
 /* ---------- PACKAGES (패키지별 관리) ---------- */
 function packageForm(onClose){
