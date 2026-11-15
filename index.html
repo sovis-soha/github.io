@@ -416,7 +416,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       <div class="err" id="loginErr"></div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.1 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.1.1 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -442,7 +442,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.1 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.1.1 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -713,7 +713,7 @@ function doLogout(msg){
   TOKEN=""; ME=null; try{sessionStorage.removeItem("sovis_token");}catch(e){}
   clearInterval(pollTimer); for(const k in data) data[k]=[];
   $("app").style.display="none"; $("login").style.display="";
-  $("loginErr").textContent=msg||""; closeModal&&$("mask")&&($("mask").style.display="none"); setTimeout(()=>$("lgEmail").focus(),60);
+  $("loginErr").textContent=msg||""; $("mask").style.display="none"; $("modal").innerHTML=""; modalPushed=false; setTimeout(()=>$("lgEmail").focus(),60);
 }
 $("loginForm").addEventListener("submit",e=>{ e.preventDefault(); tryLogin(); });
 $("logout").onclick=()=>doLogout();
@@ -772,7 +772,9 @@ const VIEWS={
   mail:{t:"등기 발송 관리",d:"등기 발송 요청과 발송 결과를 기록합니다.",add:"발송 요청",fn:()=>mailForm(),menu:"mail"}
 };
 let cur="dashboard";
-function go(v){ if(v==="alerts") v="contracts"; cur=VIEWS[v]?v:"dashboard"; route(true); }
+function go(v){ if(v==="alerts") v="contracts"; v=VIEWS[v]?v:"dashboard";
+  if($("mask").style.display==="flex") closeModal(true);
+  if((location.hash||"").replace("#","")!==v){ location.hash=v; } else { cur=v; route(true); } }
 function viewOk(v){ const V=VIEWS[v]; if(!V) return false; if(V.admin) return !!(ME&&ME.is_admin); return !V.menu||can(V.menu,"view"); }
 function route(keep){
   if(!keep){ let h=(location.hash||"").replace("#",""); if(h==="alerts") h="contracts"; cur=VIEWS[h]?h:"dashboard"; }
@@ -933,8 +935,12 @@ document.addEventListener("click",e=>{ const a=e.target.closest("[data-medit]");
 
 /* ---------- MODAL FORMS ---------- */
 const X='<svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M18 6 6 18M6 6l12 12"/></svg>';
-function openModal(h){ $("modal").innerHTML=h; $("mask").style.display="flex"; const f=$("modal").querySelector("input:not([type=radio]),select"); if(f) setTimeout(()=>f.focus(),40); }
-function closeModal(){ $("mask").style.display="none"; $("modal").innerHTML=""; }
+function openModal(h){ $("modal").innerHTML=h; showMask(); const f=$("modal").querySelector("input:not([type=radio]),select"); if(f) setTimeout(()=>f.focus(),40); }
+let modalPushed=false, ignorePop=false;
+function showMask(){ if($("mask").style.display!=="flex"){ $("mask").style.display="flex"; if(!modalPushed){ try{ history.pushState({sovisModal:1},""); modalPushed=true; }catch(e){} } } }
+function closeModal(fromPop){ $("mask").style.display="none"; $("modal").innerHTML="";
+  if(modalPushed){ modalPushed=false; if(fromPop!==true){ ignorePop=true; try{ history.back(); }catch(e){ ignorePop=false; } } } }
+window.addEventListener("popstate",()=>{ if(ignorePop){ ignorePop=false; return; } if($("mask").style.display==="flex") closeModal(true); });
 $("mask").addEventListener("mousedown",e=>{ if(e.target===$("mask")) closeModal(); });
 document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&$("mask").style.display==="flex") closeModal(); });
 const fld=(lbl,name,val,type="text",req=false,cls="",extra="")=>'<div class="'+cls+'"><label>'+lbl+(req?' <span class="req">*</span>':'')+'</label><input name="'+name+'" type="'+type+'" value="'+esc(val??"")+'" '+(req?"required":"")+' '+extra+'></div>';
@@ -1204,7 +1210,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.1",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.1.1",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1376,7 +1382,7 @@ function clientForm(onClose){
     };
     $("nc_memo").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); $("ncAdd").click(); } };
   };
-  if($("mask").style.display!=="flex") $("mask").style.display="flex";
+  showMask();
   draw(); setTimeout(()=>$("nc_code")&&$("nc_code").focus(),40);
 }
 
@@ -1416,7 +1422,7 @@ function examForm(onClose){
     };
     ["ne_name","ne_memo"].forEach(id=>$(id).onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); $("neAdd").click(); } });
   };
-  if($("mask").style.display!=="flex") $("mask").style.display="flex";
+  showMask();
   draw(); setTimeout(()=>$("ne_cat")&&$("ne_cat").focus(),40);
 }
 $("exBtn").onclick=()=>{ if(!can("contracts","write")) return toast(ERRMSG.FORBIDDEN); examForm(); };
@@ -1507,7 +1513,7 @@ function packageForm(onClose){
   const close=()=>{ if(onClose) onClose(); else closeModal(); };
   const list=data.package.slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));
   const used=id=>data.contracts.filter(c=>Array.isArray(c.packages)&&c.packages.includes(id)).length;
-  if($("mask").style.display!=="flex") $("mask").style.display="flex";
+  showMask();
   $("modal").innerHTML='<div class="mh">검진 패키지 관리<button type="button" data-pclose>'+X+'</button></div><div class="mb"><div class="full">'
     +(list.length?list.map(p=>{ const ex=pkExamNames(p); return '<div class="pkcard"><div class="bd"><div><span class="tt">'+esc(p.name)+'</span>'+(p.price?'<span class="pr">'+fmtMoney(p.price)+'원</span>':'')+'</div>'
       +(ex.length?'<div class="exchips" style="margin-top:6px">'+ex.map(n=>'<span class="pk" style="background:#eef1f5;color:var(--ink2)">'+esc(n)+'</span>').join("")+'</div>':(p.items?'<div class="mini2">기존 검사내용(글): '+esc(p.items)+'</div>':'<div class="mini2">검사 미지정</div>'))
@@ -1732,7 +1738,7 @@ function staffForm(){
     };
     $("ns_name").onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); $("nsAdd").click(); } };
   };
-  if($("mask").style.display!=="flex") $("mask").style.display="flex";
+  showMask();
   draw(); setTimeout(()=>$("ns_part")&&$("ns_part").focus(),40);
 }
 $("wStaffBtn").onclick=()=>{ if(!can("workday","write")) return toast(ERRMSG.FORBIDDEN); staffForm(); };
