@@ -240,6 +240,45 @@ td.num,th.num{text-align:right}
 .ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;height:36px;color:var(--red);display:flex;align-items:center;justify-content:center}
 @media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
 
+/* v2.2 bank/expense */
+.split{display:grid;grid-template-columns:120px 1fr;gap:10px;align-items:center;margin-bottom:8px}
+.split .ck{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;cursor:pointer;margin:0!important;color:var(--ink2)!important}
+.split .ck input{width:18px!important;height:18px;accent-color:var(--blue)}
+.split input[data-sa2]{padding:9px 10px!important}
+.split input[data-sa2]:disabled{opacity:.45}
+.lnk{grid-column:1/-1;background:var(--soft);border-radius:12px;padding:10px 12px;margin:-2px 0 8px}
+.lnkrow{display:grid;grid-template-columns:1fr 150px 40px;gap:8px;align-items:center;margin-bottom:6px}
+.lnkrow select,.lnkrow input{padding:8px 10px!important}
+.bankgrp{margin-bottom:16px}
+.bankhd{display:flex;align-items:center;gap:10px;padding:16px 20px 4px}
+.bankhd .bn{font-size:16px;font-weight:800}
+.bankhd .bt{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
+.bk-woori{color:#0067ac}.bk-nh{color:#00873c}
+.cats{display:flex;flex-wrap:wrap;gap:4px}
+.cats span{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:#eef1f5;color:#5b6577;white-space:nowrap}
+.cats .c-gongdan{background:#e8f2fb;color:var(--blue)}.cats .c-corp{background:#f2edff;color:#6d3fd8}.cats .c-indiv{background:var(--green-s);color:#0b8a5e}
+.cats .c-parking{background:#eef1f5;color:#5b6577}.cats .c-misc{background:var(--amber-s);color:#a96400}.cats .c-prepaid{background:#fdeef6;color:#b02a74}
+.cats .c-un{background:var(--red-s);color:#c22}
+.sumrow{display:flex;flex-wrap:wrap;gap:8px;padding:2px 20px 14px}
+.sumrow div{background:var(--soft);border-radius:12px;padding:8px 12px;min-width:110px}
+.sumrow small{display:block;font-size:11.5px;color:var(--mute);font-weight:600}
+.sumrow b{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums}
+.alertbox{border-radius:14px;padding:12px 16px;margin-bottom:16px;border:1px solid #f6d5a5;background:var(--amber-s);color:#8a5a00}
+.alertbox.red{border-color:#f3b4b4;background:var(--red-s);color:#a11}
+.alertbox b{font-weight:800}
+.alertbox .ar{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.alertbox .ar button{border:1px solid currentColor;background:#fff;color:inherit;border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:700}
+.ystat{overflow:auto;padding:0 8px 8px}
+.ystat table td,.ystat table th{padding:8px 9px;font-size:12.5px;white-space:nowrap}
+.ystat td.money,.ystat th.num{text-align:right}
+.ystat tr.acct td{background:#f6f8fb;font-weight:800}
+.ystat tr.tot td{background:#eef6fd;font-weight:800;border-top:2px solid #cfe3f5}
+.ystat td.cur{background:#fffbea}
+.ystat .z{color:#c8ced8}
+.ecrow{display:grid;grid-template-columns:1fr 1.2fr 92px 74px 40px;gap:8px;align-items:center;margin-bottom:8px}
+.ecrow input,.ecrow select{padding:8px 10px}
+.ecrow label.rg{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;margin:0;color:var(--ink2)}
+.ecrow label.rg input{width:16px!important;height:16px}
 /* v2.1 demo */
 .tag{white-space:nowrap}.btn-sm{white-space:nowrap}
 #bTable .nm{white-space:nowrap}
@@ -416,7 +455,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       <div class="err" id="loginErr"></div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.1.1 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.2.0 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -435,6 +474,8 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <nav class="nav">
       <a href="#contracts" data-v="contracts"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>계약관리<span class="badge" id="alertBadge" style="display:none">0</span></a>
       <a href="#billing" data-v="billing"><svg class="i" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>청구관리</a>
+      <a href="#bank" data-v="bank"><svg class="i" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/></svg>통장관리</a>
+      <a href="#expense" data-v="expense"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h4"/></svg>지출관리<span class="badge" id="expBadge" style="display:none">0</span></a>
       <a href="#workday" data-v="workday"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 18h2"/></svg>워킹데이 계획</a>
       <a href="#oxygen" data-v="oxygen"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3M12 3V2"/><path d="M10 12h4"/></svg>산소가스 관리</a>
       <a href="#mail" data-v="mail"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg>등기 발송 관리</a>
@@ -442,7 +483,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.1.1 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.2.0 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -466,6 +507,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 
     <!-- DASHBOARD -->
     <section id="v-dashboard">
+      <div id="dExpAlert"></div>
       <div class="card dsec" id="dsNotice"><div class="ph"><h3>📢 공지사항</h3><div class="right"><button class="link" data-go="notice">전체보기 ›</button></div></div><div class="pb" style="padding-top:4px"><div class="nstrip" id="dNotice"></div></div></div>
 
       <div class="card dsec" id="dsOps"><div class="ph"><h3>🏥 센터운영 현황</h3><span class="hint">오늘 · 이번달</span></div><div class="pb"><div class="ops ops6">
@@ -601,6 +643,46 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
     </section>
 
+    <!-- BANK -->
+    <section id="v-bank" style="display:none">
+      <div class="card" style="margin-bottom:16px">
+        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="kPrev"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="kTitle"></b><button class="btn btn-ic" id="kNext"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="kThis">이번달</button></div>
+          <div class="right"><div class="chips" id="kChips"></div><label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="kQ" placeholder="적요 검색"></label></div>
+        </div>
+        <div class="ph" style="padding-top:2px"><h3 style="font-size:13.5px;color:var(--ink2)">구분별 월 합계 <span class="hint">(수입결의 참고)</span></h3></div>
+        <div class="sumrow" id="kSum"></div>
+      </div>
+      <div id="kBanks"></div>
+    </section>
+
+    <!-- EXPENSE -->
+    <section id="v-expense" style="display:none">
+      <div id="eAlert"></div>
+      <div class="bento" style="grid-template-columns:repeat(4,1fr)">
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:#e8f2fb;color:var(--blue)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h4"/></svg></div><span class="lb" id="eAyL">학년도 지출</span></div><div class="v" id="eAy">0<small>원</small></div><div class="ft" id="eAyFt"></div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--green-s);color:var(--green)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18"/></svg></div><span class="lb" id="eMoL">이번달 지출</span></div><div class="v" id="eMo">0<small>원</small></div><div class="ft" id="eMoFt"></div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:#f2edff;color:var(--violet)"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><span class="lb" id="ePayL">이번달 지급예정</span></div><div class="v" id="ePay">0<small>원</small></div><div class="ft" id="ePayFt"></div></div>
+        <div class="card kpi"><div class="hd"><div class="ic" style="background:var(--amber-s);color:var(--amber)"><svg class="i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div><span class="lb">정기지출 미등록</span></div><div class="v" id="eMiss">0<small>건</small></div><div class="ft" id="eMissFt">이번달 결의 기준</div></div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="eyPrev"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="eyTitle"></b><button class="btn btn-ic" id="eyNext"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div></div>
+          <h3 style="margin-left:6px">학년도 월별 지출 통계</h3><span class="hint">결의일자 기준 · 3월~익년 2월</span>
+          <div class="right"><div class="basis" id="eyMode"><button data-y="mid" class="on">중분류별</button><button data-y="acct">회계계정별</button></div></div></div>
+        <div class="ystat" id="eStat"></div>
+      </div>
+      <div class="card">
+        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="ePrev"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="eTitle"></b><button class="btn btn-ic" id="eNext"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="eThis">이번달</button></div>
+          <div class="right">
+            <button class="btn" id="ecBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M4 6h16M4 12h10M4 18h7"/></svg>지출 구분 관리</button>
+            <select class="sel" id="eAcct"><option value="">전체 회계계정</option></select>
+            <label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="eQ" placeholder="중분류, 거래처, 적요"></label>
+          </div>
+        </div>
+        <div class="tw"><table><thead><tr><th>결의일자</th><th>회계계정</th><th>중분류</th><th>거래처</th><th class="num">지출금액</th><th>계산서일자</th><th>지급예정일</th><th>적요</th><th></th></tr></thead><tbody id="eTable"></tbody></table></div>
+        <div class="pf" id="eFoot"></div>
+      </div>
+    </section>
+
     <!-- WORKDAY -->
     <section id="v-workday" style="display:none">
       <div class="bento" style="grid-template-columns:repeat(4,1fr)">
@@ -630,7 +712,7 @@ const TYPES = ["MOU협약","위수탁계약","유지보수계약","식사권 계
 const NCATS = ["무이자 할부","일반","검진 안내","기타"];
 const NCAT_CLS = {"무이자 할부":"t-vio","일반":"t-blu","검진 안내":"t-grn","기타":"t-gry"};
 const TYPE_COLORS = {"위수탁계약":"#006cb8","MOU협약":"#8b5cf6","유지보수계약":"#2aa5b5","식사권 계약":"#f59e0b","기타":"#94a3b8"};
-const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday", package:"package", notice:"notice", client:"client", billing:"billing", exam:"exam"};
+const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday", package:"package", notice:"notice", client:"client", billing:"billing", exam:"exam", bank:"bank", expense:"expense", expcat:"expcat"};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -679,7 +761,7 @@ async function api(fn,...a){
   return r;
 }
 /* ---------- 권한 ---------- */
-const MENUS=[["notice","공지사항"],["contracts","계약관리"],["billing","청구관리"],["workday","워킹데이 계획"],["oxygen","산소가스 관리"],["mail","등기 발송 관리"]];
+const MENUS=[["notice","공지사항"],["contracts","계약관리"],["billing","청구관리"],["bank","통장관리"],["expense","지출관리"],["workday","워킹데이 계획"],["oxygen","산소가스 관리"],["mail","등기 발송 관리"]];
 const ACTS=[["view","조회"],["write","등록·수정"],["del","삭제"]];
 function can(menu,act){ if(!ME) return false; if(ME.is_admin) return true; const p=ME.perms&&ME.perms[menu]; return !!(p&&p[act]); }
 function applyPerms(){
@@ -720,7 +802,7 @@ $("logout").onclick=()=>doLogout();
 $("pwBtn").onclick=()=>pwForm();
 
 /* ---------- STORAGE (구글 시트 / 미리보기는 이 브라우저) ---------- */
-const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[],package:[],notice:[],client:[],billing:[],exam:[]};
+const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[],package:[],notice:[],client:[],billing:[],exam:[],bank:[],expense:[],expcat:[]};
 let mode=GAS?"gas":"local", pollTimer=null;
 function setConn(s){
   const dot=$("connDot"), txt=$("connTxt"), n=$("notice");
@@ -767,6 +849,8 @@ const VIEWS={
   notice:{t:"공지사항",d:"월간 무이자 할부 카드 안내 등 센터 공지를 관리합니다.",add:"공지 작성",fn:()=>noticeForm(),menu:"notice"},
   contracts:{t:"계약관리",d:"계약·협약 목록입니다. 만료가 가까운 계약이 위에 표시됩니다.",add:"계약 등록",fn:()=>contractForm(),menu:"contracts"},
   billing:{t:"청구관리",d:"기관별 청구 · 증빙 · 입금 내역과 미수금을 관리합니다.",add:"청구 등록",fn:()=>billingForm(),menu:"billing"},
+  bank:{t:"통장관리",d:"은행별 입금 내역을 구분(공단·기업·개인·주차비·잡이익·선수금)별로 정리합니다.",add:"입금 등록",fn:()=>bankForm(),menu:"bank"},
+  expense:{t:"지출관리",d:"지출결의 기준 지출 내역과 정기지출 등록 여부를 관리합니다.",add:"지출 등록",fn:()=>expenseForm(),menu:"expense"},
   workday:{t:"워킹데이 계획",d:"날짜별 센터 운영 여부와 행정 인원 근무를 관리합니다.",add:"오늘 근무 입력",fn:()=>dayForm(todayStr()),menu:"workday"},
   oxygen:{t:"산소가스 관리",d:"발주일 · 입고일 · 요청 수량을 기록합니다.",add:"발주 등록",fn:()=>oxygenForm(),menu:"oxygen"},
   mail:{t:"등기 발송 관리",d:"등기 발송 요청과 발송 결과를 기록합니다.",add:"발송 요청",fn:()=>mailForm(),menu:"mail"}
@@ -946,15 +1030,15 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&$("mask").style.di
 const fld=(lbl,name,val,type="text",req=false,cls="",extra="")=>'<div class="'+cls+'"><label>'+lbl+(req?' <span class="req">*</span>':'')+'</label><input name="'+name+'" type="'+type+'" value="'+esc(val??"")+'" '+(req?"required":"")+' '+extra+'></div>';
 let FORM_MENU="";
 const shell=(title,body,ed)=>'<form id="mform"><div class="mh">'+title+'<button type="button" data-close>'+X+'</button></div><div class="mb">'+body+'</div><div class="mf">'+(ed&&can(FORM_MENU,"del")?'<button type="button" class="btn btn-d" data-del>삭제</button>':'')+'<span class="ferr" id="ferr">'+(can(FORM_MENU,"write")?"":"조회 전용입니다.")+'</span><span class="sp"></span><button type="button" class="btn" data-close>'+(can(FORM_MENU,"write")?"취소":"닫기")+'</button>'+(can(FORM_MENU,"write")?'<button class="btn btn-p" type="submit">저장</button>':'')+'</div></form>';
-function wire(k,item,build,validate){
+function wire(k,item,build,validate,after){
   const f=$("mform"); f.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal);
   const del=f.querySelector("[data-del]");
   if(del) del.onclick=()=>{
     $("modal").innerHTML='<div class="mh">삭제할까요?</div><div class="confirm-box">삭제하면 되돌릴 수 없습니다.</div><div class="mf"><span class="sp"></span><button class="btn" id="cNo">취소</button><button class="btn btn-p" style="background:var(--red);border-color:var(--red)" id="cYes">삭제</button></div>';
-    $("cNo").onclick=closeModal; $("cYes").onclick=async()=>{ $("cYes").disabled=true; try{ await deleteItem(k,item.id); toast("삭제했습니다."); }catch(e){ toast(e.message||"삭제 실패"); } closeModal(); }; };
+    $("cNo").onclick=closeModal; $("cYes").onclick=async()=>{ $("cYes").disabled=true; try{ await deleteItem(k,item.id); if(k==="bank") await syncBankLinks(item,item.links||[],true); toast("삭제했습니다."); }catch(e){ toast(e.message||"삭제 실패"); } closeModal(); }; };
   f.onsubmit=async e=>{ e.preventDefault(); const fd=Object.fromEntries(new FormData(f).entries()); const msg=validate?validate(fd):""; if(msg){ $("ferr").textContent=msg; return; }
     const sb=f.querySelector("[type=submit]"); sb.disabled=true; sb.textContent="저장 중…";
-    try{ await saveItem(k,build(fd)); toast("저장했습니다."); closeModal(); }catch(err){ $("ferr").textContent=err.message; sb.disabled=false; sb.textContent="저장"; } };
+    try{ const ob=build(fd); await saveItem(k,ob); if(after) await after(ob); toast("저장했습니다."); closeModal(); }catch(err){ $("ferr").textContent=err.message; sb.disabled=false; sb.textContent="저장"; } };
 }
 function contractForm(c,forceType){
   FORM_MENU="contracts";
@@ -1116,11 +1200,14 @@ var SOVIS_SHEETS = [
   ["staff","행정인원",[["part","파트"],["title","직책/직급"],["name","이름"],["order","순서"]]],
   ["oxygen","산소가스",[["orderDate","발주일"],["inDate","입고일"],["qty","요청갯수"],["requester","요청자"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["mail","등기발송",[["reqDate","요청일"],["title","제목"],["requester","요청자"],["to","수신처"],["sentDate","발송일"],["memo","비고"],["updatedBy","최종수정자"]]],
+  ["bank","통장",[["bank","은행"],["dt","입금일시"],["memo","적요"],["amount","금액"],["gongdan","공단"],["corp","기업"],["indiv","개인"],["parking","주차비"],["misc","잡이익"],["prepaid","선수금"],["unsplit","미분류"],["links","청구 연동"],["updatedBy","최종수정자"]]],
+  ["expense","지출",[["resolDate","결의일자"],["acct","회계계정"],["mid","중분류"],["vendor","거래처"],["amount","지출금액"],["invoiceDate","계산서일자(발급일)"],["payDate","지급예정일"],["memo","적요"],["updatedBy","최종수정자"]]],
+  ["expcat","지출구분",[["acct","회계계정"],["mid","중분류"],["regular","매월 정기"],["dueDay","결의 기한(일)"],["memo","비고"]]],
   ["users","계정",[["email","아이디"],["name","이름"],["part","구분"],["is_admin","관리자"],["active","사용"],["perms","메뉴권한"]]]
 ];
 var SOVIS_DSTAT = {open:"정상운영",short:"단축운영",closed:"휴진",holiday:"공휴일"};
 var SOVIS_PSTAT = {work:"출근",off:"연차",am:"오전반차",pm:"오후반차",half:"반차",trip:"출장·교육",sick:"병가·경조",rest:"휴무"};
-var SOVIS_MENUS = {notice:"공지사항",contracts:"계약관리",billing:"청구관리",workday:"워킹데이",oxygen:"산소가스",mail:"등기발송"};
+var SOVIS_MENUS = {notice:"공지사항",contracts:"계약관리",billing:"청구관리",bank:"통장관리",expense:"지출관리",workday:"워킹데이",oxygen:"산소가스",mail:"등기발송"};
 /** data: {contracts:[...], ...}, users: [...]  →  [[시트명, [[헤더...],[행...],...]], ...] */
 function sovisBuildSheets(data, users){
   var pk = {}; (data["package"]||[]).forEach(function(p){ pk[p.id]=p.name; });
@@ -1130,6 +1217,14 @@ function sovisBuildSheets(data, users){
   var src = {}; for (var k in data) src[k]=data[k]; src.users = users||[];
   function cell(kind, key, row){
     var v = row[key];
+    if (kind==="bank") {
+      var sp = row.splits || {};
+      if (["gongdan","corp","indiv","parking","misc","prepaid"].indexOf(key)>=0) return sp[key] ? Number(sp[key]) : "";
+      if (key==="unsplit") return (Number(row.amount)||0) - Object.keys(sp).reduce(function(t,k){ return t + (Number(sp[k])||0); }, 0);
+      if (key==="dt") return String(v||"").replace("T"," ");
+      if (key==="links") return (Array.isArray(v)?v:[]).map(function(l){ var b=(data.billing||[]).filter(function(x){ return x.id===l.billingId; })[0]||{}; var c=cl[b.clientId]||{}; return (c.name||b.clientName||"?")+" "+(Number(l.amount)||0).toLocaleString("ko-KR"); }).join(", ");
+    }
+    if (kind==="expcat" && key==="regular") return v ? "정기" : "";
     if (kind==="contracts" && key==="mgmtType") return row.type!=="MOU협약" ? "" : (v==="platform" ? "플랫폼(" + (row.platform||"") + ")" : (v==="self" ? "자체관리" : ""));
     if (kind==="contracts" && key==="subsidies") return (Array.isArray(v)?v:[]).map(function(x){ return (x.grade||"") + " " + (Number(x.amount)||0).toLocaleString("ko-KR") + "원" + (x.memo ? "(" + x.memo + ")" : ""); }).join(", ");
     if (kind==="package" && key==="exams") return (Array.isArray(v)?v:[]).map(function(id){ return ex[id] ? ex[id].name : ""; }).filter(Boolean).join(", ");
@@ -1210,7 +1305,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.1.1",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.2.0",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1290,7 +1385,7 @@ function billingForm(b,keep){
   b=b||{}; const ed=!!b.id, cur=Object.assign({},b,keep||{});
   const clients=data.client.slice().sort((a,c)=>String(a.name).localeCompare(String(c.name)));
   const prs=keep&&keep.proofs?keep.proofs:getProofs(cur), pmap={}; prs.forEach(p=>pmap[p.type]=p);
-  const deps=Array.isArray(cur.deposits)?cur.deposits:[];
+  const allDeps=Array.isArray(cur.deposits)?cur.deposits:[], linked=allDeps.filter(d=>d.bankRef), deps=allDeps.filter(d=>!d.bankRef);
   const depRow=(d)=>'<div class="dep"><input type="date" data-dd value="'+esc(d.date||"")+'"><input data-da inputmode="numeric" placeholder="입금금액" value="'+(d.amount?fmtMoney(d.amount):"")+'"><input data-dm placeholder="적요 (통장 표기)" value="'+esc(d.memo||"")+'"><button type="button" class="ibtn" data-ddel title="삭제">'+X+'</button></div>';
   const prRow=t=>{ const p=pmap[t]||{}; return '<div class="pf2" data-pr="'+t+'" style="display:'+(pmap[t]?"grid":"none")+'"><span class="pt">'+t+'</span><input data-pa inputmode="numeric" placeholder="금액" value="'+(p.amount?fmtMoney(p.amount):"")+'"><input type="date" data-pi value="'+esc(p.issueDate||"")+'" title="발행일 (발행한 날)"><input type="date" data-pd value="'+esc(p.issuedDate||"")+'" title="발급일 (증빙상 일자)"></div>'; };
   const body=fld("청구일","billDate",cur.billDate||todayStr(),"date",true)
@@ -1304,14 +1399,14 @@ function billingForm(b,keep){
    +'<div class="full"><div class="pf2" style="font-size:12px;color:var(--mute);font-weight:600;margin-bottom:4px" id="bfPH"><span>구분</span><span>증빙금액</span><span>발행일 (발행한 날)</span><span>발급일 (증빙상 일자)</span></div>'+PROOF_TYPES.map(prRow).join("")
      +'<div class="unis" id="bfUn"><span>미발행</span><span id="bfUnV">0원</span></div></div>'
    +'<div class="sechd">입금 내역</div>'
-   +'<div class="full"><div class="dep" style="font-size:12px;color:var(--mute);font-weight:600;margin-bottom:4px"><span>입금일</span><span>입금금액</span><span>적요</span><span></span></div><div id="bfDeps">'+(deps.length?deps:[{}]).map(depRow).join("")+'</div>'
+   +'<div class="full"><div class="dep" style="font-size:12px;color:var(--mute);font-weight:600;margin-bottom:4px"><span>입금일</span><span>입금금액</span><span>적요</span><span></span></div>'+(linked.length?'<div class="lnk" style="margin:0 0 8px"><div class="mini2" style="font-weight:700;color:var(--ink2)">🏦 통장관리에서 연동된 입금 (수정은 통장관리에서)</div>'+linked.map(d=>'<div class="mini2">'+esc(d.date)+' · <b>'+fmtMoney(d.amount)+'원</b>'+(d.memo?' · '+esc(d.memo):'')+'</div>').join("")+'</div>':'')+'<div id="bfDeps">'+(deps.length?deps:(linked.length?[]:[{}])).map(depRow).join("")+'</div>'
      +'<button type="button" class="btn btn-sm" id="bfAddDep" style="margin-top:2px">+ 입금 추가</button>'
      +'<div class="chk"><div id="ckP"></div><div id="ckD"></div></div></div>'
    +'<div class="full"><label>비고</label><input name="memo" value="'+esc(cur.memo||"")+'"></div>';
   openModal(shell(ed?"청구 수정":"청구 등록",body,ed));
   const F=$("mform");
   const proofsNow=()=>PROOF_TYPES.filter(t=>F.querySelector('[data-pt="'+t+'"]').checked).map(t=>{ const r=F.querySelector('[data-pr="'+t+'"]'); return {type:t,amount:money(r.querySelector("[data-pa]").value),issueDate:r.querySelector("[data-pi]").value,issuedDate:r.querySelector("[data-pd]").value}; });
-  const depsNow=()=>[...F.querySelectorAll("#bfDeps .dep")].map(r=>({date:r.querySelector("[data-dd]").value,amount:money(r.querySelector("[data-da]").value),memo:r.querySelector("[data-dm]").value.trim()})).filter(d=>d.date||d.amount||d.memo);
+  const depsNow=()=>linked.concat([...F.querySelectorAll("#bfDeps .dep")].map(r=>({date:r.querySelector("[data-dd]").value,amount:money(r.querySelector("[data-da]").value),memo:r.querySelector("[data-dm]").value.trim()})).filter(d=>d.date||d.amount||d.memo));
   const recalc=()=>{
     const a=money($("bfAmt").value), ps=proofsNow(), pa=ps.reduce((s,p)=>s+p.amount,0), un=a-pa, pd=depsNow().reduce((s,d)=>s+d.amount,0);
     $("bfPH").style.display=ps.length?"grid":"none";
@@ -1427,6 +1522,216 @@ function examForm(onClose){
 }
 $("exBtn").onclick=()=>{ if(!can("contracts","write")) return toast(ERRMSG.FORBIDDEN); examForm(); };
 
+/* ---------- BANK (통장관리) ---------- */
+const BANKS=["우리은행","농협은행"], BANK_CLS={"우리은행":"bk-woori","농협은행":"bk-nh"};
+const SPLITS=[["gongdan","공단"],["corp","기업"],["indiv","개인"],["parking","주차비"],["misc","잡이익"],["prepaid","선수금"]];
+const splitSum=k=>Object.values(k.splits||{}).reduce((s,v)=>s+(Number(v)||0),0);
+let kMonth=thisMonth(), kFilter="all";
+function kShift(n){ const [y,m]=kMonth.split("-").map(Number); const d=new Date(y,m-1+n,1); kMonth=d.getFullYear()+"-"+pad(d.getMonth()+1); renderBank(); }
+$("kPrev").onclick=()=>kShift(-1); $("kNext").onclick=()=>kShift(1); $("kThis").onclick=()=>{ kMonth=thisMonth(); renderBank(); };
+chips($("kChips"),[["all","전체"],["un","미분류 있음"],["corp","기업"],["gongdan","공단"],["indiv","개인"]],"all",r=>{kFilter=r;renderBank();});
+$("kQ").oninput=renderBank;
+function bankCats(k){ const sp=k.splits||{}, un=(Number(k.amount)||0)-splitSum(k);
+  return '<div class="cats">'+SPLITS.filter(([c])=>Number(sp[c])).map(([c,l])=>'<span class="c-'+c+'">'+l+' '+fmtMoney(sp[c])+'</span>').join("")+(un>0?'<span class="c-un">미분류 '+fmtMoney(un)+'</span>':un<0?'<span class="c-un">초과 '+fmtMoney(-un)+'</span>':'')+'</div>'; }
+function renderBank(){
+  if(!$("kBanks")) return;
+  const [y,m]=kMonth.split("-").map(Number); $("kTitle").textContent=y+"년 "+m+"월";
+  const q=$("kQ").value.trim().toLowerCase();
+  const inM=data.bank.filter(k=>(k.dt||"").slice(0,7)===kMonth);
+  const tot={}; SPLITS.forEach(([c])=>tot[c]=0); let all=0, un=0;
+  inM.forEach(k=>{ all+=Number(k.amount)||0; SPLITS.forEach(([c])=>tot[c]+=Number((k.splits||{})[c])||0); un+=Math.max(0,(Number(k.amount)||0)-splitSum(k)); });
+  $("kSum").innerHTML='<div><small>전체 입금</small><b>'+fmtMoney(all)+'</b></div>'+SPLITS.map(([c,l])=>'<div><small>'+l+'</small><b>'+fmtMoney(tot[c])+'</b></div>').join("")+'<div style="background:'+(un?"var(--red-s)":"var(--green-s)")+'"><small>미분류</small><b style="color:'+(un?"var(--red)":"var(--green)")+'">'+fmtMoney(un)+'</b></div>';
+  const ok=k=>(kFilter==="all"||(kFilter==="un"?(Number(k.amount)||0)!==splitSum(k):Number((k.splits||{})[kFilter])>0))&&(!q||String(k.memo||"").toLowerCase().includes(q));
+  $("kBanks").innerHTML=BANKS.map(bn=>{
+    const rows=inM.filter(k=>k.bank===bn&&ok(k)).sort((a,b)=>String(b.dt||"").localeCompare(String(a.dt||"")));
+    const bt=inM.filter(k=>k.bank===bn).reduce((s,k)=>s+(Number(k.amount)||0),0);
+    return '<div class="card bankgrp"><div class="bankhd"><span class="bn '+BANK_CLS[bn]+'">🏦 '+bn+'</span><span class="hint">'+inM.filter(k=>k.bank===bn).length+'건</span><span class="bt">'+fmtMoney(bt)+'원</span></div>'
+      +'<div class="tw"><table><thead><tr><th>입금일시</th><th>적요</th><th class="num">금액</th><th>구분</th><th>청구 연동</th><th></th></tr></thead><tbody>'
+      +(rows.length?rows.map(k=>{ const ln=(k.links||[]).map(l=>{ const b=data.billing.find(x=>x.id===l.billingId); return b?esc(clientOf(b).name||"-")+' '+fmtMoney(l.amount):""; }).filter(Boolean);
+          return '<tr><td style="white-space:nowrap">'+esc(String(k.dt||"").replace("T"," "))+'</td><td class="nm">'+esc(k.memo||"-")+'</td><td class="money"><b>'+fmtMoney(k.amount)+'</b></td><td>'+bankCats(k)+'</td><td class="mini2" style="white-space:nowrap">'+(ln.length?'🔗 '+ln.join("<br>🔗 "):"-")+'</td><td><button class="btn btn-sm" data-kedit="'+esc(k.id)+'">수정</button></td></tr>'; }).join("")
+        :'<tr><td colspan="6" class="empty">'+bn+' 입금 내역이 없습니다.</td></tr>')
+      +'</tbody></table></div></div>'; }).join("");
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-kedit]"); if(b) bankForm(data.bank.find(x=>x.id===b.dataset.kedit)); });
+function bankForm(k){
+  FORM_MENU="bank";
+  k=k||{}; const ed=!!k.id, sp=k.splits||{}, links=Array.isArray(k.links)?k.links:[];
+  const bn=k.bank||BANKS[0];
+  const openBills=()=>data.billing.filter(b=>{ const own=links.find(l=>l.billingId===b.id); return (Number(b.amount)||0)-billPaid(b)+(own?Number(own.amount)||0:0)>0; })
+    .sort((a,b)=>String(clientOf(a).name||"").localeCompare(String(clientOf(b).name||""))||String(a.billDate||"").localeCompare(String(b.billDate||"")));
+  const dueOf=b=>{ const own=links.find(l=>l.billingId===b.id); return (Number(b.amount)||0)-billPaid(b)+(own?Number(own.amount)||0:0); };
+  const lnRow=l=>'<div class="lnkrow"><select data-lb><option value="">청구 건 선택</option>'+openBills().map(b=>'<option value="'+esc(b.id)+'"'+(b.id===l.billingId?" selected":"")+'>'+esc(clientOf(b).name||"-")+' · 청구 '+esc(b.billDate||"")+' · 미수 '+fmtMoney(dueOf(b))+'</option>').join("")+'</select><input data-la inputmode="numeric" placeholder="연결 금액" value="'+(l.amount?fmtMoney(l.amount):"")+'"><button type="button" class="ibtn" data-ldel title="삭제">'+X+'</button></div>';
+  const canLink=can("billing","write");
+  const body='<div class="full"><label>구분 (은행) <span class="req">*</span></label><div class="seg sm">'+BANKS.map(b=>'<label><input type="radio" name="bank" value="'+b+'"'+(b===bn?" checked":"")+'>'+b+'</label>').join("")+'</div></div>'
+   +fld("입금일시","dt",k.dt||(todayStr()+"T09:00"),"datetime-local",true)
+   +fld("금액 (원)","amount",k.amount?fmtMoney(k.amount):"","text",true,"",'inputmode="numeric" id="kfAmt"')
+   +fld("적요 (통장 표기)","memo",k.memo,"text",false,"full",'placeholder="예: 소하산업검진비"')
+   +'<div class="sechd">입금 구분 <span style="font-weight:500;color:var(--mute)">(해당 항목 체크 후 금액 입력 · 여러 개 가능)</span></div>'
+   +'<div class="full">'+SPLITS.map(([c,l])=>'<div class="split"><label class="ck"><input type="checkbox" data-sc="'+c+'"'+(Number(sp[c])?" checked":"")+'>'+l+'</label><input data-sa2="'+c+'" inputmode="numeric" placeholder="'+l+' 금액" value="'+(Number(sp[c])?fmtMoney(sp[c]):"")+'"'+(Number(sp[c])?"":" disabled")+'></div>'
+       +(c==="corp"?'<div class="lnk" id="kfLnk" style="display:'+(Number(sp.corp)?"block":"none")+'"><div class="mini2" style="font-weight:700;color:var(--ink2);margin-bottom:6px">🔗 청구관리 연동 '+(canLink?'<span style="font-weight:500">— 연결하면 해당 청구의 입금 내역에 자동으로 들어가요</span>':'<span style="font-weight:500;color:var(--red)">— 청구관리 등록 권한이 있어야 연결할 수 있어요</span>')+'</div><div id="kfLinks">'+links.map(lnRow).join("")+'</div>'+(canLink?'<button type="button" class="btn btn-sm" id="kfAddLn">+ 청구 연결</button>':'')+'</div>':'')).join("")
+   +'<div class="chk"><div id="kfCk"></div><div id="kfCk2" style="display:none"></div></div></div>';
+  openModal(shell(ed?"입금 수정":"입금 등록",body,ed));
+  const F=$("mform");
+  const splitsNow=()=>{ const o={}; SPLITS.forEach(([c])=>{ if(F.querySelector('[data-sc="'+c+'"]').checked){ const v=money(F.querySelector('[data-sa2="'+c+'"]').value); if(v) o[c]=v; } }); return o; };
+  const linksNow=()=>[...F.querySelectorAll("#kfLinks .lnkrow")].map(r=>({billingId:r.querySelector("[data-lb]").value,amount:money(r.querySelector("[data-la]").value)})).filter(l=>l.billingId&&l.amount);
+  const recalc=()=>{ const a=money($("kfAmt").value), ss=Object.values(splitsNow()).reduce((t,v)=>t+v,0), d=a-ss, ck=$("kfCk");
+    ck.className=d===0?"ok":d<0?"bad":"warn"; ck.innerHTML='<span>금액 = 구분 합계</span><span>'+(d===0?"✓ 일치":d<0?"⚠ 구분이 "+fmtMoney(-d)+"원 많음":"⚠ 미분류 "+fmtMoney(d)+"원")+'</span>';
+    const corp=splitsNow().corp||0, ls=linksNow().reduce((t,l)=>t+l.amount,0), c2=$("kfCk2");
+    if(corp||ls){ c2.style.display="flex"; c2.className=ls<=corp?(ls===corp?"ok":"warn"):"bad"; c2.innerHTML='<span>기업 '+fmtMoney(corp)+'원 중 청구 연결</span><span>'+fmtMoney(ls)+'원'+(ls>corp?" ⚠ 초과":ls<corp?" (미연결 "+fmtMoney(corp-ls)+")":" ✓")+'</span>'; } else c2.style.display="none"; };
+  SPLITS.forEach(([c])=>{ const cb=F.querySelector('[data-sc="'+c+'"]'), inp=F.querySelector('[data-sa2="'+c+'"]'); bindMoney(inp,recalc);
+    cb.onchange=()=>{ inp.disabled=!cb.checked; if(cb.checked&&!inp.value){ const rest=money($("kfAmt").value)-Object.values(splitsNow()).reduce((t,v)=>t+v,0); if(rest>0) inp.value=fmtMoney(rest); inp.focus(); } if(!cb.checked) inp.value="";
+      if(c==="corp") $("kfLnk").style.display=cb.checked?"block":"none"; recalc(); }; });
+  const wireLn=r=>{ bindMoney(r.querySelector("[data-la]"),recalc); r.querySelector("[data-ldel]").onclick=()=>{ r.remove(); recalc(); };
+    r.querySelector("[data-lb]").onchange=e=>{ const b=data.billing.find(x=>x.id===e.target.value), la=r.querySelector("[data-la]"); if(b&&!la.value){ const rest=(splitsNow().corp||0)-linksNow().reduce((t,l)=>t+l.amount,0); la.value=fmtMoney(Math.max(0,Math.min(dueOf(b),rest>0?rest:dueOf(b)))); } recalc(); }; };
+  F.querySelectorAll("#kfLinks .lnkrow").forEach(wireLn);
+  if($("kfAddLn")) $("kfAddLn").onclick=()=>{ const t=document.createElement("div"); t.innerHTML=lnRow({}); const r=t.firstChild; $("kfLinks").appendChild(r); wireLn(r); };
+  bindMoney($("kfAmt"),recalc); recalc();
+  const origWire=FORM_MENU;
+  wire("bank",k,fd=>{ const o=Object.assign({},k,{id:k.id||uid(),bank:fd.bank,dt:fd.dt,amount:money(fd.amount),memo:(fd.memo||"").trim(),splits:splitsNow(),links:canLink?linksNow():(k.links||[]),createdAt:k.createdAt||new Date().toISOString()}); delete o.updatedBy; delete o.updatedAt; F._kb=o; return o; },
+    fd=>{ const a=money(fd.amount); if(!a) return "금액을 입력하세요.";
+      const sp=splitsNow(), ss=Object.values(sp).reduce((t,v)=>t+v,0); if(ss>a) return "구분 합계가 입금 금액보다 많습니다.";
+      if(SPLITS.some(([c])=>F.querySelector('[data-sc="'+c+'"]').checked&&!sp[c])) return "체크한 구분의 금액을 입력하세요.";
+      const ls=linksNow(); if(ls.reduce((t,l)=>t+l.amount,0)>(sp.corp||0)) return "청구 연결 금액이 기업 금액보다 많습니다.";
+      if(new Set(ls.map(l=>l.billingId)).size!==ls.length) return "같은 청구 건이 두 번 연결되었습니다.";
+      for(const l of ls){ const b=data.billing.find(x=>x.id===l.billingId); if(b&&l.amount>dueOf(b)) return clientOf(b).name+" 청구의 미수금("+fmtMoney(dueOf(b))+"원)보다 많이 연결했습니다."; }
+      return ""; }, async kb=>{ await syncBankLinks(kb, k.links||[]); });
+}
+async function syncBankLinks(kb, oldLinks, removing){
+  if(!can("billing","write")) return;
+  const newLinks=removing?[]:(kb.links||[]), ids=new Set(oldLinks.map(l=>l.billingId).concat(newLinks.map(l=>l.billingId)));
+  for(const id of ids){ const b=data.billing.find(x=>x.id===id); if(!b) continue;
+    const keep=(b.deposits||[]).filter(d=>d.bankRef!==kb.id), add=newLinks.filter(l=>l.billingId===id).map(l=>({date:String(kb.dt||"").slice(0,10),amount:l.amount,memo:(kb.memo||"")+" ("+kb.bank+")",bankRef:kb.id}));
+    const o=Object.assign({},b,{deposits:keep.concat(add)}); delete o.updatedBy; delete o.updatedAt; await saveItem("billing",o); }
+}
+
+/* ---------- EXPENSE (지출관리) ---------- */
+// 기본 구분: 메디인포 지출결의(2024.03~2026.09) 계정과목·중분류 정리 기준
+const EXPCAT_PRESETS=[["외주검사비","외주판독료",1,10],["외주검사비","외부위탁검사",1,10],["기타지급수수료","외부위탁검사",0,0],["우편요금","우편요금",1,0],["기타지급수수료","식사권",1,0],
+  ["기타지급수수료","대진의",0,0],["기타지급수수료","장비검사·품질관리",0,0],["기타지급수수료","프로그램·시스템 이용료",0,0],["기타지급수수료","행정수수료",0,0],
+  ["인쇄비","식사권·초대권 제작",0,0],["인쇄비","홍보물 제작",0,0],["기타소모품비","소모품 구입",0,0],["기타약품","마약류 의약품",0,0],["기타세금공과금","세금·공과금",0,0],
+  ["대외접대비","대외접대",0,0],["부서운영비","부서운영",0,0],["회의관련비","회의비",0,0],["기타연구비","연구 회의·식대",0,0],["은행예수금","수검자 환불",0,0],["은행예수금","직원 주차비 환불",0,0],
+  ["의료사고보상금","수검자 보상",0,0],["가지급금","접수·수납 전도금",0,0]];
+const catSorted=()=>data.expcat.slice().sort((a,b)=>((b.regular?1:0)-(a.regular?1:0))||String(a.acct).localeCompare(String(b.acct))||String(a.mid).localeCompare(String(b.mid)));
+const expCat=e=>data.expcat.find(c=>c.id===e.catId)||{acct:e.acct,mid:e.mid};
+let eMonth=thisMonth(), eAy=(m=>m[1]>=3?m[0]:m[0]-1)(thisMonth().split("-").map(Number)), eyMode="mid";
+function eShift(n){ const [y,m]=eMonth.split("-").map(Number); const d=new Date(y,m-1+n,1); eMonth=d.getFullYear()+"-"+pad(d.getMonth()+1); renderExpense(); }
+$("ePrev").onclick=()=>eShift(-1); $("eNext").onclick=()=>eShift(1); $("eThis").onclick=()=>{ eMonth=thisMonth(); renderExpense(); };
+$("eyPrev").onclick=()=>{ eAy--; renderExpense(); }; $("eyNext").onclick=()=>{ eAy++; renderExpense(); };
+$("eyMode").onclick=e=>{ const x=e.target.closest("[data-y]"); if(!x) return; eyMode=x.dataset.y; renderExpense(); };
+$("eQ").oninput=renderExpense; $("eAcct").onchange=renderExpense;
+$("ecBtn").onclick=()=>{ if(!can("expense","write")) return toast(ERRMSG.FORBIDDEN); expcatForm(); };
+function missingRegular(ym){ ym=ym||thisMonth(); return data.expcat.filter(c=>c.regular&&!data.expense.some(e=>e.catId===c.id&&(e.resolDate||"").slice(0,7)===ym)); }
+function renderExpense(){
+  if(!$("eTable")) return;
+  const tm=thisMonth(), today=todayStr(), dd=Number(today.slice(8));
+  // 알림
+  const miss=missingRegular(tm), late=miss.filter(c=>Number(c.dueDay)&&dd>Number(c.dueDay));
+  const alertHtml=miss.length?'<div class="alertbox'+(late.length?" red":"")+'">🔔 <b>'+Number(tm.slice(5))+'월 정기지출 '+miss.length+'건이 아직 지출결의 등록되지 않았어요.</b>'+(late.length?' (결의 기한 지남 '+late.length+'건)':'')
+    +'<div class="ar">'+miss.map(c=>'<button type="button" data-equick="'+esc(c.id)+'">'+esc(c.mid)+(Number(c.dueDay)?' · '+c.dueDay+'일까지':'')+(Number(c.dueDay)&&dd>Number(c.dueDay)?' ⚠':'')+' +</button>').join("")+'</div></div>':"";
+  $("eAlert").innerHTML=can("expense","view")?alertHtml:"";
+  if($("dExpAlert")) $("dExpAlert").innerHTML=can("expense","view")&&miss.length?alertHtml.replace('class="alertbox','style="cursor:pointer" data-go="expense" class="alertbox'):"";
+  if($("expBadge")){ $("expBadge").textContent=miss.length; $("expBadge").style.display=miss.length&&can("expense","view")?"":"none"; }
+  // KPI
+  const [ty,tmm]=[+tm.slice(0,4),+tm.slice(5)];
+  const ayDays=e=>{ const ym=(e.resolDate||"").slice(0,7); if(!ym) return false; const y=+ym.slice(0,4), m=+ym.slice(5); return acadYear(y,m)===eAy; };
+  const ayList=data.expense.filter(ayDays), sum=a=>a.reduce((t,e)=>t+(Number(e.amount)||0),0);
+  $("eAyL").textContent=eAy+"학년도 지출"; $("eAy").innerHTML=fmtMoney(sum(ayList))+"<small>원</small>"; $("eAyFt").textContent=eAy+".03 ~ "+(eAy+1)+".02 · "+ayList.length+"건";
+  const mo=data.expense.filter(e=>(e.resolDate||"").slice(0,7)===tm);
+  $("eMoL").textContent=tmm+"월 지출 (결의)"; $("eMo").innerHTML=fmtMoney(sum(mo))+"<small>원</small>"; $("eMoFt").textContent=mo.length+"건";
+  const py=data.expense.filter(e=>(e.payDate||"").slice(0,7)===tm), pyLeft=py.filter(e=>(e.payDate||"")>=today);
+  $("ePayL").textContent=tmm+"월 지급예정"; $("ePay").innerHTML=fmtMoney(sum(py))+"<small>원</small>"; $("ePayFt").textContent=py.length+"건 · 남은 지급 "+fmtMoney(sum(pyLeft))+"원";
+  $("eMiss").innerHTML=miss.length+"<small>건</small>"; $("eMissFt").textContent=data.expcat.filter(c=>c.regular).length+"개 정기 구분 중";
+  // 학년도 월별 통계
+  $("eyTitle").textContent=eAy+"학년도";
+  document.querySelectorAll("#eyMode [data-y]").forEach(x=>x.classList.toggle("on",x.dataset.y===eyMode));
+  const months=[]; for(let i=0;i<12;i++){ const d=new Date(eAy,2+i,1); months.push(d.getFullYear()+"-"+pad(d.getMonth()+1)); }
+  const keyOf=e=>{ const c=expCat(e); return eyMode==="acct"?(c.acct||"-"):(c.acct||"-")+"\u0001"+(c.mid||"-"); };
+  const grid={}; ayList.forEach(e=>{ const k=keyOf(e), ym=(e.resolDate||"").slice(0,7); grid[k]=grid[k]||{}; grid[k][ym]=(grid[k][ym]||0)+(Number(e.amount)||0); });
+  const cell=(v,ym)=>'<td class="money'+(ym===tm?" cur":"")+'">'+(v?fmtMoney(v):'<span class="z">-</span>')+'</td>';
+  const rowSum=o=>months.reduce((t,ym)=>t+(o[ym]||0),0);
+  let body="";
+  if(eyMode==="acct"){
+    Object.keys(grid).sort((a,b)=>rowSum(grid[b])-rowSum(grid[a])).forEach(k=>{ body+='<tr><td class="nm">'+esc(k)+'</td>'+months.map(ym=>cell(grid[k][ym],ym)).join("")+'<td class="money"><b>'+fmtMoney(rowSum(grid[k]))+'</b></td></tr>'; });
+  } else {
+    const accts={}; Object.keys(grid).forEach(k=>{ const [a]=k.split("\u0001"); (accts[a]=accts[a]||[]).push(k); });
+    Object.keys(accts).sort((a,b)=>accts[b].reduce((t,k)=>t+rowSum(grid[k]),0)-accts[a].reduce((t,k)=>t+rowSum(grid[k]),0)).forEach(a=>{
+      const at={}; accts[a].forEach(k=>months.forEach(ym=>at[ym]=(at[ym]||0)+(grid[k][ym]||0)));
+      body+='<tr class="acct"><td>'+esc(a)+'</td>'+months.map(ym=>cell(at[ym],ym)).join("")+'<td class="money">'+fmtMoney(rowSum(at))+'</td></tr>';
+      accts[a].sort((x,y)=>rowSum(grid[y])-rowSum(grid[x])).forEach(k=>{ body+='<tr><td style="padding-left:22px">'+esc(k.split("\u0001")[1])+'</td>'+months.map(ym=>cell(grid[k][ym],ym)).join("")+'<td class="money"><b>'+fmtMoney(rowSum(grid[k]))+'</b></td></tr>'; });
+    });
+  }
+  const mt={}; ayList.forEach(e=>{ const ym=(e.resolDate||"").slice(0,7); mt[ym]=(mt[ym]||0)+(Number(e.amount)||0); });
+  $("eStat").innerHTML=ayList.length?'<table><thead><tr><th>'+(eyMode==="acct"?"회계계정":"회계계정 / 중분류")+'</th>'+months.map(ym=>'<th class="num">'+Number(ym.slice(5))+'월</th>').join("")+'<th class="num">합계</th></tr></thead><tbody>'+body
+      +'<tr class="tot"><td>합계</td>'+months.map(ym=>cell(mt[ym],ym)).join("")+'<td class="money">'+fmtMoney(rowSum(mt))+'</td></tr></tbody></table>'
+    :'<div class="empty">'+eAy+'학년도 지출 내역이 없습니다.</div>';
+  // 목록
+  const [ey,em]=eMonth.split("-").map(Number); $("eTitle").textContent=ey+"년 "+em+"월";
+  const ca=$("eAcct").value, accts=[...new Set(data.expcat.map(c=>c.acct).concat(data.expense.map(e=>expCat(e).acct)).filter(Boolean))].sort();
+  $("eAcct").innerHTML='<option value="">전체 회계계정</option>'+accts.map(a=>'<option'+(a===ca?" selected":"")+'>'+esc(a)+'</option>').join("");
+  const q=$("eQ").value.trim().toLowerCase();
+  const rows=data.expense.filter(e=>{ const c=expCat(e); return (e.resolDate||"").slice(0,7)===eMonth&&(!ca||c.acct===ca)&&(!q||[c.mid,e.vendor,e.memo].join(" ").toLowerCase().includes(q)); }).sort((a,b)=>String(b.resolDate||"").localeCompare(String(a.resolDate||"")));
+  $("eTable").innerHTML=rows.length?rows.map(e=>{ const c=expCat(e); return '<tr><td class="nm" style="white-space:nowrap">'+esc(e.resolDate||"-")+'</td><td>'+esc(c.acct||"-")+'</td><td>'+(c.regular?'<span class="tag t-blu" style="margin-right:4px">정기</span>':'')+esc(c.mid||"-")+'</td><td>'+esc(e.vendor||"-")+'</td><td class="money"><b>'+fmtMoney(e.amount)+'</b></td><td>'+esc(e.invoiceDate||"-")+'</td><td>'+(e.payDate?esc(e.payDate)+(e.payDate<today?' <span class="tag t-gry">지남</span>':''):"-")+'</td><td class="mini2">'+esc(e.memo||"")+'</td><td><button class="btn btn-sm" data-eedit="'+esc(e.id)+'">수정</button></td></tr>'; }).join("")
+    :'<tr><td colspan="9" class="empty">'+em+'월 지출결의 내역이 없습니다.'+(data.expcat.length?'':' 먼저 <b>지출 구분 관리</b>에서 구분을 등록하세요.')+'</td></tr>';
+  $("eFoot").innerHTML=em+"월 표시 <b>"+rows.length+"건</b><span>합계 <b>"+fmtMoney(sum(rows))+"원</b></span>";
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-eedit]"); if(b) return expenseForm(data.expense.find(x=>x.id===b.dataset.eedit));
+  const q=e.target.closest("[data-equick]"); if(q){ e.stopPropagation(); if(cur!=="expense") go("expense"); expenseForm(null,q.dataset.equick); } }, true);
+function expenseForm(x,catId){
+  FORM_MENU="expense";
+  x=x||{}; const ed=!!x.id, cats=catSorted(), sel=x.catId||catId||"";
+  const prev=sel?data.expense.filter(e=>e.catId===sel).sort((a,b)=>String(b.resolDate).localeCompare(String(a.resolDate)))[0]:null;
+  const body=fld("결의일자","resolDate",x.resolDate||todayStr(),"date",true)
+   +'<div><label>회계계정 · 중분류 <span class="req">*</span>'+(can("expense","write")?' <button type="button" class="link" id="efCat" style="float:right;padding:0">구분 관리 ›</button>':'')+'</label><select name="catId" id="efCatSel" required><option value="">선택</option>'
+     +[...new Set(cats.map(c=>c.acct))].map(a=>'<optgroup label="'+esc(a)+'">'+cats.filter(c=>c.acct===a).map(c=>'<option value="'+esc(c.id)+'"'+(c.id===sel?" selected":"")+'>'+esc(c.mid)+(c.regular?" (정기)":"")+'</option>').join("")+'</optgroup>').join("")+'</select></div>'
+   +fld("지출금액 (원)","amount",x.amount?fmtMoney(x.amount):(prev&&!ed?fmtMoney(prev.amount):""),"text",true,"",'inputmode="numeric" id="efAmt"')
+   +fld("거래처","vendor",x.vendor||(prev&&!ed?prev.vendor:""),"text",false,"",'placeholder="예: 검사의학재단" list="efVen"')+'<datalist id="efVen">'+[...new Set(data.expense.map(e=>e.vendor).filter(Boolean))].map(v=>'<option value="'+esc(v)+'">').join("")+'</datalist>'
+   +fld("계산서일자 (발급일)","invoiceDate",x.invoiceDate,"date")
+   +fld("지급예정일","payDate",x.payDate,"date")
+   +fld("적요","memo",x.memo||(prev&&!ed?"":""),"text",false,"full",'placeholder="예: 10월분 외주판독료"')
+   +(prev&&!ed?'<div class="full subt">💡 지난 결의('+esc(prev.resolDate)+') 금액·거래처를 미리 채웠어요. 이번 금액에 맞게 고쳐 주세요.</div>':'');
+  openModal(shell(ed?"지출 수정":"지출 등록",body,ed));
+  bindMoney($("efAmt"));
+  if($("efCat")) $("efCat").onclick=()=>{ const fd=Object.fromEntries(new FormData($("mform")).entries()); expcatForm(()=>expenseForm(Object.assign({},x,fd,{amount:money(fd.amount)}),fd.catId)); };
+  wire("expense",x,fd=>{ const c=data.expcat.find(z=>z.id===fd.catId)||{}; const o=Object.assign({},x,{resolDate:fd.resolDate,catId:fd.catId,acct:c.acct||"",mid:c.mid||"",amount:money(fd.amount),vendor:(fd.vendor||"").trim(),invoiceDate:fd.invoiceDate||"",payDate:fd.payDate||"",memo:(fd.memo||"").trim(),createdAt:x.createdAt||new Date().toISOString()}); delete o.updatedBy; delete o.updatedAt; return o; },
+    fd=>!fd.catId?"회계계정·중분류를 선택하세요.":!money(fd.amount)?"지출금액을 입력하세요.":"");
+}
+function expcatForm(onClose){
+  const close=()=>{ if(onClose) onClose(); else closeModal(); };
+  const draw=()=>{
+    const list=catSorted(), used=id=>data.expense.filter(e=>e.catId===id).length;
+    const accts=[...new Set(EXPCAT_PRESETS.map(p=>p[0]).concat(data.expcat.map(c=>c.acct)).filter(Boolean))];
+    $("modal").innerHTML='<div class="mh">지출 구분 관리<button type="button" data-cclose2>'+X+'</button></div><div class="mb"><div class="full"><datalist id="acctList">'+accts.map(a=>'<option value="'+esc(a)+'">').join("")+'</datalist>'
+      +(list.length?'':'<div class="alertbox" style="margin-bottom:12px">아직 구분이 없어요. <b>이전에 정리하신 메디인포 지출결의 계정과목·중분류</b>('+EXPCAT_PRESETS.length+'개)를 한 번에 넣을 수 있어요.<div class="ar"><button type="button" id="ecPreset">기본 구분 넣기</button></div></div>')
+      +'<div class="ecrow" style="font-size:12px;color:var(--mute);font-weight:600"><span>회계계정</span><span>중분류</span><span>매월 정기</span><span>결의 기한</span><span></span></div>'
+      +list.map(c=>'<div class="ecrow"><input data-ecid="'+esc(c.id)+'" data-f="acct" list="acctList" value="'+esc(c.acct||"")+'"><input data-ecid="'+esc(c.id)+'" data-f="mid" value="'+esc(c.mid||"")+'"><label class="rg"><input type="checkbox" data-ecid="'+esc(c.id)+'" data-f="regular"'+(c.regular?" checked":"")+'>정기</label><input data-ecid="'+esc(c.id)+'" data-f="dueDay" type="number" min="0" max="31" placeholder="일" value="'+(Number(c.dueDay)||"")+'" title="매월 며칠까지 결의 (비우면 기한 없음)"><button type="button" class="ibtn" data-ecdel="'+esc(c.id)+'" title="삭제 (사용 '+used(c.id)+'건)">'+X+'</button></div>').join("")
+      +'<div class="ecrow" style="margin-top:14px"><input id="nc2_acct" list="acctList" placeholder="회계계정 (예: 외주검사비)"><input id="nc2_mid" placeholder="중분류 (예: 외주판독료)"><label class="rg"><input type="checkbox" id="nc2_reg">정기</label><input id="nc2_due" type="number" min="0" max="31" placeholder="일"><button type="button" class="btn btn-p" id="nc2Add" style="height:36px;padding:0;justify-content:center">+</button></div>'
+      +'<div class="subt">"정기"로 체크한 구분은 이번달 지출결의가 없으면 알림이 떠요. 결의 기한(일)을 넣으면 그 날짜가 지났을 때 빨간색으로 표시돼요.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn btn-p" data-cclose2>'+(onClose?"완료 · 돌아가기":"닫기")+'</button></div>';
+    $("modal").querySelectorAll("[data-cclose2]").forEach(b=>b.onclick=close);
+    if($("ecPreset")) $("ecPreset").onclick=async()=>{ $("ecPreset").disabled=true; $("ecPreset").textContent="넣는 중…";
+      try{ for(const [a,m,r,d] of EXPCAT_PRESETS){ if(!data.expcat.some(c=>c.acct===a&&c.mid===m)) await saveItem("expcat",{acct:a,mid:m,regular:!!r,dueDay:d||0,createdAt:new Date().toISOString()}); } toast("기본 구분을 넣었습니다."); draw(); }
+      catch(e){ $("ferr").textContent=e.message; } };
+    $("modal").querySelectorAll("[data-ecid]").forEach(inp=>inp.onchange=async()=>{
+      const c=data.expcat.find(z=>z.id===inp.dataset.ecid); if(!c) return; const f=inp.dataset.f;
+      const v=f==="regular"?inp.checked:f==="dueDay"?(Number(inp.value)||0):inp.value.trim();
+      if((f==="mid"||f==="acct")&&!v){ inp.value=c[f]; return; }
+      try{ const o=Object.assign({},c,{[f]:v}); delete o.updatedBy; delete o.updatedAt; await saveItem("expcat",o); toast("저장했습니다."); }catch(e){ $("ferr").textContent=e.message; }
+    });
+    $("modal").querySelectorAll("[data-ecdel]").forEach(b=>b.onclick=async()=>{
+      const c=data.expcat.find(z=>z.id===b.dataset.ecdel); if(!c) return;
+      if(!can("expense","del")){ $("ferr").textContent=ERRMSG.FORBIDDEN; return; }
+      if(b.dataset.confirm!=="1"){ b.dataset.confirm="1"; b.style.background="var(--red)"; b.style.color="#fff"; $("ferr").textContent="'"+c.mid+"' 삭제하려면 한 번 더 누르세요."+(used(c.id)?" (지출 "+used(c.id)+"건은 계정·중분류 이름으로 남아요)":""); return; }
+      b.disabled=true; try{ await deleteItem("expcat",c.id); toast("삭제했습니다."); draw(); }catch(e){ $("ferr").textContent=e.message||"삭제 실패"; }
+    });
+    $("nc2Add").onclick=async()=>{ const a=$("nc2_acct").value.trim(), m=$("nc2_mid").value.trim();
+      if(!a||!m){ $("ferr").textContent="회계계정과 중분류를 입력하세요."; return; }
+      if(data.expcat.some(c=>c.acct===a&&c.mid===m)){ $("ferr").textContent="이미 있는 구분입니다."; return; }
+      $("nc2Add").disabled=true;
+      try{ await saveItem("expcat",{acct:a,mid:m,regular:$("nc2_reg").checked,dueDay:Number($("nc2_due").value)||0,createdAt:new Date().toISOString()}); toast(m+" 추가했습니다."); draw(); }
+      catch(e){ $("ferr").textContent=e.message; $("nc2Add").disabled=false; } };
+  };
+  showMask(); draw();
+}
+
 /* ---------- DEMO (구경하러 가기 · 예시 데이터) ---------- */
 function demoData(){
   const T=new Date(), D=n=>{ const d=new Date(T); d.setDate(d.getDate()+n); return dStr(d); }, M=n=>{ const d=new Date(T.getFullYear(),T.getMonth()+n,1); return d.getFullYear()+"-"+pad(d.getMonth()+1); };
@@ -1494,10 +1799,40 @@ function demoData(){
     {id:"n2",cat:"검진 안내",month:thisM,title:"연말 검진 예약 마감 일정 안내",content:"연말 검진 수요 증가로 12월 예약은 셋째 주 금요일까지 접수합니다.\n당일 접수는 받지 않습니다.",author:"예약 파트",pinned:"N",createdAt:D(-4)+"T09:00:00"},
     {id:"n3",cat:"일반",month:thisM,title:"토요 검진 근무자 확인 요청",content:"이번 주 토요 검진 근무자는 워킹데이 계획에서 확인해 주세요.",author:"원무",pinned:"N",createdAt:D(-2)+"T09:00:00"},
     {id:"n4",cat:"무이자 할부",month:lastM,title:Number(lastM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~5개월 무이자\n- B카드: 2~3개월 무이자",author:"기획·협약 파트",pinned:"N",createdAt:dayIn(lastM,"01")+"T09:00:00"}];
-  const all={contracts,oxygen,mail,staff,workday,package:pk,notice,client,billing,exam};
+  const expcat=EXPCAT_PRESETS.map((p,i)=>({id:"ec"+i,acct:p[0],mid:p[1],regular:!!p[2],dueDay:p[3]||0}));
+  const ecId=(a,m)=>expcat.find(c=>c.acct===a&&c.mid===m).id;
+  const EX=(rd,a,m,amt,v,inv,pay,memo)=>({id:"e"+Math.random().toString(36).slice(2,8),resolDate:rd,catId:ecId(a,m),acct:a,mid:m,amount:amt,vendor:v,invoiceDate:inv||"",payDate:pay||"",memo:memo||""});
+  const expense=[];
+  [M(-8),M(-7),M(-6),M(-5),M(-4),M(-3),M(-2),lastM].forEach((ym,i)=>{ const pm=Number(M(-9+i).slice(5));
+    expense.push(EX(dayIn(ym,"07"),"외주검사비","외주판독료",3200000+i*90000,"(예시) 원격판독센터",dayIn(ym,"05"),dayIn(ym,"25"),pm+"월분 외주판독료"));
+    expense.push(EX(dayIn(ym,"08"),"외주검사비","외부위탁검사",2100000+(i%3)*240000,"(예시) 검사의학재단",dayIn(ym,"05"),dayIn(ym,"25"),pm+"월분 외부위탁검사"));
+    expense.push(EX(dayIn(ym,"12"),"기타지급수수료","식사권",5400000+(i%4)*320000,"(예시) 푸드서비스",dayIn(ym,"10"),dayIn(ym,"28"),pm+"월 수검자 식사권"));
+    expense.push(EX(dayIn(ym,"20"),"우편요금","우편요금",410000+(i%5)*35000,"(예시) 광명우체국","","",pm+"월 결과지 우편발송"));
+    if(i%3===0) expense.push(EX(dayIn(ym,"15"),"기타지급수수료","대진의",2400000,"(예시) 대진의 OOO","","",""));
+    if(i%4===1) expense.push(EX(dayIn(ym,"18"),"기타소모품비","소모품 구입",380000,"(예시) 사무용품몰","","",""));
+  });
+  expense.push(EX(dayIn(thisM,"06"),"외주검사비","외주판독료",3950000,"(예시) 원격판독센터",dayIn(thisM,"05"),D(10)>dayIn(thisM,"25")?D(10):dayIn(thisM,"25"),Number(lastM.slice(5))+"월분 외주판독료"));
+  expense.push(EX(dayIn(thisM,"11"),"기타지급수수료","장비검사·품질관리",660000,"(예시) 의료영상품질관리원",dayIn(thisM,"10"),D(7),"특수의료장비 품질관리"));
+  const bank=[];
+  const BK=(bk,dt,memo,amt,sp,links)=>bank.push({id:"k"+Math.random().toString(36).slice(2,8),bank:bk,dt,memo,amount:amt,splits:sp,links:links||[]});
+  BK("우리은행",dayIn(thisM,"12")+"T10:21","소하산업검진비",12400000,{corp:12400000},[{billingId:"b1",amount:12400000}]);
+  BK("우리은행",dayIn(thisM,"10")+"T14:05","광명물류(주)",3000000,{corp:3000000},[{billingId:"b2",amount:3000000}]);
+  BK("우리은행",dayIn(thisM,"09")+"T11:40","하안건설 3분기",15600000,{corp:15600000},[{billingId:"b4",amount:15600000}]);
+  BK("우리은행",dayIn(thisM,"02")+"T09:12","광명물류 잔금",2000000,{corp:2000000},[{billingId:"b7",amount:2000000}]);
+  BK("농협은행",dayIn(thisM,"15")+"T09:30","국민건강보험공단",8640000,{gongdan:8640000});
+  BK("농협은행",dayIn(thisM,"05")+"T16:44","카드매출입금",3210000,{indiv:3210000});
+  BK("농협은행",dayIn(thisM,"07")+"T13:10","철산전자 선입금",1500000,{corp:1000000,prepaid:500000});
+  BK("우리은행",dayIn(thisM,"08")+"T17:20","주차정산",184000,{parking:184000});
+  BK("농협은행",dayIn(thisM,"11")+"T10:02","이자",12340,{misc:12340});
+  BK("우리은행",dayIn(thisM,"13")+"T15:55","김OO",250000,{});
+  BK("농협은행",dayIn(lastM,"15")+"T09:30","국민건강보험공단",7980000,{gongdan:7980000});
+  BK("우리은행",dayIn(lastM,"14")+"T10:00","소하산업검진비",11200000,{corp:11200000},[{billingId:"b6",amount:11200000}]);
+  // 청구 입금 중 통장 연동분 표시
+  bank.forEach(k=>(k.links||[]).forEach(l=>{ const b=billing.find(x=>x.id===l.billingId); if(!b) return; const d=(b.deposits||[]).find(x=>!x.bankRef&&x.amount===l.amount); if(d){ d.bankRef=k.id; d.memo=(k.memo||"")+" ("+k.bank+")"; } }));
+  const all={contracts,oxygen,mail,staff,workday,package:pk,notice,client,billing,exam,bank,expense,expcat};
   Object.values(all).forEach(arr=>arr.forEach(x=>{ x.createdAt=x.createdAt||now; x.updatedBy=by; }));
   const users=[{id:"demo",email:"demo@sovis",name:"체험 사용자",part:"관리자",is_admin:true,perms:{},active:true},
-    {id:"u2",email:"plan@example.com",name:"김민지",part:"기획예약파트",is_admin:false,active:true,perms:{notice:{view:true,write:true},contracts:{view:true,write:true},billing:{view:true},workday:{view:true,write:true},oxygen:{view:true,write:true},mail:{view:true,write:true}}},
+    {id:"u2",email:"plan@example.com",name:"김민지",part:"기획예약파트",is_admin:false,active:true,perms:{notice:{view:true,write:true},contracts:{view:true,write:true},billing:{view:true},bank:{view:true},expense:{view:true,write:true},workday:{view:true,write:true},oxygen:{view:true,write:true},mail:{view:true,write:true}}},
     {id:"u3",email:"pay@example.com",name:"최유나",part:"수납파트",is_admin:false,active:true,perms:{notice:{view:true},billing:{view:true,write:true},workday:{view:true}}}];
   return {data:all,users};
 }
@@ -1762,7 +2097,7 @@ $("wCopy").onclick=async()=>{
   catch(e){ openModal('<div class="mh">월간 요약<button type="button" data-close>'+X+'</button></div><div class="mb"><div class="full"><textarea style="min-height:320px;font-size:13px" readonly>'+esc(txt)+'</textarea></div></div>'); $("modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal); }
 };
 
-function renderAll(){ renderDashboard(); renderContracts(); renderOxygen(); renderMail(); renderWorkday(); renderNotice(); renderBilling(); }
+function renderAll(){ renderDashboard(); renderContracts(); renderOxygen(); renderMail(); renderWorkday(); renderNotice(); renderBilling(); renderBank(); renderExpense(); }
 renderAll();
 if(GAS && TOKEN){ api("me").then(u=>{ ME=u; enter(); }).catch(()=>{ TOKEN=""; try{sessionStorage.removeItem("sovis_token");}catch(e){} setTimeout(()=>$("lgEmail").focus(),60); }); }
 else setTimeout(()=>$("lgEmail").focus(),60);
