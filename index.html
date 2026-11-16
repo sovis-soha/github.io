@@ -493,7 +493,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       <div class="err" id="loginErr"></div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.3.1 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.3.3 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -522,7 +522,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.3.1 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.3.3 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -724,19 +724,19 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
       <div class="card" style="margin-bottom:16px">
         <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="eyPrev"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="eyTitle"></b><button class="btn btn-ic" id="eyNext"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div></div>
-          <h3 style="margin-left:6px;white-space:nowrap">월별 지출 통계</h3><span class="hint eyhint">3월~익년 2월</span>
-          <div class="right"><div class="basis" id="eyView"><button data-w="chart" class="on">📈 그래프</button><button data-w="list">📋 표</button></div><div class="basis" id="eyChart"><button data-c="line" class="on">선</button><button data-c="bar">막대</button></div><div class="basis" id="eyBasis"><button data-b="use" class="on">귀속월</button><button data-b="resol">결의일</button></div><div class="basis" id="eyMode"><button data-y="mid" class="on">중분류별</button><button data-y="acct">회계계정별</button></div></div></div>
+          <h3 style="margin-left:6px;white-space:nowrap">월별 지출 통계</h3><span class="hint eyhint">결의일자 기준 · 3월~익년 2월</span>
+          <div class="right"><div class="basis" id="eyView"><button data-w="chart" class="on">📈 그래프</button><button data-w="list">📋 표</button></div><div class="basis" id="eyChart"><button data-c="line" class="on">선</button><button data-c="bar">막대</button></div><div class="basis" id="eyMode"><button data-y="mid" class="on">중분류별</button><button data-y="acct">회계계정별</button></div></div></div>
         <div class="ystat" id="eStat"></div>
       </div>
       <div class="card">
-        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="ePrev"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="eTitle"></b><button class="btn btn-ic" id="eNext"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="eThis">전월분</button></div>
+        <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="ePrev"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="eTitle"></b><button class="btn btn-ic" id="eNext"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div><button class="btn btn-sm" id="eThis">이번달</button></div>
           <div class="right">
             <button class="btn" id="ecBtn"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M4 6h16M4 12h10M4 18h7"/></svg>지출 구분 관리</button>
             <select class="sel" id="eAcct"><option value="">전체 회계계정</option></select>
-            <label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="eQ" placeholder="중분류, 거래처, 적요"></label>
+            <label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="eQ" placeholder="전체 기간 검색 (중분류·거래처·적요)"></label>
           </div>
         </div>
-        <div class="tw"><table><thead><tr><th>결의일자</th><th>귀속월</th><th>회계계정</th><th>중분류</th><th>거래처</th><th class="num">지출금액</th><th>계산서일자</th><th>지급예정일</th><th>적요</th><th></th></tr></thead><tbody id="eTable"></tbody></table></div>
+        <div class="tw"><table><thead><tr><th>결의일자</th><th>회계계정</th><th>중분류</th><th>거래처</th><th class="num">지출금액</th><th>계산서일자</th><th>지급예정일</th><th>적요</th><th></th></tr></thead><tbody id="eTable"></tbody></table></div>
         <div class="pf" id="eFoot"></div>
       </div>
     </section>
@@ -1259,7 +1259,7 @@ var SOVIS_SHEETS = [
   ["resv","예약",[["date","날짜"],["corp","기업"],["gen","개인(일검)"],["comp","개인(종검)"],["intl","국제"],["total","합계"],["memo","메모"],["updatedBy","최종수정자"]]],
   ["visit","검진",[["date","날짜"],["corp","기업"],["gen","개인(일검)"],["comp","개인(종검)"],["intl","국제"],["total","합계"],["memo","메모"],["updatedBy","최종수정자"]]],
   ["bank","통장",[["bank","은행"],["dt","입금일시"],["memo","적요"],["note","비고"],["intl","국제환자"],["amount","금액"],["gongdan","공단"],["corp","기업"],["indiv_gen","개인(일검)"],["indiv_comp","개인(종검)"],["indiv","개인(구분없음)"],["parking","주차비"],["misc","잡이익"],["prepaid","선수금"],["unsplit","미분류"],["receipts","새롬 수납(일자 금액)"],["unreceipted","미수납"],["links","청구 연동"],["updatedBy","최종수정자"]]],
-  ["expense","지출",[["resolDate","결의일자"],["useMonth","귀속월"],["acct","회계계정"],["mid","중분류"],["vendor","거래처"],["amount","지출금액"],["invoiceDate","계산서일자(발급일)"],["payDate","지급예정일"],["memo","적요"],["resolNo","결의번호"],["slipNo","전표번호"],["applicant","신청자"],["updatedBy","최종수정자"]]],
+  ["expense","지출",[["resolDate","결의일자"],["acct","회계계정"],["mid","중분류"],["vendor","거래처"],["amount","지출금액"],["invoiceDate","계산서일자(발급일)"],["payDate","지급예정일"],["memo","적요"],["resolNo","결의번호"],["slipNo","전표번호"],["applicant","신청자"],["updatedBy","최종수정자"]]],
   ["expcat","지출구분",[["acct","회계계정"],["mid","중분류"],["regular","매월 정기"],["memo","비고"]]],
   ["users","계정",[["email","아이디"],["name","이름"],["part","구분"],["is_admin","관리자"],["active","사용"],["perms","메뉴권한"]]]
 ];
@@ -1290,7 +1290,6 @@ function sovisBuildSheets(data, users){
       if (["corp","gen","comp","intl"].indexOf(key)>=0) return ct[key] ? Number(ct[key]) : "";
       if (key==="total") return ["corp","gen","comp","intl"].reduce(function(t,k){ return t + (Number(ct[k])||0); }, 0);
     }
-    if (kind==="expense" && key==="useMonth" && !v && row.resolDate) { var y=+row.resolDate.slice(0,4), m=+row.resolDate.slice(5,7)-1; if(m<1){ m=12; y--; } return y+"-"+(m<10?"0":"")+m; }
     if (kind==="expcat" && key==="regular") return v ? "정기" : "";
     if (kind==="contracts" && key==="mgmtType") return row.type!=="MOU협약" ? "" : (v==="platform" ? "플랫폼(" + (row.platform||"") + ")" : (v==="self" ? "자체관리" : ""));
     if (kind==="contracts" && key==="subsidies") return (Array.isArray(v)?v:[]).map(function(x){ return (x.grade||"") + " " + (Number(x.amount)||0).toLocaleString("ko-KR") + "원" + (x.memo ? "(" + x.memo + ")" : ""); }).join(", ");
@@ -1372,7 +1371,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.3.1",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.3.3",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1807,22 +1806,21 @@ const EXPCAT_PRESETS=[["외주검사비","외주판독료",1,10],["외주검사�
   ["대외접대비","대외접대",0,0],["부서운영비","부서운영",0,0],["회의관련비","회의비",0,0],["기타연구비","연구 회의·식대",0,0],["은행예수금","수검자 환불",0,0],["은행예수금","직원 주차비 환불",0,0],
   ["의료사고보상금","수검자 보상",0,0],["가지급금","접수·수납 전도금",0,0]];
 const catSorted=()=>data.expcat.slice().sort((a,b)=>((b.regular?1:0)-(a.regular?1:0))||String(a.acct).localeCompare(String(b.acct))||String(a.mid).localeCompare(String(b.mid)));
-const useM=e=>e.useMonth||(e.resolDate?ymAdd(e.resolDate.slice(0,7),-1):"");
+const useM=e=>(e.resolDate||"").slice(0,7); // 결의일자 기준
 function bizDayIdx(ds){ const ym=ds.slice(0,7); let n=0; for(let d=1;d<=Number(ds.slice(8));d++){ const x=ym+"-"+pad(d), w=dObj(x).getDay(); if(w!==0&&w!==6&&!HOL[x]) n++; } return n; }
 const expCat=e=>data.expcat.find(c=>c.id===e.catId)||{acct:e.acct,mid:e.mid};
-let eMonth=ymAdd(thisMonth(),-1), eAy=(m=>m[1]>=3?m[0]:m[0]-1)(thisMonth().split("-").map(Number)), eyMode="mid", eyBasis="use", eyView=(()=>{ try{ return localStorage.getItem("sovis_eyview")||"chart"; }catch(e){ return "chart"; } })();
+let eMonth=thisMonth(), eAy=(m=>m[1]>=3?m[0]:m[0]-1)(thisMonth().split("-").map(Number)), eyMode="mid", eyBasis="use", eyView=(()=>{ try{ return localStorage.getItem("sovis_eyview")||"chart"; }catch(e){ return "chart"; } })();
 function eShift(n){ const [y,m]=eMonth.split("-").map(Number); const d=new Date(y,m-1+n,1); eMonth=d.getFullYear()+"-"+pad(d.getMonth()+1); renderExpense(); }
-$("ePrev").onclick=()=>eShift(-1); $("eNext").onclick=()=>eShift(1); $("eThis").onclick=()=>{ eMonth=ymAdd(thisMonth(),-1); renderExpense(); };
+$("ePrev").onclick=()=>eShift(-1); $("eNext").onclick=()=>eShift(1); $("eThis").onclick=()=>{ eMonth=thisMonth(); renderExpense(); };
 $("eyPrev").onclick=()=>{ eAy--; renderExpense(); }; $("eyNext").onclick=()=>{ eAy++; renderExpense(); };
 $("eyView").onclick=e=>{ const x=e.target.closest("[data-w]"); if(!x) return; eyView=x.dataset.w; try{localStorage.setItem("sovis_eyview",eyView);}catch(er){} renderExpense(); };
 $("eStat").addEventListener("click",e=>{ const g=e.target.closest("[data-ym]"); if(!g) return; eMonth=g.dataset.ym; renderExpense(); $("eTable").closest(".card").scrollIntoView({behavior:"smooth",block:"start"}); });
 $("eyChart").onclick=e=>{ const x=e.target.closest("[data-c]"); if(!x) return; eyChart=x.dataset.c; try{localStorage.setItem("sovis_eychart",eyChart);}catch(er){} renderExpense(); };
 $("eStat").addEventListener("click",e=>{ const f=e.target.closest("[data-ef]"); if(!f) return; e.stopPropagation(); eyFocus=eyFocus===f.dataset.ef?"":f.dataset.ef; renderExpense(); },true);
-$("eyBasis").onclick=e=>{ const x=e.target.closest("[data-b]"); if(!x) return; eyBasis=x.dataset.b; renderExpense(); };
 $("eyMode").onclick=e=>{ const x=e.target.closest("[data-y]"); if(!x) return; eyMode=x.dataset.y; renderExpense(); };
 $("eQ").oninput=renderExpense; $("eAcct").onchange=renderExpense;
 $("ecBtn").onclick=()=>{ if(!can("expense","write")) return toast(ERRMSG.FORBIDDEN); expcatForm(); };
-function missingRegular(ym){ ym=ym||ymAdd(thisMonth(),-1); const seenMid=new Set(); return data.expcat.filter(c=>{ if(!c.regular||seenMid.has(c.mid)) return false; seenMid.add(c.mid); return !data.expense.some(e=>(e.catId===c.id||expCat(e).mid===c.mid)&&useM(e)===ym); }); }
+function missingRegular(ym){ ym=ym||thisMonth(); const seenMid=new Set(); return data.expcat.filter(c=>{ if(!c.regular||seenMid.has(c.mid)) return false; seenMid.add(c.mid); return !data.expense.some(e=>(e.catId===c.id||expCat(e).mid===c.mid)&&useM(e)===ym); }); }
 const ECOL=["#5b6cff","#22c3a6","#ff7a90","#ffb547","#8b7cf6","#38bdf8","#9bd36b","#f472b6","#c3cad5"];
 let eyChart=(()=>{ try{ return localStorage.getItem("sovis_eychart")||"line"; }catch(e){ return "line"; } })(), eyFocus="";
 function expChart(grid,months,mt,tm){
@@ -1871,17 +1869,16 @@ function renderExpense(){
   if(!$("eTable")) return;
   const tm=thisMonth(), today=todayStr(), dd=Number(today.slice(8));
   // 알림
-  const pm=ymAdd(tm,-1), miss=missingRegular(pm), bd=bizDayIdx(today), lv=bd>5?"red":bd>=3?"warn":"info";
+  const pm=ymAdd(tm,-1), miss=missingRegular(tm), bd=bizDayIdx(today), lv=bd>5?"red":bd>=3?"warn":"info";
   const lvTxt=lv==="red"?"⛔ 영업일 5일이 지났어요":lv==="warn"?"⚠ 영업일 "+bd+"일째 · 5영업일 안에 결의하세요":"이번달 영업일 "+bd+"일째 · 5영업일 안에 결의";
-  const alertHtml=miss.length?'<div class="alertbox'+(lv==="red"?" red":lv==="info"?" info":"")+'">🔔 <b>'+Number(pm.slice(5))+'월분 정기지출 '+miss.length+'건이 아직 지출결의 등록되지 않았어요.</b> <span style="font-weight:600">('+lvTxt+')</span>'
+  const alertHtml=miss.length?'<div class="alertbox'+(lv==="red"?" red":lv==="info"?" info":"")+'">🔔 <b>'+Number(tm.slice(5))+'월 정기지출 결의 '+miss.length+'건이 아직 등록되지 않았어요.</b> <span style="font-weight:500">('+Number(pm.slice(5))+'월 사용분)</span> <span style="font-weight:600">('+lvTxt+')</span>'
     +'<div class="ar">'+miss.map(c=>'<button type="button" data-equick="'+esc(c.id)+'">'+esc(c.mid)+' +</button>').join("")+'</div></div>':"";
   $("eAlert").innerHTML=can("expense","view")?alertHtml:"";
   if($("dExpAlert")) $("dExpAlert").innerHTML=can("expense","view")&&miss.length?alertHtml.replace('class="alertbox','style="cursor:pointer" data-go="expense" class="alertbox'):"";
   if($("expBadge")){ $("expBadge").textContent=miss.length; $("expBadge").style.display=miss.length&&can("expense","view")?"":"none"; }
   // KPI
   const [ty,tmm]=[+tm.slice(0,4),+tm.slice(5)];
-  const statYm=e=>eyBasis==="use"?useM(e):(e.resolDate||"").slice(0,7);
-  document.querySelectorAll("#eyBasis [data-b]").forEach(x=>x.classList.toggle("on",x.dataset.b===eyBasis));
+  const statYm=e=>(e.resolDate||"").slice(0,7);
   const ayDays=e=>{ const ym=statYm(e); if(!ym) return false; const y=+ym.slice(0,4), m=+ym.slice(5); return acadYear(y,m)===eAy; };
   const ayList=data.expense.filter(ayDays), sum=a=>a.reduce((t,e)=>t+(Number(e.amount)||0),0);
   $("eAyL").textContent=eAy+"학년도 지출"; $("eAy").innerHTML=fmtMoney(sum(ayList))+"<small>원</small>"; $("eAyFt").textContent=eAy+".03 ~ "+(eAy+1)+".02 · "+ayList.length+"건";
@@ -1889,7 +1886,7 @@ function renderExpense(){
   $("eMoL").textContent=tmm+"월 지출 (결의)"; $("eMo").innerHTML=fmtMoney(sum(mo))+"<small>원</small>"; $("eMoFt").textContent=mo.length+"건";
   const py=data.expense.filter(e=>(e.payDate||"").slice(0,7)===tm), pyLeft=py.filter(e=>(e.payDate||"")>=today);
   $("ePayL").textContent=tmm+"월 지급예정"; $("ePay").innerHTML=fmtMoney(sum(py))+"<small>원</small>"; $("ePayFt").textContent=py.length+"건 · 남은 지급 "+fmtMoney(sum(pyLeft))+"원";
-  $("eMiss").innerHTML=miss.length+"<small>건</small>"; $("eMissL").textContent=Number(pm.slice(5))+"월분 정기지출 미등록"; $("eMissFt").textContent=data.expcat.filter(c=>c.regular).length+"개 정기 구분 중 · 익월 5영업일 내 결의";
+  $("eMiss").innerHTML=miss.length+"<small>건</small>"; $("eMissL").textContent=Number(tm.slice(5))+"월 정기지출 미결의"; $("eMissFt").textContent=data.expcat.filter(c=>c.regular).length+"개 정기 구분 중 · 매월 5영업일 내 결의";
   // 학년도 월별 통계
   $("eyTitle").textContent=eAy+"학년도";
   document.querySelectorAll("#eyMode [data-y]").forEach(x=>x.classList.toggle("on",x.dataset.y===eyMode));
@@ -1912,18 +1909,17 @@ function renderExpense(){
     });
   }
   const mt={}; ayList.forEach(e=>{ const ym=statYm(e); mt[ym]=(mt[ym]||0)+(Number(e.amount)||0); });
-  $("eStat").innerHTML=!ayList.length?'<div class="empty">'+eAy+'학년도 지출 내역이 없습니다.</div>':eyView==="chart"?expChart(grid,months,mt,eyBasis==="use"?ymAdd(tm,-1):tm):'<table><thead><tr><th>'+(eyMode==="acct"?"회계계정":"회계계정 / 중분류")+'</th>'+months.map(ym=>'<th class="num">'+Number(ym.slice(5))+'월</th>').join("")+'<th class="num">합계</th></tr></thead><tbody>'+body
+  $("eStat").innerHTML=!ayList.length?'<div class="empty">'+eAy+'학년도 지출 내역이 없습니다.</div>':eyView==="chart"?expChart(grid,months,mt,tm):'<table><thead><tr><th>'+(eyMode==="acct"?"회계계정":"회계계정 / 중분류")+'</th>'+months.map(ym=>'<th class="num">'+Number(ym.slice(5))+'월</th>').join("")+'<th class="num">합계</th></tr></thead><tbody>'+body
       +'<tr class="tot"><td>합계</td>'+months.map(ym=>cell(mt[ym],ym)).join("")+'<td class="money">'+fmtMoney(rowSum(mt))+'</td></tr></tbody></table>'
     ;
   // 목록
-  const [ey,em]=eMonth.split("-").map(Number); $("eTitle").textContent=ey+"년 "+em+"월분";
+  const q=$("eQ").value.trim().toLowerCase(); const [ey,em]=eMonth.split("-").map(Number); $("eTitle").textContent=q?"🔍 전체 기간 검색":ey+"년 "+em+"월";
   const ca=$("eAcct").value, accts=[...new Set(data.expcat.map(c=>c.acct).concat(data.expense.map(e=>expCat(e).acct)).filter(Boolean))].sort();
   $("eAcct").innerHTML='<option value="">전체 회계계정</option>'+accts.map(a=>'<option'+(a===ca?" selected":"")+'>'+esc(a)+'</option>').join("");
-  const q=$("eQ").value.trim().toLowerCase();
-  const rows=data.expense.filter(e=>{ const c=expCat(e); return useM(e)===eMonth&&(!ca||c.acct===ca)&&(!q||[c.mid,e.vendor,e.memo].join(" ").toLowerCase().includes(q)); }).sort((a,b)=>String(b.resolDate||"").localeCompare(String(a.resolDate||"")));
-  $("eTable").innerHTML=rows.length?rows.map(e=>{ const c=expCat(e); return '<tr><td class="nm" style="white-space:nowrap">'+esc(e.resolDate||"-")+'</td><td style="white-space:nowrap">'+(useM(e)?Number(useM(e).slice(5))+'월분':'-')+'</td><td>'+esc(c.acct||"-")+'</td><td>'+(c.regular?'<span class="tag t-blu" style="margin-right:4px">정기</span>':'')+esc(c.mid||"-")+'</td><td>'+esc(e.vendor||"-")+'</td><td class="money"><b>'+fmtMoney(e.amount)+'</b></td><td>'+esc(e.invoiceDate||"-")+'</td><td>'+(e.payDate?esc(e.payDate)+(e.payDate<today?' <span class="tag t-gry">지남</span>':''):"-")+'</td><td class="mini2" title="'+esc([e.resolNo?"결의번호 "+e.resolNo:"",e.applicant?"신청자 "+e.applicant:"",e.detail||""].filter(Boolean).join("\n"))+'">'+esc(e.memo||"")+(e.resolNo?'<div style="color:#b4bcc8;font-size:11px">'+esc(e.resolNo)+'</div>':'')+'</td><td><button class="btn btn-sm" data-eedit="'+esc(e.id)+'">수정</button></td></tr>'; }).join("")
-    :'<tr><td colspan="10" class="empty">'+em+'월분 지출결의 내역이 없습니다.'+(data.expcat.length?'':' 먼저 <b>지출 구분 관리</b>에서 구분을 등록하세요.')+'</td></tr>';
-  $("eFoot").innerHTML=em+"월분 표시 <b>"+rows.length+"건</b><span>합계 <b>"+fmtMoney(sum(rows))+"원</b></span>";
+  const rows=data.expense.filter(e=>{ const c=expCat(e); return (q||useM(e)===eMonth)&&(!ca||c.acct===ca)&&(!q||[c.mid,e.vendor,e.memo,e.resolNo,e.detail].join(" ").toLowerCase().includes(q)); }).sort((a,b)=>String(b.resolDate||"").localeCompare(String(a.resolDate||"")));
+  $("eTable").innerHTML=rows.length?rows.map(e=>{ const c=expCat(e); return '<tr><td class="nm" style="white-space:nowrap">'+esc(e.resolDate||"-")+'</td><td>'+esc(c.acct||"-")+'</td><td>'+(c.regular?'<span class="tag t-blu" style="margin-right:4px">정기</span>':'')+esc(c.mid||"-")+'</td><td>'+esc(e.vendor||"-")+'</td><td class="money"><b>'+fmtMoney(e.amount)+'</b></td><td>'+esc(e.invoiceDate||"-")+'</td><td>'+(e.payDate?esc(e.payDate)+(e.payDate<today?' <span class="tag t-gry">지남</span>':''):"-")+'</td><td class="mini2" title="'+esc([e.resolNo?"결의번호 "+e.resolNo:"",e.applicant?"신청자 "+e.applicant:"",e.detail||""].filter(Boolean).join("\n"))+'">'+esc(e.memo||"")+(e.resolNo?'<div style="color:#b4bcc8;font-size:11px">'+esc(e.resolNo)+'</div>':'')+'</td><td><button class="btn btn-sm" data-eedit="'+esc(e.id)+'">수정</button></td></tr>'; }).join("")
+    :'<tr><td colspan="9" class="empty">'+em+'월 지출결의 내역이 없습니다.'+(data.expcat.length?'':' 먼저 <b>지출 구분 관리</b>에서 구분을 등록하세요.')+'</td></tr>';
+  $("eFoot").innerHTML=(q?"검색 결과":em+"월 결의")+" 표시 <b>"+rows.length+"건</b><span>합계 <b>"+fmtMoney(sum(rows))+"원</b></span>";
 }
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-eedit]"); if(b) return expenseForm(data.expense.find(x=>x.id===b.dataset.eedit));
   const q=e.target.closest("[data-equick]"); if(q){ e.stopPropagation(); if(cur!=="expense") go("expense"); expenseForm(null,q.dataset.equick); } }, true);
@@ -1931,8 +1927,8 @@ function expenseForm(x,catId){
   FORM_MENU="expense";
   x=x||{}; const ed=!!x.id, cats=catSorted(), sel=x.catId||catId||"";
   const prev=sel?data.expense.filter(e=>e.catId===sel).sort((a,b)=>String(b.resolDate).localeCompare(String(a.resolDate)))[0]:null;
-  const rd0=x.resolDate||todayStr(), um0=x.useMonth||(x.resolDate?useM(x):ymAdd(rd0.slice(0,7),-1));
-  const body=fld("결의일자","resolDate",rd0,"date",true,"",'id="efRd"')+fld("귀속월 (○월분 사용)","useMonth",um0,"month",true,"",'id="efUm"')
+  const rd0=x.resolDate||todayStr();
+  const body=fld("결의일자","resolDate",rd0,"date",true,"",'id="efRd"')
    +'<div><label>회계계정 · 중분류 <span class="req">*</span>'+(can("expense","write")?' <button type="button" class="link" id="efCat" style="float:right;padding:0">구분 관리 ›</button>':'')+'</label><select name="catId" id="efCatSel" required><option value="">선택</option>'
      +[...new Set(cats.map(c=>c.acct))].map(a=>'<optgroup label="'+esc(a)+'">'+cats.filter(c=>c.acct===a).map(c=>'<option value="'+esc(c.id)+'"'+(c.id===sel?" selected":"")+'>'+esc(c.mid)+(c.regular?" (정기)":"")+'</option>').join("")+'</optgroup>').join("")+'</select></div>'
    +fld("지출금액 (원)","amount",x.amount?fmtMoney(x.amount):(prev&&!ed?fmtMoney(prev.amount):""),"text",true,"",'inputmode="numeric" id="efAmt"')
@@ -1943,10 +1939,9 @@ function expenseForm(x,catId){
    +(prev&&!ed?'<div class="full subt">💡 지난 결의('+esc(prev.resolDate)+') 금액·거래처를 미리 채웠어요. 이번 금액에 맞게 고쳐 주세요.</div>':'');
   openModal(shell(ed?"지출 수정":"지출 등록",body,ed));
   bindMoney($("efAmt"));
-  let umTouched=!!x.useMonth; $("efUm").oninput=()=>umTouched=true; $("efRd").onchange=()=>{ if(!umTouched&&$("efRd").value) $("efUm").value=ymAdd($("efRd").value.slice(0,7),-1); };
   if($("efCat")) $("efCat").onclick=()=>{ const fd=Object.fromEntries(new FormData($("mform")).entries()); expcatForm(()=>expenseForm(Object.assign({},x,fd,{amount:money(fd.amount)}),fd.catId)); };
-  wire("expense",x,fd=>{ const c=data.expcat.find(z=>z.id===fd.catId)||{}; const o=Object.assign({},x,{resolDate:fd.resolDate,useMonth:fd.useMonth||ymAdd((fd.resolDate||todayStr()).slice(0,7),-1),catId:fd.catId,acct:c.acct||"",mid:c.mid||"",amount:money(fd.amount),vendor:(fd.vendor||"").trim(),invoiceDate:fd.invoiceDate||"",payDate:fd.payDate||"",memo:(fd.memo||"").trim(),createdAt:x.createdAt||new Date().toISOString()}); delete o.updatedBy; delete o.updatedAt; return o; },
-    fd=>!fd.useMonth?"귀속월을 입력하세요.":!fd.catId?"회계계정·중분류를 선택하세요.":!money(fd.amount)?"지출금액을 입력하세요.":"");
+  wire("expense",x,fd=>{ const c=data.expcat.find(z=>z.id===fd.catId)||{}; const o=Object.assign({},x,{resolDate:fd.resolDate,catId:fd.catId,acct:c.acct||"",mid:c.mid||"",amount:money(fd.amount),vendor:(fd.vendor||"").trim(),invoiceDate:fd.invoiceDate||"",payDate:fd.payDate||"",memo:(fd.memo||"").trim(),createdAt:x.createdAt||new Date().toISOString()}); delete o.updatedBy; delete o.updatedAt; return o; },
+    fd=>!fd.catId?"회계계정·중분류를 선택하세요.":!money(fd.amount)?"지출금액을 입력하세요.":"");
 }
 function expcatForm(onClose){
   const close=()=>{ if(onClose) onClose(); else closeModal(); };
@@ -1958,7 +1953,7 @@ function expcatForm(onClose){
       +'<div class="ecrow" style="font-size:12px;color:var(--mute);font-weight:600"><span>회계계정</span><span>중분류</span><span>매월 정기</span><span></span><span></span></div>'
       +list.map(c=>'<div class="ecrow"><input data-ecid="'+esc(c.id)+'" data-f="acct" list="acctList" value="'+esc(c.acct||"")+'"><input data-ecid="'+esc(c.id)+'" data-f="mid" value="'+esc(c.mid||"")+'"><label class="rg"><input type="checkbox" data-ecid="'+esc(c.id)+'" data-f="regular"'+(c.regular?" checked":"")+'>정기</label><span></span><button type="button" class="ibtn" data-ecdel="'+esc(c.id)+'" title="삭제 (사용 '+used(c.id)+'건)">'+X+'</button></div>').join("")
       +'<div class="ecrow" style="margin-top:14px"><input id="nc2_acct" list="acctList" placeholder="회계계정 (예: 외주검사비)"><input id="nc2_mid" placeholder="중분류 (예: 외주판독료)"><label class="rg"><input type="checkbox" id="nc2_reg">정기</label><span></span><button type="button" class="btn btn-p" id="nc2Add" style="height:36px;padding:0;justify-content:center">+</button></div>'
-      +'<div class="subt">"정기"로 체크한 구분은 매월 사용분을 익월에 결의하는지 확인해요. 익월 영업일 3일째부터 경고(노랑), 5영업일이 지나면 위험(빨강) 알림이 떠요.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn btn-p" data-cclose2>'+(onClose?"완료 · 돌아가기":"닫기")+'</button></div>';
+      +'<div class="subt">"정기"로 체크한 구분은 매월 지출결의(결의일자 기준)가 등록됐는지 확인해요. 그 달 영업일 3일째부터 경고(노랑), 5영업일이 지나면 위험(빨강) 알림이 떠요.</div></div></div><div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn btn-p" data-cclose2>'+(onClose?"완료 · 돌아가기":"닫기")+'</button></div>';
     $("modal").querySelectorAll("[data-cclose2]").forEach(b=>b.onclick=close);
     if($("ecPreset")) $("ecPreset").onclick=async()=>{ $("ecPreset").disabled=true; $("ecPreset").textContent="넣는 중…";
       try{ for(const [a,m,r,d] of EXPCAT_PRESETS){ if(!data.expcat.some(c=>c.acct===a&&c.mid===m)) await saveItem("expcat",{acct:a,mid:m,regular:!!r,dueDay:d||0,createdAt:new Date().toISOString()}); } toast("기본 구분을 넣었습니다."); draw(); }
@@ -2054,7 +2049,7 @@ function demoData(){
     {id:"n4",cat:"무이자 할부",month:lastM,title:Number(lastM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~5개월 무이자\n- B카드: 2~3개월 무이자",author:"기획·협약 파트",pinned:"N",createdAt:dayIn(lastM,"01")+"T09:00:00"}];
   const expcat=EXPCAT_PRESETS.map((p,i)=>({id:"ec"+i,acct:p[0],mid:p[1],regular:!!p[2],dueDay:p[3]||0}));
   const ecId=(a,m)=>expcat.find(c=>c.acct===a&&c.mid===m).id;
-  const EX=(rd,a,m,amt,v,inv,pay,memo)=>({id:"e"+Math.random().toString(36).slice(2,8),resolDate:rd,useMonth:ymAdd(rd.slice(0,7),-1),catId:ecId(a,m),acct:a,mid:m,amount:amt,vendor:v,invoiceDate:inv||"",payDate:pay||"",memo:memo||""});
+  const EX=(rd,a,m,amt,v,inv,pay,memo)=>({id:"e"+Math.random().toString(36).slice(2,8),resolDate:rd,catId:ecId(a,m),acct:a,mid:m,amount:amt,vendor:v,invoiceDate:inv||"",payDate:pay||"",memo:memo||""});
   const expense=[];
   [M(-8),M(-7),M(-6),M(-5),M(-4),M(-3),M(-2),lastM].forEach((ym,i)=>{ const pm=Number(M(-9+i).slice(5));
     expense.push(EX(dayIn(ym,"07"),"외주검사비","외주판독료",3200000+i*90000,"(예시) 원격판독센터",dayIn(ym,"05"),dayIn(ym,"25"),pm+"월분 외주판독료"));
