@@ -543,20 +543,20 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
       <div id="lVote" style="display:none">
       <h2>투표 참여 🗳</h2>
-      <p>계정 없이 소속·사번·이름과 투표 비밀번호로 들어올 수 있어요.</p>
+      <p>계정 없이 소속·사번·이름과 <b>안건별 투표 비밀번호</b>로 참여해요.</p>
       <form id="voteLogin" class="lf" autocomplete="off">
         <label for="vlPart">소속(파트)</label><input id="vlPart" maxlength="30" placeholder="예: 검진파트" required>
         <label for="vlEmp">사번</label><input id="vlEmp" maxlength="20" inputmode="numeric" placeholder="예: 20231234" required>
         <label for="vlName">이름</label><input id="vlName" maxlength="20" placeholder="이름" required>
-        <label for="vlPw">투표 비밀번호</label><input id="vlPw" type="password" inputmode="numeric" placeholder="안내받은 비밀번호" required>
+        <label for="vlPw">투표 비밀번호</label><input id="vlPw" type="password" inputmode="numeric" autocomplete="off" placeholder="공지에서 안내받은 투표 비밀번호" required>
         <button class="btn-login" type="submit">투표하러 가기 <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </form>
       <div class="err" id="vlErr"></div>
-      <div class="vote-hint">🔒 이 투표는 <b>비밀투표</b>로, <b>투표권(참여 여부) 외에는 어떤 것도 기록에 남지 않습니다.</b> 투표 비밀번호는 담당자에게 안내받으세요.</div>
+      <div class="vote-hint">🔒 이 투표는 <b>비밀투표</b>로, <b>투표권(참여 여부) 외에는 어떤 것도 기록에 남지 않습니다.</b> 투표 비밀번호는 안건마다 달라요.</div>
       </div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.4.1 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.4.2 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -591,7 +591,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.4.1 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.4.2 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -853,7 +853,7 @@ const SUPABASE_URL = "https://yrrlimyvsqprzezkzntd.supabase.co";
 const SUPABASE_KEY = "sb_publishable_d0voink0Gp_o-m_RkvnyCg_VV0BNUXp";
 /* ==================================================================== */
 const GAS = !!(SUPABASE_URL && SUPABASE_KEY);
-const RPC = {login:"sovis_login",logout:"sovis_logout",me:"sovis_me",changePw:"sovis_change_pw",listAll:"sovis_list",save:"sovis_save",remove:"sovis_remove",users:"sovis_users_list",userSave:"sovis_user_save",userDelete:"sovis_user_delete",voteList:"sovis_vote_list",voteCast:"sovis_vote_cast",voteAdmin:"sovis_vote_admin"};
+const RPC = {login:"sovis_login",logout:"sovis_logout",me:"sovis_me",changePw:"sovis_change_pw",listAll:"sovis_list",save:"sovis_save",remove:"sovis_remove",users:"sovis_users_list",userSave:"sovis_user_save",userDelete:"sovis_user_delete",voteList:"sovis_vote_list",voteCast:"sovis_vote_cast",voteAdmin:"sovis_vote_admin",voteOpen:"sovis_vote_open",voteCastPw:"sovis_vote_cast_pw"};
 const ERRMSG = {FORBIDDEN:"권한이 없습니다. 관리자에게 문의하세요.",BADPW:"현재 비밀번호가 맞지 않습니다.",SHORTPW:"비밀번호는 8자 이상이어야 합니다.",DUP:"이미 등록된 아이디입니다.",BADEMAIL:"아이디는 이메일 형식으로 입력하세요.",NEEDPW:"새 계정은 비밀번호가 필요합니다.",SELF:"본인 계정은 삭제할 수 없습니다.",LOCK:"로그인 시도 횟수를 초과했습니다. 10분 후 다시 시도하세요.",NET:"서버에 연결하지 못했습니다. 잠시 후 다시 시도하세요."};
 const errText = e => ERRMSG[String(e&&e.message||e)] || String(e&&e.message||e);
 async function api(fn,...a){
@@ -866,6 +866,8 @@ async function api(fn,...a){
              : fn==="userDelete" ? {token:TOKEN,user_id:a[0]}
              : fn==="voteCast" ? {token:TOKEN,agenda_id:a[0],part:a[1],name:a[2],choice:a[3],empno:a[4]}
              : fn==="voteAdmin" ? {token:TOKEN,agenda_id:a[0]}
+             : fn==="voteOpen" ? {pw:a[0]}
+             : fn==="voteCastPw" ? {pw:a[0],agenda_id:a[1],part:a[2],name:a[3],choice:a[4],empno:a[5]}
              : {token:TOKEN};
   const headers={"Content-Type":"application/json","apikey":SUPABASE_KEY};
   if(SUPABASE_KEY.indexOf("eyJ")===0) headers.Authorization="Bearer "+SUPABASE_KEY;
@@ -876,7 +878,7 @@ async function api(fn,...a){
   }catch(e){ throw new Error("NET"); }
   const err = !res.ok ? String(r&&(r.message||r.error)||"ERR") : (r && !Array.isArray(r) && typeof r==="object" && r.error ? String(r.error) : "");
   if(err){
-    if(err==="AUTH" && fn!=="login" && fn!=="logout") doLogout("로그인 시간이 만료되었습니다. 다시 로그인하세요.");
+    if(err==="AUTH" && fn!=="login" && fn!=="logout" && fn!=="voteOpen" && fn!=="voteCastPw") doLogout("로그인 시간이 만료되었습니다. 다시 로그인하세요.");
     throw new Error(err);
   }
   return r;
@@ -893,7 +895,7 @@ function applyPerms(){
   $("meName").textContent=nm; $("mePart").textContent=ME?((ME.is_admin?"관리자":ME.part||"")+(ME.name?" · "+ME.email:"")):""; $("meAv").textContent=nm.slice(0,1).toUpperCase();
   $("pwBtn").style.display=GAS&&mode!=="demo"?"":"none";
 }
-const isVoteOnly=()=>!!(ME&&String(ME.email||"").trim()==="투표");
+const isVoteOnly=()=>!!(VOTER&&VOTER.pw&&!ME)||!!(ME&&String(ME.email||"").trim()==="투표");
 let VOTER=null; try{ VOTER=JSON.parse(sessionStorage.getItem("sovis_voter")||"null"); }catch(e){}
 function enter(){ $("login").style.display="none"; if(isVoteOnly()){ $("app").style.display="none"; enterVote(); return; } $("voteApp").style.display="none"; $("app").style.display="block"; applyPerms(); route(); initStore(); }
 async function tryLogin(){
@@ -915,7 +917,7 @@ async function tryLogin(){
 function doLogout(msg){
   if(GAS && TOKEN && !msg && mode!=="demo"){ api("logout").catch(()=>{}); }
   if(mode==="demo"){ mode=GAS?"gas":"local"; USERS=[]; }
-  const wasVoter=isVoteOnly(); TOKEN=""; ME=null; VOTER=null; try{sessionStorage.removeItem("sovis_token"); sessionStorage.removeItem("sovis_voter");}catch(e){} if($("voteApp")) $("voteApp").style.display="none"; if(wasVoter&&$("lTab")) setTimeout(()=>lTab("vote"),0);
+  const wasVoter=isVoteOnly(); TOKEN=""; ME=null; VOTER=null; if($("login")) $("login").style.display=""; try{sessionStorage.removeItem("sovis_token"); sessionStorage.removeItem("sovis_voter");}catch(e){} if($("voteApp")) $("voteApp").style.display="none"; if(wasVoter&&$("lTab")) setTimeout(()=>lTab("vote"),0);
   clearInterval(pollTimer); for(const k in data) data[k]=[];
   $("app").style.display="none"; $("login").style.display="";
   $("loginErr").textContent=msg||""; $("mask").style.display="none"; $("modal").innerHTML=""; modalPushed=false; setTimeout(()=>$("lgEmail").focus(),60);
@@ -1436,7 +1438,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.4.1",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.4.2",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1751,7 +1753,9 @@ const VLOCAL={voters:{},tally:{}};   // 체험·미리보기 모드용 (저장 �
 async function vApi(fn,...a){
   if(mode==="gas") return api(fn,...a);
   const ags=data.notice.filter(n=>n.vote);
-  const ag=n=>({id:n.id,title:n.title,content:n.content,author:n.author,options:vOpts(n),voteEnd:n.voteEnd,closed:vClosed(n),participants:(VLOCAL.voters[n.id]||[]).length,tally:vClosed(n)?Object.assign({},VLOCAL.tally[n.id]||{}):null});
+  const ag=n=>({id:n.id,title:n.title,content:n.content,author:n.author,options:vOpts(n),hasPw:!!n.votePw,voteEnd:n.voteEnd,closed:vClosed(n),participants:(VLOCAL.voters[n.id]||[]).length,tally:vClosed(n)?Object.assign({},VLOCAL.tally[n.id]||{}):null});
+  if(fn==="voteOpen"){ const L=ags.filter(n=>n.votePw&&n.votePw===String(a[0]||"").trim()); if(!L.length) throw new Error("BADPW"); return L.sort((x,y)=>(vClosed(x)-vClosed(y))||String(y.voteEnd).localeCompare(String(x.voteEnd))).map(ag); }
+  if(fn==="voteCastPw"){ const [pw,id,part,name,ch,emp]=a, n=ags.find(x=>x.id===id); if(!n) throw new Error("NOAGENDA"); if(!(n.votePw&&n.votePw===String(pw||"").trim())) throw new Error("BADPW"); return vApi("voteCast",id,part,name,ch,emp); }
   if(fn==="voteList") return ags.sort((x,y)=>(vClosed(x)-vClosed(y))||String(y.voteEnd).localeCompare(String(x.voteEnd))).map(ag);
   if(fn==="voteCast"){ const [id,part,name,ch,emp]=a, n=ags.find(x=>x.id===id); if(!n) throw new Error("NOAGENDA"); if(vClosed(n)) throw new Error("CLOSED");
     if(!vOpts(n).includes(ch)) throw new Error("BADCHOICE"); const k="e|"+String(emp||"").replace(/\s/g,"").toLowerCase(); if(k==="e|") throw new Error("NONAME");
@@ -1759,7 +1763,7 @@ async function vApi(fn,...a){
     L.push({k,part,name,empno:emp}); const T=VLOCAL.tally[id]=VLOCAL.tally[id]||{}; T[ch]=(T[ch]||0)+1; return {ok:true}; }
   if(fn==="voteAdmin"){ const n=data.notice.find(x=>x.id===a[0]); return Object.assign(ag(n),{voters:(VLOCAL.voters[n.id]||[]).map(v=>({part:v.part,name:v.name,empno:v.empno||""})).sort((x,y)=>(x.part+x.name).localeCompare(y.part+y.name))}); }
 }
-const VERR={DUP:"이 사번으로 이미 투표했어요.",CLOSED:"투표가 마감되었어요.",NOAGENDA:"안건을 찾을 수 없어요.",NONAME:"소속·사번·이름을 입력하세요.",BADCHOICE:"선택지 중 하나를 고르세요."};
+const VERR={BADPW:"투표 비밀번호가 맞지 않아요.",LOCK:"비밀번호를 여러 번 틀려 10분간 잠겼어요.",DUP:"이 사번으로 이미 투표했어요.",CLOSED:"투표가 마감되었어요.",NOAGENDA:"안건을 찾을 수 없어요.",NONAME:"소속·사번·이름을 입력하세요.",BADCHOICE:"선택지 중 하나를 고르세요."};
 function vResult(a){ const t=a.tally||{}, ops=vOpts(a), tot=ops.reduce((s,c)=>s+(Number(t[c])||0),0);
   const sorted=ops.filter(c=>c!=="기권").map(c=>[c,Number(t[c])||0]).sort((x,y)=>y[1]-x[1]);
   const win=!tot?"참여자가 없습니다.":(sorted.length>1&&sorted[0][1]===sorted[1][1])?"⚖ 동수":"🏆 "+sorted[0][0]+" 최다";
@@ -1770,43 +1774,44 @@ function vCard(a,asStaff){
   const head='<div class="vt-meta"><span class="tag vtag" style="background:#eef0ff;color:#4553d6">🗳 투표</span>'+(a.closed?'<span class="tag t-gry">마감</span>':'<span class="tag t-grn">진행 중</span>')+'<span>마감 '+esc(end)+'</span><span>· 참여 '+(a.participants||0)+'명</span></div>'
     +'<h3>'+esc(a.title||"")+'</h3>'+(a.content?'<div class="vt-body">'+esc(a.content)+'</div>':'');
   if(a.closed) return '<div class="vt-card">'+head+vResult(a)+'</div>';
-  const who=asStaff?'<div class="vt-who" style="grid-template-columns:1fr 1fr 1fr"><input name="part" placeholder="소속(파트)" required maxlength="30" value="'+esc(ME&&ME.part||"")+'"><input name="empno" placeholder="사번" required maxlength="20" inputmode="numeric"><input name="name" placeholder="이름" required maxlength="20" value="'+esc(ME&&ME.name||"")+'"></div>':'';
+  const who=asStaff?(a.hasPw?'<input name="vpw" type="password" inputmode="numeric" autocomplete="off" placeholder="🔑 투표 비밀번호" required style="width:100%;margin-bottom:10px;padding:12px 14px;font-size:15px">':'')+'<div class="vt-who" style="grid-template-columns:1fr 1fr 1fr"><input name="part" placeholder="소속(파트)" required maxlength="30" value="'+esc(ME&&ME.part||"")+'"><input name="empno" placeholder="사번" required maxlength="20" inputmode="numeric"><input name="name" placeholder="이름" required maxlength="20" value="'+esc(ME&&ME.name||"")+'"></div>':'';
   return '<div class="vt-card" data-vcard="'+esc(a.id)+'">'+head+'<form class="vt-form">'+who
     +'<div class="vt-ch" style="grid-template-columns:repeat('+Math.min(3,vOpts(a).length)+',1fr)">'+vOpts(a).map((c,i)=>'<label class="'+(c==="찬성"?"c1":c==="반대"?"c2":c==="기권"?"c3":"c4")+'"><input type="radio" name="choice" value="'+esc(c)+'">'+esc(c)+'</label>').join("")+'</div><div class="vt-err"></div><button class="btn btn-p vt-go" type="submit">투표하기</button></form></div>';
 }
 function vWire(root,after){
   root.querySelectorAll(".vt-form").forEach(f=>f.onsubmit=async e=>{ e.preventDefault();
     const card=f.closest("[data-vcard]"), id=card.dataset.vcard, fd=Object.fromEntries(new FormData(f).entries()), er=f.querySelector(".vt-err");
-    const who=VOTER&&isVoteOnly()?VOTER:{part:(fd.part||"").trim(),empno:(fd.empno||"").trim(),name:(fd.name||"").trim()};
+    const pwMode=!!(VOTER&&VOTER.pw&&!ME), who=pwMode?VOTER:{part:(fd.part||"").trim(),empno:(fd.empno||"").trim(),name:(fd.name||"").trim()}, vpw=pwMode?VOTER.pw:(fd.vpw||"").trim();
+    if(f.querySelector('[name="vpw"]')&&!vpw){ er.textContent="투표 비밀번호를 입력하세요."; return; }
     if(!who.part||!who.empno||!who.name){ er.textContent=VERR.NONAME; return; } if(!fd.choice){ er.textContent=VERR.BADCHOICE; return; }
     if(!confirm("["+fd.choice+"] 에 투표할까요?\n\n이 투표는 비밀투표로, 투표권(참여 여부) 외에는 어떤 것도 기록에 남지 않습니다.\n제출하면 수정할 수 없어요.")) return;
     const btn=f.querySelector("button"); btn.disabled=true; btn.textContent="제출 중…";
-    try{ await vApi("voteCast",id,who.part,who.name,fd.choice,who.empno);
-      f.outerHTML='<div class="vt-done">✅ 투표가 접수되었어요.<br><span style="font-weight:500;font-size:13px">투표권(참여 여부) 외에는 어떤 것도 기록되지 않았어요. 결과는 마감 후 공개됩니다.</span>'+(isVoteOnly()?'<br><button type="button" class="btn btn-sm" data-vnext>다음 사람 투표하기 (로그아웃)</button>':'')+'</div>';
-      const nx=card.querySelector("[data-vnext]"); if(nx) nx.onclick=()=>doLogout();
+    try{ if(vpw) await vApi("voteCastPw",vpw,id,who.part,who.name,fd.choice,who.empno); else await vApi("voteCast",id,who.part,who.name,fd.choice,who.empno);
+      f.outerHTML='<div class="vt-done">✅ 투표가 접수되었어요.<br><span style="font-weight:500;font-size:13px">투표권(참여 여부) 외에는 어떤 것도 기록되지 않았어요. 결과는 마감 후 공개됩니다.</span>'+(pwMode?'<br><button type="button" class="btn btn-sm" data-vnext>다음 사람 투표하기</button>':'')+'</div>';
+      const nx=card.querySelector("[data-vnext]"); if(nx) nx.onclick=()=>vExit();
     }catch(err){ er.textContent=VERR[err.message]||errText(err); btn.disabled=false; btn.textContent="투표하기"; } });
 }
 async function enterVote(){ $("voteApp").style.display="block"; $("vtWho").textContent=VOTER?("투표자 · "+VOTER.part+" "+VOTER.name+" ("+VOTER.empno+")"):"광명소하검진센터 · 비밀투표"; await renderVote(); }
 async function renderVote(){
   $("vtList").innerHTML='<div class="empty">불러오는 중…</div>';
-  try{ const L=await vApi("voteList"); const open=L.filter(a=>!a.closed), done=L.filter(a=>a.closed).slice(0,10);
-    $("vtList").innerHTML=(open.length?open.map(a=>vCard(a,!VOTER)).join(""):'<div class="vt-card" style="text-align:center;color:var(--mute)">지금 진행 중인 투표가 없어요.</div>')
+  try{ const pwMode=!!(VOTER&&VOTER.pw&&!ME), L=pwMode?await vApi("voteOpen",VOTER.pw):await vApi("voteList"); const open=L.filter(a=>!a.closed), done=L.filter(a=>a.closed).slice(0,10);
+    $("vtList").innerHTML=(open.length?open.map(a=>vCard(a,!pwMode)).join(""):'<div class="vt-card" style="text-align:center;color:var(--mute)">지금 진행 중인 투표가 없어요.</div>')
       +(done.length?'<h4 style="margin:24px 4px 10px;color:var(--mute);font-size:13px">마감된 투표 결과</h4>'+done.map(a=>vCard(a)).join(""):"");
     vWire($("vtList"));
-  }catch(e){ $("vtList").innerHTML='<div class="empty">'+esc(errText(e))+'</div>'; }
+  }catch(e){ $("vtList").innerHTML='<div class="empty">'+esc(VERR[e.message]||errText(e))+'</div>'; }
 }
-$("vtRefresh").onclick=renderVote; $("vtOut").onclick=()=>doLogout();
+$("vtRefresh").onclick=renderVote; $("vtOut").onclick=()=>vExit();
+function vExit(){ if(VOTER&&VOTER.pw&&!ME){ VOTER=null; try{ sessionStorage.removeItem("sovis_voter"); }catch(e){} $("voteApp").style.display="none"; $("login").style.display=""; lTab("vote"); } else doLogout(); }
 function lTab(t){ document.querySelectorAll("#lTab [data-lt]").forEach(b=>b.classList.toggle("on",b.dataset.lt===t)); $("lStaff").style.display=t==="staff"?"":"none"; $("lVote").style.display=t==="vote"?"":"none"; setTimeout(()=>(t==="vote"?$("vlPart"):$("lgEmail")).focus(),30); }
 $("lTab").onclick=e=>{ const b=e.target.closest("[data-lt]"); if(b) lTab(b.dataset.lt); };
 $("voteLogin").addEventListener("submit",async e=>{ e.preventDefault();
-  const v={part:$("vlPart").value.trim(),empno:$("vlEmp").value.trim(),name:$("vlName").value.trim()}, pw=$("vlPw").value;
-  if(!v.part||!v.empno||!v.name||!pw){ $("vlErr").textContent="소속·사번·이름·비밀번호를 모두 입력하세요."; return; }
-  if(!GAS){ $("vlErr").textContent="투표는 실제 DB에 연결된 사이트에서만 할 수 있어요. (체험은 '구경하러 가기' → 공지사항)"; return; }
+  const v={part:$("vlPart").value.trim(),empno:$("vlEmp").value.trim(),name:$("vlName").value.trim(),pw:$("vlPw").value.trim()};
+  if(!v.part||!v.empno||!v.name||!v.pw){ $("vlErr").textContent="소속·사번·이름·투표 비밀번호를 모두 입력하세요."; return; }
+  if(!GAS&&mode!=="demo"){ $("vlErr").textContent="투표는 실제 DB에 연결된 사이트에서만 할 수 있어요."; return; }
   $("vlErr").textContent="확인 중…";
-  try{ const r=await api("login","투표",pw); TOKEN=r.token; ME=r.user; VOTER=v;
-    try{ sessionStorage.setItem("sovis_token",TOKEN); sessionStorage.setItem("sovis_voter",JSON.stringify(v)); }catch(er){}
-    $("vlErr").textContent=""; $("vlPw").value=""; enter();
-  }catch(err){ const m=String(err.message); $("vlErr").textContent=m==="BADLOGIN"?"투표 비밀번호가 올바르지 않습니다.":m==="LOCK"?"비밀번호를 여러 번 틀려 10분간 잠겼어요.":errText(err); }
+  try{ await vApi("voteOpen",v.pw); TOKEN=""; ME=null; VOTER=v; try{ sessionStorage.setItem("sovis_voter",JSON.stringify(v)); }catch(er){}
+    $("vlErr").textContent=""; $("vlPw").value=""; $("login").style.display="none"; $("app").style.display="none"; enterVote();
+  }catch(err){ $("vlErr").textContent=VERR[err.message]||errText(err); }
 });
 async function vOpen(id,adm){
   showMask(); $("modal").innerHTML='<div class="mh">🗳 '+(adm?"참여 현황":"투표")+'<button type="button" data-vx>'+X+'</button></div><div class="mb"><div class="full" id="vmBody"><div class="empty">불러오는 중…</div></div></div>';
@@ -1814,13 +1819,17 @@ async function vOpen(id,adm){
   try{
     if(adm){ const a=await vApi("voteAdmin",id);
       $("vmBody").innerHTML='<h3 style="font-size:17px;font-weight:800;margin-bottom:6px">'+esc(a.title)+'</h3><div class="vt-meta" style="margin-bottom:12px"><span>마감 '+esc(String(a.voteEnd||"").replace("T"," "))+'</span>'+(a.closed?'<span class="tag t-gry">마감</span>':'<span class="tag t-grn">진행 중</span>')+'<span>선택지: '+vOpts(a).map(esc).join(" / ")+'</span></div>'
-        +(a.closed?vResult(a):'<div class="vt-note" style="margin:0">결과(득표 수)는 마감 후에 공개돼요. 관리자도 마감 전에는 볼 수 없어요.</div>')
+        +(a.closed?vResult(a):'<div class="vt-note" style="margin:0">결과(득표 수)는 마감 후에 공개돼요. 관리자도 마감 전에는 볼 수 없어요. <button type="button" class="btn btn-sm" data-vend="'+esc(a.id)+'" style="color:var(--red);margin-left:6px">지금 투표 종료</button></div>')
         +'<div class="sechd" style="margin-top:16px">참여자 '+a.voters.length+'명 <span style="font-weight:500;color:var(--mute)">(관리자만 보임 · 투표권 외에는 기록되지 않아요)</span></div><div class="vt-voters">'+(a.voters.length?a.voters.map(v=>'<span>'+esc(v.part)+' · <b>'+esc(v.name)+'</b>'+(v.empno?' <small style="color:var(--mute)">'+esc(v.empno)+'</small>':'')+'</span>').join(""):'<span>아직 없음</span>')+'</div>';
     } else { const L=await vApi("voteList"), a=L.find(x=>x.id===id); if(!a) throw new Error("NOAGENDA");
       $("vmBody").innerHTML='<div class="vt-note" style="margin-bottom:12px">🔒 '+VSECRET+'</div>'+vCard(a,true); vWire($("vmBody")); }
   }catch(e){ $("vmBody").innerHTML='<div class="empty">'+esc(VERR[e.message]||errText(e))+'</div>'; }
 }
-document.addEventListener("click",e=>{ const g=e.target.closest("[data-vgo],[data-vres],[data-vadm]"); if(!g) return; e.stopPropagation();
+async function vEndNow(id){ const n=data.notice.find(x=>x.id===id); if(!n||!(ME&&ME.is_admin)) return;
+  if(!confirm("'"+n.title+"' 투표를 지금 종료할까요?\n종료하면 더 이상 투표할 수 없고 결과가 공개됩니다.")) return;
+  const d=new Date(Date.now()-60000), o=Object.assign({},n,{voteEnd:dStr(d)+"T"+pad(d.getHours())+":"+pad(d.getMinutes()),voteEndedEarly:new Date().toISOString()}); delete o.updatedBy; delete o.updatedAt;
+  try{ await saveItem("notice",o); toast("투표를 종료했습니다. 결과가 공개됩니다."); }catch(err){ toast(errText(err)); } }
+document.addEventListener("click",e=>{ const en=e.target.closest("[data-vend]"); if(en){ e.stopPropagation(); vEndNow(en.dataset.vend); return; } const g=e.target.closest("[data-vgo],[data-vres],[data-vadm]"); if(!g) return; e.stopPropagation();
   if(g.dataset.vadm) vOpen(g.dataset.vadm,true); else vOpen(g.dataset.vgo||g.dataset.vres,false); },true);
 
 /* ---------- 검색형 선택 (기관 선택 등) ---------- */
@@ -2190,7 +2199,7 @@ function demoData(){
   const mail=[{id:"m1",reqDate:D(-1),title:"기업검진 결과 통보서",requester:"이서연",to:"(예시) 소하산업㈜ 인사팀",sentDate:""},{id:"m2",reqDate:D(-3),title:"협약서 원본 송부",requester:"홍길동",to:"(예시) 광명시립학교",sentDate:D(-2)},
     {id:"m3",reqDate:D(-6),title:"세금계산서 원본",requester:"최유나",to:"(예시) 하안건설",sentDate:D(-5)},{id:"m4",reqDate:D(0),title:"재검 안내문",requester:"박준호",to:"수검자 12명",sentDate:"",memo:"개인정보 봉투 사용"},
     {id:"m5",reqDate:dayIn(lastM,"18"),title:"외주검사 정산서",requester:"홍길동",to:"(예시) 검사의학재단",sentDate:dayIn(lastM,"19")}];
-  const notice=[{id:"nvote1",cat:"일반",title:"(예시) 12월 송년회 장소를 OO한정식으로 하는 안",content:"찬성 시 12/19(금) 18:30 OO한정식으로 예약합니다.\n반대가 많으면 다른 장소를 다시 올릴게요.",author:"기획협약 김현석",pinned:"Y",vote:"true",voteEnd:D(3)+"T18:00",createdAt:D(-1)+"T09:00:00"},{id:"nvote3",cat:"일반",title:"(예시) 직원 단체복 색상 선택",content:"후보 3가지 중 하나를 골라 주세요.",author:"기획협약",vote:"true",voteOptions:["네이비","차콜","버건디"],voteEnd:D(5)+"T17:00",createdAt:D(0)+"T09:00:00"},{id:"nvote2",cat:"일반",title:"(예시) 검진 결과지 우편 발송을 알림톡으로 대체하는 안",content:"",author:"기획협약",vote:"true",voteEnd:D(-2)+"T18:00",createdAt:D(-9)+"T09:00:00"},{id:"n1",cat:"무이자 할부",month:thisM,title:Number(thisM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~6개월 무이자\n- B카드: 2~5개월 무이자\n- C카드: 2~3개월 무이자\n※ 법인카드·체크카드·기프트카드 제외\n※ 카드사 사정에 따라 변경될 수 있음",author:"기획·협약 파트",pinned:"Y",createdAt:dayIn(thisM,"01")+"T09:00:00"},
+  const notice=[{id:"nvote1",votePw:"1219",cat:"일반",title:"(예시) 12월 송년회 장소를 OO한정식으로 하는 안",content:"찬성 시 12/19(금) 18:30 OO한정식으로 예약합니다.\n반대가 많으면 다른 장소를 다시 올릴게요.",author:"기획협약 김현석",pinned:"Y",vote:"true",voteEnd:D(3)+"T18:00",createdAt:D(-1)+"T09:00:00"},{id:"nvote3",votePw:"7777",cat:"일반",title:"(예시) 직원 단체복 색상 선택",content:"후보 3가지 중 하나를 골라 주세요.",author:"기획협약",vote:"true",voteOptions:["네이비","차콜","버건디"],voteEnd:D(5)+"T17:00",createdAt:D(0)+"T09:00:00"},{id:"nvote2",votePw:"1219",cat:"일반",title:"(예시) 검진 결과지 우편 발송을 알림톡으로 대체하는 안",content:"",author:"기획협약",vote:"true",voteEnd:D(-2)+"T18:00",createdAt:D(-9)+"T09:00:00"},{id:"n1",cat:"무이자 할부",month:thisM,title:Number(thisM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~6개월 무이자\n- B카드: 2~5개월 무이자\n- C카드: 2~3개월 무이자\n※ 법인카드·체크카드·기프트카드 제외\n※ 카드사 사정에 따라 변경될 수 있음",author:"기획·협약 파트",pinned:"Y",createdAt:dayIn(thisM,"01")+"T09:00:00"},
     {id:"n2",cat:"검진 안내",month:thisM,title:"연말 검진 예약 마감 일정 안내",content:"연말 검진 수요 증가로 12월 예약은 셋째 주 금요일까지 접수합니다.\n당일 접수는 받지 않습니다.",author:"예약 파트",pinned:"N",createdAt:D(-4)+"T09:00:00"},
     {id:"n3",cat:"일반",month:thisM,title:"토요 검진 근무자 확인 요청",content:"이번 주 토요 검진 근무자는 워킹데이 계획에서 확인해 주세요.",author:"원무",pinned:"N",createdAt:D(-2)+"T09:00:00"},
     {id:"n4",cat:"무이자 할부",month:lastM,title:Number(lastM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~5개월 무이자\n- B카드: 2~3개월 무이자",author:"기획·협약 파트",pinned:"N",createdAt:dayIn(lastM,"01")+"T09:00:00"}];
@@ -2302,9 +2311,9 @@ const noticeSorted=()=>data.notice.slice().sort((a,b)=>((b.pinned==="Y")-(a.pinn
 function renderNotice(){
   const q=$("nQ").value.trim().toLowerCase();
   const rows=noticeSorted().filter(n=>(nFilter==="all"||n.cat===nFilter)&&(!q||[n.title,n.content,n.author].join(" ").toLowerCase().includes(q)));
-  $("nList").innerHTML=rows.length?rows.map(n=>'<div class="ntc'+(n.pinned==="Y"?" pin":"")+'"><div class="nh">'+(n.pinned==="Y"?'<span class="tag t-red">📌 고정</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span>'+(n.month?'<span class="tag t-gry">'+esc(ymLabel(n.month))+'</span>':'')+(n.vote?'<span class="tag vtag">🗳 투표 · '+(vClosed(n)?'마감':'~'+esc(String(n.voteEnd).replace("T"," ").slice(5)))+'</span>':'')+'</div>'
+  $("nList").innerHTML=rows.length?rows.map(n=>'<div class="ntc'+(n.pinned==="Y"?" pin":"")+'"><div class="nh">'+(n.pinned==="Y"?'<span class="tag t-red">📌 고정</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span>'+(n.month?'<span class="tag t-gry">'+esc(ymLabel(n.month))+'</span>':'')+(n.vote?'<span class="tag vtag">🗳 투표 · '+(vClosed(n)?'마감':'~'+esc(String(n.voteEnd).replace("T"," ").slice(5)))+'</span>'+(ME&&ME.is_admin&&n.votePw?'<span class="tag t-gry">🔑 비밀번호 <b>'+esc(n.votePw)+'</b></span>':''):'')+'</div>'
     +'<div class="nt">'+esc(n.title)+'</div>'+(n.content?'<div class="nb">'+esc(n.content)+'</div>':'')
-    +'<div class="nf">'+(n.author?'<span>'+esc(n.author)+'</span> · ':'')+'<span>'+esc((n.createdAt||"").slice(0,10))+'</span><span class="sp"></span>'+(n.vote?(vClosed(n)?'<button class="btn btn-sm" data-vres="'+esc(n.id)+'">🗳 결과 보기</button>':'<button class="btn btn-sm btn-p" data-vgo="'+esc(n.id)+'">🗳 투표하기</button>')+(ME&&ME.is_admin?'<button class="btn btn-sm" data-vadm="'+esc(n.id)+'">참여 현황</button>':''):'')+'<button class="btn btn-sm" data-nedit="'+esc(n.id)+'">수정</button></div></div>').join("")
+    +'<div class="nf">'+(n.author?'<span>'+esc(n.author)+'</span> · ':'')+'<span>'+esc((n.createdAt||"").slice(0,10))+'</span><span class="sp"></span>'+(n.vote?(vClosed(n)?'<button class="btn btn-sm" data-vres="'+esc(n.id)+'">🗳 결과 보기</button>':'<button class="btn btn-sm btn-p" data-vgo="'+esc(n.id)+'">🗳 투표하기</button>')+(ME&&ME.is_admin?'<button class="btn btn-sm" data-vadm="'+esc(n.id)+'">참여 현황</button>'+(!vClosed(n)?'<button class="btn btn-sm" data-vend="'+esc(n.id)+'" style="color:var(--red)">투표 종료</button>':''):''):'')+'<button class="btn btn-sm" data-nedit="'+esc(n.id)+'">수정</button></div></div>').join("")
     :'<div class="empty">'+(data.notice.length?"조건에 맞는 공지가 없습니다.":"아직 공지가 없습니다. 오른쪽 위 <b>공지 작성</b>으로 시작하세요.")+'</div>';
   const top=noticeSorted().slice(0,4);
   if($("dNotice")) $("dNotice").innerHTML=top.length?top.map(n=>'<div class="nline" data-go="notice">'+(n.pinned==="Y"?'<span class="tag t-red">📌</span>':'')+(n.vote&&!vClosed(n)?'<span class="tag vtag" style="background:#eef0ff;color:#4553d6">🗳 투표중</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span><span class="t">'+esc(n.title)+'</span><span class="d">'+esc(n.month?ymLabel(n.month):(n.createdAt||"").slice(0,10))+'</span></div>').join("")
@@ -2320,7 +2329,7 @@ function noticeForm(n){
    +'<div class="full"><label>내용</label><textarea name="content" style="min-height:180px" placeholder="예)\n- 삼성카드: 2~6개월 무이자\n- 신한카드: 2~5개월 무이자\n※ 법인카드·체크카드 제외">'+esc(n.content||"")+'</textarea></div>'
    +fld("작성자","author",n.author)
    +'<div class="full" style="background:#f6f7ff;border-radius:14px;padding:12px 14px"><label class="ck" style="display:flex;align-items:center;gap:8px;margin:0;font-weight:800;color:#4553d6"><input type="checkbox" name="vote" id="nfVote" style="width:18px;height:18px"'+(n.vote?" checked":"")+'>🗳 투표 안건으로 올리기 <span style="font-weight:500;color:var(--mute)">(비밀투표 · 마감 후 결과 공개)</span></label>'
-     +'<div id="nfVoteBox" style="display:'+(n.vote?"grid":"none")+';grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div style="grid-column:1/-1"><label>선택지 <span class="req">*</span> <span style="font-weight:500;color:var(--mute)">(2개 이상 · 투표자는 하나만 선택)</span></label><div id="nfOpts">'+((Array.isArray(n.voteOptions)&&n.voteOptions.length>=2)?n.voteOptions:["찬성","반대","기권"]).map(o=>'<div class="nfopt"><input data-vo value="'+esc(o)+'" maxlength="30"><button type="button" class="ibtn" data-vodel>'+X+'</button></div>').join("")+'</div><div style="display:flex;gap:6px;margin-top:6px"><button type="button" class="btn btn-sm" id="nfOptAdd">+ 선택지 추가</button><button type="button" class="btn btn-sm" id="nfOptYN">찬성·반대·기권</button></div></div><div><label>투표 마감 일시 <span class="req">*</span></label><input type="datetime-local" name="voteEnd" value="'+esc(n.voteEnd||(()=>{ const d=new Date(); d.setDate(d.getDate()+3); return dStr(d)+"T18:00"; })())+'"></div><div class="subt" style="align-self:end">마감 일시가 지나면 투표가 닫히고 결과가 공개돼요. 일찍 마감하려면 마감 일시를 지금으로 바꾸세요.</div></div></div>'
+     +'<div id="nfVoteBox" style="display:'+(n.vote?"grid":"none")+';grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div style="grid-column:1/-1"><label>선택지 <span class="req">*</span> <span style="font-weight:500;color:var(--mute)">(2개 이상 · 투표자는 하나만 선택)</span></label><div id="nfOpts">'+((Array.isArray(n.voteOptions)&&n.voteOptions.length>=2)?n.voteOptions:["찬성","반대","기권"]).map(o=>'<div class="nfopt"><input data-vo value="'+esc(o)+'" maxlength="30"><button type="button" class="ibtn" data-vodel>'+X+'</button></div>').join("")+'</div><div style="display:flex;gap:6px;margin-top:6px"><button type="button" class="btn btn-sm" id="nfOptAdd">+ 선택지 추가</button><button type="button" class="btn btn-sm" id="nfOptYN">찬성·반대·기권</button></div></div><div><label>투표 비밀번호 <span class="req">*</span> <span style="font-weight:500;color:var(--mute)">(투표자에게 안내)</span></label><div style="display:flex;gap:6px"><input name="votePw" id="nfPw" maxlength="12" autocomplete="off" value="'+esc(n.votePw||String(Math.floor(1000+Math.random()*9000)))+'" style="flex:1;font-weight:800;letter-spacing:2px"><button type="button" class="btn btn-sm" id="nfPwNew" title="새로 만들기">🎲</button></div></div><div><label>투표 마감 일시 <span class="req">*</span></label><input type="datetime-local" name="voteEnd" value="'+esc(n.voteEnd||(()=>{ const d=new Date(); d.setDate(d.getDate()+3); return dStr(d)+"T18:00"; })())+'"></div><div class="subt" style="grid-column:1/-1">마감 일시가 지나면 투표가 닫히고 결과가 공개돼요. 일찍 끝내려면 공지의 <b>[투표 종료]</b> 버튼을 누르세요. 비밀번호는 관리자 화면에만 보여요.</div></div></div>'
    +'<div><label>상단 고정</label><select name="pinned"><option value="N"'+(n.pinned!=="Y"?" selected":"")+'>고정 안 함</option><option value="Y"'+(n.pinned==="Y"?" selected":"")+'>📌 상단 고정</option></select></div>';
   openModal(shell(ed?"공지 수정":"공지 작성",body,ed));
   const nfF=$("mform"), optRow=v=>{ const d=document.createElement("div"); d.className="nfopt"; d.innerHTML='<input data-vo maxlength="30" value="'+esc(v||"")+'"><button type="button" class="ibtn" data-vodel>'+X+'</button>'; return d; };
@@ -2330,9 +2339,10 @@ function noticeForm(n){
   $("nfVote").onchange=e=>{ $("nfVoteBox").style.display=e.target.checked?"grid":"none"; relabel(e.target.checked); }; relabel(!!n.vote);
   $("nfOpts").addEventListener("click",e=>{ const b=e.target.closest("[data-vodel]"); if(b&&nfF.querySelectorAll("[data-vo]").length>2) b.parentNode.remove(); });
   $("nfOptAdd").onclick=()=>{ const r=optRow(""); $("nfOpts").appendChild(r); r.querySelector("input").focus(); };
+  $("nfPwNew").onclick=()=>{ $("nfPw").value=String(Math.floor(1000+Math.random()*9000)); };
   $("nfOptYN").onclick=()=>{ $("nfOpts").innerHTML=""; ["찬성","반대","기권"].forEach(v=>$("nfOpts").appendChild(optRow(v))); };
-  wire("notice",n,fd=>{ const o={id:n.id,cat:fd.cat,month:fd.month||"",title:fd.title.trim(),content:fd.content.replace(/\s+$/,""),author:fd.author.trim(),pinned:fd.pinned,createdAt:n.createdAt||new Date().toISOString()}; if(fd.vote){ o.vote="true"; o.voteEnd=fd.voteEnd; o.voteOptions=optsNow(); } return o; },
-    fd=>!fd.vote?"":!fd.voteEnd?"투표 마감 일시를 입력하세요.":optsNow().length<2?"선택지를 2개 이상 입력하세요.":new Set(optsNow()).size!==optsNow().length?"같은 선택지가 두 번 있어요.":"");
+  wire("notice",n,fd=>{ const o={id:n.id,cat:fd.cat,month:fd.month||"",title:fd.title.trim(),content:fd.content.replace(/\s+$/,""),author:fd.author.trim(),pinned:fd.pinned,createdAt:n.createdAt||new Date().toISOString()}; if(!o.id) o.id=uid(); if(fd.vote){ o.vote="true"; o.voteEnd=fd.voteEnd; o.voteOptions=optsNow(); o.votePw=(fd.votePw||"").trim(); } return o; },
+    fd=>!fd.vote?"":!(fd.votePw||"").trim()?"투표 비밀번호를 입력하세요.":(fd.votePw||"").trim().length<4?"투표 비밀번호는 4자리 이상으로 해 주세요.":!fd.voteEnd?"투표 마감 일시를 입력하세요.":optsNow().length<2?"선택지를 2개 이상 입력하세요.":new Set(optsNow()).size!==optsNow().length?"같은 선택지가 두 번 있어요.":"");
 }
 
 function oxygenForm(o){
@@ -2511,7 +2521,8 @@ $("wCopy").onclick=async()=>{
 
 function renderAll(){ renderDashboard(); renderContracts(); renderOxygen(); renderMail(); renderWorkday(); renderNotice(); renderBilling(); renderBank(); renderExpense(); renderRv(); }
 renderAll();
-if(GAS && TOKEN){ api("me").then(u=>{ ME=u; enter(); }).catch(()=>{ TOKEN=""; try{sessionStorage.removeItem("sovis_token");}catch(e){} setTimeout(()=>$("lgEmail").focus(),60); }); }
+if(GAS && !TOKEN && VOTER && VOTER.pw){ $("login").style.display="none"; enterVote(); }
+else if(GAS && TOKEN){ api("me").then(u=>{ ME=u; enter(); }).catch(()=>{ TOKEN=""; try{sessionStorage.removeItem("sovis_token");}catch(e){} setTimeout(()=>$("lgEmail").focus(),60); }); }
 else setTimeout(()=>$("lgEmail").focus(),60);
 })();
 </script>
