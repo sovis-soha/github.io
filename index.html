@@ -241,6 +241,42 @@ td.num,th.num{text-align:right}
 .ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;height:36px;color:var(--red);display:flex;align-items:center;justify-content:center}
 @media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
 
+/* v2.4 vote */
+.vote-hint{margin-top:14px;font-size:12.5px;color:var(--mute);text-align:center;background:#f6f7fb;border-radius:10px;padding:8px}
+.vote-hint b{color:var(--ink)}
+#voteApp{min-height:100vh;background:var(--bg)}
+.vt-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:14px 20px;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.vt-top .vt-logo{height:28px}
+.vt-top b{display:block;font-size:16px;font-weight:800}.vt-top small{font-size:12px;color:var(--mute)}
+.vt-top #vtRefresh{margin-left:auto}
+.vt-wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+.vt-note{background:#eef0ff;color:#3b4bd8;border-radius:14px;padding:12px 16px;font-size:13px;line-height:1.6;margin-bottom:16px}
+.vt-card{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:20px;margin-bottom:16px}
+.vt-card h3{font-size:18px;font-weight:800;margin:6px 0 8px}
+.vt-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--mute)}
+.vt-body{white-space:pre-wrap;font-size:14px;color:var(--ink2);line-height:1.65;margin:4px 0 14px}
+.vt-who{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.vt-who input{padding:12px 14px;font-size:15px}
+.vt-ch{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.vt-ch label{display:flex;align-items:center;justify-content:center;gap:8px;height:58px;border-radius:14px;border:2px solid var(--line);font-weight:800;font-size:17px;cursor:pointer;transition:.15s;background:#fff}
+.vt-ch input{display:none}
+.vt-ch label.c1:has(input:checked){border-color:#12a37f;background:#e8f7f1;color:#0b8a5e}
+.vt-ch label.c2:has(input:checked){border-color:#ef4444;background:#fdeceb;color:#c63a2f}
+.vt-ch label.c3:has(input:checked){border-color:#8a94a6;background:#f1f3f7;color:#5b6577}
+.vt-go{width:100%;height:52px;font-size:16px;font-weight:800;border-radius:14px}
+.vt-done{text-align:center;padding:18px 10px;background:#e8f7f1;border-radius:14px;color:#0b8a5e;font-weight:700}
+.vt-done button{margin-top:10px}
+.vt-err{color:var(--red);font-size:13px;font-weight:700;min-height:18px;margin-bottom:6px}
+.vt-res{display:grid;gap:10px;margin-top:4px}
+.vt-bar{display:grid;grid-template-columns:52px 1fr 92px;gap:10px;align-items:center;font-weight:700;font-size:14px}
+.vt-bar .tr{height:14px;border-radius:999px;background:#f1f3f7;overflow:hidden}.vt-bar .tr i{display:block;height:100%;border-radius:999px}
+.vt-bar span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.vt-win{margin-top:12px;font-weight:800;font-size:15px}
+.ntc .vtag{background:#eef0ff;color:#4553d6}
+.vt-voters{max-height:280px;overflow:auto;display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.vt-voters span{font-size:12.5px;background:#f6f7fb;border-radius:999px;padding:4px 10px}
+.vt-top>div{white-space:nowrap}
+@media (max-width:600px){.vt-top .vt-logo{display:none}.vt-top{padding:12px 14px}.vt-who{grid-template-columns:1fr}.vt-ch label{height:52px;font-size:15px}}
 /* v2.3.4 combo */
 .combo{position:relative}
 .combo .combo-sel{position:absolute;left:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none}
@@ -492,17 +528,24 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       <p>아이디와 비밀번호를 입력하세요.</p>
       <form id="loginForm" class="lf" autocomplete="on">
         <label for="lgEmail">아이디</label>
-        <input id="lgEmail" type="email" autocomplete="username" placeholder="example@cauhs.or.kr" required>
+        <input id="lgEmail" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="example@cauhs.or.kr · 투표" required>
         <label for="lgPw">비밀번호</label>
         <input id="lgPw" type="password" autocomplete="current-password" placeholder="비밀번호" required>
         <button class="btn-login" type="submit">로그인 <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </form>
       <div class="err" id="loginErr"></div>
+      <div class="vote-hint">🗳 투표 참여는 아이디 <b>투표</b> / 비밀번호 <b>투표</b></div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.3.4 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.4.0 · 소하검진센터 SEOK</div>
     </div>
   </div>
+</div>
+
+<!-- ================= VOTE (투표 전용) ================= -->
+<div id="voteApp" style="display:none">
+  <div class="vt-top"><img src="data:image/png;base64,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" alt="" class="vt-logo"><div><b>SOVIS 투표</b><small>광명소하검진센터 · 비밀투표</small></div><button class="btn btn-sm" id="vtRefresh">새로고침</button><button class="btn btn-sm" id="vtOut">나가기</button></div>
+  <div class="vt-wrap"><div class="vt-note">🔒 <b>비밀투표</b>입니다. 소속·이름은 <b>참여 여부 확인용</b>으로만 쓰이며, 누가 어떤 표를 냈는지는 관리자를 포함해 <b>아무도 알 수 없어요</b>. 결과는 마감 후 공개됩니다.</div><div id="vtList"></div></div>
 </div>
 
 <!-- ================= APP ================= -->
@@ -529,7 +572,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.3.4 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.4.0 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -791,7 +834,7 @@ const SUPABASE_URL = "https://yrrlimyvsqprzezkzntd.supabase.co";
 const SUPABASE_KEY = "sb_publishable_d0voink0Gp_o-m_RkvnyCg_VV0BNUXp";
 /* ==================================================================== */
 const GAS = !!(SUPABASE_URL && SUPABASE_KEY);
-const RPC = {login:"sovis_login",logout:"sovis_logout",me:"sovis_me",changePw:"sovis_change_pw",listAll:"sovis_list",save:"sovis_save",remove:"sovis_remove",users:"sovis_users_list",userSave:"sovis_user_save",userDelete:"sovis_user_delete"};
+const RPC = {login:"sovis_login",logout:"sovis_logout",me:"sovis_me",changePw:"sovis_change_pw",listAll:"sovis_list",save:"sovis_save",remove:"sovis_remove",users:"sovis_users_list",userSave:"sovis_user_save",userDelete:"sovis_user_delete",voteList:"sovis_vote_list",voteCast:"sovis_vote_cast",voteAdmin:"sovis_vote_admin"};
 const ERRMSG = {FORBIDDEN:"권한이 없습니다. 관리자에게 문의하세요.",BADPW:"현재 비밀번호가 맞지 않습니다.",SHORTPW:"비밀번호는 8자 이상이어야 합니다.",DUP:"이미 등록된 아이디입니다.",BADEMAIL:"아이디는 이메일 형식으로 입력하세요.",NEEDPW:"새 계정은 비밀번호가 필요합니다.",SELF:"본인 계정은 삭제할 수 없습니다.",LOCK:"로그인 시도 횟수를 초과했습니다. 10분 후 다시 시도하세요.",NET:"서버에 연결하지 못했습니다. 잠시 후 다시 시도하세요."};
 const errText = e => ERRMSG[String(e&&e.message||e)] || String(e&&e.message||e);
 async function api(fn,...a){
@@ -802,6 +845,8 @@ async function api(fn,...a){
              : fn==="remove" ? {token:TOKEN,kind:a[0],item_id:a[1]}
              : fn==="userSave" ? {token:TOKEN,acct:a[0]}
              : fn==="userDelete" ? {token:TOKEN,user_id:a[0]}
+             : fn==="voteCast" ? {token:TOKEN,agenda_id:a[0],part:a[1],name:a[2],choice:a[3]}
+             : fn==="voteAdmin" ? {token:TOKEN,agenda_id:a[0]}
              : {token:TOKEN};
   const headers={"Content-Type":"application/json","apikey":SUPABASE_KEY};
   if(SUPABASE_KEY.indexOf("eyJ")===0) headers.Authorization="Bearer "+SUPABASE_KEY;
@@ -829,7 +874,8 @@ function applyPerms(){
   $("meName").textContent=nm; $("mePart").textContent=ME?((ME.is_admin?"관리자":ME.part||"")+(ME.name?" · "+ME.email:"")):""; $("meAv").textContent=nm.slice(0,1).toUpperCase();
   $("pwBtn").style.display=GAS&&mode!=="demo"?"":"none";
 }
-function enter(){ $("login").style.display="none"; $("app").style.display="block"; applyPerms(); route(); initStore(); }
+const isVoteOnly=()=>!!(ME&&String(ME.email||"").trim()==="투표");
+function enter(){ $("login").style.display="none"; if(isVoteOnly()){ $("app").style.display="none"; enterVote(); return; } $("voteApp").style.display="none"; $("app").style.display="block"; applyPerms(); route(); initStore(); }
 async function tryLogin(){
   const email=$("lgEmail").value.trim(), pw=$("lgPw").value;
   if(!email||!pw){ $("loginErr").textContent="아이디와 비밀번호를 입력하세요."; return; }
@@ -849,7 +895,7 @@ async function tryLogin(){
 function doLogout(msg){
   if(GAS && TOKEN && !msg && mode!=="demo"){ api("logout").catch(()=>{}); }
   if(mode==="demo"){ mode=GAS?"gas":"local"; USERS=[]; }
-  TOKEN=""; ME=null; try{sessionStorage.removeItem("sovis_token");}catch(e){}
+  TOKEN=""; ME=null; try{sessionStorage.removeItem("sovis_token");}catch(e){} if($("voteApp")) $("voteApp").style.display="none";
   clearInterval(pollTimer); for(const k in data) data[k]=[];
   $("app").style.display="none"; $("login").style.display="";
   $("loginErr").textContent=msg||""; $("mask").style.display="none"; $("modal").innerHTML=""; modalPushed=false; setTimeout(()=>$("lgEmail").focus(),60);
@@ -1370,7 +1416,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.3.4",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.4.0",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1674,6 +1720,70 @@ function visitForm(ym){
   wire("visit",it,fd=>{ const o=Object.assign({},it,{id:it.id||("vm-"+fd.month),month:fd.month,counts:now(),memo:(fd.memo||"").trim(),createdAt:it.createdAt||new Date().toISOString()}); delete o.date; delete o.updatedBy; delete o.updatedAt; return o; },
     fd=>!fd.month?"검진월을 입력하세요.":"");
 }
+
+/* ---------- VOTE (투표 채널 · 비밀투표) ---------- */
+const VCH=[["찬성","c1","#12a37f"],["반대","c2","#ef4444"],["기권","c3","#9aa3b2"]];
+const vNow=()=>{ const d=new Date(); return dStr(d)+"T"+pad(d.getHours())+":"+pad(d.getMinutes()); };
+const vClosed=n=>String(n.voteEnd||"")<=vNow();
+const VLOCAL={voters:{},tally:{}};   // 체험·미리보기 모드용 (저장 안 됨)
+async function vApi(fn,...a){
+  if(mode==="gas") return api(fn,...a);
+  const ags=data.notice.filter(n=>n.vote);
+  const ag=n=>({id:n.id,title:n.title,content:n.content,author:n.author,voteEnd:n.voteEnd,closed:vClosed(n),participants:(VLOCAL.voters[n.id]||[]).length,tally:vClosed(n)?Object.assign({},VLOCAL.tally[n.id]||{}):null});
+  if(fn==="voteList") return ags.sort((x,y)=>(vClosed(x)-vClosed(y))||String(y.voteEnd).localeCompare(String(x.voteEnd))).map(ag);
+  if(fn==="voteCast"){ const [id,part,name,ch]=a, n=ags.find(x=>x.id===id); if(!n) throw new Error("NOAGENDA"); if(vClosed(n)) throw new Error("CLOSED");
+    const k=(part+"|"+name).replace(/\s/g,"").toLowerCase(), L=VLOCAL.voters[id]=VLOCAL.voters[id]||[]; if(L.some(v=>v.k===k)) throw new Error("DUP");
+    L.push({k,part,name}); const T=VLOCAL.tally[id]=VLOCAL.tally[id]||{}; T[ch]=(T[ch]||0)+1; return {ok:true}; }
+  if(fn==="voteAdmin"){ const n=data.notice.find(x=>x.id===a[0]); return Object.assign(ag(n),{voters:(VLOCAL.voters[n.id]||[]).map(v=>({part:v.part,name:v.name})).sort((x,y)=>(x.part+x.name).localeCompare(y.part+y.name))}); }
+}
+const VERR={DUP:"이미 같은 소속·이름으로 투표했어요.",CLOSED:"투표가 마감되었어요.",NOAGENDA:"안건을 찾을 수 없어요.",NONAME:"소속과 이름을 입력하세요.",BADCHOICE:"찬성·반대·기권 중 하나를 고르세요."};
+function vResult(a){ const t=a.tally||{}, tot=VCH.reduce((s,[c])=>s+(Number(t[c])||0),0), valid=(Number(t["찬성"])||0)+(Number(t["반대"])||0);
+  const win=!tot?"참여자가 없습니다.":(Number(t["찬성"])||0)>(Number(t["반대"])||0)?"✅ 찬성 다수":(Number(t["찬성"])||0)<(Number(t["반대"])||0)?"❌ 반대 다수":"⚖ 찬반 동수";
+  return '<div class="vt-res">'+VCH.map(([c,,col])=>{ const n=Number(t[c])||0, p=tot?Math.round(n/tot*1000)/10:0; return '<div class="vt-bar"><span style="color:'+col+'">'+c+'</span><div class="tr"><i style="width:'+p+'%;background:'+col+'"></i></div><span>'+n+'표 · '+p+'%</span></div>'; }).join("")
+    +'</div><div class="vt-win">'+win+' <span style="font-weight:500;color:var(--mute);font-size:13px">(총 '+tot+'표'+(tot?' · 찬성률 '+(valid?Math.round((Number(t["찬성"])||0)/valid*1000)/10:0)+'% (기권 제외)':'')+')</span></div>'; }
+function vCard(a,inModal){
+  const end=String(a.voteEnd||"").replace("T"," ");
+  const head='<div class="vt-meta"><span class="tag vtag" style="background:#eef0ff;color:#4553d6">🗳 투표</span>'+(a.closed?'<span class="tag t-gry">마감</span>':'<span class="tag t-grn">진행 중</span>')+'<span>마감 '+esc(end)+'</span><span>· 참여 '+(a.participants||0)+'명</span></div>'
+    +'<h3>'+esc(a.title||"")+'</h3>'+(a.content?'<div class="vt-body">'+esc(a.content)+'</div>':'');
+  if(a.closed) return '<div class="vt-card">'+head+vResult(a)+'</div>';
+  return '<div class="vt-card" data-vcard="'+esc(a.id)+'">'+head+'<form class="vt-form"><div class="vt-who"><input name="part" placeholder="소속(파트) 예: 기획협약" required maxlength="30"><input name="name" placeholder="이름" required maxlength="20"></div>'
+    +'<div class="vt-ch">'+VCH.map(([c,cls])=>'<label class="'+cls+'"><input type="radio" name="choice" value="'+c+'">'+c+'</label>').join("")+'</div><div class="vt-err"></div><button class="btn btn-p vt-go" type="submit">투표하기</button></form></div>';
+}
+function vWire(root,after){
+  root.querySelectorAll(".vt-form").forEach(f=>f.onsubmit=async e=>{ e.preventDefault();
+    const card=f.closest("[data-vcard]"), id=card.dataset.vcard, fd=Object.fromEntries(new FormData(f).entries()), er=f.querySelector(".vt-err");
+    if(!fd.part||!fd.part.trim()||!fd.name||!fd.name.trim()){ er.textContent=VERR.NONAME; return; } if(!fd.choice){ er.textContent="찬성·반대·기권 중 하나를 고르세요."; return; }
+    if(!confirm("["+fd.choice+"] 으로 투표할까요?\n제출하면 수정할 수 없어요.")) return;
+    const btn=f.querySelector("button"); btn.disabled=true; btn.textContent="제출 중…";
+    try{ await vApi("voteCast",id,fd.part.trim(),fd.name.trim(),fd.choice);
+      f.outerHTML='<div class="vt-done">✅ 투표가 접수되었어요. 결과는 마감 후 공개됩니다.<br><button type="button" class="btn btn-sm" data-vagain>다른 사람이 이어서 투표하기</button></div>';
+      const again=card.querySelector("[data-vagain]"); if(again) again.onclick=()=>after&&after();
+    }catch(err){ er.textContent=VERR[err.message]||errText(err); btn.disabled=false; btn.textContent="투표하기"; } });
+}
+async function enterVote(){ $("voteApp").style.display="block"; await renderVote(); }
+async function renderVote(){
+  $("vtList").innerHTML='<div class="empty">불러오는 중…</div>';
+  try{ const L=await vApi("voteList"); const open=L.filter(a=>!a.closed), done=L.filter(a=>a.closed).slice(0,10);
+    $("vtList").innerHTML=(open.length?open.map(a=>vCard(a)).join(""):'<div class="vt-card" style="text-align:center;color:var(--mute)">지금 진행 중인 투표가 없어요.</div>')
+      +(done.length?'<h4 style="margin:24px 4px 10px;color:var(--mute);font-size:13px">마감된 투표 결과</h4>'+done.map(a=>vCard(a)).join(""):"");
+    vWire($("vtList"),renderVote);
+  }catch(e){ $("vtList").innerHTML='<div class="empty">'+esc(errText(e))+'</div>'; }
+}
+$("vtRefresh").onclick=renderVote; $("vtOut").onclick=()=>doLogout();
+async function vOpen(id,adm){
+  showMask(); $("modal").innerHTML='<div class="mh">🗳 '+(adm?"참여 현황":"투표")+'<button type="button" data-vx>'+X+'</button></div><div class="mb"><div class="full" id="vmBody"><div class="empty">불러오는 중…</div></div></div>';
+  $("modal").querySelector("[data-vx]").onclick=()=>closeModal();
+  try{
+    if(adm){ const a=await vApi("voteAdmin",id);
+      $("vmBody").innerHTML='<h3 style="font-size:17px;font-weight:800;margin-bottom:6px">'+esc(a.title)+'</h3><div class="vt-meta" style="margin-bottom:12px"><span>마감 '+esc(String(a.voteEnd||"").replace("T"," "))+'</span>'+(a.closed?'<span class="tag t-gry">마감</span>':'<span class="tag t-grn">진행 중</span>')+'</div>'
+        +(a.closed?vResult(a):'<div class="vt-note" style="margin:0">결과(득표 수)는 마감 후에 공개돼요. 관리자도 마감 전에는 볼 수 없어요.</div>')
+        +'<div class="sechd" style="margin-top:16px">참여자 '+a.voters.length+'명 <span style="font-weight:500;color:var(--mute)">(관리자만 보임 · 누가 무엇을 찍었는지는 저장되지 않아요)</span></div><div class="vt-voters">'+(a.voters.length?a.voters.map(v=>'<span>'+esc(v.part)+' · <b>'+esc(v.name)+'</b></span>').join(""):'<span>아직 없음</span>')+'</div>';
+    } else { const L=await vApi("voteList"), a=L.find(x=>x.id===id); if(!a) throw new Error("NOAGENDA");
+      $("vmBody").innerHTML=vCard(a,true); vWire($("vmBody"),()=>vOpen(id,false)); }
+  }catch(e){ $("vmBody").innerHTML='<div class="empty">'+esc(VERR[e.message]||errText(e))+'</div>'; }
+}
+document.addEventListener("click",e=>{ const g=e.target.closest("[data-vgo],[data-vres],[data-vadm]"); if(!g) return; e.stopPropagation();
+  if(g.dataset.vadm) vOpen(g.dataset.vadm,true); else vOpen(g.dataset.vgo||g.dataset.vres,false); },true);
 
 /* ---------- 검색형 선택 (기관 선택 등) ---------- */
 function comboize(el,opt){ opt=opt||{}; if(!el||el._combo) return; el._combo=1;
@@ -2042,7 +2152,7 @@ function demoData(){
   const mail=[{id:"m1",reqDate:D(-1),title:"기업검진 결과 통보서",requester:"이서연",to:"(예시) 소하산업㈜ 인사팀",sentDate:""},{id:"m2",reqDate:D(-3),title:"협약서 원본 송부",requester:"홍길동",to:"(예시) 광명시립학교",sentDate:D(-2)},
     {id:"m3",reqDate:D(-6),title:"세금계산서 원본",requester:"최유나",to:"(예시) 하안건설",sentDate:D(-5)},{id:"m4",reqDate:D(0),title:"재검 안내문",requester:"박준호",to:"수검자 12명",sentDate:"",memo:"개인정보 봉투 사용"},
     {id:"m5",reqDate:dayIn(lastM,"18"),title:"외주검사 정산서",requester:"홍길동",to:"(예시) 검사의학재단",sentDate:dayIn(lastM,"19")}];
-  const notice=[{id:"n1",cat:"무이자 할부",month:thisM,title:Number(thisM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~6개월 무이자\n- B카드: 2~5개월 무이자\n- C카드: 2~3개월 무이자\n※ 법인카드·체크카드·기프트카드 제외\n※ 카드사 사정에 따라 변경될 수 있음",author:"기획·협약 파트",pinned:"Y",createdAt:dayIn(thisM,"01")+"T09:00:00"},
+  const notice=[{id:"nvote1",cat:"일반",title:"(예시) 12월 송년회 장소를 OO한정식으로 하는 안",content:"찬성 시 12/19(금) 18:30 OO한정식으로 예약합니다.\n반대가 많으면 다른 장소를 다시 올릴게요.",author:"기획협약 김현석",pinned:"Y",vote:"true",voteEnd:D(3)+"T18:00",createdAt:D(-1)+"T09:00:00"},{id:"nvote2",cat:"일반",title:"(예시) 검진 결과지 우편 발송을 알림톡으로 대체하는 안",content:"",author:"기획협약",vote:"true",voteEnd:D(-2)+"T18:00",createdAt:D(-9)+"T09:00:00"},{id:"n1",cat:"무이자 할부",month:thisM,title:Number(thisM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~6개월 무이자\n- B카드: 2~5개월 무이자\n- C카드: 2~3개월 무이자\n※ 법인카드·체크카드·기프트카드 제외\n※ 카드사 사정에 따라 변경될 수 있음",author:"기획·협약 파트",pinned:"Y",createdAt:dayIn(thisM,"01")+"T09:00:00"},
     {id:"n2",cat:"검진 안내",month:thisM,title:"연말 검진 예약 마감 일정 안내",content:"연말 검진 수요 증가로 12월 예약은 셋째 주 금요일까지 접수합니다.\n당일 접수는 받지 않습니다.",author:"예약 파트",pinned:"N",createdAt:D(-4)+"T09:00:00"},
     {id:"n3",cat:"일반",month:thisM,title:"토요 검진 근무자 확인 요청",content:"이번 주 토요 검진 근무자는 워킹데이 계획에서 확인해 주세요.",author:"원무",pinned:"N",createdAt:D(-2)+"T09:00:00"},
     {id:"n4",cat:"무이자 할부",month:lastM,title:Number(lastM.slice(5))+"월 무이자 할부 카드 안내 (예시)",content:"- A카드: 2~5개월 무이자\n- B카드: 2~3개월 무이자",author:"기획·협약 파트",pinned:"N",createdAt:dayIn(lastM,"01")+"T09:00:00"}];
@@ -2089,6 +2199,7 @@ function demoData(){
   return {data:all,users};
 }
 function enterDemo(){
+  VLOCAL.voters={nvote1:[{k:"a",part:"검진",name:"홍OO"},{k:"b",part:"예약",name:"이OO"}],nvote2:[{k:"c",part:"검진",name:"박OO"},{k:"d",part:"기획협약",name:"최OO"},{k:"e",part:"예약",name:"정OO"},{k:"f",part:"영상",name:"강OO"},{k:"g",part:"검진",name:"윤OO"}]}; VLOCAL.tally={nvote1:{찬성:1,반대:1},nvote2:{찬성:3,반대:1,기권:1}}; Object.values(VLOCAL.voters).forEach(L=>L.forEach(v=>v.k=(v.part+"|"+v.name).replace(/\s/g,"").toLowerCase()));
   mode="demo"; TOKEN=""; ME={id:"demo",email:"demo@sovis",name:"체험 사용자",part:"관리자",is_admin:true,perms:{}};
   const d=demoData(); for(const k in COLS) data[k]=d.data[k]||[]; USERS=d.users;
   location.hash=""; cur="dashboard"; $("loginErr").textContent=""; enter();
@@ -2153,12 +2264,12 @@ const noticeSorted=()=>data.notice.slice().sort((a,b)=>((b.pinned==="Y")-(a.pinn
 function renderNotice(){
   const q=$("nQ").value.trim().toLowerCase();
   const rows=noticeSorted().filter(n=>(nFilter==="all"||n.cat===nFilter)&&(!q||[n.title,n.content,n.author].join(" ").toLowerCase().includes(q)));
-  $("nList").innerHTML=rows.length?rows.map(n=>'<div class="ntc'+(n.pinned==="Y"?" pin":"")+'"><div class="nh">'+(n.pinned==="Y"?'<span class="tag t-red">📌 고정</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span>'+(n.month?'<span class="tag t-gry">'+esc(ymLabel(n.month))+'</span>':'')+'</div>'
+  $("nList").innerHTML=rows.length?rows.map(n=>'<div class="ntc'+(n.pinned==="Y"?" pin":"")+'"><div class="nh">'+(n.pinned==="Y"?'<span class="tag t-red">📌 고정</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span>'+(n.month?'<span class="tag t-gry">'+esc(ymLabel(n.month))+'</span>':'')+(n.vote?'<span class="tag vtag">🗳 투표 · '+(vClosed(n)?'마감':'~'+esc(String(n.voteEnd).replace("T"," ").slice(5)))+'</span>':'')+'</div>'
     +'<div class="nt">'+esc(n.title)+'</div>'+(n.content?'<div class="nb">'+esc(n.content)+'</div>':'')
-    +'<div class="nf">'+(n.author?'<span>'+esc(n.author)+'</span> · ':'')+'<span>'+esc((n.createdAt||"").slice(0,10))+'</span><span class="sp"></span><button class="btn btn-sm" data-nedit="'+esc(n.id)+'">수정</button></div></div>').join("")
+    +'<div class="nf">'+(n.author?'<span>'+esc(n.author)+'</span> · ':'')+'<span>'+esc((n.createdAt||"").slice(0,10))+'</span><span class="sp"></span>'+(n.vote?(vClosed(n)?'<button class="btn btn-sm" data-vres="'+esc(n.id)+'">🗳 결과 보기</button>':'<button class="btn btn-sm btn-p" data-vgo="'+esc(n.id)+'">🗳 투표하기</button>')+(ME&&ME.is_admin?'<button class="btn btn-sm" data-vadm="'+esc(n.id)+'">참여 현황</button>':''):'')+'<button class="btn btn-sm" data-nedit="'+esc(n.id)+'">수정</button></div></div>').join("")
     :'<div class="empty">'+(data.notice.length?"조건에 맞는 공지가 없습니다.":"아직 공지가 없습니다. 오른쪽 위 <b>공지 작성</b>으로 시작하세요.")+'</div>';
   const top=noticeSorted().slice(0,4);
-  if($("dNotice")) $("dNotice").innerHTML=top.length?top.map(n=>'<div class="nline" data-go="notice">'+(n.pinned==="Y"?'<span class="tag t-red">📌</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span><span class="t">'+esc(n.title)+'</span><span class="d">'+esc(n.month?ymLabel(n.month):(n.createdAt||"").slice(0,10))+'</span></div>').join("")
+  if($("dNotice")) $("dNotice").innerHTML=top.length?top.map(n=>'<div class="nline" data-go="notice">'+(n.pinned==="Y"?'<span class="tag t-red">📌</span>':'')+(n.vote&&!vClosed(n)?'<span class="tag vtag" style="background:#eef0ff;color:#4553d6">🗳 투표중</span>':'')+'<span class="tag '+(NCAT_CLS[n.cat]||"t-gry")+'">'+esc(n.cat||"일반")+'</span><span class="t">'+esc(n.title)+'</span><span class="d">'+esc(n.month?ymLabel(n.month):(n.createdAt||"").slice(0,10))+'</span></div>').join("")
     :'<div class="empty" style="padding:14px 0">등록된 공지가 없습니다.</div>';
 }
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-nedit]"); if(b) noticeForm(data.notice.find(x=>x.id===b.dataset.nedit)); });
@@ -2170,9 +2281,13 @@ function noticeForm(n){
    +fld("제목","title",n.title,"text",true,"full",'placeholder="예: 11월 무이자 할부 카드 안내"')
    +'<div class="full"><label>내용</label><textarea name="content" style="min-height:180px" placeholder="예)\n- 삼성카드: 2~6개월 무이자\n- 신한카드: 2~5개월 무이자\n※ 법인카드·체크카드 제외">'+esc(n.content||"")+'</textarea></div>'
    +fld("작성자","author",n.author)
+   +'<div class="full" style="background:#f6f7ff;border-radius:14px;padding:12px 14px"><label class="ck" style="display:flex;align-items:center;gap:8px;margin:0;font-weight:800;color:#4553d6"><input type="checkbox" name="vote" id="nfVote" style="width:18px;height:18px"'+(n.vote?" checked":"")+'>🗳 투표 안건으로 올리기 <span style="font-weight:500;color:var(--mute)">(찬성·반대·기권 · 비밀투표 · 마감 후 결과 공개)</span></label>'
+     +'<div id="nfVoteBox" style="display:'+(n.vote?"grid":"none")+';grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div><label>투표 마감 일시 <span class="req">*</span></label><input type="datetime-local" name="voteEnd" value="'+esc(n.voteEnd||(()=>{ const d=new Date(); d.setDate(d.getDate()+3); return dStr(d)+"T18:00"; })())+'"></div><div class="subt" style="align-self:end">마감 일시가 지나면 투표가 닫히고 결과가 공개돼요. 일찍 마감하려면 마감 일시를 지금으로 바꾸세요.</div></div></div>'
    +'<div><label>상단 고정</label><select name="pinned"><option value="N"'+(n.pinned!=="Y"?" selected":"")+'>고정 안 함</option><option value="Y"'+(n.pinned==="Y"?" selected":"")+'>📌 상단 고정</option></select></div>';
   openModal(shell(ed?"공지 수정":"공지 작성",body,ed));
-  wire("notice",n,fd=>({id:n.id,cat:fd.cat,month:fd.month||"",title:fd.title.trim(),content:fd.content.replace(/\s+$/,""),author:fd.author.trim(),pinned:fd.pinned,createdAt:n.createdAt||new Date().toISOString()}));
+  $("nfVote").onchange=e=>{ $("nfVoteBox").style.display=e.target.checked?"grid":"none"; };
+  wire("notice",n,fd=>{ const o={id:n.id,cat:fd.cat,month:fd.month||"",title:fd.title.trim(),content:fd.content.replace(/\s+$/,""),author:fd.author.trim(),pinned:fd.pinned,createdAt:n.createdAt||new Date().toISOString()}; if(fd.vote){ o.vote="true"; o.voteEnd=fd.voteEnd; } return o; },
+    fd=>fd.vote&&!fd.voteEnd?"투표 마감 일시를 입력하세요.":"");
 }
 
 function oxygenForm(o){
