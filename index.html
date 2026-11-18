@@ -308,6 +308,13 @@ tr.vc-used td{background:#fbfefc}tr.vc-exp td,tr.vc-void td{color:#a0a8b6}tr.vc-
 .rvtw tr.today td{background:#fffbea}
 .rvtw tr.tot td{font-weight:800;background:#f6f8fb;border-top:2px solid #e3e8ef}
 .rvtw .z{color:#d0d6de}
+.vtx{min-width:1100px}.vtx th,.vtx td{text-align:right!important;padding:9px 8px!important;font-size:12.5px!important}
+.vtx .rh{text-align:left!important;position:sticky;left:0;background:#fff;z-index:1;white-space:nowrap;font-weight:700;color:var(--ink2);min-width:96px}
+.vtx .rh i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.vtx thead th{background:#f6f8fb;color:var(--mute);font-weight:700}.vtx thead th small{display:block;font-size:10px;color:#b4bcc8;font-weight:600}
+.vtx th.mth.cl{cursor:pointer}.vtx th.mth.cl:hover{background:#eef0ff;color:#4553d6}
+.vtx .ayc{background:#f3f5ff!important;font-weight:800;color:#3b4bd8}
+.vtx tr.sum td,.vtx tr.sum th{border-top:2px solid #e3e8ef;background:#fbfcfe}.vtx tr.prev td,.vtx tr.prev th{color:#8a94a6}.vtx tr.per td{color:#5b6577}
 .rvtw .tt{font-weight:800}
 .rvdw{display:inline-block;width:18px;color:var(--mute);font-weight:600}.rvdw.sun{color:var(--red)}.rvdw.sat{color:var(--blue)}
 .cmp{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -563,7 +570,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.5.1 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.5.2 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -599,7 +606,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.5.1 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.5.2 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -1473,7 +1480,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.5.1",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.5.2",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1772,15 +1779,19 @@ function renderRv(){
   $("ryTitle").textContent=rAy+"학년도"; $("rChart").innerHTML=rvChart();
   const months=[]; for(let i=0;i<12;i++) months.push(ymAdd(rAy+"-03",i));
   const key=vTab==="rev"?"revenue":"counts", fmt=vTab==="rev"?(n=>eok(n)):nf, tf=vTab==="rev"?vRev:vTot, w=can("visit","write");
-  const tot={}; VCAT.forEach(([c])=>tot[c]=0); let tt=0, tp=0, tC=0, tR=0;
-  const rows=months.map(ym=>{ const it=vItem(ym), ct=(it&&it[key])||{}, t=tf(it), p=tf(vItem(ymAdd(ym,-12))), d=pct(t,p);
-    VCAT.forEach(([c])=>tot[c]+=Number(ct[c])||0); tt+=t; if(t) tp+=p; tC+=vTot(it); tR+=vRev(it);
-    const per=vTot(it)&&vRev(it)?Math.round(vRev(it)/vTot(it)):0;
-    return '<tr'+(w?' data-vym="'+ym+'" style="cursor:pointer"':'')+'><td><b>'+ym.slice(0,4)+'.'+ym.slice(5)+'</b></td>'+VCAT.map(([c])=>'<td class="gV" title="'+nf(ct[c])+'">'+(Number(ct[c])?fmt(ct[c]):'<span class="z">·</span>')+'</td>').join("")
-      +'<td class="gV tt">'+(t?fmt(t):'<span class="z">-</span>')+(it&&it.memo?' <span title="'+esc(it.memo)+'">💬</span>':'')+'</td><td>'+(p?fmt(p):'<span class="z">-</span>')+'</td><td>'+(t&&d!==null?'<span class="cmp" style="display:inline-flex;margin:0">'+pctTag("",d)+'</span>':'<span class="z">-</span>')+'</td><td>'+(per?nf(per):'<span class="z">-</span>')+'</td></tr>'; });
-  $("rTable").innerHTML='<table><thead><tr><th>월</th>'+VCAT.map(([,l])=>'<th class="gV">'+l+'</th>').join("")+'<th class="gV">합계'+(vTab==="rev"?" (원)":" (명)")+'</th><th>전년 동월</th><th>증감</th><th>1인당 수익</th></tr></thead><tbody>'+rows.join("")
-    +'<tr class="tot"><td>'+rAy+'학년도</td>'+VCAT.map(([c])=>'<td class="gV">'+fmt(tot[c])+'</td>').join("")+'<td class="gV">'+fmt(tt)+'</td><td>'+fmt(tp)+'</td><td>'+(tp?'<span class="cmp" style="display:inline-flex;margin:0">'+pctTag("",pct(tt,tp))+'</span>':'')+'</td><td>'+(tC&&tR?nf(Math.round(tR/tC)):'')+'</td></tr></tbody></table>'
-    +(vTab==="rev"?'<div class="subt" style="padding:8px 16px">금액은 만·억 단위로 줄여 보여요. 칸에 마우스를 올리면 원 단위가 나와요.</div>':'');
+  const its=months.map(vItem), prev=months.map(ym=>vItem(ymAdd(ym,-12))), val=(it,c)=>Number(((it||{})[key]||{})[c])||0;
+  const tot=months.map((ym,i)=>tf(its[i])), ptot=months.map((ym,i)=>tf(prev[i])), sumA=a=>a.reduce((t,v)=>t+v,0);
+  const ayT=sumA(tot), ayP=sumA(ptot.map((p,i)=>tot[i]?p:0)), cC=sumA(its.map(vTot)), cR=sumA(its.map(vRev));
+  const th='<th class="rh"></th>'+months.map(ym=>'<th class="mth'+(w?' cl':'')+'" data-vym="'+ym+'"'+(w?' title="눌러서 입력·수정"':'')+'>'+Number(ym.slice(5))+'월'+(ym.slice(5)==="01"?'<small>'+ym.slice(0,4)+'</small>':'')+'</th>').join("")+'<th class="ayc">'+rAy+'학년도</th>';
+  const tr=(lbl,cells,tot2,cls)=>'<tr class="'+(cls||"")+'"><th class="rh">'+lbl+'</th>'+cells.join("")+'<td class="ayc">'+tot2+'</td></tr>';
+  const z='<span class="z">·</span>';
+  let body=VCAT.map(([c,l])=>tr('<i style="background:'+VCOL[c]+'"></i>'+l,its.map((it,i)=>'<td title="'+nf(val(it,c))+'">'+(val(it,c)?fmt(val(it,c)):z)+'</td>'),fmt(sumA(its.map(it=>val(it,c)))))).join("");
+  body+=tr('합계'+(vTab==="rev"?" (원)":" (명)"),tot.map((t,i)=>'<td title="'+nf(t)+'"><b>'+(t?fmt(t):z)+'</b>'+(its[i]&&its[i].memo?' <span title="'+esc(its[i].memo)+'">💬</span>':'')+'</td>'),'<b>'+fmt(ayT)+'</b>',"sum");
+  body+=tr('전년 동월',ptot.map(p=>'<td>'+(p?fmt(p):z)+'</td>'),fmt(sumA(ptot)),"prev");
+  body+=tr('증감',tot.map((t,i)=>'<td>'+(t&&ptot[i]?'<span class="cmp" style="display:inline-flex;margin:0">'+pctTag("",pct(t,ptot[i]))+'</span>':z)+'</td>'),ayP?'<span class="cmp" style="display:inline-flex;margin:0">'+pctTag("",pct(ayT,ayP))+'</span>':'',"diff");
+  body+=tr('1인당 수익',its.map(it=>'<td>'+(vTot(it)&&vRev(it)?nf(Math.round(vRev(it)/vTot(it))):z)+'</td>'),cC&&cR?nf(Math.round(cR/cC)):'',"per");
+  $("rTable").innerHTML='<table class="vtx"><thead><tr>'+th+'</tr></thead><tbody>'+body+'</tbody></table>'
+    +'<div class="subt" style="padding:8px 16px">'+(vTab==="rev"?'금액은 만·억 단위로 줄여 보여요. 칸에 마우스를 올리면 원 단위가 나와요. ':'')+(w?'위쪽 월을 누르면 그 달 실적을 입력·수정할 수 있어요.':'')+'</div>';
 }
 $("rTable").addEventListener("click",e=>{ const r=e.target.closest("[data-vym]"); if(!r||!can("visit","write")) return; visitForm(r.dataset.vym); });
 function visitForm(ym){
@@ -1802,9 +1813,9 @@ function visitForm(ym){
 const VISSUER=[["center","소하검진센터","#0f9a74"],["dev","발전후원팀","#8b5cf6"]];
 const vcExpired=v=>!v.used&&!v.voided&&v.validUntil&&v.validUntil<todayStr();
 const vcState=v=>v.voided?"void":v.used?"used":vcExpired(v)?"exp":"open";
-let vcFilter={center:"all",dev:"all"}, vcLimit={center:50,dev:50}, vcYear={center:"",dev:""};
+let vcFilter={center:"all",dev:"all"}, vcLimit={center:10,dev:10}, vcYear={center:"",dev:""};
 const vcYearOf=v=>{ const m=String(v.serial||"").match(/(20\d\d)/); return m?m[1]:String(v.issueDate||"").slice(0,4); };
-const vcCmp=(a,b)=>String(b.serial||"").localeCompare(String(a.serial||""),"ko",{numeric:true});
+const vcCmp=(a,b)=>String(b.issueDate||b.validFrom||"").localeCompare(String(a.issueDate||a.validFrom||""))||String(b.serial||"").localeCompare(String(a.serial||""),"ko",{numeric:true});
 function renderVoucher(){
   if(!$("vcWrap")) return;
   const w=can("voucher","write"), q=($("vcQ")&&$("vcQ").value.trim().toLowerCase())||"";
@@ -1812,7 +1823,7 @@ function renderVoucher(){
     const dev=k==="dev", all=data.voucher.filter(v=>(v.issuer||"center")===k), n={open:0,used:0,exp:0,void:0}; all.forEach(v=>n[vcState(v)]++);
     const years=[...new Set(all.map(vcYearOf).filter(Boolean))].sort().reverse(), f=vcFilter[k], yr=vcYear[k];
     const rows=all.filter(v=>(f==="all"||vcState(v)===f)&&(!yr||vcYearOf(v)===yr)&&(!q||[v.serial,v.program,v.receiver,v.target,v.reason,v.reqDept,v.sponsor,v.usedBy,v.usedRegNo,v.docNo,v.memo].join(" ").toLowerCase().includes(q))).sort(vcCmp);
-    const live=all.length-n.void, pctUsed=live?Math.round(n.used/live*100):0, shown=rows.slice(0,vcLimit[k]);
+    const live=all.length-n.void, pctUsed=live?Math.round(n.used/live*100):0, shown=q?rows:rows.slice(0,vcLimit[k]);
     const head='<th>일련번호</th><th>프로그램</th><th>발급일자</th><th>유효기간</th><th>요청부서</th><th>수령인</th>'+(dev?'<th>발급횟수</th>':'')+'<th>발행사유</th>'+(dev?'<th>후원자</th><th class="num">후원액</th><th>입금일</th>':'')+'<th>사용 (등록번호 · 검진자 · 검진일자)</th><th></th>';
     const row=v=>{ const st=vcState(v); return '<tr class="vc-'+st+'"><td class="nm" style="white-space:nowrap;font-family:Inter">'+esc(v.serial||"-")+'</td><td class="mini2" style="min-width:140px">'+esc(v.program||"")+'</td><td style="white-space:nowrap">'+esc(v.issueDate||"-")+'</td><td style="white-space:nowrap" class="mini2">'+(v.validFrom?esc(v.validFrom)+'<br>':'')+(v.validUntil?'~ '+esc(v.validUntil):'-')+'</td><td class="mini2">'+esc(v.reqDept||"-")+'</td><td class="mini2">'+esc(v.receiver||"-")+(v.target?'<div style="color:var(--mute)">대상: '+esc(v.target)+'</div>':'')+'</td>'
       +(dev?'<td class="mini2" style="white-space:nowrap">'+esc(v.issueCount||"-")+'</td>':'')+'<td class="mini2">'+esc(v.reason||"-")+(v.memo?'<div style="color:var(--mute)">'+esc(v.memo)+'</div>':'')+'</td>'
@@ -1822,19 +1833,19 @@ function renderVoucher(){
     return '<div class="card vcCard" style="margin-bottom:16px"><div class="ph"><h3 style="color:'+col+'">'+(dev?"🤝":"🏥")+' '+lbl+' 발행</h3>'
       +'<div class="vcstat"><span>발행 <b>'+nf(all.length)+'</b></span><span class="u">사용 <b>'+nf(n.used)+'</b></span><span class="o">미사용 <b>'+nf(n.open)+'</b></span>'+(n.exp?'<span class="x">기간만료 <b>'+nf(n.exp)+'</b></span>':'')+(n.void?'<span class="x">폐기 <b>'+nf(n.void)+'</b></span>':'')+'</div>'
       +'<div class="right"><select class="sel" data-vcy="'+k+'"><option value="">전체 연도</option>'+years.map(y=>'<option'+(y===yr?" selected":"")+'>'+y+'</option>').join("")+'</select><div class="chips">'+[["all","전체"],["open","미사용"],["used","사용"],["exp","만료"]].map(([v,l])=>'<button class="chip'+(f===v?" on":"")+'" data-vcf="'+k+'|'+v+'">'+l+'</button>').join("")+'</div>'+(w?'<button class="btn btn-p btn-sm" data-vcadd="'+k+'">+ 발행 등록</button>':'')+'</div></div>'
-      +'<div class="vcbar"><i style="width:'+pctUsed+'%;background:'+col+'"></i></div><div class="subt" style="padding:4px 20px 8px">사용률 '+pctUsed+'% (폐기 제외) · 표시 '+nf(Math.min(rows.length,vcLimit[k]))+' / '+nf(rows.length)+'건</div>'
+      +'<div class="vcbar"><i style="width:'+pctUsed+'%;background:'+col+'"></i></div><div class="subt" style="padding:4px 20px 8px">사용률 '+pctUsed+'% (폐기 제외) · 최근 발급순 '+nf(Math.min(rows.length,vcLimit[k]))+' / '+nf(rows.length)+'건 표시 (검색하면 전체에서 찾아요)</div>'
       +'<div class="tw vctw"><table style="min-width:'+(dev?1500:1100)+'px"><thead><tr>'+head+'</tr></thead><tbody>'
       +(shown.length?shown.map(row).join(""):'<tr><td colspan="'+(dev?13:9)+'" class="empty">'+lbl+' 발행 내역이 없습니다.'+(w?' <b>+ 발행 등록</b>으로 추가하세요.':'')+'</td></tr>')
-      +'</tbody></table></div>'+(rows.length>vcLimit[k]?'<div style="text-align:center;padding:10px"><button class="btn btn-sm" data-vcmore="'+k+'">더 보기 (+50)</button></div>':'')+'</div>'; }).join("");
+      +'</tbody></table></div>'+(rows.length>10?'<div style="text-align:center;padding:10px"><button class="btn btn-sm" data-vcmore="'+k+'">'+(vcLimit[k]>10?'▲ 최근 10건만 보기':'▼ 나머지 '+nf(rows.length-10)+'건 펼치기')+'</button></div>':'')+'</div>'; }).join("");
 }
 document.addEventListener("click",e=>{
-  const f=e.target.closest("[data-vcf]"); if(f){ const [k,v]=f.dataset.vcf.split("|"); vcFilter[k]=v; vcLimit[k]=50; renderVoucher(); return; }
-  const mo=e.target.closest("[data-vcmore]"); if(mo){ vcLimit[mo.dataset.vcmore]+=50; renderVoucher(); return; }
+  const f=e.target.closest("[data-vcf]"); if(f){ const [k,v]=f.dataset.vcf.split("|"); vcFilter[k]=v; vcLimit[k]=10; renderVoucher(); return; }
+  const mo=e.target.closest("[data-vcmore]"); if(mo){ const k=mo.dataset.vcmore; vcLimit[k]=vcLimit[k]>10?10:100000; renderVoucher(); return; }
   const a=e.target.closest("[data-vcadd]"); if(a){ voucherForm(null,a.dataset.vcadd); return; }
   const u=e.target.closest("[data-vcuse]"); if(u){ voucherUse(data.voucher.find(x=>x.id===u.dataset.vcuse)); return; }
   const ed=e.target.closest("[data-vcedit]"); if(ed){ voucherForm(data.voucher.find(x=>x.id===ed.dataset.vcedit)); return; }
 });
-document.addEventListener("change",e=>{ const y=e.target.closest("[data-vcy]"); if(y){ vcYear[y.dataset.vcy]=y.value; vcLimit[y.dataset.vcy]=50; renderVoucher(); } });
+document.addEventListener("change",e=>{ const y=e.target.closest("[data-vcy]"); if(y){ vcYear[y.dataset.vcy]=y.value; vcLimit[y.dataset.vcy]=10; renderVoucher(); } });
 function voucherForm(v,issuer,keep){
   FORM_MENU="voucher"; v=v||{}; const ed=!!v.id, cur=Object.assign({},v,keep||{}), isr=cur.issuer||issuer||"center", dev=isr==="dev";
   const uniq=key=>[...new Set(data.voucher.map(x=>x[key]).filter(Boolean))].slice(0,80).map(d=>'<option value="'+esc(d)+'">').join("");
@@ -2205,7 +2216,9 @@ function renderExpense(){
     });
   }
   const mt={}; ayList.forEach(e=>{ const ym=statYm(e); mt[ym]=(mt[ym]||0)+(Number(e.amount)||0); });
-  $("eStat").innerHTML=!ayList.length?'<div class="empty">'+eAy+'학년도 지출 내역이 없습니다.</div>':eyView==="chart"?expChart(grid,months,mt,tm):'<table><thead><tr><th>'+(eyMode==="acct"?"회계계정":"회계계정 / 중분류")+'</th>'+months.map(ym=>'<th class="num">'+Number(ym.slice(5))+'월</th>').join("")+'<th class="num">합계</th></tr></thead><tbody>'+body
+  $("eStat").innerHTML=!ayList.length?'<div class="empty">'+eAy+'학년도 지출 내역이 없습니다.</div>':eyView==="chart"?(()=>{ const rm=new Set(data.expcat.filter(c=>c.regular).map(c=>c.mid)), rg={}, rmt={};
+      ayList.filter(e=>rm.has(expCat(e).mid)).forEach(e=>{ const k=keyOf(e), ym=statYm(e), a=Number(e.amount)||0; rg[k]=rg[k]||{}; rg[k][ym]=(rg[k][ym]||0)+a; rmt[ym]=(rmt[ym]||0)+a; });
+      return Object.keys(rg).length?'<div class="subt" style="padding:0 20px 4px">📌 <b>정기</b>로 체크한 지출 구분만 그래프에 보여요 ('+[...rm].map(esc).join(", ")+'). 전체는 [표]에서 확인하세요.</div>'+expChart(rg,months,rmt,tm):'<div class="empty">정기 지출 구분이 없거나 이번 학년도 정기지출 내역이 없어요. <b>지출 구분 관리</b>에서 "정기"를 체크하세요.</div>'; })():'<table><thead><tr><th>'+(eyMode==="acct"?"회계계정":"회계계정 / 중분류")+'</th>'+months.map(ym=>'<th class="num">'+Number(ym.slice(5))+'월</th>').join("")+'<th class="num">합계</th></tr></thead><tbody>'+body
       +'<tr class="tot"><td>합계</td>'+months.map(ym=>cell(mt[ym],ym)).join("")+'<td class="money">'+fmtMoney(rowSum(mt))+'</td></tr></tbody></table>'
     ;
   // 목록
