@@ -242,6 +242,11 @@ td.num,th.num{text-align:right}
 @media (max-width:900px){.cell{min-height:84px;padding:6px}.cell .pp,.cell .memo{display:none}}
 
 /* v2.4 vote */
+.vfgrid{display:grid;grid-template-columns:90px 1fr 1.4fr;gap:8px 10px;align-items:center}.vfgrid .vh{font-size:12px;font-weight:700;color:var(--mute)}.vfgrid .vl{font-weight:700;font-size:13.5px}.vfgrid input{padding:9px 12px}
+.vcstat{display:flex;gap:6px;flex-wrap:wrap;margin-left:10px}.vcstat span{font-size:12.5px;padding:3px 10px;border-radius:999px;background:#f1f3f7;color:#5b6577}.vcstat .u{background:#e8f7f1;color:#0b8a5e}.vcstat .o{background:#fff4e0;color:#a96400}.vcstat .x{background:#f1f3f7;color:#8a94a6}
+.vcbar{height:8px;margin:0 20px;border-radius:999px;background:#f1f3f7;overflow:hidden}.vcbar i{display:block;height:100%;border-radius:999px}
+.vcuse{display:inline-block;font-weight:800;font-size:12.5px;padding:4px 10px;border-radius:999px;white-space:nowrap}.vcuse.u{background:#e8f7f1;color:#0b8a5e}.vcuse.o{background:#fff4e0;color:#b36b00}.vcuse.x{background:#f1f3f7;color:#8a94a6}
+tr.vc-used td{background:#fbfefc}tr.vc-used td:not(:nth-child(7)){color:#8a94a6}tr.vc-exp td{color:#a0a8b6}
 .nfopt{display:grid;grid-template-columns:1fr 40px;gap:6px;margin-bottom:6px}.nfopt input{padding:9px 12px}
 .ltab{display:flex;gap:4px;background:#f1f3f7;border-radius:12px;padding:4px;margin:-20px 0 22px;max-width:292px}.ltab button{flex:1;border:0;background:none;border-radius:9px;height:38px;font-weight:700;color:var(--mute);font-size:14px}.ltab button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
 #lVote .lf input{margin-bottom:2px}
@@ -416,6 +421,7 @@ tr.expd td:first-child{box-shadow:inset 3px 0 0 #b8c0cc}
 .ctc{font-size:12px;color:var(--ink2);margin-top:3px}
 /* v1.8 billing */
 .pf2{display:grid;grid-template-columns:110px 1fr 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px}
+.pf2 .prc{grid-column:2/-1;display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center;font-size:12px;color:var(--mute);font-weight:600}.pf2 .prc input{padding:8px 10px}
 .pf2 .pt{font-weight:700;font-size:13.5px}
 .pf2 input{padding:9px 10px!important}
 .chkrow{display:flex;gap:8px}
@@ -556,7 +562,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.4.2 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.5.0 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -580,18 +586,19 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="ng">센터운영관리</div>
     <nav class="nav">
       <a href="#contracts" data-v="contracts"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>계약관리<span class="badge" id="alertBadge" style="display:none">0</span></a>
-      <a href="#rv" data-v="rv"><svg class="i" viewBox="0 0 24 24"><path d="M8 3v4M16 3v4"/><rect x="3" y="5" width="18" height="16" rx="3"/><path d="m9 14 2 2 4-4"/></svg>검진현황</a>
+      <a href="#rv" data-v="rv"><svg class="i" viewBox="0 0 24 24"><path d="M8 3v4M16 3v4"/><rect x="3" y="5" width="18" height="16" rx="3"/><path d="m9 14 2 2 4-4"/></svg>실적관리</a>
       <a href="#billing" data-v="billing"><svg class="i" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>청구관리</a>
       <a href="#bank" data-v="bank"><svg class="i" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/></svg>통장관리</a>
       <a href="#expense" data-v="expense"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h4"/></svg>지출관리<span class="badge" id="expBadge" style="display:none">0</span></a>
       <a href="#workday" data-v="workday"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 18h2"/></svg>워킹데이 계획</a>
       <a href="#oxygen" data-v="oxygen"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V3h4v3M12 3V2"/><path d="M10 12h4"/></svg>산소가스 관리</a>
+      <a href="#voucher" data-v="voucher"><svg class="i" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 2"/></svg>검진권 발급현황</a>
       <a href="#mail" data-v="mail"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg>등기 발송 관리</a>
     </nav>
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.4.2 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.5.0 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -709,6 +716,12 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
     </section>
 
+    <!-- VOUCHER -->
+    <section id="v-voucher" style="display:none">
+      <div class="card" style="margin-bottom:16px"><div class="ph"><h3>🎫 검진권 발급현황</h3><span class="hint">발행 후 사용 시 '사용 처리'로 사용자·사용일을 기록하세요</span><div class="right"><label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="vcQ" placeholder="문서번호, 번호, 대상, 사용자"></label></div></div></div>
+      <div id="vcWrap"></div>
+    </section>
+
     <!-- MAIL -->
     <section id="v-mail" style="display:none">
       <div class="bento" style="grid-template-columns:repeat(4,1fr)">
@@ -747,17 +760,17 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
     </section>
 
-    <!-- VISIT (검진현황) -->
+    <!-- VISIT (실적관리) -->
     <section id="v-rv" style="display:none">
       <div class="bento" style="grid-template-columns:repeat(4,1fr)" id="vKpi"></div>
       <div class="card" style="margin-bottom:16px">
         <div class="ph"><div class="wd-bar"><div class="mnav"><button class="btn btn-ic" id="ryPrev"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m15 18-6-6 6-6"/></svg></button><b id="ryTitle"></b><button class="btn btn-ic" id="ryNext"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="m9 18 6-6-6-6"/></svg></button></div></div>
-          <h3 style="margin-left:6px;white-space:nowrap">월별 검진자 추이</h3><span class="hint eyhint">회색 점선 = 전년도</span>
+          <h3 style="margin-left:6px;white-space:nowrap">월별 실적 추이</h3><span class="hint eyhint">막대 = 수익 · 선 = 검진자 · 회색 = 전년도</span>
           <div class="right"><div class="basis" id="vMode"><button data-m="total" class="on">합계</button><button data-m="cat">유형별</button></div></div></div>
         <div id="rChart"></div>
       </div>
       <div class="card">
-        <div class="ph"><h3>학년도 월별 검진자 수</h3><span class="hint">월을 누르면 입력·수정</span><div class="right"><div class="rvbtns"><button class="btn btn-v" id="rAddV">+ 검진자 수 입력</button></div></div></div>
+        <div class="ph"><h3>학년도 월별 실적</h3><span class="hint">월을 누르면 입력·수정</span><div class="right"><div class="basis" id="vTab"><button data-t="rev" class="on">💰 수익</button><button data-t="cnt">👥 검진자</button></div><div class="rvbtns"><button class="btn btn-v" id="rAddV">+ 실적 입력</button></div></div></div>
         <div class="rvtw" id="rTable"></div>
       </div>
     </section>
@@ -827,11 +840,11 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 <script>
 (function(){
 "use strict";
-const TYPES = ["MOU협약","위수탁계약","유지보수계약","식사권 계약","기타"];
+const TYPES = ["MOU협약","병원협약","위수탁계약","유지보수계약","식사권 계약","기타"];
 const NCATS = ["무이자 할부","일반","검진 안내","기타"];
 const NCAT_CLS = {"무이자 할부":"t-vio","일반":"t-blu","검진 안내":"t-grn","기타":"t-gry"};
-const TYPE_COLORS = {"위수탁계약":"#006cb8","MOU협약":"#8b5cf6","유지보수계약":"#2aa5b5","식사권 계약":"#f59e0b","기타":"#94a3b8"};
-const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday", package:"package", notice:"notice", client:"client", billing:"billing", exam:"exam", bank:"bank", expense:"expense", expcat:"expcat", resv:"resv", visit:"visit"};
+const TYPE_COLORS = {"위수탁계약":"#006cb8","MOU협약":"#8b5cf6","병원협약":"#0f9a74","유지보수계약":"#2aa5b5","식사권 계약":"#f59e0b","기타":"#94a3b8"};
+const COLS = {contracts:"contracts", oxygen:"oxygen", mail:"mail", staff:"staff", workday:"workday", package:"package", notice:"notice", client:"client", billing:"billing", exam:"exam", bank:"bank", expense:"expense", expcat:"expcat", resv:"resv", visit:"visit", voucher:"voucher"};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -884,7 +897,7 @@ async function api(fn,...a){
   return r;
 }
 /* ---------- 권한 ---------- */
-const MENUS=[["notice","공지사항"],["contracts","계약관리"],["visit","검진현황"],["billing","청구관리"],["bank","통장관리"],["expense","지출관리"],["workday","워킹데이 계획"],["oxygen","산소가스 관리"],["mail","등기 발송 관리"]];
+const MENUS=[["notice","공지사항"],["contracts","계약관리"],["visit","실적관리"],["billing","청구관리"],["bank","통장관리"],["expense","지출관리"],["workday","워킹데이 계획"],["oxygen","산소가스 관리"],["voucher","검진권 발급현황"],["mail","등기 발송 관리"]];
 const ACTS=[["view","조회"],["write","등록·수정"],["del","삭제"]];
 function can(menu,act){ if(!ME) return false; if(ME.is_admin) return true; const p=ME.perms&&ME.perms[menu]; return !!(p&&p[act]); }
 function applyPerms(){
@@ -927,7 +940,7 @@ $("logout").onclick=()=>doLogout();
 $("pwBtn").onclick=()=>pwForm();
 
 /* ---------- STORAGE (구글 시트 / 미리보기는 이 브라우저) ---------- */
-const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[],package:[],notice:[],client:[],billing:[],exam:[],bank:[],expense:[],expcat:[],resv:[],visit:[]};
+const data={contracts:[],oxygen:[],mail:[],staff:[],workday:[],package:[],notice:[],client:[],billing:[],exam:[],bank:[],expense:[],expcat:[],resv:[],visit:[],voucher:[]};
 let mode=GAS?"gas":"local", pollTimer=null;
 function setConn(s){
   const dot=$("connDot"), txt=$("connTxt"), n=$("notice");
@@ -974,11 +987,12 @@ const VIEWS={
   notice:{t:"공지사항",d:"월간 무이자 할부 카드 안내 등 센터 공지를 관리합니다.",add:"공지 작성",fn:()=>noticeForm(),menu:"notice"},
   contracts:{t:"계약관리",d:"계약·협약 목록입니다. 만료가 가까운 계약이 위에 표시됩니다.",add:"계약 등록",fn:()=>contractForm(),menu:"contracts"},
   billing:{t:"청구관리",d:"기관별 청구 · 증빙 · 입금 내역과 미수금을 관리합니다.",add:"청구 등록",fn:()=>billingForm(),menu:"billing"},
-  rv:{t:"검진현황",d:"월별 검진자 수를 검진유형(개인종합·동절기·기업·국제·공단·기타)별로 관리합니다.",add:"",fn:()=>{},menus:["visit"]},
+  rv:{t:"실적관리",d:"월별 검진자 수와 수익을 검진유형(개인종합·동절기·기업·국제·공단·기타)별로 관리합니다.",add:"",fn:()=>{},menus:["visit"]},
   bank:{t:"통장관리",d:"은행별 입금 내역을 구분(공단·기업·개인·주차비·잡이익·선수금)별로 정리합니다.",add:"입금 등록",fn:()=>bankForm(),menu:"bank"},
   expense:{t:"지출관리",d:"지출결의 기준 지출 내역과 정기지출 등록 여부를 관리합니다.",add:"지출 등록",fn:()=>expenseForm(),menu:"expense"},
   workday:{t:"워킹데이 계획",d:"날짜별 센터 운영 여부와 행정 인원 근무를 관리합니다.",add:"오늘 근무 입력",fn:()=>dayForm(todayStr()),menu:"workday"},
   oxygen:{t:"산소가스 관리",d:"발주일 · 입고일 · 요청 수량을 기록합니다.",add:"발주 등록",fn:()=>oxygenForm(),menu:"oxygen"},
+  voucher:{t:"검진권 발급현황",d:"소하검진센터·발전후원팀이 발행한 검진권과 사용 여부를 관리합니다.",add:"",fn:()=>{},menu:"voucher"},
   mail:{t:"등기 발송 관리",d:"등기 발송 요청과 발송 결과를 기록합니다.",add:"발송 요청",fn:()=>mailForm(),menu:"mail"}
 };
 let cur="dashboard";
@@ -989,7 +1003,7 @@ function viewOk(v){ const V=VIEWS[v]; if(!V) return false; if(V.admin) return !!
 function route(keep){
   if(!keep){ let h=(location.hash||"").replace("#",""); if(h==="alerts") h="contracts"; cur=VIEWS[h]?h:"dashboard"; }
   if(!viewOk(cur)) cur="dashboard";
-  const am=VIEWS[cur].admin?null:(VIEWS[cur].menu||VIEWS[cur].addMenu); $("topAdd").style.display=(VIEWS[cur].menus?false:VIEWS[cur].admin?(ME&&ME.is_admin):can(am,"write"))?"":"none";
+  const am=VIEWS[cur].admin?null:(VIEWS[cur].menu||VIEWS[cur].addMenu); $("topAdd").style.display=(VIEWS[cur].menus||!VIEWS[cur].add?false:VIEWS[cur].admin?(ME&&ME.is_admin):can(am,"write"))?"":"none";
   if(cur==="accounts") loadUsers();
   for(const k in VIEWS) $("v-"+k).style.display=k===cur?"":"none";
   document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("on",a.dataset.v===cur));
@@ -1091,10 +1105,10 @@ function renderContracts(){
   document.querySelectorAll("[data-cf]").forEach(k=>k.classList.toggle("on",k.dataset.cf===cRange&&cRange!=="all"));
   const tp=$("cType").value, q=$("cQ").value.trim().toLowerCase();
   const okR=l=>cRange==="all"||(cRange==="exp"?(l!==null&&l<0):(l!==null&&l>=0&&l<=Number(cRange)));
-  const rows=data.contracts.filter(c=>{ const i=cInfo(c); return (!tp||c.type===tp)&&okR(i.left)&&(!q||[c.name,c.vendor,c.manager,c.dept,c.contactName].join(" ").toLowerCase().includes(q)); })
+  const rows=data.contracts.filter(c=>{ const i=cInfo(c); return (!tp||c.type===tp)&&okR(i.left)&&(!q||[c.name,c.vendor,c.manager,c.dept,c.contactName,c.benefit,c.target].join(" ").toLowerCase().includes(q)); })
     .sort((a,b)=>{ const pa=cPri(cInfo(a).left), pb=cPri(cInfo(b).left); return (pa[0]-pb[0])||(pa[1]-pb[1])||(TYPES.indexOf(a.type)-TYPES.indexOf(b.type)); });
   const rc=l=>l===null?"":l<0?"expd":l<=30?"exp30":l<=60?"exp60":l<=90?"exp90":"";
-  $("cTable").innerHTML=rows.length?rows.map(c=>{ const i=cInfo(c); return '<tr class="'+rc(i.left)+'"><td><div class="nm">'+esc(c.name)+'</div><div class="subt">'+esc(c.vendor)+(c.memo?' · '+esc(c.memo):'')+'</div>'+contactLine(c)+mouLine(c)+'</td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.manager||"-")+'</td><td style="white-space:nowrap">'+(c.start||c.end?esc(c.start||"-")+' → '+esc(c.end||"-"):'<span style="color:var(--mute)">-</span>')+'</td><td>'+leftTag(i.left)+'</td><td class="num">'+(isMOU(c)?(c.headcount?'<b>'+Number(c.headcount).toLocaleString("ko-KR")+'</b>명':'-'):(c.amount?won(c.amount):"-"))+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'<span style="color:var(--mute)">-</span>')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>'; }).join("")
+  $("cTable").innerHTML=rows.length?rows.map(c=>{ const i=cInfo(c); return '<tr class="'+rc(i.left)+'"><td><div class="nm">'+esc(c.name)+'</div>'+(c.type==="병원협약"?'<div class="subt">'+(c.benefit?'🎁 '+esc(c.benefit):'혜택 미기재')+(c.target?' · 👥 '+esc(c.target):'')+'</div>'+(c.proofDocs?'<div class="mini2">📎 '+esc(c.proofDocs)+'</div>':'')+(c.memo?'<div class="mini2">'+esc(c.memo)+'</div>':''):'<div class="subt">'+esc(c.vendor)+(c.memo?' · '+esc(c.memo):'')+'</div>'+contactLine(c)+mouLine(c))+'</td><td>'+typeDot(c.type)+'</td><td>'+esc(c.dept||"-")+'</td><td>'+esc(c.manager||"-")+'</td><td style="white-space:nowrap">'+(c.type==="병원협약"?'체결 '+esc(c.start||"-"):c.start||c.end?esc(c.start||"-")+' → '+esc(c.end||"-"):'<span style="color:var(--mute)">-</span>')+'</td><td>'+(c.type==="병원협약"?'<span class="tag t-grn">협약 중</span>':leftTag(i.left))+'</td><td class="num">'+(isMOU(c)?(c.headcount?'<b>'+Number(c.headcount).toLocaleString("ko-KR")+'</b>명':'-'):(c.amount?won(c.amount):"-"))+'</td><td>'+(c.autoRenew==="Y"?'<span class="tag t-blu">자동</span>':'<span style="color:var(--mute)">-</span>')+'</td><td><button class="btn btn-sm" data-edit="'+c.id+'">수정</button></td></tr>'; }).join("")
     :'<tr><td colspan="9" class="empty">표시할 계약이 없습니다.</td></tr>';
   const mous=rows.filter(isMOU);
   $("cFoot").innerHTML="총 <b>"+rows.length+"건</b><span>계약금액 합계 <b>"+won(rows.reduce((s,c)=>s+(isMOU(c)?0:(Number(c.amount)||0)),0))+"</b></span>"+(mous.length?"<span>MOU 검진인원 합계 <b>"+mous.reduce((s,c)=>s+(Number(c.headcount)||0),0).toLocaleString("ko-KR")+"명</b></span>":"");
@@ -1170,15 +1184,25 @@ function contractForm(c,forceType){
   const typeSel='<div><label>계약유형 <span class="req">*</span></label><select name="type" id="cfType" required>'+TYPES.map(x=>'<option'+(x===t?" selected":"")+'>'+x+'</option>').join("")+'</select></div>';
   const common=fld(mou?"협약명":"계약명","name",c.name,"text",true,"full")
    +fld(mou?"상대기관(기업)명":"업체(상대기관)명","vendor",c.vendor,"text",true)+typeSel
-   +fld("담당부서 (우리)","dept",c.dept||"소하검진센터","text",false,"",'list="deptList"')+'<datalist id="deptList">'+depts.map(d=>'<option value="'+esc(d)+'">').join("")+'</datalist>'
-   +fld("담당자 (우리)","manager",c.manager);
+   +fld("담당부서","dept",c.dept||"소하검진센터","text",false,"",'list="deptList"')+'<datalist id="deptList">'+depts.map(d=>'<option value="'+esc(d)+'">').join("")+'</datalist>'
+   +fld("담당자","manager",c.manager);
   const contact='<div class="sechd">상대기관 담당자</div>'
    +fld("담당자명","contactName",c.contactName,"text",false,"",'placeholder="예: 인사팀 김OO 과장"')
    +fld("연락처","contactPhone",c.contactPhone,"tel",false,"",'placeholder="예: 02-000-0000"')
    +fld("이메일","contactEmail",c.contactEmail,"email",false,"full",'placeholder="예: hr@company.com"');
   const tail='<div class="full"><label>비고</label><textarea name="memo">'+esc(c.memo||"")+'</textarea></div>';
   let body;
-  if(mou){
+  const hosp=t==="병원협약";
+  if(hosp){
+    body='<div class="full" style="background:#e8f7f1;color:#0b7a5a;border-radius:12px;padding:10px 14px;font-size:13px">🏥 <b>병원협약</b> — 기관과 별도 MOU가 아니라 의료원·광명병원이 직접 맺은 협약이에요.</div>'
+     +fld("기관명","vendor",c.vendor,"text",true)+typeSel
+     +fld("체결일","start",c.start,"date",true)
+     +fld("관련부서","dept",c.dept,"text",false,"",'placeholder="예: 진료협력팀" list="deptList"')+'<datalist id="deptList">'+[...new Set(depts.concat(["진료협력팀","기획팀","총무팀","스마트헬스"]))].map(d=>'<option value="'+esc(d)+'">').join("")+'</datalist>'
+     +'<div class="full"><label>혜택</label><textarea name="benefit" rows="2" placeholder="예: 기본종합건강검진 20% 할인(추가선택 항목 제외)">'+esc(c.benefit||"")+'</textarea></div>'
+     +fld("대상","target",c.target,"text",false,"full",'placeholder="예: GIDC 소속 구성원 및 그 가족"')
+     +fld("증빙서류","proofDocs",c.proofDocs,"text",false,"full",'placeholder="예: 재직증명서 및 가족관계증명서"')
+     +tail;
+  } else if(mou){
     const pks=data.package.slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));
     const sbs=Array.isArray(c.subsidies)&&c.subsidies.length?c.subsidies:[{grade:"임원"},{grade:"직원"}];
     const mt=c.mgmtType||"self";
@@ -1206,7 +1230,7 @@ function contractForm(c,forceType){
      +'<div><label>자동갱신</label><select name="autoRenew"><option value="N"'+(c.autoRenew!=="Y"?" selected":"")+'>없음</option><option value="Y"'+(c.autoRenew==="Y"?" selected":"")+'>자동갱신</option></select></div>'
      +contact+tail;
   }
-  openModal(shell((ed?"":"새 ")+(mou?"MOU 협약 ":"계약 ")+(ed?"수정":"등록"),body,ed));
+  openModal(shell((ed?"":"새 ")+(hosp?"병원협약 ":mou?"MOU 협약 ":"계약 ")+(ed?"수정":"등록"),body,ed));
   comboize(document.querySelector('#mform input[name="vendor"]'),{items:()=>[...new Set(data.client.map(c=>c.name).concat(data.contracts.map(x=>x.vendor)).filter(Boolean))].sort()});
   const F=$("mform");
   const subsNow=()=>[...F.querySelectorAll("#sbRows .sbrow")].map(r=>({grade:r.querySelector("[data-sg]").value.trim(),amount:money(r.querySelector("[data-sa]").value),memo:r.querySelector("[data-sm]").value.trim()})).filter(x=>x.amount||x.memo);
@@ -1222,13 +1246,15 @@ function contractForm(c,forceType){
   if($("cfPk")) $("cfPk").onclick=()=>{ const o=snapshot(); packageForm(()=>contractForm(o,"MOU협약")); };
   const ai=$("amtIn"); if(ai) bindMoney(ai);
   wire("contracts",c,fd=>{
+    if(fd.type==="병원협약"){ const o=Object.assign({},c,{id:c.id,type:"병원협약",name:(fd.vendor||"").trim(),vendor:(fd.vendor||"").trim(),start:fd.start||"",end:"",dept:(fd.dept||"").trim(),benefit:(fd.benefit||"").trim(),target:(fd.target||"").trim(),proofDocs:(fd.proofDocs||"").trim(),memo:(fd.memo||"").trim(),createdAt:c.createdAt||new Date().toISOString()});
+      ["hcStart","hcEnd","headcount","mgmtType","platform","subsidies","packages","amount","autoRenew","manager","contactName","contactPhone","contactEmail","updatedBy","updatedAt"].forEach(k=>delete o[k]); return o; }
     const base=Object.assign({},c,{id:c.id,name:fd.name.trim(),vendor:fd.vendor.trim(),type:fd.type,dept:(fd.dept||"").trim(),manager:(fd.manager||"").trim(),start:fd.start||"",end:fd.end||"",autoRenew:fd.autoRenew,memo:(fd.memo||"").trim(),
       contactName:(fd.contactName||"").trim(),contactPhone:(fd.contactPhone||"").trim(),contactEmail:(fd.contactEmail||"").trim(),createdAt:c.createdAt||new Date().toISOString()});
     delete base.updatedBy; delete base.updatedAt;
     if(fd.type==="MOU협약") return Object.assign(base,{amount:0,hcStart:fd.hcStart,hcEnd:fd.hcEnd,headcount:Number(fd.headcount)||0,
       mgmtType:fd.mgmtType||"self",platform:fd.mgmtType==="platform"?(fd.platform||"").trim():"",subsidies:subsNow(),
       packages:[...F.querySelectorAll("[name=pkg]:checked")].map(x=>x.value)});
-    ["hcStart","hcEnd","headcount","mgmtType","platform","subsidies","packages"].forEach(k=>delete base[k]);
+    ["hcStart","hcEnd","headcount","mgmtType","platform","subsidies","packages","benefit","target","proofDocs"].forEach(k=>delete base[k]);
     return Object.assign(base,{amount:money(fd.amount)});
   }, fd=>{
     if(fd.start&&fd.end&&fd.end<fd.start) return "종료일이 시작일보다 빠릅니다.";
@@ -1314,17 +1340,18 @@ function pwForm(){
 /* ---------- BACKUP (관리자 전용) ---------- */
 /* ===== SOVIS 백업 시트 구성 (화면 다운로드 · 자동 메일 공통) ===== */
 var SOVIS_SHEETS = [
-  ["contracts","계약",[["type","계약유형"],["name","계약(협약)명"],["vendor","업체·상대기관"],["contactName","상대 담당자"],["contactPhone","상대 연락처"],["contactEmail","상대 이메일"],["mgmtType","관리주체"],["subsidies","검진자구분별 지원금"],["dept","담당부서"],["manager","담당자"],["start","계약시작일"],["end","계약종료일"],["amount","계약금액"],["hcStart","검진시작일"],["hcEnd","검진종료일"],["headcount","검진인원"],["packages","패키지"],["autoRenew","자동갱신"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
+  ["contracts","계약",[["type","계약유형"],["name","계약(협약)명"],["vendor","업체·상대기관"],["contactName","상대 담당자"],["contactPhone","상대 연락처"],["contactEmail","상대 이메일"],["mgmtType","관리주체"],["subsidies","검진자구분별 지원금"],["benefit","혜택(병원협약)"],["target","대상(병원협약)"],["proofDocs","증빙서류(병원협약)"],["dept","담당·관련부서"],["manager","담당자"],["start","계약시작·체결일"],["end","계약종료일"],["amount","계약금액"],["hcStart","검진시작일"],["hcEnd","검진종료일"],["headcount","검진인원"],["packages","패키지"],["autoRenew","자동갱신"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
   ["client","기관",[["code","기업코드"],["name","기관(기업)명"],["mgmt","관리구분"],["memo","비고"],["updatedBy","최종수정자"]]],
-  ["billing","청구",[["billDate","청구일"],["code","기업코드"],["name","기관(기업)명"],["mgmt","관리구분"],["target","대상기간"],["amount","청구금액"],["tax","계산서금액"],["taxIssue","계산서 발행일"],["taxIssued","계산서 발급일"],["cash","현금영수증금액"],["cashIssue","현금영수증 발행일"],["cashIssued","현금영수증 발급일"],["unissued","미발행금액"],["paid","입금합계"],["due","미수금"],["deposits","입금내역(입금일 금액 적요)"],["memo","비고"],["updatedBy","최종수정자"]]],
+  ["billing","청구",[["billDate","청구일"],["code","기업코드"],["name","기관(기업)명"],["mgmtType","관리 구분"],["platform","플랫폼명"],["mgmt","기관 관리구분"],["target","대상기간"],["amount","청구금액"],["tax","계산서금액"],["taxIssue","계산서 발행일"],["taxIssued","계산서 발급일"],["taxTo","계산서 공급받는 기관"],["cash","현금영수증금액"],["cashIssue","현금영수증 발행일"],["cashIssued","현금영수증 발급일"],["unissued","미발행금액"],["paid","입금합계"],["due","미수금"],["deposits","입금내역(입금일 금액 적요)"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["package","검진패키지",[["name","패키지명"],["price","금액"],["exams","검사항목"],["examCount","검사수"],["items","기존 검사내용(글)"],["memo","비고"],["updatedBy","최종수정자"],["updatedAt","수정일시"]]],
   ["exam","검사항목",[["cat","분류"],["name","검사명"],["memo","비고"],["pkgCount","사용 패키지 수"],["pkgNames","사용 패키지"]]],
   ["notice","공지사항",[["cat","분류"],["month","대상월"],["title","제목"],["content","내용"],["author","작성자"],["pinned","상단고정"],["createdAt","작성일시"],["updatedBy","최종수정자"]]],
   ["workday","워킹데이",[["date","날짜"],["status","운영상태"],["memo","메모"],["people","행정근무"],["updatedBy","최종수정자"]]],
   ["staff","행정인원",[["part","파트"],["title","직책/직급"],["name","이름"],["order","순서"]]],
+  ["voucher","검진권",[["issuer","발행처"],["docNo","문서번호"],["issueDate","발급일"],["serial","검진권 번호"],["recipient","발급 대상"],["kind","내용"],["validUntil","유효기간"],["used","사용 여부"],["usedDate","사용일"],["usedBy","사용자"],["usedMemo","확인 메모"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["oxygen","산소가스",[["orderDate","발주일"],["inDate","입고일"],["qty","요청갯수"],["requester","요청자"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["mail","등기발송",[["reqDate","요청일"],["title","제목"],["requester","요청자"],["to","수신처"],["sentDate","발송일"],["memo","비고"],["updatedBy","최종수정자"]]],
-  ["visit","검진현황",[["month","검진월"],["indiv","개인종합"],["winter","동절기"],["corp","기업"],["intl","국제"],["nhis","공단"],["etc","기타"],["total","합계"],["memo","메모"],["updatedBy","최종수정자"]]],
+  ["visit","실적",[["month","월"],["indiv","개인종합(명)"],["winter","동절기(명)"],["corp","기업(명)"],["intl","국제(명)"],["nhis","공단(명)"],["etc","기타(명)"],["total","검진자 합계"],["r_indiv","개인종합 수익"],["r_winter","동절기 수익"],["r_corp","기업 수익"],["r_intl","국제 수익"],["r_nhis","공단 수익"],["r_etc","기타 수익"],["rtotal","수익 합계"],["memo","메모"],["updatedBy","최종수정자"]]],
   ["bank","통장",[["bank","은행"],["dt","입금일시"],["memo","적요"],["note","비고"],["intl","국제환자"],["amount","금액"],["gongdan","공단"],["corp","기업"],["indiv_gen","개인(일검)"],["indiv_comp","개인(종검)"],["indiv","개인(구분없음)"],["parking","주차비"],["misc","잡이익"],["prepaid","선수금"],["unsplit","미분류"],["receipts","새롬 수납(일자 금액)"],["unreceipted","미수납"],["links","청구 연동"],["updatedBy","최종수정자"]]],
   ["expense","지출",[["resolDate","결의일자"],["acct","회계계정"],["mid","중분류"],["vendor","거래처"],["amount","지출금액"],["invoiceDate","계산서일자(발급일)"],["payDate","지급예정일"],["memo","적요"],["resolNo","결의번호"],["slipNo","전표번호"],["applicant","신청자"],["updatedBy","최종수정자"]]],
   ["expcat","지출구분",[["acct","회계계정"],["mid","중분류"],["regular","매월 정기"],["memo","비고"]]],
@@ -1332,7 +1359,7 @@ var SOVIS_SHEETS = [
 ];
 var SOVIS_DSTAT = {open:"정상운영",short:"단축운영",closed:"휴진",holiday:"공휴일"};
 var SOVIS_PSTAT = {work:"출근",off:"연차",am:"오전반차",pm:"오후반차",half:"반차",trip:"출장·교육",sick:"병가·경조",rest:"휴무"};
-var SOVIS_MENUS = {notice:"공지사항",contracts:"계약관리",visit:"검진현황",billing:"청구관리",bank:"통장관리",expense:"지출관리",workday:"워킹데이",oxygen:"산소가스",mail:"등기발송"};
+var SOVIS_MENUS = {notice:"공지사항",contracts:"계약관리",visit:"실적관리",billing:"청구관리",bank:"통장관리",expense:"지출관리",workday:"워킹데이",oxygen:"산소가스",voucher:"검진권",mail:"등기발송"};
 /** data: {contracts:[...], ...}, users: [...]  →  [[시트명, [[헤더...],[행...],...]], ...] */
 function sovisBuildSheets(data, users){
   var pk = {}; (data["package"]||[]).forEach(function(p){ pk[p.id]=p.name; });
@@ -1356,7 +1383,12 @@ function sovisBuildSheets(data, users){
       var ct = row.counts || {}, VK = ["indiv","winter","corp","intl","nhis","etc"];
       if (VK.indexOf(key)>=0) return ct[key] ? Number(ct[key]) : "";
       if (key==="total") return VK.reduce(function(t,k){ return t + (Number(ct[k])||0); }, 0);
+      var rv = row.revenue || {};
+      if (key.indexOf("r_")===0) return rv[key.slice(2)] ? Number(rv[key.slice(2)]) : "";
+      if (key==="rtotal") return VK.reduce(function(t,k){ return t + (Number(rv[k])||0); }, 0);
     }
+    if (kind==="voucher" && key==="issuer") return v==="dev" ? "발전후원팀" : "소하검진센터";
+    if (kind==="voucher" && key==="used") return v ? "사용" : (row.validUntil && row.validUntil < new Date().toISOString().slice(0,10) ? "기간만료" : "미사용");
     if (kind==="expcat" && key==="regular") return v ? "정기" : "";
     if (kind==="contracts" && key==="mgmtType") return row.type!=="MOU협약" ? "" : (v==="platform" ? "플랫폼(" + (row.platform||"") + ")" : (v==="self" ? "자체관리" : ""));
     if (kind==="contracts" && key==="subsidies") return (Array.isArray(v)?v:[]).map(function(x){ return (x.grade||"") + " " + (Number(x.amount)||0).toLocaleString("ko-KR") + "원" + (x.memo ? "(" + x.memo + ")" : ""); }).join(", ");
@@ -1374,6 +1406,8 @@ function sovisBuildSheets(data, users){
       if (key==="tax") return tx.amount ? Number(tx.amount) : "";
       if (key==="taxIssue") return tx.issueDate || "";
       if (key==="taxIssued") return tx.issuedDate || "";
+      if (key==="taxTo") return tx.recipient || "";
+      if (key==="mgmtType") return v==="platform" ? "플랫폼" : v==="self" ? "자체관리" : "";
       if (key==="cash") return cs.amount ? Number(cs.amount) : "";
       if (key==="cashIssue") return cs.issueDate || "";
       if (key==="cashIssued") return cs.issuedDate || "";
@@ -1438,7 +1472,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.4.2",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.5.0",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1505,7 +1539,7 @@ function renderBilling(){
       return okF&&(!cm||c.mgmt===cm)&&(!q||[c.name,c.code,b.memo,...(b.deposits||[]).map(d=>d.memo)].join(" ").toLowerCase().includes(q)); })
     .sort((a,b)=>String(b.billDate||"").localeCompare(String(a.billDate||""))||String(clientOf(a).name||"").localeCompare(String(clientOf(b).name||"")));
   $("bTable").innerHTML=rows.length?rows.map(b=>{ const c=clientOf(b), p=billPaid(b), due=(Number(b.amount)||0)-p, st=billStatus(b), deps=b.deposits||[];
-    return '<tr><td class="nm" style="white-space:nowrap">'+esc(b.billDate||"-")+'</td><td style="font-family:Inter;font-size:12.5px">'+esc(c.code||"-")+'</td><td><div class="nm">'+esc(c.name||"(삭제된 기관)")+'</div>'+(c.mgmt?'<div class="mini2">'+esc(c.mgmt)+'</div>':'')+'</td><td style="white-space:nowrap">'+esc(targetLabel(b))+'</td><td class="money"><b>'+fmtMoney(b.amount)+'</b></td><td>'+proofCell(b)+'</td>'
+    return '<tr><td class="nm" style="white-space:nowrap">'+esc(b.billDate||"-")+'</td><td style="font-family:Inter;font-size:12.5px">'+esc(c.code||"-")+'</td><td><div class="nm">'+esc(c.name||"(삭제된 기관)")+'</div><div class="mini2">'+(b.mgmtType==="platform"?'<span class="tag" style="background:#eef0ff;color:#4553d6">🔗 '+esc(b.platform||"플랫폼")+'</span>':b.mgmtType==="self"?'자체관리':(c.mgmt?esc(c.mgmt):''))+(getProofs(b).some(p=>p.recipient)?' · 계산서 → '+esc(getProofs(b).filter(p=>p.recipient).map(p=>p.recipient).join(", ")):'')+'</div></td><td style="white-space:nowrap">'+esc(targetLabel(b))+'</td><td class="money"><b>'+fmtMoney(b.amount)+'</b></td><td>'+proofCell(b)+'</td>'
       +'<td class="money">'+fmtMoney(p)+(deps.length?'<div class="mini2">'+deps.length+'회 · 최근 '+esc(deps.map(d=>d.date||"").sort().pop()||"-")+'</div>':'')+'</td><td class="money" style="color:'+(due>0?"var(--red)":due<0?"var(--violet)":"var(--ink2)")+';font-weight:700">'+fmtMoney(due)+'</td><td><span class="tag '+BST_CLS[st]+'">'+st+'</span></td><td><button class="btn btn-sm" data-bedit="'+esc(b.id)+'">수정</button></td></tr>'; }).join("")
     :'<tr><td colspan="10" class="empty">'+(data.billing.length?"조건에 맞는 청구가 없습니다.":"아직 청구 내역이 없습니다. "+(data.client.length?"오른쪽 위 <b>청구 등록</b>으로 시작하세요.":"먼저 <b>기관 관리</b>에서 기관를 등록하세요."))+'</td></tr>';
   const ra=rows.reduce((s,b)=>s+(Number(b.amount)||0),0), rp=rows.reduce((s,b)=>s+billPaid(b),0), ru=rows.reduce((s,b)=>s+Math.max(0,unissued(b)),0);
@@ -1520,12 +1554,16 @@ function billingForm(b,keep){
   const prs=keep&&keep.proofs?keep.proofs:getProofs(cur), pmap={}; prs.forEach(p=>pmap[p.type]=p);
   const allDeps=Array.isArray(cur.deposits)?cur.deposits:[], linked=allDeps.filter(d=>d.bankRef), deps=allDeps.filter(d=>!d.bankRef);
   const depRow=(d)=>'<div class="dep"><input type="date" data-dd value="'+esc(d.date||"")+'"><input data-da inputmode="numeric" placeholder="입금금액" value="'+(d.amount?fmtMoney(d.amount):"")+'"><input data-dm placeholder="적요 (통장 표기)" value="'+esc(d.memo||"")+'"><button type="button" class="ibtn" data-ddel title="삭제">'+X+'</button></div>';
-  const prRow=t=>{ const p=pmap[t]||{}; return '<div class="pf2" data-pr="'+t+'" style="display:'+(pmap[t]?"grid":"none")+'"><span class="pt">'+t+'</span><input data-pa inputmode="numeric" placeholder="금액" value="'+(p.amount?fmtMoney(p.amount):"")+'"><input type="date" data-pi value="'+esc(p.issueDate||"")+'" title="발행일 (발행한 날)"><input type="date" data-pd value="'+esc(p.issuedDate||"")+'" title="발급일 (증빙상 일자)"></div>'; };
+  const prRow=t=>{ const p=pmap[t]||{}; return '<div class="pf2" data-pr="'+t+'" style="display:'+(pmap[t]?"grid":"none")+'"><span class="pt">'+t+'</span><input data-pa inputmode="numeric" placeholder="금액" value="'+(p.amount?fmtMoney(p.amount):"")+'"><input type="date" data-pi value="'+esc(p.issueDate||"")+'" title="발행일 (발행한 날)"><input type="date" data-pd value="'+esc(p.issuedDate||"")+'" title="발급일 (증빙상 일자)">'+(t==="계산서"?'<div class="prc"><span>공급받는 기관</span><input data-prc placeholder="계산서상 공급받는 기관 (비우면 위 기관명과 동일)" value="'+esc(p.recipient||"")+'"></div>':'')+'</div>'; };
+  const lastBill=cid=>data.billing.filter(x=>x.clientId===cid&&x.id!==b.id&&x.mgmtType).sort((x,y)=>String(y.billDate||"").localeCompare(String(x.billDate||"")))[0];
+  const mt0=cur.mgmtType||((lastBill(cur.clientId)||{}).mgmtType)||"self", pf0=cur.platform!==undefined&&cur.mgmtType?cur.platform:((lastBill(cur.clientId)||{}).platform||"");
   const body=fld("청구일","billDate",cur.billDate||todayStr(),"date",true)
    +'<div><label>대상기간 <span class="req">*</span> <span style="font-weight:500;color:var(--mute)">(분기·연간이면 종료월까지)</span></label><div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center"><input type="month" name="targetFrom" required value="'+esc(tFrom(cur)||thisMonth())+'"><span style="color:var(--mute)">~</span><input type="month" name="targetTo" value="'+esc(tTo(cur)&&tTo(cur)!==tFrom(cur)?tTo(cur):"")+'"></div></div>'
    +'<div class="full"><label>기관(기업)명 <span class="req">*</span>'+(can("billing","write")?' <button type="button" class="link" id="bfCl" style="float:right">기관 추가·수정 ›</button>':'')+'</label>'
      +(clients.length?'<select name="clientId" required><option value="">기관(기업) 선택</option>'+clients.map(c=>'<option value="'+esc(c.id)+'"'+(c.id===cur.clientId?" selected":"")+'>'+esc(c.name)+(c.code?" ("+esc(c.code)+")":"")+(c.mgmt?" · "+esc(c.mgmt):"")+'</option>').join("")+'</select>'
        :'<div class="subt" style="padding:8px 0">등록된 기관가 없습니다. 오른쪽 <b>기관 추가·수정</b>에서 먼저 등록하세요.</div>')+'</div>'
+   +'<div><label>관리 구분</label><div class="seg sm" id="bfMt"><label><input type="radio" name="mgmtType" value="self"'+(mt0==="self"?" checked":"")+'>자체관리</label><label><input type="radio" name="mgmtType" value="platform"'+(mt0==="platform"?" checked":"")+'>플랫폼</label></div></div>'
+   +'<div id="bfPfBox" style="visibility:'+(mt0==="platform"?"visible":"hidden")+'"><label>플랫폼명 <span class="req">*</span></label><input name="platform" id="bfPf" list="bfPfList" placeholder="예: GC케어" value="'+esc(pf0)+'"><datalist id="bfPfList">'+[...new Set(PLATFORM_PRESETS.concat(data.billing.map(x=>x.platform)).concat(data.contracts.map(x=>x.platform)).filter(Boolean))].map(x=>'<option value="'+esc(x)+'">').join("")+'</datalist></div>'
    +fld("청구금액 (원)","amount",cur.amount?fmtMoney(cur.amount):"","text",true,"full",'inputmode="numeric" id="bfAmt" placeholder="예: 5,000,000"')
    +'<div class="sechd">증빙 <span style="font-weight:500;color:var(--mute)">(복수 선택 가능 · 남는 금액은 미발행)</span></div>'
    +'<div class="full"><div class="chkrow">'+PROOF_TYPES.map(t=>'<label><input type="checkbox" data-pt="'+t+'"'+(pmap[t]?" checked":"")+'>'+t+'</label>').join("")+'</div></div>'
@@ -1539,7 +1577,9 @@ function billingForm(b,keep){
   openModal(shell(ed?"청구 수정":"청구 등록",body,ed));
   comboize(document.querySelector('#mform select[name="clientId"]'),{placeholder:"기관(기업)명이나 코드를 입력해 검색"});
   const F=$("mform");
-  const proofsNow=()=>PROOF_TYPES.filter(t=>F.querySelector('[data-pt="'+t+'"]').checked).map(t=>{ const r=F.querySelector('[data-pr="'+t+'"]'); return {type:t,amount:money(r.querySelector("[data-pa]").value),issueDate:r.querySelector("[data-pi]").value,issuedDate:r.querySelector("[data-pd]").value}; });
+  const proofsNow=()=>PROOF_TYPES.filter(t=>F.querySelector('[data-pt="'+t+'"]').checked).map(t=>{ const r=F.querySelector('[data-pr="'+t+'"]'), o={type:t,amount:money(r.querySelector("[data-pa]").value),issueDate:r.querySelector("[data-pi]").value,issuedDate:r.querySelector("[data-pd]").value}; const rc=r.querySelector("[data-prc]"); if(rc&&rc.value.trim()) o.recipient=rc.value.trim(); return o; });
+  F.querySelectorAll('[name="mgmtType"]').forEach(x=>x.onchange=()=>{ $("bfPfBox").style.visibility=F.querySelector('[name="mgmtType"]:checked').value==="platform"?"visible":"hidden"; });
+  const csel=F.querySelector('select[name="clientId"]'); if(csel&&!ed) csel.addEventListener("change",()=>{ const lb=lastBill(csel.value); if(lb){ F.querySelector('[name="mgmtType"][value="'+lb.mgmtType+'"]').checked=true; $("bfPf").value=lb.platform||""; $("bfPfBox").style.visibility=lb.mgmtType==="platform"?"visible":"hidden"; } });
   const depsNow=()=>linked.concat([...F.querySelectorAll("#bfDeps .dep")].map(r=>({date:r.querySelector("[data-dd]").value,amount:money(r.querySelector("[data-da]").value),memo:r.querySelector("[data-dm]").value.trim()})).filter(d=>d.date||d.amount||d.memo));
   const recalc=()=>{
     const a=money($("bfAmt").value), ps=proofsNow(), pa=ps.reduce((s,p)=>s+p.amount,0), un=a-pa, pd=depsNow().reduce((s,d)=>s+d.amount,0);
@@ -1563,13 +1603,13 @@ function billingForm(b,keep){
   recalc();
   const snapshot=()=>{ const fd=Object.fromEntries(new FormData(F).entries());
     const tf=fd.targetFrom||"", tt=fd.targetTo&&fd.targetTo>=tf?fd.targetTo:tf;
-    return {clientId:fd.clientId,billDate:fd.billDate,targetFrom:tf,targetTo:tt,month:tf,amount:money(fd.amount),proofs:proofsNow(),memo:fd.memo||"",deposits:depsNow()}; };
+    return {clientId:fd.clientId,billDate:fd.billDate,targetFrom:tf,targetTo:tt,month:tf,amount:money(fd.amount),mgmtType:fd.mgmtType||"self",platform:fd.mgmtType==="platform"?(fd.platform||"").trim():"",proofs:proofsNow(),memo:fd.memo||"",deposits:depsNow()}; };
   if($("bfCl")) $("bfCl").onclick=()=>{ const sn=snapshot(); clientForm(()=>billingForm(b,sn)); };
   wire("billing",b,fd=>{ const sn=snapshot(), c=data.client.find(x=>x.id===sn.clientId)||{};
     const o=Object.assign({},b,{id:b.id,createdAt:b.createdAt||new Date().toISOString(),clientCode:c.code||"",clientName:c.name||"",clientMgmt:c.mgmt||""},sn);
     delete o.proofType; delete o.proofAmount; delete o.issueDate; delete o.issuedDate; delete o.updatedBy; delete o.updatedAt;
     return o; },
-    fd=>{ if(!fd.clientId) return "기관(기업)을 선택하세요."; const a=money(fd.amount); if(!a) return "청구금액을 입력하세요.";
+    fd=>{ if(!fd.clientId) return "기관(기업)을 선택하세요."; if(fd.mgmtType==="platform"&&!(fd.platform||"").trim()) return "플랫폼명을 입력하세요."; const a=money(fd.amount); if(!a) return "청구금액을 입력하세요.";
       if(fd.targetTo&&fd.targetTo<fd.targetFrom) return "대상기간 종료월이 시작월보다 빠릅니다.";
       const ps=proofsNow(); if(ps.some(p=>!p.amount)) return "체크한 증빙의 금액을 입력하세요.";
       if(ps.reduce((s,p)=>s+p.amount,0)>a) return "증빙 합계가 청구금액보다 많습니다.";
@@ -1656,7 +1696,7 @@ function examForm(onClose){
 }
 $("exBtn").onclick=()=>{ if(!can("contracts","write")) return toast(ERRMSG.FORBIDDEN); examForm(); };
 
-/* ---------- VISIT (검진현황 · 월별) ---------- */
+/* ---------- VISIT (실적관리 · 월별 검진자 + 수익) ---------- */
 const VCAT=[["indiv","개인종합"],["winter","동절기"],["corp","기업"],["intl","국제"],["nhis","공단"],["etc","기타"]];
 const VCOL={indiv:"#5b6cff",winter:"#38bdf8",corp:"#8b7cf6",intl:"#22c3a6",nhis:"#ffb547",etc:"#c3cad5"};
 const ymAdd=(ym,n)=>{ const [y,m]=ym.split("-").map(Number), d=new Date(y,m-1+n,1); return d.getFullYear()+"-"+pad(d.getMonth()+1); };
@@ -1665,52 +1705,61 @@ const pctTag=(lbl,v)=>v===null?'<span>'+lbl+' -</span>':'<span class="'+(v>0?"up
 const ayOf=ym=>{ const [y,m]=ym.split("-").map(Number); return m>=3?y:y-1; };
 const vItem=ym=>data.visit.find(x=>x.month===ym);
 const vTot=it=>VCAT.reduce((t,[c])=>t+(Number((it&&it.counts||{})[c])||0),0);
-const vM=ym=>vTot(vItem(ym)), nf=n=>Number(n||0).toLocaleString("ko-KR");
-function vLatest(){ const tm=thisMonth(); const ms=data.visit.filter(x=>x.month&&x.month<=tm&&vTot(x)>0).map(x=>x.month).sort(); return ms.length?ms[ms.length-1]:ymAdd(tm,-1); }
-function vSumRange(from,to){ const o={total:0}; VCAT.forEach(([c])=>o[c]=0); data.visit.forEach(x=>{ if(x.month&&x.month>=from&&x.month<=to){ VCAT.forEach(([c])=>o[c]+=Number((x.counts||{})[c])||0); } }); o.total=VCAT.reduce((t,[c])=>t+o[c],0); return o; }
-function vStats(){ const L=vLatest(), ay=ayOf(L), cur=vM(L), pm=vM(ymAdd(L,-1)), py=vM(ymAdd(L,-12));
-  const ayC=vSumRange(ay+"-03",L), ayP=vSumRange((ay-1)+"-03",ymAdd(L,-12));
-  return {L,ay,cur,pm,py,ayC,ayP,mix:vItem(L)}; }
-const vMix=it=>VCAT.filter(([c])=>Number(((it&&it.counts)||{})[c])).map(([c,l])=>l+" "+nf(it.counts[c])).join(" · ");
-function vKpiCards(S,big){ const mm=Number(S.L.slice(5)), yy=S.L.slice(2,4);
+const vRev=it=>VCAT.reduce((t,[c])=>t+(Number((it&&it.revenue||{})[c])||0),0);
+const vM=ym=>vTot(vItem(ym)), vR=ym=>vRev(vItem(ym)), nf=n=>Number(n||0).toLocaleString("ko-KR");
+const eok=n=>{ n=Number(n)||0; const a=Math.abs(n); return a>=1e8?(Math.round(n/1e6)/100).toLocaleString("ko-KR")+"억":a>=1e4?Math.round(n/1e4).toLocaleString("ko-KR")+"만":nf(n); };
+function vLatest(){ const tm=thisMonth(); const ms=data.visit.filter(x=>x.month&&x.month<tm&&(vTot(x)>0||vRev(x)>0)).map(x=>x.month).sort(); return ms.length?ms[ms.length-1]:ymAdd(tm,-1); }
+function vSumRange(from,to,f){ return data.visit.filter(x=>x.month&&x.month>=from&&x.month<=to).reduce((t,x)=>t+f(x),0); }
+function vStats(){ const L=vLatest(), ay=ayOf(L);
+  const Lc=(()=>{ const ms=data.visit.filter(x=>x.month&&x.month<=L&&vTot(x)>0).map(x=>x.month).sort(); return ms.length?ms[ms.length-1]:L; })();
+  return {L,Lc,ay,c:vM(Lc),cpm:vM(ymAdd(Lc,-1)),cpy:vM(ymAdd(Lc,-12)),r:vR(L),rpm:vR(ymAdd(L,-1)),rpy:vR(ymAdd(L,-12)),
+    ...vPair(ay,L),it:vItem(Lc)}; }
+function vPair(ay,L){ const o={ayC:0,ayCp:0,ayR:0,ayRp:0,mC:0,mR:0}; for(let ym=ay+"-03"; ym<=L; ym=ymAdd(ym,1)){ const it=vItem(ym), p=vItem(ymAdd(ym,-12)); if(vTot(it)){ o.ayC+=vTot(it); o.ayCp+=vTot(p); o.mC=Number(ym.slice(5)); } if(vRev(it)){ o.ayR+=vRev(it); o.ayRp+=vRev(p); o.mR=Number(ym.slice(5)); } } return o; }
+function vKpiCards(S,big){ const mm=Number(S.L.slice(5)), yy=S.L.slice(2,4), U=big?"<em>명</em>":"<small>명</small>", W=big?"<em>원</em>":"<small>원</small>";
+  const I1='<svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 11l2 2 4-4"/></svg>', I2='<svg class="i" viewBox="0 0 24 24"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', I3='<svg class="i" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg>';
   const card=(lbl,val,cmp,sub,col,ic)=>big?'<div class="op" data-go="rv"><small>'+lbl+'</small><b style="color:'+col+'">'+val+'</b><div class="cmp">'+cmp+'</div>'+(sub?'<div class="rvmix">'+sub+'</div>':'')+'</div>'
     :'<div class="card kpi"><div class="hd"><div class="ic" style="background:'+col+'1a;color:'+col+'">'+ic+'</div><span class="lb">'+lbl+'</span></div><div class="v">'+val+'</div><div class="ft"><div class="cmp" style="margin:0">'+cmp+'</div>'+(sub?'<div class="rvmix">'+sub+'</div>':'')+'</div></div>';
-  const I1='<svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 11l2 2 4-4"/></svg>', I2='<svg class="i" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg>', I3='<svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18"/></svg>';
-  const dM=S.cur-S.pm, dY=S.cur-S.py, sg=n=>(n>0?"+":"")+nf(n), U=big?"<em>명</em>":"<small>명</small>";
-  return card(yy+"년 "+mm+"월 검진자",nf(S.cur)+U,pctTag("전월",pct(S.cur,S.pm))+pctTag("전년동월",pct(S.cur,S.py)),vMix(S.mix),"#12a37f",I1)
-    +card("전월 대비 ("+Number(ymAdd(S.L,-1).slice(5))+"월 "+nf(S.pm)+"명)",sg(dM)+U,pctTag("",pct(S.cur,S.pm)),"","#5b6cff",I2)
-    +card("전년 동월 대비 ("+ymAdd(S.L,-12).slice(2,4)+"년 "+mm+"월 "+nf(S.py)+"명)",sg(dY)+U,pctTag("",pct(S.cur,S.py)),"","#8b7cf6",I2)
-    +card(String(S.ay).slice(2)+"학년도 누적 검진 ("+(S.ay)+".03~"+mm+"월)",nf(S.ayC.total)+U,pctTag("전년 같은 기간",pct(S.ayC.total,S.ayP.total)),"전년 같은 기간 "+nf(S.ayP.total)+"명","#f59e0b",I3);
+  const has=S.c>0, hasR=S.r>0, per=has&&hasR?Math.round(S.r/S.c):0;
+  return card(S.Lc.slice(2,4)+"년 "+Number(S.Lc.slice(5))+"월 검진자",has?nf(S.c)+U:'<span style="font-size:.6em;color:var(--mute)">미입력</span>',has?pctTag("전월",pct(S.c,S.cpm))+pctTag("전년동월",pct(S.c,S.cpy)):"",has?VCAT.filter(([c])=>Number(((S.it||{}).counts||{})[c])).map(([c,l])=>l+" "+nf(S.it.counts[c])).join(" · "):"","#12a37f",I1)
+    +card(yy+"년 "+mm+"월 수익",hasR?eok(S.r)+W:'<span style="font-size:.6em;color:var(--mute)">미입력</span>',hasR?pctTag("전월",pct(S.r,S.rpm))+pctTag("전년동월",pct(S.r,S.rpy)):"",hasR?nf(S.r)+"원"+(per?" · 1인당 "+nf(per)+"원":""):"","#5b6cff",I2)
+    +card(String(S.ay).slice(2)+"학년도 누적 검진 ("+(S.mC||mm)+"월까지)",nf(S.ayC)+U,pctTag("전년 같은 기간",pct(S.ayC,S.ayCp)),"전년 같은 기간 "+nf(S.ayCp)+"명","#f59e0b",I3)
+    +card(String(S.ay).slice(2)+"학년도 누적 수익 ("+(S.mR||mm)+"월까지)",eok(S.ayR)+W,pctTag("전년 같은 기간",pct(S.ayR,S.ayRp)),"전년 같은 기간 "+eok(S.ayRp)+"원","#8b7cf6",I3);
 }
 function renderRvDash(){
   const box=$("opRvBig"); if(!box) return; if(!can("visit","view")){ box.innerHTML=""; return; }
   const S=vStats(); box.innerHTML=vKpiCards(S,true);
-  $("opHint").textContent="오늘 근무 · 최근 입력월 검진자 ("+S.L.slice(0,4)+"년 "+Number(S.L.slice(5))+"월)";
+  $("opHint").textContent="오늘 근무 · 최근 실적 ("+S.L.slice(0,4)+"년 "+Number(S.L.slice(5))+"월)";
 }
-let rAy=ayOf(ymAdd(thisMonth(),-1)), vMode="total";
+let rAy=ayOf(ymAdd(thisMonth(),-1)), vMode="total", vTab="rev";
 $("ryPrev").onclick=()=>{ rAy--; renderRv(); }; $("ryNext").onclick=()=>{ rAy++; renderRv(); };
 $("vMode").onclick=e=>{ const x=e.target.closest("[data-m]"); if(!x) return; vMode=x.dataset.m; renderRv(); };
+$("vTab").onclick=e=>{ const x=e.target.closest("[data-t]"); if(!x) return; vTab=x.dataset.t; renderRv(); };
 $("rAddV").onclick=()=>visitForm();
+setTimeout(()=>{ if($("vcQ")) $("vcQ").oninput=renderVoucher; },0);
 function rvChart(){
   const months=[]; for(let i=0;i<12;i++) months.push(ymAdd(rAy+"-03",i));
-  const has=ym=>!!vItem(ym)&&vTot(vItem(ym))>0;
-  let S;
-  if(vMode==="cat") S=VCAT.map(([c,l])=>({l,c:VCOL[c],v:months.map(ym=>Number(((vItem(ym)||{}).counts||{})[c])||0),on:months.map(has)}));
-  else S=[{l:rAy+"학년도",c:"#12a37f",v:months.map(vM),on:months.map(has),fill:true}];
-  S.push({l:(rAy-1)+"학년도",c:"#9aa3b2",v:months.map(ym=>vM(ymAdd(ym,-12))),on:months.map(ym=>has(ymAdd(ym,-12))),dash:true});
-  const max=Math.max(1,...S.flatMap(x=>x.v)), step=(()=>{ const raw=max/4, p=Math.pow(10,Math.floor(Math.log10(raw))); return [1,2,2.5,5,10].map(x=>x*p).find(x=>x>=raw); })(), top=step*Math.ceil(max/step);
-  const W=1000,H=260,L=50,R=10,T=20,B=30,cw=(W-L-R)/12,y=v=>T+(H-T-B)*(1-v/top),cx=i=>L+cw*i+cw/2;
-  let g='<defs><linearGradient id="rvg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12a37f" stop-opacity=".18"/><stop offset="1" stop-color="#12a37f" stop-opacity="0"/></linearGradient></defs>';
-  for(let v=0;v<=top+1;v+=step) g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="#eef1f5"'+(v?' stroke-dasharray="3 4"':'')+'/><text x="'+(L-10)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="11" fill="#a0a8b6">'+nf(v)+'</text>';
+  const R=months.map(vR), Rp=months.map(ym=>vR(ymAdd(ym,-12))), C=months.map(vM), Cp=months.map(ym=>vM(ymAdd(ym,-12)));
+  const nice=mx=>{ mx=Math.max(1,mx); const raw=mx/4, p=Math.pow(10,Math.floor(Math.log10(raw))), st=[1,2,2.5,5,10].map(x=>x*p).find(x=>x>=raw); return [st,st*Math.ceil(mx/st)]; };
+  const [rs,rt]=nice(Math.max(...R,...Rp)), [cs,ct]=nice(Math.max(...C,...Cp));
+  const W=1000,H=300,L=64,Rr=56,T=22,B=30,cw=(W-L-Rr)/12,yR=v=>T+(H-T-B)*(1-v/rt),yC=v=>T+(H-T-B)*(1-v/ct),cx=i=>L+cw*i+cw/2;
+  let g='<defs><linearGradient id="rvBar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6d7cff"/><stop offset="1" stop-color="#4553d6"/></linearGradient></defs>';
+  const nSt=Math.max(1,Math.round(rt/rs));
+  for(let k=0;k<=nSt;k++){ const v=rs*k, y=yR(v); g+='<line x1="'+L+'" x2="'+(W-Rr)+'" y1="'+y+'" y2="'+y+'" stroke="#eef1f5"'+(k?' stroke-dasharray="3 4"':'')+'/><text x="'+(L-10)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="#7c86f7">'+eok(v)+'</text><text x="'+(W-Rr+10)+'" y="'+(y+4)+'" font-size="11" fill="#12a37f">'+nf(Math.round(ct*k/nSt))+'</text>'; }
+  const bw=Math.min(30,cw*0.42);
+  months.forEach((ym,i)=>{ const x=cx(i);
+    if(Rp[i]) g+='<rect x="'+(x-bw/2-6)+'" y="'+yR(Rp[i])+'" width="'+bw+'" height="'+(yR(0)-yR(Rp[i]))+'" rx="5" fill="#e4e7ee"/>';
+    if(vMode==="cat"){ let acc=0; const it=vItem(ym)||{}; const on=VCAT.filter(([c])=>Number((it.revenue||{})[c]));
+      on.forEach(([c],j)=>{ const v=Number(it.revenue[c]); const y0=yR(acc), y1=yR(acc+v); g+='<rect x="'+(x-bw/2+4)+'" y="'+y1+'" width="'+bw+'" height="'+Math.max(0,y0-y1-1)+'" rx="'+(j===on.length-1?5:2)+'" fill="'+VCOL[c]+'"/>'; acc+=v; }); }
+    else if(R[i]) g+='<rect x="'+(x-bw/2+4)+'" y="'+yR(R[i])+'" width="'+bw+'" height="'+(yR(0)-yR(R[i]))+'" rx="5" fill="url(#rvBar)"/>';
+    if(R[i]) g+='<text x="'+(x+4)+'" y="'+(yR(R[i])-6)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="#4553d6">'+eok(R[i])+'</text>'; });
   const curve=pts=>{ let d="M"+pts[0][0]+","+pts[0][1]; for(let i=1;i<pts.length;i++){ const [x0,y0]=pts[i-1],[x1,y1]=pts[i],mx=(x0+x1)/2; d+=" C"+mx+","+y0+" "+mx+","+y1+" "+x1+","+y1; } return d; };
-  S.forEach(sr=>{ const idx=sr.on.map((o,i)=>o?i:-1).filter(i=>i>=0); if(!idx.length) return; const pts=idx.map(i=>[cx(i),y(sr.v[i])]);
-    if(sr.fill&&pts.length>1) g+='<path d="'+curve(pts)+" L"+pts[pts.length-1][0]+","+y(0)+" L"+pts[0][0]+","+y(0)+' Z" fill="url(#rvg)"/>';
-    if(pts.length>1) g+='<path d="'+curve(pts)+'" fill="none" stroke="'+sr.c+'" stroke-width="'+(sr.dash?1.8:2.4)+'"'+(sr.dash?' stroke-dasharray="4 5"':'')+' stroke-linecap="round"/>';
-    if(!sr.dash) pts.forEach(([x,yy])=>g+='<circle cx="'+x+'" cy="'+yy+'" r="3" fill="#fff" stroke="'+sr.c+'" stroke-width="2"/>'); });
-  months.forEach((ym,i)=>{ const it=vItem(ym), tip=[ym.slice(0,4)+"년 "+Number(ym.slice(5))+"월 "+nf(vM(ym))+"명"].concat(VCAT.map(([c,l])=>"· "+l+" "+nf(((it||{}).counts||{})[c]))).concat(["전년 동월 "+nf(vM(ymAdd(ym,-12)))+"명"]);
+  const line=(vals,col,dash)=>{ const pts=vals.map((v,i)=>v?[cx(i),yC(v)]:null).filter(Boolean); if(pts.length<1) return; if(pts.length>1) g+='<path d="'+curve(pts)+'" fill="none" stroke="'+col+'" stroke-width="'+(dash?1.8:2.8)+'"'+(dash?' stroke-dasharray="4 5"':'')+' stroke-linecap="round"/>'; if(!dash) pts.forEach(([x,y])=>g+='<circle cx="'+x+'" cy="'+y+'" r="4" fill="#fff" stroke="'+col+'" stroke-width="2.4"/>'); };
+  line(Cp,"#9aa3b2",true); line(C,"#12a37f",false);
+  months.forEach((ym,i)=>{ const it=vItem(ym)||{}; const tip=[ym.slice(0,4)+"년 "+Number(ym.slice(5))+"월","수익 "+nf(R[i])+"원 (전년 "+nf(Rp[i])+")","검진자 "+nf(C[i])+"명 (전년 "+nf(Cp[i])+")"].concat(VCAT.filter(([c])=>(it.revenue||{})[c]||(it.counts||{})[c]).map(([c,l])=>"· "+l+" "+eok((it.revenue||{})[c])+"원 / "+nf((it.counts||{})[c])+"명"));
     g+='<g class="bar" data-vym="'+ym+'"><title>'+esc(tip.join("\n"))+'</title><rect x="'+(L+cw*i)+'" y="'+T+'" width="'+cw+'" height="'+(H-T-B)+'" fill="transparent"/><text x="'+cx(i)+'" y="'+(H-8)+'" text-anchor="middle" font-size="12" font-weight="600" fill="#8a94a6">'+Number(ym.slice(5))+'월</text></g>'; });
-  const tot=sr=>sr.v.reduce((t,v,i)=>t+(sr.on[i]?v:0),0);
-  return '<div class="ychart"><svg viewBox="0 0 '+W+' '+H+'">'+g+'</svg><div class="ylegend">'+S.map(sr=>'<span style="cursor:default"><i style="background:'+sr.c+'"></i>'+sr.l+' <b>'+nf(tot(sr))+'명</b></span>').join("")+'</div><div class="subt" style="margin-top:6px">월을 누르면 그 달 검진자 수를 입력·수정할 수 있어요.</div></div>';
+  const sum=a=>a.reduce((t,v)=>t+v,0);
+  const leg=vMode==="cat"?VCAT.map(([c,l])=>'<span style="cursor:default"><i style="background:'+VCOL[c]+';border-radius:3px"></i>'+l+' <b>'+eok(months.reduce((t,ym)=>t+(Number(((vItem(ym)||{}).revenue||{})[c])||0),0))+'</b></span>').join(""):'<span style="cursor:default"><i style="background:#5b6cff;border-radius:3px"></i>'+rAy+'학년도 수익 <b>'+eok(sum(R))+'원</b></span>';
+  return '<div class="ychart"><svg viewBox="0 0 '+W+' '+H+'">'+g+'</svg><div class="ylegend">'+leg+'<span style="cursor:default"><i style="background:#e4e7ee;border-radius:3px"></i>전년 수익 <b>'+eok(sum(Rp))+'원</b></span><span style="cursor:default"><i style="background:#12a37f"></i>검진자 <b>'+nf(sum(C))+'명</b></span><span style="cursor:default"><i style="background:#9aa3b2"></i>전년 검진자 <b>'+nf(sum(Cp))+'명</b></span></div><div class="subt" style="margin-top:6px">왼쪽 축(파랑) = 수익 · 오른쪽 축(초록) = 검진자 수 · 월을 누르면 그 달 실적을 입력·수정할 수 있어요.</div></div>';
 }
 $("rChart").addEventListener("click",e=>{ const g=e.target.closest("[data-vym]"); if(!g||!can("visit","write")) return; visitForm(g.dataset.vym); });
 function renderRv(){
@@ -1718,29 +1767,99 @@ function renderRv(){
   $("rAddV").style.display=can("visit","write")?"":"none";
   const S=vStats(); $("vKpi").innerHTML=vKpiCards(S,false);
   document.querySelectorAll("#vMode [data-m]").forEach(x=>x.classList.toggle("on",x.dataset.m===vMode));
+  document.querySelectorAll("#vTab [data-t]").forEach(x=>x.classList.toggle("on",x.dataset.t===vTab));
   $("ryTitle").textContent=rAy+"학년도"; $("rChart").innerHTML=rvChart();
   const months=[]; for(let i=0;i<12;i++) months.push(ymAdd(rAy+"-03",i));
-  const tot={}; VCAT.forEach(([c])=>tot[c]=0); let tt=0, tp=0; const w=can("visit","write");
-  const rows=months.map(ym=>{ const it=vItem(ym), ct=(it&&it.counts)||{}, t=vTot(it), p=vM(ymAdd(ym,-12)), d=pct(t,p);
-    VCAT.forEach(([c])=>tot[c]+=Number(ct[c])||0); tt+=t; if(it) tp+=p;
-    return '<tr'+(w?' class="clrow" data-vym="'+ym+'" style="cursor:pointer"':'')+'><td><b>'+ym.slice(0,4)+'.'+ym.slice(5)+'</b></td>'+VCAT.map(([c])=>'<td class="gV">'+(Number(ct[c])?nf(ct[c]):'<span class="z">·</span>')+'</td>').join("")
-      +'<td class="gV tt">'+(it?nf(t):'<span class="z">-</span>')+(it&&it.memo?' <span title="'+esc(it.memo)+'">💬</span>':'')+'</td><td>'+(p?nf(p):'<span class="z">-</span>')+'</td><td>'+(it&&d!==null?'<span class="cmp" style="display:inline-flex;margin:0">'+pctTag("",d)+'</span>':'<span class="z">-</span>')+'</td></tr>'; });
-  $("rTable").innerHTML='<table><thead><tr><th>월</th>'+VCAT.map(([,l])=>'<th class="gV">'+l+'</th>').join("")+'<th class="gV">합계</th><th>전년 동월</th><th>증감</th></tr></thead><tbody>'+rows.join("")
-    +'<tr class="tot"><td>'+rAy+'학년도 합계</td>'+VCAT.map(([c])=>'<td class="gV">'+nf(tot[c])+'</td>').join("")+'<td class="gV">'+nf(tt)+'</td><td>'+nf(tp)+'</td><td>'+(tp?'<span class="cmp" style="display:inline-flex;margin:0">'+pctTag("",pct(tt,tp))+'</span>':'')+'</td></tr></tbody></table>';
+  const key=vTab==="rev"?"revenue":"counts", fmt=vTab==="rev"?(n=>eok(n)):nf, tf=vTab==="rev"?vRev:vTot, w=can("visit","write");
+  const tot={}; VCAT.forEach(([c])=>tot[c]=0); let tt=0, tp=0, tC=0, tR=0;
+  const rows=months.map(ym=>{ const it=vItem(ym), ct=(it&&it[key])||{}, t=tf(it), p=tf(vItem(ymAdd(ym,-12))), d=pct(t,p);
+    VCAT.forEach(([c])=>tot[c]+=Number(ct[c])||0); tt+=t; if(t) tp+=p; tC+=vTot(it); tR+=vRev(it);
+    const per=vTot(it)&&vRev(it)?Math.round(vRev(it)/vTot(it)):0;
+    return '<tr'+(w?' data-vym="'+ym+'" style="cursor:pointer"':'')+'><td><b>'+ym.slice(0,4)+'.'+ym.slice(5)+'</b></td>'+VCAT.map(([c])=>'<td class="gV" title="'+nf(ct[c])+'">'+(Number(ct[c])?fmt(ct[c]):'<span class="z">·</span>')+'</td>').join("")
+      +'<td class="gV tt">'+(t?fmt(t):'<span class="z">-</span>')+(it&&it.memo?' <span title="'+esc(it.memo)+'">💬</span>':'')+'</td><td>'+(p?fmt(p):'<span class="z">-</span>')+'</td><td>'+(t&&d!==null?'<span class="cmp" style="display:inline-flex;margin:0">'+pctTag("",d)+'</span>':'<span class="z">-</span>')+'</td><td>'+(per?nf(per):'<span class="z">-</span>')+'</td></tr>'; });
+  $("rTable").innerHTML='<table><thead><tr><th>월</th>'+VCAT.map(([,l])=>'<th class="gV">'+l+'</th>').join("")+'<th class="gV">합계'+(vTab==="rev"?" (원)":" (명)")+'</th><th>전년 동월</th><th>증감</th><th>1인당 수익</th></tr></thead><tbody>'+rows.join("")
+    +'<tr class="tot"><td>'+rAy+'학년도</td>'+VCAT.map(([c])=>'<td class="gV">'+fmt(tot[c])+'</td>').join("")+'<td class="gV">'+fmt(tt)+'</td><td>'+fmt(tp)+'</td><td>'+(tp?'<span class="cmp" style="display:inline-flex;margin:0">'+pctTag("",pct(tt,tp))+'</span>':'')+'</td><td>'+(tC&&tR?nf(Math.round(tR/tC)):'')+'</td></tr></tbody></table>'
+    +(vTab==="rev"?'<div class="subt" style="padding:8px 16px">금액은 만·억 단위로 줄여 보여요. 칸에 마우스를 올리면 원 단위가 나와요.</div>':'');
 }
 $("rTable").addEventListener("click",e=>{ const r=e.target.closest("[data-vym]"); if(!r||!can("visit","write")) return; visitForm(r.dataset.vym); });
 function visitForm(ym){
-  FORM_MENU="visit"; ym=ym||ymAdd(thisMonth(),-1); const it=vItem(ym)||{}, ed=!!it.id, ct=it.counts||{};
-  const body=fld("검진월","month",ym,"month",true,"full",ed?'readonly':'id="vfM"')
-    +'<div class="sechd">검진유형별 검진자 수</div><div class="full" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">'+VCAT.map(([c,l])=>'<div><label>'+l+'</label><input data-vn="'+c+'" type="number" min="0" inputmode="numeric" value="'+(Number(ct[c])||"")+'" placeholder="0"></div>').join("")+'</div>'
+  FORM_MENU="visit"; ym=ym||ymAdd(thisMonth(),-1); const it=vItem(ym)||{}, ed=!!it.id, ct=it.counts||{}, rv=it.revenue||{};
+  const body=fld("월","month",ym,"month",true,"full",ed?'readonly':'id="vfM"')
+    +'<div class="sechd">검진유형별 <b style="color:#0f9a74">검진자 수</b> · <b style="color:#4553d6">수익(원)</b></div><div class="full vfgrid"><span></span><span class="vh">검진자 (명)</span><span class="vh">수익 (원)</span>'+VCAT.map(([c,l])=>'<span class="vl">'+l+'</span><input data-vn="'+c+'" type="number" min="0" inputmode="numeric" value="'+(Number(ct[c])||"")+'" placeholder="0"><input data-vr="'+c+'" inputmode="numeric" value="'+(Number(rv[c])?fmtMoney(rv[c]):"")+'" placeholder="0">').join("")+'</div>'
     +'<div class="full chk"><div id="vfSum" class="ok"></div></div>'+fld("메모","memo",it.memo,"text",false,"full",'placeholder="예: 동절기 단체 포함, 휴진 3일"');
-  openModal(shell((ed?"검진자 수정":"검진자 입력")+" · "+ym.slice(0,4)+"년 "+Number(ym.slice(5))+"월",body,ed));
-  const F=$("mform"), now=()=>{ const o={}; VCAT.forEach(([c])=>{ const v=Number(F.querySelector('[data-vn="'+c+'"]').value)||0; if(v>0) o[c]=v; }); return o; };
-  const recalc=()=>{ $("vfSum").innerHTML='<span>합계</span><span>'+nf(Object.values(now()).reduce((a,b)=>a+b,0))+'명</span>'; };
-  F.querySelectorAll("[data-vn]").forEach(i=>i.oninput=recalc); recalc();
+  openModal(shell((ed?"실적 수정":"실적 입력")+" · "+ym.slice(0,4)+"년 "+Number(ym.slice(5))+"월",body,ed));
+  const F=$("mform"), now=()=>{ const o={}; VCAT.forEach(([c])=>{ const v=Number(F.querySelector('[data-vn="'+c+'"]').value)||0; if(v>0) o[c]=v; }); return o; },
+    revNow=()=>{ const o={}; VCAT.forEach(([c])=>{ const v=money(F.querySelector('[data-vr="'+c+'"]').value); if(v) o[c]=v; }); return o; };
+  const recalc=()=>{ const c=Object.values(now()).reduce((a,b)=>a+b,0), r=Object.values(revNow()).reduce((a,b)=>a+b,0); $("vfSum").innerHTML='<span>합계 검진자 '+nf(c)+'명 · 수익 '+nf(r)+'원</span><span>'+(c&&r?"1인당 "+nf(Math.round(r/c))+"원":"")+'</span>'; };
+  F.querySelectorAll("[data-vn]").forEach(i=>i.oninput=recalc); F.querySelectorAll("[data-vr]").forEach(i=>bindMoney(i,recalc)); recalc();
   if($("vfM")) $("vfM").onchange=e=>{ if(vItem(e.target.value)){ closeModal(); setTimeout(()=>visitForm(e.target.value),0); } };
-  wire("visit",it,fd=>{ const o=Object.assign({},it,{id:it.id||("vm-"+fd.month),month:fd.month,counts:now(),memo:(fd.memo||"").trim(),createdAt:it.createdAt||new Date().toISOString()}); delete o.date; delete o.updatedBy; delete o.updatedAt; return o; },
-    fd=>!fd.month?"검진월을 입력하세요.":"");
+  wire("visit",it,fd=>{ const o=Object.assign({},it,{id:it.id||("vm-"+fd.month),month:fd.month,counts:now(),revenue:revNow(),memo:(fd.memo||"").trim(),createdAt:it.createdAt||new Date().toISOString()}); delete o.date; delete o.updatedBy; delete o.updatedAt; return o; },
+    fd=>!fd.month?"월을 입력하세요.":"");
+}
+
+/* ---------- VOUCHER (검진권 발급현황) ---------- */
+const VISSUER=[["center","소하검진센터","#0f9a74"],["dev","발전후원팀","#8b5cf6"]];
+const vcExpired=v=>!v.used&&v.validUntil&&v.validUntil<todayStr();
+const vcState=v=>v.used?"used":vcExpired(v)?"exp":"open";
+let vcFilter={center:"all",dev:"all"}, vcQ="";
+function renderVoucher(){
+  if(!$("vcWrap")) return;
+  const w=can("voucher","write"), q=($("vcQ")&&$("vcQ").value.trim().toLowerCase())||"";
+  $("vcWrap").innerHTML=VISSUER.map(([k,lbl,col])=>{
+    const all=data.voucher.filter(v=>(v.issuer||"center")===k), n={open:0,used:0,exp:0}; all.forEach(v=>n[vcState(v)]++);
+    const f=vcFilter[k], rows=all.filter(v=>(f==="all"||vcState(v)===f)&&(!q||[v.docNo,v.serial,v.recipient,v.kind,v.usedBy,v.memo].join(" ").toLowerCase().includes(q)))
+      .sort((a,b)=>String(b.issueDate||"").localeCompare(String(a.issueDate||""))||String(a.serial||"").localeCompare(String(b.serial||""),"ko",{numeric:true}));
+    const pctUsed=all.length?Math.round(n.used/all.length*100):0;
+    return '<div class="card vcCard" style="margin-bottom:16px"><div class="ph"><h3 style="color:'+col+'">'+(k==="center"?"🏥":"🤝")+' '+lbl+' 발행</h3>'
+      +'<div class="vcstat"><span>발행 <b>'+all.length+'</b></span><span class="u">사용 <b>'+n.used+'</b></span><span class="o">미사용 <b>'+n.open+'</b></span>'+(n.exp?'<span class="x">기간만료 <b>'+n.exp+'</b></span>':'')+'</div>'
+      +'<div class="right"><div class="chips">'+[["all","전체"],["open","미사용"],["used","사용"],["exp","만료"]].map(([v,l])=>'<button class="chip'+(f===v?" on":"")+'" data-vcf="'+k+'|'+v+'">'+l+'</button>').join("")+'</div>'+(w?'<button class="btn btn-p btn-sm" data-vcadd="'+k+'">+ 발행 등록</button>':'')+'</div></div>'
+      +'<div class="vcbar"><i style="width:'+pctUsed+'%;background:'+col+'"></i></div><div class="subt" style="padding:4px 20px 8px">사용률 '+pctUsed+'%</div>'
+      +'<div class="tw"><table><thead><tr><th>문서번호</th><th>발급일</th><th>검진권 번호</th><th>발급 대상</th><th>내용</th><th>유효기간</th><th>사용 여부</th><th></th></tr></thead><tbody>'
+      +(rows.length?rows.map(v=>{ const st=vcState(v); return '<tr class="vc-'+st+'"><td class="nm" style="white-space:nowrap">'+esc(v.docNo||"-")+'</td><td style="white-space:nowrap">'+esc(v.issueDate||"-")+'</td><td style="white-space:nowrap;font-family:Inter">'+esc(v.serial||"-")+'</td><td>'+esc(v.recipient||"-")+'</td><td class="mini2">'+esc(v.kind||"")+(v.memo?'<div style="color:var(--mute)">'+esc(v.memo)+'</div>':'')+'</td><td style="white-space:nowrap">'+(v.validUntil?'~ '+esc(v.validUntil):'-')+'</td>'
+        +'<td>'+(st==="used"?'<span class="vcuse u">✅ 사용완료</span><div class="mini2"><b>'+esc(v.usedBy||"")+'</b> · '+esc(v.usedDate||"")+(v.usedMemo?' · '+esc(v.usedMemo):'')+'</div>':st==="exp"?'<span class="vcuse x">⌛ 기간만료</span>':'<span class="vcuse o">⏳ 미사용</span>')+'</td>'
+        +'<td style="white-space:nowrap">'+(w?(st==="used"?'<button class="btn btn-sm" data-vcuse="'+esc(v.id)+'">사용 수정</button>':'<button class="btn btn-sm btn-p" data-vcuse="'+esc(v.id)+'">사용 처리</button>')+' <button class="btn btn-sm" data-vcedit="'+esc(v.id)+'">수정</button>':'')+'</td></tr>'; }).join("")
+        :'<tr><td colspan="8" class="empty">'+lbl+' 발행 내역이 없습니다.'+(w?' <b>+ 발행 등록</b>으로 추가하세요.':'')+'</td></tr>')
+      +'</tbody></table></div></div>'; }).join("");
+}
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-vcf]"); if(f){ const [k,v]=f.dataset.vcf.split("|"); vcFilter[k]=v; renderVoucher(); return; }
+  const a=e.target.closest("[data-vcadd]"); if(a){ voucherForm(null,a.dataset.vcadd); return; }
+  const u=e.target.closest("[data-vcuse]"); if(u){ voucherUse(data.voucher.find(x=>x.id===u.dataset.vcuse)); return; }
+  const ed=e.target.closest("[data-vcedit]"); if(ed){ voucherForm(data.voucher.find(x=>x.id===ed.dataset.vcedit)); return; }
+});
+function voucherForm(v,issuer){
+  FORM_MENU="voucher"; v=v||{}; const ed=!!v.id, isr=v.issuer||issuer||"center";
+  const docs=[...new Set(data.voucher.map(x=>x.docNo).filter(Boolean))];
+  const body='<div class="full"><label>발행처 <span class="req">*</span></label><div class="seg sm">'+VISSUER.map(([k,l])=>'<label><input type="radio" name="issuer" value="'+k+'"'+(k===isr?" checked":"")+'>'+l+'</label>').join("")+'</div></div>'
+    +fld("문서번호","docNo",v.docNo,"text",true,"",'placeholder="예: 소하검진-2026-123" list="vcDocs"')+'<datalist id="vcDocs">'+docs.map(d=>'<option value="'+esc(d)+'">').join("")+'</datalist>'
+    +fld("발급일","issueDate",v.issueDate||todayStr(),"date",true)
+    +fld("발급 대상 (기관·사람)","recipient",v.recipient,"text",false,"",'placeholder="예: 광명시청 / 홍길동"')
+    +fld("내용 (검진권 종류)","kind",v.kind,"text",false,"",'placeholder="예: 기본종합검진권 1인"')
+    +fld("유효기간 (까지)","validUntil",v.validUntil,"date")
+    +(ed?fld("검진권 번호","serial",v.serial,"text",false,"",'placeholder="예: 001"')
+        :'<div><label>발급 수량 · 시작 번호</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><input name="qty" type="number" min="1" max="200" value="1"><input name="serialStart" placeholder="시작 번호 (예: 001)"></div><div class="subt">수량만큼 한 장씩 따로 등록돼서 장별로 사용 처리할 수 있어요.</div></div>')
+    +fld("비고","memo",v.memo,"text",false,"full");
+  openModal(shell((ed?"검진권 수정":"검진권 발행 등록"),body,ed));
+  if(ed){ wire("voucher",v,fd=>{ const o=Object.assign({},v,{issuer:fd.issuer,docNo:fd.docNo.trim(),issueDate:fd.issueDate,recipient:(fd.recipient||"").trim(),kind:(fd.kind||"").trim(),validUntil:fd.validUntil||"",serial:(fd.serial||"").trim(),memo:(fd.memo||"").trim()}); delete o.updatedBy; delete o.updatedAt; return o; },
+      fd=>!fd.docNo.trim()?"문서번호를 입력하세요.":""); return; }
+  const F=$("mform");
+  F.onsubmit=async e=>{ e.preventDefault(); const fd=Object.fromEntries(new FormData(F).entries()), qn=Math.max(1,Math.min(200,Number(fd.qty)||1)), ferr=$("ferr");
+    if(!fd.docNo.trim()){ ferr.textContent="문서번호를 입력하세요."; return; }
+    const st=String(fd.serialStart||"").trim(), m=st.match(/^(.*?)(\d+)$/), base=m?m[1]:st, n0=m?Number(m[2]):1, wd=m?m[2].length:3;
+    const btn=F.querySelector('[type=submit]'); btn.disabled=true;
+    try{ for(let i=0;i<qn;i++){ const serial=(qn>1||st)?(base+String(n0+i).padStart(wd,"0")):""; btn.textContent="저장 중… "+(i+1)+"/"+qn;
+        await saveItem("voucher",{issuer:fd.issuer,docNo:fd.docNo.trim(),issueDate:fd.issueDate,recipient:(fd.recipient||"").trim(),kind:(fd.kind||"").trim(),validUntil:fd.validUntil||"",serial,memo:(fd.memo||"").trim(),used:false,createdAt:new Date().toISOString()}); }
+      toast(qn+"장 발행 등록했습니다."); closeModal(); }
+    catch(err){ ferr.textContent=errText(err); btn.disabled=false; btn.textContent="저장"; } };
+}
+function voucherUse(v){ if(!v) return; FORM_MENU="voucher";
+  const body='<div class="full" style="background:#f6f8fb;border-radius:12px;padding:10px 14px;font-size:13px">🎫 <b>'+esc(v.docNo||"")+'</b> '+(v.serial?"· "+esc(v.serial):"")+' · '+esc(v.kind||"")+(v.recipient?' · 발급 대상 '+esc(v.recipient):'')+'</div>'
+    +'<div class="full"><label class="ck" style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:0"><input type="checkbox" name="used" id="vuUsed" style="width:20px;height:20px"'+(v.used||!v.usedDate?" checked":"")+'>✅ 사용 완료</label></div>'
+    +fld("사용일","usedDate",v.usedDate||todayStr(),"date",false)+fld("사용자 (검진 받은 분)","usedBy",v.usedBy,"text",false,"",'placeholder="예: 홍길동"')
+    +fld("확인 메모","usedMemo",v.usedMemo,"text",false,"full",'placeholder="예: 원본 회수, 등록번호 12345"');
+  openModal(shell("검진권 사용 처리",body,false));
+  wire("voucher",v,fd=>{ const o=Object.assign({},v,{used:!!fd.used,usedDate:fd.used?fd.usedDate:"",usedBy:fd.used?(fd.usedBy||"").trim():"",usedMemo:fd.used?(fd.usedMemo||"").trim():""}); delete o.updatedBy; delete o.updatedAt; return o; },
+    fd=>fd.used&&!(fd.usedBy||"").trim()?"사용자 이름을 입력하세요.":fd.used&&!fd.usedDate?"사용일을 입력하세요.":"");
 }
 
 /* ---------- VOTE (투표 채널 · 비밀투표) ---------- */
@@ -2238,10 +2357,16 @@ function demoData(){
     for(let ym=ymAdd(thisM,-21); ym<thisM; ym=ymAdd(ym,1)){ const m=Number(ym.slice(5)), win=(m===3||m===4)?1:(m>=11||m<=2)?0.6:0, g=ym>=ymAdd(thisM,-8)?1.06:1;
       const c={indiv:Math.round((70+rnd()*60)*g),winter:Math.round((150+rnd()*150)*win),corp:Math.round((600+rnd()*500)*(m>=9&&m<=12?1.3:1)*g),intl:Math.round((12+rnd()*16)*g),nhis:Math.round((420+rnd()*300)*(m>=10&&m<=12?1.6:1)),etc:Math.round(150+rnd()*90)};
       Object.keys(c).forEach(k=>{ if(!c[k]) delete c[k]; }); visit.push({id:"vm-"+ym,month:ym,counts:c,memo:""}); } }
-  const all={contracts,oxygen,mail,staff,workday,package:pk,notice,client,billing,exam,bank,expense,expcat,resv,visit};
+  visit.forEach(v=>{ const k={indiv:150000,winter:120000,corp:230000,intl:900000,nhis:105000,etc:60000}; v.revenue={}; Object.keys(v.counts).forEach(c=>v.revenue[c]=Math.round(v.counts[c]*k[c]*(0.92+((v.month.charCodeAt(6)+c.length)%9)/50)/10)*10); });
+  const voucher=[]; const VC=(isr,doc,dt,ser,rc,kind,vu,used,by,ud)=>voucher.push({id:"vc"+voucher.length,issuer:isr,docNo:doc,issueDate:dt,serial:ser,recipient:rc,kind,validUntil:vu,used:!!used,usedBy:by||"",usedDate:ud||""});
+  ["001","002","003","004","005"].forEach((n,i)=>VC("center","소하검진-2026-0412",D(-40),"2026-"+n,"(예시) 광명시 체육회","기본종합검진권 1인",D(120),i<2,i<2?["김OO","이OO"][i]:"",i<2?D(-20+i*5):""));
+  VC("center","소하검진-2026-0398",D(-200),"2025-031","(예시) 지역 행사 경품","기본종합검진권 1인",D(-10));
+  ["01","02","03"].forEach((n,i)=>VC("dev","발전후원-2026-077",D(-25),"D-"+n,"(예시) 후원자 감사 선물","프리미엄 종합검진권",D(340),i===0,i===0?"박OO":"",i===0?D(-3):""));
+  contracts.push({id:"ch1",type:"병원협약",name:"GIDC 지식산업센터",vendor:"GIDC 지식산업센터",start:"2026-10-14",end:"",dept:"진료협력팀",benefit:"기본종합건강검진 20% 할인(추가선택 항목 제외)",target:"GIDC 소속 구성원 및 그 가족",proofDocs:"재직증명서 및 가족관계증명서"});
+  const all={contracts,oxygen,mail,staff,workday,package:pk,notice,client,billing,exam,bank,expense,expcat,resv,visit,voucher};
   Object.values(all).forEach(arr=>arr.forEach(x=>{ x.createdAt=x.createdAt||now; x.updatedBy=by; }));
   const users=[{id:"demo",email:"demo@sovis",name:"체험 사용자",part:"관리자",is_admin:true,perms:{},active:true},
-    {id:"u2",email:"plan@example.com",name:"김민지",part:"기획예약파트",is_admin:false,active:true,perms:{notice:{view:true,write:true},contracts:{view:true,write:true},billing:{view:true},bank:{view:true},expense:{view:true,write:true},workday:{view:true,write:true},oxygen:{view:true,write:true},mail:{view:true,write:true}}},
+    {id:"u2",email:"plan@example.com",name:"김민지",part:"기획예약파트",is_admin:false,active:true,perms:{notice:{view:true,write:true},contracts:{view:true,write:true},billing:{view:true},voucher:{view:true,write:true},bank:{view:true},expense:{view:true,write:true},workday:{view:true,write:true},oxygen:{view:true,write:true},mail:{view:true,write:true}}},
     {id:"u3",email:"pay@example.com",name:"최유나",part:"수납파트",is_admin:false,active:true,perms:{notice:{view:true},billing:{view:true,write:true},workday:{view:true}}}];
   return {data:all,users};
 }
@@ -2519,7 +2644,7 @@ $("wCopy").onclick=async()=>{
   catch(e){ openModal('<div class="mh">월간 요약<button type="button" data-close>'+X+'</button></div><div class="mb"><div class="full"><textarea style="min-height:320px;font-size:13px" readonly>'+esc(txt)+'</textarea></div></div>'); $("modal").querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal); }
 };
 
-function renderAll(){ renderDashboard(); renderContracts(); renderOxygen(); renderMail(); renderWorkday(); renderNotice(); renderBilling(); renderBank(); renderExpense(); renderRv(); }
+function renderAll(){ renderDashboard(); renderContracts(); renderOxygen(); renderMail(); renderWorkday(); renderNotice(); renderBilling(); renderBank(); renderExpense(); renderRv(); renderVoucher(); }
 renderAll();
 if(GAS && !TOKEN && VOTER && VOTER.pw){ $("login").style.display="none"; enterVote(); }
 else if(GAS && TOKEN){ api("me").then(u=>{ ME=u; enter(); }).catch(()=>{ TOKEN=""; try{sessionStorage.removeItem("sovis_token");}catch(e){} setTimeout(()=>$("lgEmail").focus(),60); }); }
