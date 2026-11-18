@@ -244,9 +244,10 @@ td.num,th.num{text-align:right}
 /* v2.4 vote */
 .vfgrid{display:grid;grid-template-columns:90px 1fr 1.4fr;gap:8px 10px;align-items:center}.vfgrid .vh{font-size:12px;font-weight:700;color:var(--mute)}.vfgrid .vl{font-weight:700;font-size:13.5px}.vfgrid input{padding:9px 12px}
 .vcstat{display:flex;gap:6px;flex-wrap:wrap;margin-left:10px}.vcstat span{font-size:12.5px;padding:3px 10px;border-radius:999px;background:#f1f3f7;color:#5b6577}.vcstat .u{background:#e8f7f1;color:#0b8a5e}.vcstat .o{background:#fff4e0;color:#a96400}.vcstat .x{background:#f1f3f7;color:#8a94a6}
+.vctw{overflow:auto}.vctw th,.vctw td{text-align:left;vertical-align:top;padding:10px 8px;font-size:13px}.vctw td.money{text-align:right}
 .vcbar{height:8px;margin:0 20px;border-radius:999px;background:#f1f3f7;overflow:hidden}.vcbar i{display:block;height:100%;border-radius:999px}
 .vcuse{display:inline-block;font-weight:800;font-size:12.5px;padding:4px 10px;border-radius:999px;white-space:nowrap}.vcuse.u{background:#e8f7f1;color:#0b8a5e}.vcuse.o{background:#fff4e0;color:#b36b00}.vcuse.x{background:#f1f3f7;color:#8a94a6}
-tr.vc-used td{background:#fbfefc}tr.vc-used td:not(:nth-child(7)){color:#8a94a6}tr.vc-exp td{color:#a0a8b6}
+tr.vc-used td{background:#fbfefc}tr.vc-exp td,tr.vc-void td{color:#a0a8b6}tr.vc-void td{text-decoration:line-through;text-decoration-color:#d0d6de}tr.vc-void td:nth-last-child(-n+2){text-decoration:none}
 .nfopt{display:grid;grid-template-columns:1fr 40px;gap:6px;margin-bottom:6px}.nfopt input{padding:9px 12px}
 .ltab{display:flex;gap:4px;background:#f1f3f7;border-radius:12px;padding:4px;margin:-20px 0 22px;max-width:292px}.ltab button{flex:1;border:0;background:none;border-radius:9px;height:38px;font-weight:700;color:var(--mute);font-size:14px}.ltab button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
 #lVote .lf input{margin-bottom:2px}
@@ -562,7 +563,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.5.0 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.5.1 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -598,7 +599,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.5.0 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.5.1 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -718,7 +719,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 
     <!-- VOUCHER -->
     <section id="v-voucher" style="display:none">
-      <div class="card" style="margin-bottom:16px"><div class="ph"><h3>🎫 검진권 발급현황</h3><span class="hint">발행 후 사용 시 '사용 처리'로 사용자·사용일을 기록하세요</span><div class="right"><label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="vcQ" placeholder="문서번호, 번호, 대상, 사용자"></label></div></div></div>
+      <div class="card" style="margin-bottom:16px"><div class="ph"><h3>🎫 검진권 발급현황</h3><span class="hint">발행 후 사용 시 '사용 처리'로 사용자·사용일을 기록하세요</span><div class="right"><label class="search"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="vcQ" placeholder="일련번호, 프로그램, 수령인, 후원자, 검진자"></label></div></div></div>
       <div id="vcWrap"></div>
     </section>
 
@@ -1348,7 +1349,7 @@ var SOVIS_SHEETS = [
   ["notice","공지사항",[["cat","분류"],["month","대상월"],["title","제목"],["content","내용"],["author","작성자"],["pinned","상단고정"],["createdAt","작성일시"],["updatedBy","최종수정자"]]],
   ["workday","워킹데이",[["date","날짜"],["status","운영상태"],["memo","메모"],["people","행정근무"],["updatedBy","최종수정자"]]],
   ["staff","행정인원",[["part","파트"],["title","직책/직급"],["name","이름"],["order","순서"]]],
-  ["voucher","검진권",[["issuer","발행처"],["docNo","문서번호"],["issueDate","발급일"],["serial","검진권 번호"],["recipient","발급 대상"],["kind","내용"],["validUntil","유효기간"],["used","사용 여부"],["usedDate","사용일"],["usedBy","사용자"],["usedMemo","확인 메모"],["memo","비고"],["updatedBy","최종수정자"]]],
+  ["voucher","검진권",[["issuer","발행처"],["serial","일련번호"],["program","프로그램"],["issueDate","발급일자"],["validFrom","유효기간 시작"],["validUntil","유효기간 종료"],["reqDept","요청부서"],["receiver","수령인"],["target","발행대상인"],["issueCount","발급횟수"],["reason","발행사유"],["sponsor","후원자"],["donation","후원액"],["depositDate","입금일"],["docNo","문서번호"],["used","사용 여부"],["usedRegNo","등록번호"],["usedBy","검진자"],["usedDate","검진일자"],["usedMemo","확인 메모"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["oxygen","산소가스",[["orderDate","발주일"],["inDate","입고일"],["qty","요청갯수"],["requester","요청자"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["mail","등기발송",[["reqDate","요청일"],["title","제목"],["requester","요청자"],["to","수신처"],["sentDate","발송일"],["memo","비고"],["updatedBy","최종수정자"]]],
   ["visit","실적",[["month","월"],["indiv","개인종합(명)"],["winter","동절기(명)"],["corp","기업(명)"],["intl","국제(명)"],["nhis","공단(명)"],["etc","기타(명)"],["total","검진자 합계"],["r_indiv","개인종합 수익"],["r_winter","동절기 수익"],["r_corp","기업 수익"],["r_intl","국제 수익"],["r_nhis","공단 수익"],["r_etc","기타 수익"],["rtotal","수익 합계"],["memo","메모"],["updatedBy","최종수정자"]]],
@@ -1388,7 +1389,7 @@ function sovisBuildSheets(data, users){
       if (key==="rtotal") return VK.reduce(function(t,k){ return t + (Number(rv[k])||0); }, 0);
     }
     if (kind==="voucher" && key==="issuer") return v==="dev" ? "발전후원팀" : "소하검진센터";
-    if (kind==="voucher" && key==="used") return v ? "사용" : (row.validUntil && row.validUntil < new Date().toISOString().slice(0,10) ? "기간만료" : "미사용");
+    if (kind==="voucher" && key==="used") return row.voided ? "폐기" : v ? "사용" : (row.validUntil && row.validUntil < new Date().toISOString().slice(0,10) ? "기간만료" : "미사용");
     if (kind==="expcat" && key==="regular") return v ? "정기" : "";
     if (kind==="contracts" && key==="mgmtType") return row.type!=="MOU협약" ? "" : (v==="platform" ? "플랫폼(" + (row.platform||"") + ")" : (v==="self" ? "자체관리" : ""));
     if (kind==="contracts" && key==="subsidies") return (Array.isArray(v)?v:[]).map(function(x){ return (x.grade||"") + " " + (Number(x.amount)||0).toLocaleString("ko-KR") + "원" + (x.memo ? "(" + x.memo + ")" : ""); }).join(", ");
@@ -1472,7 +1473,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.5.0",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.5.1",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -1799,67 +1800,87 @@ function visitForm(ym){
 
 /* ---------- VOUCHER (검진권 발급현황) ---------- */
 const VISSUER=[["center","소하검진센터","#0f9a74"],["dev","발전후원팀","#8b5cf6"]];
-const vcExpired=v=>!v.used&&v.validUntil&&v.validUntil<todayStr();
-const vcState=v=>v.used?"used":vcExpired(v)?"exp":"open";
-let vcFilter={center:"all",dev:"all"}, vcQ="";
+const vcExpired=v=>!v.used&&!v.voided&&v.validUntil&&v.validUntil<todayStr();
+const vcState=v=>v.voided?"void":v.used?"used":vcExpired(v)?"exp":"open";
+let vcFilter={center:"all",dev:"all"}, vcLimit={center:50,dev:50}, vcYear={center:"",dev:""};
+const vcYearOf=v=>{ const m=String(v.serial||"").match(/(20\d\d)/); return m?m[1]:String(v.issueDate||"").slice(0,4); };
+const vcCmp=(a,b)=>String(b.serial||"").localeCompare(String(a.serial||""),"ko",{numeric:true});
 function renderVoucher(){
   if(!$("vcWrap")) return;
   const w=can("voucher","write"), q=($("vcQ")&&$("vcQ").value.trim().toLowerCase())||"";
   $("vcWrap").innerHTML=VISSUER.map(([k,lbl,col])=>{
-    const all=data.voucher.filter(v=>(v.issuer||"center")===k), n={open:0,used:0,exp:0}; all.forEach(v=>n[vcState(v)]++);
-    const f=vcFilter[k], rows=all.filter(v=>(f==="all"||vcState(v)===f)&&(!q||[v.docNo,v.serial,v.recipient,v.kind,v.usedBy,v.memo].join(" ").toLowerCase().includes(q)))
-      .sort((a,b)=>String(b.issueDate||"").localeCompare(String(a.issueDate||""))||String(a.serial||"").localeCompare(String(b.serial||""),"ko",{numeric:true}));
-    const pctUsed=all.length?Math.round(n.used/all.length*100):0;
-    return '<div class="card vcCard" style="margin-bottom:16px"><div class="ph"><h3 style="color:'+col+'">'+(k==="center"?"🏥":"🤝")+' '+lbl+' 발행</h3>'
-      +'<div class="vcstat"><span>발행 <b>'+all.length+'</b></span><span class="u">사용 <b>'+n.used+'</b></span><span class="o">미사용 <b>'+n.open+'</b></span>'+(n.exp?'<span class="x">기간만료 <b>'+n.exp+'</b></span>':'')+'</div>'
-      +'<div class="right"><div class="chips">'+[["all","전체"],["open","미사용"],["used","사용"],["exp","만료"]].map(([v,l])=>'<button class="chip'+(f===v?" on":"")+'" data-vcf="'+k+'|'+v+'">'+l+'</button>').join("")+'</div>'+(w?'<button class="btn btn-p btn-sm" data-vcadd="'+k+'">+ 발행 등록</button>':'')+'</div></div>'
-      +'<div class="vcbar"><i style="width:'+pctUsed+'%;background:'+col+'"></i></div><div class="subt" style="padding:4px 20px 8px">사용률 '+pctUsed+'%</div>'
-      +'<div class="tw"><table><thead><tr><th>문서번호</th><th>발급일</th><th>검진권 번호</th><th>발급 대상</th><th>내용</th><th>유효기간</th><th>사용 여부</th><th></th></tr></thead><tbody>'
-      +(rows.length?rows.map(v=>{ const st=vcState(v); return '<tr class="vc-'+st+'"><td class="nm" style="white-space:nowrap">'+esc(v.docNo||"-")+'</td><td style="white-space:nowrap">'+esc(v.issueDate||"-")+'</td><td style="white-space:nowrap;font-family:Inter">'+esc(v.serial||"-")+'</td><td>'+esc(v.recipient||"-")+'</td><td class="mini2">'+esc(v.kind||"")+(v.memo?'<div style="color:var(--mute)">'+esc(v.memo)+'</div>':'')+'</td><td style="white-space:nowrap">'+(v.validUntil?'~ '+esc(v.validUntil):'-')+'</td>'
-        +'<td>'+(st==="used"?'<span class="vcuse u">✅ 사용완료</span><div class="mini2"><b>'+esc(v.usedBy||"")+'</b> · '+esc(v.usedDate||"")+(v.usedMemo?' · '+esc(v.usedMemo):'')+'</div>':st==="exp"?'<span class="vcuse x">⌛ 기간만료</span>':'<span class="vcuse o">⏳ 미사용</span>')+'</td>'
-        +'<td style="white-space:nowrap">'+(w?(st==="used"?'<button class="btn btn-sm" data-vcuse="'+esc(v.id)+'">사용 수정</button>':'<button class="btn btn-sm btn-p" data-vcuse="'+esc(v.id)+'">사용 처리</button>')+' <button class="btn btn-sm" data-vcedit="'+esc(v.id)+'">수정</button>':'')+'</td></tr>'; }).join("")
-        :'<tr><td colspan="8" class="empty">'+lbl+' 발행 내역이 없습니다.'+(w?' <b>+ 발행 등록</b>으로 추가하세요.':'')+'</td></tr>')
-      +'</tbody></table></div></div>'; }).join("");
+    const dev=k==="dev", all=data.voucher.filter(v=>(v.issuer||"center")===k), n={open:0,used:0,exp:0,void:0}; all.forEach(v=>n[vcState(v)]++);
+    const years=[...new Set(all.map(vcYearOf).filter(Boolean))].sort().reverse(), f=vcFilter[k], yr=vcYear[k];
+    const rows=all.filter(v=>(f==="all"||vcState(v)===f)&&(!yr||vcYearOf(v)===yr)&&(!q||[v.serial,v.program,v.receiver,v.target,v.reason,v.reqDept,v.sponsor,v.usedBy,v.usedRegNo,v.docNo,v.memo].join(" ").toLowerCase().includes(q))).sort(vcCmp);
+    const live=all.length-n.void, pctUsed=live?Math.round(n.used/live*100):0, shown=rows.slice(0,vcLimit[k]);
+    const head='<th>일련번호</th><th>프로그램</th><th>발급일자</th><th>유효기간</th><th>요청부서</th><th>수령인</th>'+(dev?'<th>발급횟수</th>':'')+'<th>발행사유</th>'+(dev?'<th>후원자</th><th class="num">후원액</th><th>입금일</th>':'')+'<th>사용 (등록번호 · 검진자 · 검진일자)</th><th></th>';
+    const row=v=>{ const st=vcState(v); return '<tr class="vc-'+st+'"><td class="nm" style="white-space:nowrap;font-family:Inter">'+esc(v.serial||"-")+'</td><td class="mini2" style="min-width:140px">'+esc(v.program||"")+'</td><td style="white-space:nowrap">'+esc(v.issueDate||"-")+'</td><td style="white-space:nowrap" class="mini2">'+(v.validFrom?esc(v.validFrom)+'<br>':'')+(v.validUntil?'~ '+esc(v.validUntil):'-')+'</td><td class="mini2">'+esc(v.reqDept||"-")+'</td><td class="mini2">'+esc(v.receiver||"-")+(v.target?'<div style="color:var(--mute)">대상: '+esc(v.target)+'</div>':'')+'</td>'
+      +(dev?'<td class="mini2" style="white-space:nowrap">'+esc(v.issueCount||"-")+'</td>':'')+'<td class="mini2">'+esc(v.reason||"-")+(v.memo?'<div style="color:var(--mute)">'+esc(v.memo)+'</div>':'')+'</td>'
+      +(dev?'<td class="mini2" style="white-space:nowrap">'+esc(v.sponsor||"-")+'</td><td class="money mini2">'+(v.donation?fmtMoney(v.donation):'-')+'</td><td class="mini2" style="white-space:nowrap">'+esc(v.depositDate||"-")+'</td>':'')
+      +'<td>'+(st==="used"?'<span class="vcuse u">✅ 사용완료</span><div class="mini2">'+(v.usedRegNo?esc(v.usedRegNo)+' · ':'')+'<b>'+esc(v.usedBy||"")+'</b>'+(v.usedDate?' · '+esc(v.usedDate):'')+'</div>':st==="void"?'<span class="vcuse x">⛔ 폐기</span>':st==="exp"?'<span class="vcuse x">⌛ 기간만료</span>':'<span class="vcuse o">⏳ 미사용</span>')+'</td>'
+      +'<td style="white-space:nowrap">'+(w?(st==="used"?'<button class="btn btn-sm" data-vcuse="'+esc(v.id)+'">사용 수정</button>':st==="void"?'':'<button class="btn btn-sm btn-p" data-vcuse="'+esc(v.id)+'">사용 처리</button>')+' <button class="btn btn-sm" data-vcedit="'+esc(v.id)+'">수정</button>':'')+'</td></tr>'; };
+    return '<div class="card vcCard" style="margin-bottom:16px"><div class="ph"><h3 style="color:'+col+'">'+(dev?"🤝":"🏥")+' '+lbl+' 발행</h3>'
+      +'<div class="vcstat"><span>발행 <b>'+nf(all.length)+'</b></span><span class="u">사용 <b>'+nf(n.used)+'</b></span><span class="o">미사용 <b>'+nf(n.open)+'</b></span>'+(n.exp?'<span class="x">기간만료 <b>'+nf(n.exp)+'</b></span>':'')+(n.void?'<span class="x">폐기 <b>'+nf(n.void)+'</b></span>':'')+'</div>'
+      +'<div class="right"><select class="sel" data-vcy="'+k+'"><option value="">전체 연도</option>'+years.map(y=>'<option'+(y===yr?" selected":"")+'>'+y+'</option>').join("")+'</select><div class="chips">'+[["all","전체"],["open","미사용"],["used","사용"],["exp","만료"]].map(([v,l])=>'<button class="chip'+(f===v?" on":"")+'" data-vcf="'+k+'|'+v+'">'+l+'</button>').join("")+'</div>'+(w?'<button class="btn btn-p btn-sm" data-vcadd="'+k+'">+ 발행 등록</button>':'')+'</div></div>'
+      +'<div class="vcbar"><i style="width:'+pctUsed+'%;background:'+col+'"></i></div><div class="subt" style="padding:4px 20px 8px">사용률 '+pctUsed+'% (폐기 제외) · 표시 '+nf(Math.min(rows.length,vcLimit[k]))+' / '+nf(rows.length)+'건</div>'
+      +'<div class="tw vctw"><table style="min-width:'+(dev?1500:1100)+'px"><thead><tr>'+head+'</tr></thead><tbody>'
+      +(shown.length?shown.map(row).join(""):'<tr><td colspan="'+(dev?13:9)+'" class="empty">'+lbl+' 발행 내역이 없습니다.'+(w?' <b>+ 발행 등록</b>으로 추가하세요.':'')+'</td></tr>')
+      +'</tbody></table></div>'+(rows.length>vcLimit[k]?'<div style="text-align:center;padding:10px"><button class="btn btn-sm" data-vcmore="'+k+'">더 보기 (+50)</button></div>':'')+'</div>'; }).join("");
 }
 document.addEventListener("click",e=>{
-  const f=e.target.closest("[data-vcf]"); if(f){ const [k,v]=f.dataset.vcf.split("|"); vcFilter[k]=v; renderVoucher(); return; }
+  const f=e.target.closest("[data-vcf]"); if(f){ const [k,v]=f.dataset.vcf.split("|"); vcFilter[k]=v; vcLimit[k]=50; renderVoucher(); return; }
+  const mo=e.target.closest("[data-vcmore]"); if(mo){ vcLimit[mo.dataset.vcmore]+=50; renderVoucher(); return; }
   const a=e.target.closest("[data-vcadd]"); if(a){ voucherForm(null,a.dataset.vcadd); return; }
   const u=e.target.closest("[data-vcuse]"); if(u){ voucherUse(data.voucher.find(x=>x.id===u.dataset.vcuse)); return; }
   const ed=e.target.closest("[data-vcedit]"); if(ed){ voucherForm(data.voucher.find(x=>x.id===ed.dataset.vcedit)); return; }
 });
-function voucherForm(v,issuer){
-  FORM_MENU="voucher"; v=v||{}; const ed=!!v.id, isr=v.issuer||issuer||"center";
-  const docs=[...new Set(data.voucher.map(x=>x.docNo).filter(Boolean))];
-  const body='<div class="full"><label>발행처 <span class="req">*</span></label><div class="seg sm">'+VISSUER.map(([k,l])=>'<label><input type="radio" name="issuer" value="'+k+'"'+(k===isr?" checked":"")+'>'+l+'</label>').join("")+'</div></div>'
-    +fld("문서번호","docNo",v.docNo,"text",true,"",'placeholder="예: 소하검진-2026-123" list="vcDocs"')+'<datalist id="vcDocs">'+docs.map(d=>'<option value="'+esc(d)+'">').join("")+'</datalist>'
-    +fld("발급일","issueDate",v.issueDate||todayStr(),"date",true)
-    +fld("발급 대상 (기관·사람)","recipient",v.recipient,"text",false,"",'placeholder="예: 광명시청 / 홍길동"')
-    +fld("내용 (검진권 종류)","kind",v.kind,"text",false,"",'placeholder="예: 기본종합검진권 1인"')
-    +fld("유효기간 (까지)","validUntil",v.validUntil,"date")
-    +(ed?fld("검진권 번호","serial",v.serial,"text",false,"",'placeholder="예: 001"')
-        :'<div><label>발급 수량 · 시작 번호</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><input name="qty" type="number" min="1" max="200" value="1"><input name="serialStart" placeholder="시작 번호 (예: 001)"></div><div class="subt">수량만큼 한 장씩 따로 등록돼서 장별로 사용 처리할 수 있어요.</div></div>')
-    +fld("비고","memo",v.memo,"text",false,"full");
-  openModal(shell((ed?"검진권 수정":"검진권 발행 등록"),body,ed));
-  if(ed){ wire("voucher",v,fd=>{ const o=Object.assign({},v,{issuer:fd.issuer,docNo:fd.docNo.trim(),issueDate:fd.issueDate,recipient:(fd.recipient||"").trim(),kind:(fd.kind||"").trim(),validUntil:fd.validUntil||"",serial:(fd.serial||"").trim(),memo:(fd.memo||"").trim()}); delete o.updatedBy; delete o.updatedAt; return o; },
-      fd=>!fd.docNo.trim()?"문서번호를 입력하세요.":""); return; }
-  const F=$("mform");
-  F.onsubmit=async e=>{ e.preventDefault(); const fd=Object.fromEntries(new FormData(F).entries()), qn=Math.max(1,Math.min(200,Number(fd.qty)||1)), ferr=$("ferr");
-    if(!fd.docNo.trim()){ ferr.textContent="문서번호를 입력하세요."; return; }
-    const st=String(fd.serialStart||"").trim(), m=st.match(/^(.*?)(\d+)$/), base=m?m[1]:st, n0=m?Number(m[2]):1, wd=m?m[2].length:3;
+document.addEventListener("change",e=>{ const y=e.target.closest("[data-vcy]"); if(y){ vcYear[y.dataset.vcy]=y.value; vcLimit[y.dataset.vcy]=50; renderVoucher(); } });
+function voucherForm(v,issuer,keep){
+  FORM_MENU="voucher"; v=v||{}; const ed=!!v.id, cur=Object.assign({},v,keep||{}), isr=cur.issuer||issuer||"center", dev=isr==="dev";
+  const uniq=key=>[...new Set(data.voucher.map(x=>x[key]).filter(Boolean))].slice(0,80).map(d=>'<option value="'+esc(d)+'">').join("");
+  const body='<div class="full"><label>발행처 <span class="req">*</span></label><div class="seg sm" id="vfIss">'+VISSUER.map(([k,l])=>'<label><input type="radio" name="issuer" value="'+k+'"'+(k===isr?" checked":"")+'>'+l+'</label>').join("")+'</div></div>'
+    +(ed?fld("일련번호","serial",cur.serial,"text",true,"",'placeholder="예: SH2026-01"')
+        :'<div class="full"><label>일련번호 <span class="req">*</span> <span style="font-weight:500;color:var(--mute)">(여러 장이면 수량 입력 → 끝 숫자가 1씩 증가)</span></label><div style="display:grid;grid-template-columns:2fr 1fr;gap:8px"><input name="serial" required placeholder="시작 번호 (예: '+(dev?"GDF2026-501":"SH2026-63")+')" value="'+esc(cur.serial||"")+'"><input name="qty" type="number" min="1" max="200" value="'+esc(cur.qty||1)+'" title="발급 수량"></div></div>')
+    +fld("프로그램","program",cur.program,"text",true,"full",'list="vcProg" placeholder="예: 스탠다드(수면)+갑상선+전립선/유방"')+'<datalist id="vcProg">'+uniq("program")+'</datalist>'
+    +fld("발급일자","issueDate",cur.issueDate||todayStr(),"date")
+    +'<div><label>유효기간</label><div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center"><input type="date" name="validFrom" value="'+esc(cur.validFrom||"")+'"><span style="color:var(--mute)">~</span><input type="date" name="validUntil" value="'+esc(cur.validUntil||"")+'"></div></div>'
+    +fld("요청부서","reqDept",cur.reqDept,"text",false,"",'list="vcDept" placeholder="예: 진료협력팀"')+'<datalist id="vcDept">'+uniq("reqDept")+'</datalist>'
+    +fld("수령인","receiver",cur.receiver,"text",false,"",'placeholder="예: 진료협력팀 OOO 팀장"')
+    +(dev?'':fld("발행대상인","target",cur.target,"text",false,"",'placeholder="예: OOO 원장"'))
+    +(dev?fld("발급횟수","issueCount",cur.issueCount,"text",false,"",'list="vcCnt" placeholder="예: 1회/년, 3년(2차)"')+'<datalist id="vcCnt">'+uniq("issueCount")+'</datalist>':'')
+    +fld("발행사유","reason",cur.reason,"text",false,dev?"":"full",'placeholder="예: 개원기념일, 후원자 예우"')
+    +(dev?'<div class="sechd">후원 정보</div>'+fld("후원자","sponsor",cur.sponsor,"text")+fld("후원액 (원)","donation",cur.donation?fmtMoney(cur.donation):"","text",false,"",'inputmode="numeric" id="vfDon"')+fld("입금일","depositDate",cur.depositDate,"text",false,"",'placeholder="예: 2026.03.10 (누적)"'):'')
+    +fld("문서번호 (선택)","docNo",cur.docNo,"text")+fld("비고","memo",cur.memo,"text")
+    +(ed?'<div class="full"><label class="ck" style="display:flex;align-items:center;gap:8px;margin:0;color:var(--red);font-weight:700"><input type="checkbox" name="voided"'+(cur.voided?" checked":"")+' style="width:18px;height:18px">⛔ 폐기 (사용하지 않고 폐기된 검진권)</label></div>':'');
+  openModal(shell(ed?"검진권 수정":"검진권 발행 등록",body,ed));
+  const F=$("mform"); if($("vfDon")) bindMoney($("vfDon"));
+  F.querySelectorAll('#vfIss input').forEach(r=>r.onchange=()=>{ const fd=Object.fromEntries(new FormData(F).entries()); voucherForm(v,r.value,Object.assign(fd,{issuer:r.value,donation:money(fd.donation||"")})); });
+  const build=(fd,serial)=>{ const o=Object.assign({},v,{issuer:fd.issuer,serial:serial,program:(fd.program||"").trim(),issueDate:fd.issueDate||"",validFrom:fd.validFrom||"",validUntil:fd.validUntil||"",reqDept:(fd.reqDept||"").trim(),receiver:(fd.receiver||"").trim(),reason:(fd.reason||"").trim(),docNo:(fd.docNo||"").trim(),memo:(fd.memo||"").trim()});
+    if(fd.issuer==="dev"){ o.issueCount=(fd.issueCount||"").trim(); o.sponsor=(fd.sponsor||"").trim(); o.donation=money(fd.donation||""); o.depositDate=(fd.depositDate||"").trim(); delete o.target; }
+    else { o.target=(fd.target||"").trim(); ["issueCount","sponsor","donation","depositDate"].forEach(x=>delete o[x]); }
+    if(ed) o.voided=!!fd.voided; else { o.used=false; o.createdAt=new Date().toISOString(); }
+    delete o.updatedBy; delete o.updatedAt; delete o.qty; return o; };
+  const vErr=fd=>!(fd.serial||"").trim()?"일련번호를 입력하세요.":!(fd.program||"").trim()?"프로그램을 입력하세요.":fd.validFrom&&fd.validUntil&&fd.validUntil<fd.validFrom?"유효기간 종료일이 시작일보다 빠릅니다.":"";
+  if(ed){ wire("voucher",v,fd=>build(fd,(fd.serial||"").trim()),fd=>{ const m=vErr(fd); if(m) return m; const dup=data.voucher.find(x=>x.id!==v.id&&x.serial===(fd.serial||"").trim()); return dup?"같은 일련번호가 이미 있어요.":""; }); return; }
+  F.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeModal);
+  F.onsubmit=async e=>{ e.preventDefault(); const fd=Object.fromEntries(new FormData(F).entries()), ferr=$("ferr"), m=vErr(fd); if(m){ ferr.textContent=m; return; }
+    const qn=Math.max(1,Math.min(200,Number(fd.qty)||1)), st=fd.serial.trim(), mm=st.match(/^(.*?)(\d+)$/);
+    if(qn>1&&!mm){ ferr.textContent="여러 장을 등록하려면 일련번호가 숫자로 끝나야 해요. (예: SH2026-63)"; return; }
+    const serials=qn===1?[st]:Array.from({length:qn},(_,i)=>mm[1]+String(Number(mm[2])+i).padStart(mm[2].length,"0"));
+    const dups=serials.filter(sr=>data.voucher.some(x=>x.serial===sr)); if(dups.length){ ferr.textContent="이미 있는 일련번호: "+dups.slice(0,5).join(", ")+(dups.length>5?" 외 "+(dups.length-5)+"건":""); return; }
     const btn=F.querySelector('[type=submit]'); btn.disabled=true;
-    try{ for(let i=0;i<qn;i++){ const serial=(qn>1||st)?(base+String(n0+i).padStart(wd,"0")):""; btn.textContent="저장 중… "+(i+1)+"/"+qn;
-        await saveItem("voucher",{issuer:fd.issuer,docNo:fd.docNo.trim(),issueDate:fd.issueDate,recipient:(fd.recipient||"").trim(),kind:(fd.kind||"").trim(),validUntil:fd.validUntil||"",serial,memo:(fd.memo||"").trim(),used:false,createdAt:new Date().toISOString()}); }
-      toast(qn+"장 발행 등록했습니다."); closeModal(); }
+    try{ for(let i=0;i<serials.length;i++){ btn.textContent="저장 중… "+(i+1)+"/"+serials.length; await saveItem("voucher",build(fd,serials[i])); }
+      toast(serials.length+"장 발행 등록했습니다."); closeModal(); }
     catch(err){ ferr.textContent=errText(err); btn.disabled=false; btn.textContent="저장"; } };
 }
 function voucherUse(v){ if(!v) return; FORM_MENU="voucher";
-  const body='<div class="full" style="background:#f6f8fb;border-radius:12px;padding:10px 14px;font-size:13px">🎫 <b>'+esc(v.docNo||"")+'</b> '+(v.serial?"· "+esc(v.serial):"")+' · '+esc(v.kind||"")+(v.recipient?' · 발급 대상 '+esc(v.recipient):'')+'</div>'
-    +'<div class="full"><label class="ck" style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:0"><input type="checkbox" name="used" id="vuUsed" style="width:20px;height:20px"'+(v.used||!v.usedDate?" checked":"")+'>✅ 사용 완료</label></div>'
-    +fld("사용일","usedDate",v.usedDate||todayStr(),"date",false)+fld("사용자 (검진 받은 분)","usedBy",v.usedBy,"text",false,"",'placeholder="예: 홍길동"')
-    +fld("확인 메모","usedMemo",v.usedMemo,"text",false,"full",'placeholder="예: 원본 회수, 등록번호 12345"');
+  const body='<div class="full" style="background:#f6f8fb;border-radius:12px;padding:10px 14px;font-size:13px">🎫 <b>'+esc(v.serial||"")+'</b> · '+esc(v.program||"")+(v.receiver?' · 수령인 '+esc(v.receiver):'')+(v.sponsor?' · 후원자 '+esc(v.sponsor):'')+'</div>'
+    +'<div class="full"><label class="ck" style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:0"><input type="checkbox" name="used" style="width:20px;height:20px"'+(v.used||!v.usedDate?" checked":"")+'>✅ 사용 완료</label></div>'
+    +fld("등록번호","usedRegNo",v.usedRegNo,"text",false,"",'inputmode="numeric" placeholder="예: 113190"')+fld("검진자","usedBy",v.usedBy,"text",false,"",'placeholder="예: 홍길동"')
+    +fld("검진일자","usedDate",v.usedDate||todayStr(),"date")+fld("확인 메모","usedMemo",v.usedMemo,"text",false,"",'placeholder="예: 원본 회수"');
   openModal(shell("검진권 사용 처리",body,false));
-  wire("voucher",v,fd=>{ const o=Object.assign({},v,{used:!!fd.used,usedDate:fd.used?fd.usedDate:"",usedBy:fd.used?(fd.usedBy||"").trim():"",usedMemo:fd.used?(fd.usedMemo||"").trim():""}); delete o.updatedBy; delete o.updatedAt; return o; },
-    fd=>fd.used&&!(fd.usedBy||"").trim()?"사용자 이름을 입력하세요.":fd.used&&!fd.usedDate?"사용일을 입력하세요.":"");
+  wire("voucher",v,fd=>{ const o=Object.assign({},v,{used:!!fd.used,usedRegNo:fd.used?(fd.usedRegNo||"").trim():"",usedDate:fd.used?fd.usedDate:"",usedBy:fd.used?(fd.usedBy||"").trim():"",usedMemo:fd.used?(fd.usedMemo||"").trim():""}); delete o.updatedBy; delete o.updatedAt; return o; },
+    fd=>fd.used&&!(fd.usedBy||"").trim()?"검진자 이름을 입력하세요.":fd.used&&!fd.usedDate?"검진일자를 입력하세요.":"");
 }
 
 /* ---------- VOTE (투표 채널 · 비밀투표) ---------- */
@@ -2358,10 +2379,10 @@ function demoData(){
       const c={indiv:Math.round((70+rnd()*60)*g),winter:Math.round((150+rnd()*150)*win),corp:Math.round((600+rnd()*500)*(m>=9&&m<=12?1.3:1)*g),intl:Math.round((12+rnd()*16)*g),nhis:Math.round((420+rnd()*300)*(m>=10&&m<=12?1.6:1)),etc:Math.round(150+rnd()*90)};
       Object.keys(c).forEach(k=>{ if(!c[k]) delete c[k]; }); visit.push({id:"vm-"+ym,month:ym,counts:c,memo:""}); } }
   visit.forEach(v=>{ const k={indiv:150000,winter:120000,corp:230000,intl:900000,nhis:105000,etc:60000}; v.revenue={}; Object.keys(v.counts).forEach(c=>v.revenue[c]=Math.round(v.counts[c]*k[c]*(0.92+((v.month.charCodeAt(6)+c.length)%9)/50)/10)*10); });
-  const voucher=[]; const VC=(isr,doc,dt,ser,rc,kind,vu,used,by,ud)=>voucher.push({id:"vc"+voucher.length,issuer:isr,docNo:doc,issueDate:dt,serial:ser,recipient:rc,kind,validUntil:vu,used:!!used,usedBy:by||"",usedDate:ud||""});
-  ["001","002","003","004","005"].forEach((n,i)=>VC("center","소하검진-2026-0412",D(-40),"2026-"+n,"(예시) 광명시 체육회","기본종합검진권 1인",D(120),i<2,i<2?["김OO","이OO"][i]:"",i<2?D(-20+i*5):""));
-  VC("center","소하검진-2026-0398",D(-200),"2025-031","(예시) 지역 행사 경품","기본종합검진권 1인",D(-10));
-  ["01","02","03"].forEach((n,i)=>VC("dev","발전후원-2026-077",D(-25),"D-"+n,"(예시) 후원자 감사 선물","프리미엄 종합검진권",D(340),i===0,i===0?"박OO":"",i===0?D(-3):""));
+  const voucher=[]; const VC=(o)=>voucher.push(Object.assign({id:"vc"+voucher.length,used:false},o));
+  ["01","02","03","04","05"].forEach((n,i)=>VC({issuer:"center",serial:"SH2026-"+n,program:"스탠다드(수면)+갑상선",issueDate:D(-40),validFrom:D(-40),validUntil:D(320),reqDept:"진료협력팀",receiver:"(예시) 진료협력팀 OOO 팀장",target:"(예시) 협력병원 원장",reason:"개원기념일",used:i<2,usedRegNo:i<2?String(110000+i*137):"",usedBy:i<2?["김OO","이OO"][i]:"",usedDate:i<2?D(-20+i*5):""}));
+  VC({issuer:"center",serial:"SH2025-31",program:"베이직",issueDate:D(-400),validFrom:D(-400),validUntil:D(-10),reqDept:"홍보팀",receiver:"(예시) 홍보팀",reason:"지역 행사 경품"});
+  ["501","502","503"].forEach((n,i)=>VC({issuer:"dev",serial:"GDF2026-"+n,program:i?"기본검진(1매)":"VIP(프리미엄) 1매",issueDate:D(-25),validUntil:D(705),reqDept:"발전후원팀",receiver:"(예시) 후원자 본인",issueCount:"1회/년",reason:"후원자 예우",sponsor:"(예시) 홍OO",donation:5000000,depositDate:"2026.10.01",used:i===0,usedRegNo:i===0?"98765":"",usedBy:i===0?"박OO":"",usedDate:i===0?D(-3):""}));
   contracts.push({id:"ch1",type:"병원협약",name:"GIDC 지식산업센터",vendor:"GIDC 지식산업센터",start:"2026-10-14",end:"",dept:"진료협력팀",benefit:"기본종합건강검진 20% 할인(추가선택 항목 제외)",target:"GIDC 소속 구성원 및 그 가족",proofDocs:"재직증명서 및 가족관계증명서"});
   const all={contracts,oxygen,mail,staff,workday,package:pk,notice,client,billing,exam,bank,expense,expcat,resv,visit,voucher};
   Object.values(all).forEach(arr=>arr.forEach(x=>{ x.createdAt=x.createdAt||now; x.updatedBy=by; }));
