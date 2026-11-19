@@ -532,6 +532,12 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .bsel{padding:4px 8px;font-size:12.5px}.bwarn{color:#b46d00;font-weight:700}
 .bmgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.bmgrid label{font-size:11.5px}.bmgrid input{text-align:right}
 @media (max-width:900px){.bmgrid{grid-template-columns:repeat(3,1fr)}}
+.krecon{margin:0 20px 12px;border-radius:14px;padding:12px 16px;background:#f2fbf6;border:1px solid #cdeedd}.krecon.bad{background:#fff6ec;border-color:#f6d9b3}
+.krc-h{font-weight:800;font-size:13.5px;margin-bottom:8px}.krc-h span{font-weight:500;color:var(--mute);font-size:12px;margin-left:6px}
+.krc-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.krc-g div{background:#fff;border-radius:10px;padding:8px 12px}.krc-g small{display:block;font-size:11.5px;color:var(--mute)}.krc-g b{font-size:15px}.krc-g em{display:block;font-style:normal;font-size:11.5px;color:var(--ink2);margin-top:2px}
+.krc-b{margin-top:8px;font-size:12.5px;color:#a65b00;font-weight:600}.krc-b span{font-weight:500;color:var(--mute)}.krc-n{margin-top:8px;font-size:11.5px;color:var(--mute)}
+@media (max-width:900px){.krc-g{grid-template-columns:1fr}}
+.krow-card td{background:#f7faff}.krow-out td{background:#fff7f7}
 </style>
 </head>
 <body>
@@ -582,7 +588,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       </div>
       <div class="or">처음이신가요?</div>
       <button type="button" class="btn-demo" id="demoBtn">👀 구경하러 가기 <small>· 예시 데이터로 체험 (저장 안 됨)</small></button>
-      <div class="l-foot">v2.6.0 · 소하검진센터 SEOK</div>
+      <div class="l-foot">v2.6.2 · 소하검진센터 SEOK</div>
     </div>
   </div>
 </div>
@@ -619,7 +625,7 @@ td.money{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <div class="side-foot">
       <div class="me"><span class="av" id="meAv">?</span><div><span id="meName">-</span><small id="mePart"></small></div></div>
       <div class="conn" style="margin-top:8px"><i id="connDot"></i><span id="connTxt">연결 중…</span></div>
-      <div class="ver">v2.6.0 | 소하검진센터 SEOK</div>
+      <div class="ver">v2.6.2 | 소하검진센터 SEOK</div>
       <div class="row2"><button id="pwBtn">비밀번호 변경</button><button id="logout"><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>로그아웃</button></div>
     </div>
   </aside>
@@ -1551,7 +1557,7 @@ function backupMenu(){
   });
   $("bkJ").onclick=()=>run($("bkJ"),async()=>{
     const b=await freshBackupData();
-    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.6.0",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
+    downloadBlob(new Blob([JSON.stringify({app:"SOVIS",version:"2.6.2",exportedAt:new Date().toISOString(),exportedBy:ME.email,data:b.data,users:b.users},null,1)],{type:"application/json"}),"SOVIS_백업_"+stamp()+".json");
   });
 }
 $("bkBtn").onclick=backupMenu;
@@ -2089,7 +2095,7 @@ const splitSum=k=>Object.values(k.splits||{}).reduce((s,v)=>s+(Number(v)||0),0);
 let kMonth=thisMonth(), kFilter="all";
 function kShift(n){ const [y,m]=kMonth.split("-").map(Number); const d=new Date(y,m-1+n,1); kMonth=d.getFullYear()+"-"+pad(d.getMonth()+1); renderBank(); }
 $("kPrev").onclick=()=>kShift(-1); $("kNext").onclick=()=>kShift(1); $("kThis").onclick=()=>{ kMonth=thisMonth(); renderBank(); };
-chips($("kChips"),[["all","전체"],["un","미분류 있음"],["norc","미수납"],["intl","🌏 국제"],["corp","기업"],["gongdan","공단"],["indiv*","개인"]],"all",r=>{kFilter=r;renderBank();});
+chips($("kChips"),[["all","전체"],["un","미분류 있음"],["norc","미수납"],["intl","🌏 국제"],["corp","기업"],["gongdan","공단"],["indiv*","개인"],["card","카드결제대금"],["out","출금"]],"all",r=>{kFilter=r;renderBank();});
 $("kQ").oninput=renderBank;
 function bankCats(k){ const sp=k.splits||{}, un=(Number(k.amount)||0)-splitSum(k);
   return '<div class="cats">'+SPLITS.filter(([c])=>Number(sp[c])).map(([c,l])=>'<span class="c-'+c+'">'+l+' '+fmtMoney(sp[c])+'</span>').join("")+(un>0?'<span class="c-un">미분류 '+fmtMoney(un)+'</span>':un<0?'<span class="c-un">초과 '+fmtMoney(-un)+'</span>':'')+'</div>'; }
@@ -2135,7 +2141,7 @@ $("kUpFile").onchange=async e=>{ const f=e.target.files[0]; if(!f) return;
       +'<table style="width:100%"><tbody><tr><td><b>미분류 입금</b> <span class="mini2">(구분·수납·청구연동을 직접 지정)</span></td><td class="money"><b>'+nX.length+'건</b></td><td class="money">'+fmtMoney(sum(nX))+'원</td></tr>'
       +'<tr><td>기타 · 카드결제대금 <span class="mini2">(NH1·BC-·KB1·신한0·삼성1·현대1·하나9·롯데9)</span></td><td class="money">'+nC.length+'건</td><td class="money">'+fmtMoney(sum(nC))+'원</td></tr>'
       +'<tr><td>기타 · 출금</td><td class="money">'+nO.length+'건</td><td class="money">'+fmtMoney(sum(nO))+'원</td></tr></tbody></table>'
-      +'<div class="subt" style="margin-top:10px">카드결제대금·출금은 구분 정리 대상에서 빠지고, 우리은행 목록 아래 <b>기타</b>에 따로 모여요. 잘못 분류됐으면 [수정]에서 바꿀 수 있어요.</div></div></div>'
+      +'<div class="subt" style="margin-top:10px">카드결제대금·출금은 구분 정리 대상에서 빠지고, 우리은행 목록에 거래일시 순서대로 함께 표시돼요. 잘못 분류됐으면 [수정]에서 바꿀 수 있어요.</div></div></div>'
       +'<div class="mf"><span class="ferr" id="ferr"></span><span class="sp"></span><button type="button" class="btn" data-x2>취소</button><button type="button" class="btn btn-p" id="kUpGo"'+(nw.length?'':' disabled')+'>'+nw.length+'건 등록</button></div>';
     $("modal").querySelectorAll("[data-x2]").forEach(b=>b.onclick=()=>closeModal());
     $("kUpGo").onclick=async()=>{ $("kUpGo").disabled=true; $("kUpGo").textContent="등록 중…";
@@ -2143,31 +2149,59 @@ $("kUpFile").onchange=async e=>{ const f=e.target.files[0]; if(!f) return;
       catch(err){ $("ferr").textContent=errText(err); $("kUpGo").disabled=false; $("kUpGo").textContent="다시 시도"; } };
   }catch(err){ toast(err.message||"파일을 읽지 못했어요."); }
 };
-let kEtcOpen=false;
-document.addEventListener("click",e=>{ const t=e.target.closest("[data-ketc]"); if(t){ kEtcOpen=!kEtcOpen; renderBank(); } });
+let kAsc=(()=>{ try{ return localStorage.getItem("sovis_kasc")!=="0"; }catch(e){ return true; } })();
+/* 계좌 대사: 은행 계좌조회의 찾으신금액·맡기신금액 합계, 거래후잔액 흐름과 맞는지 확인 */
+function bankRecon(bn){
+  const R=data.bank.filter(k=>k.bank===bn&&(k.dt||"").slice(0,7)===kMonth&&String(k.id||"").startsWith("wr-")&&k.balance!=null&&k.balance!=="");
+  if(!R.length) return "";
+  const key=k=>String(k.id).slice(3,17), inOf=k=>k.etc==="out"?0:(Number(k.amount)||0), outOf=k=>k.etc==="out"?(Number(k.amount)||0):0;
+  const sIn=R.reduce((t,k)=>t+inOf(k),0), sOut=R.reduce((t,k)=>t+outOf(k),0), sX=R.filter(k=>!k.etc).reduce((t,k)=>t+inOf(k),0), sC=R.filter(k=>k.etc==="card").reduce((t,k)=>t+inOf(k),0);
+  const grp={}; R.forEach(k=>(grp[key(k)]=grp[key(k)]||[]).push(k)); const ks=Object.keys(grp).sort();
+  let cur=null, start=null, breaks=[];
+  ks.forEach(t=>{ const g=grp[t].slice();
+    if(cur===null){ const f=g.find(k=>!g.some(o=>o!==k&&Number(o.balance)-inOf(o)+outOf(o)===Number(k.balance)))||g[0]; cur=Number(f.balance)-inOf(f)+outOf(f); start=cur; }
+    while(g.length){ let i=g.findIndex(k=>cur+inOf(k)-outOf(k)===Number(k.balance)); if(i<0){ i=0; breaks.push(g[0]); } cur=Number(g[i].balance); g.splice(i,1); } });
+  const nonUp=data.bank.filter(k=>k.bank===bn&&(k.dt||"").slice(0,7)===kMonth&&!String(k.id||"").startsWith("wr-")).length;
+  const f=ks[0], l=ks[ks.length-1], fmtT=t=>t.slice(4,6)+"/"+t.slice(6,8)+" "+t.slice(8,10)+":"+t.slice(10,12);
+  const ok=!breaks.length;
+  return '<div class="krecon '+(ok?"ok":"bad")+'"><div class="krc-h">'+(ok?"✅ 계좌 대사 일치":"⚠ 잔액이 이어지지 않는 곳 "+breaks.length+"곳 — 빠진 거래가 있을 수 있어요")+' <span>'+fmtT(f)+' ~ '+fmtT(l)+' · '+R.length+'건</span></div>'
+    +'<div class="krc-g"><div><small>맡기신금액 합계</small><b>'+fmtMoney(sIn)+'</b><em>입금 '+fmtMoney(sX)+' + 카드결제대금 '+fmtMoney(sC)+'</em></div>'
+    +'<div><small>찾으신금액 합계</small><b>'+fmtMoney(sOut)+'</b><em>출금</em></div>'
+    +'<div><small>잔액 흐름</small><b>'+fmtMoney(start)+' → '+fmtMoney(cur)+'</b><em>시작잔액 + 맡기신 − 찾으신 '+(start+sIn-sOut===cur?"= 마지막 거래후잔액 ✓":"≠ 마지막 거래후잔액 ("+fmtMoney(start+sIn-sOut-cur)+" 차이)")+'</em></div></div>'
+    +(breaks.length?'<div class="krc-b">확인할 위치: '+breaks.slice(0,5).map(k=>esc(String(k.dt||"").replace("T"," ")+" "+(k.memo||"")+" "+fmtMoney(k.amount))).join(" · ")+(breaks.length>5?" 외 "+(breaks.length-5)+"곳":"")+' <span>(바로 앞에 거래가 빠졌거나 중복됐을 수 있어요. 그 기간 파일을 다시 올리면 빠진 건만 추가돼요.)</span></div>':'')
+    +'<div class="krc-n">은행 계좌조회에서 같은 기간('+fmtT(f).slice(0,5)+' ~ '+fmtT(l).slice(0,5)+')을 조회해 찾으신금액·맡기신금액 합계와 비교하세요.'+(nonUp?' 직접 등록한 '+nonUp+'건은 대사에서 빠져요.':'')+'</div></div>';
+}
+document.addEventListener("click",e=>{ const t=e.target.closest("[data-ksort]"); if(t){ kAsc=!kAsc; try{localStorage.setItem("sovis_kasc",kAsc?"1":"0");}catch(er){} renderBank(); } });
 
 function renderBank(){
   if(!$("kBanks")) return;
   const [y,m]=kMonth.split("-").map(Number); $("kTitle").textContent=y+"년 "+m+"월";
   const q=$("kQ").value.trim().toLowerCase();
-  const inAll=data.bank.filter(k=>(k.dt||"").slice(0,7)===kMonth), inM=inAll.filter(k=>!bankEtc(k)), etcM=inAll.filter(bankEtc);
-  const tot={}; SPLITS.forEach(([c])=>tot[c]=0); let all=0, un=0;
+  const inAll=data.bank.filter(k=>(k.dt||"").slice(0,7)===kMonth), inM=inAll.filter(k=>!bankEtc(k));
+  const tot={}; SPLITS.forEach(([c])=>tot[c]=0); let all=0, un=0, cardT=0, outT=0;
   let nrc=0; inM.forEach(k=>{ nrc+=Math.max(0,(Number(k.amount)||0)-rcSum(k)); });
   inM.forEach(k=>{ all+=Number(k.amount)||0; SPLITS.forEach(([c])=>tot[c]+=Number((k.splits||{})[c])||0); un+=Math.max(0,(Number(k.amount)||0)-splitSum(k)); });
-  $("kSum").innerHTML='<div><small>전체 입금</small><b>'+fmtMoney(all)+'</b></div>'+SPLITS.filter(([c])=>c!=="indiv"||tot.indiv).map(([c,l])=>'<div><small>'+l+'</small><b>'+fmtMoney(tot[c])+'</b></div>').join("")+'<div style="background:'+(nrc?"var(--amber-s)":"var(--green-s)")+'"><small>새롬 미수납</small><b style="color:'+(nrc?"#a96400":"var(--green)")+'">'+fmtMoney(nrc)+'</b></div>'+'<div style="background:'+(un?"var(--red-s)":"var(--green-s)")+'"><small>미분류</small><b style="color:'+(un?"var(--red)":"var(--green)")+'">'+fmtMoney(un)+'</b></div>';
-  const ok=k=>(kFilter==="all"||(kFilter==="norc"?(Number(k.amount)||0)>rcSum(k):kFilter==="intl"?!!k.intl:kFilter==="un"?(Number(k.amount)||0)!==splitSum(k):kFilter==="indiv*"?["indiv","indiv_gen","indiv_comp"].some(c=>Number((k.splits||{})[c])>0):Number((k.splits||{})[kFilter])>0))&&(!q||(String(k.memo||"")+" "+String(k.note||"")).toLowerCase().includes(q));
+  inAll.forEach(k=>{ if(k.etc==="card") cardT+=Number(k.amount)||0; else if(k.etc==="out") outT+=Number(k.amount)||0; });
+  $("kSum").innerHTML='<div style="background:#eaf3ff"><small>전체 입금</small><b style="color:var(--blue)">'+fmtMoney(all+cardT)+'</b></div>'
+    +'<div style="background:#fdeeee"><small>전체 출금</small><b style="color:var(--red)">'+fmtMoney(outT)+'</b></div>'
+    +SPLITS.filter(([c])=>c!=="indiv"||tot.indiv).map(([c,l])=>'<div><small>'+l+'</small><b>'+fmtMoney(tot[c])+'</b></div>').join("")
+    +'<div><small>카드결제대금</small><b>'+fmtMoney(cardT)+'</b></div>'
+    +'<div style="background:'+(nrc?"var(--amber-s)":"var(--green-s)")+'"><small>새롬 미수납</small><b style="color:'+(nrc?"#a96400":"var(--green)")+'">'+fmtMoney(nrc)+'</b></div>'+'<div style="background:'+(un?"var(--red-s)":"var(--green-s)")+'"><small>미분류</small><b style="color:'+(un?"var(--red)":"var(--green)")+'">'+fmtMoney(un)+'</b></div>';
+  const okX=k=>kFilter==="all"||(kFilter==="norc"?(Number(k.amount)||0)>rcSum(k):kFilter==="intl"?!!k.intl:kFilter==="un"?(Number(k.amount)||0)!==splitSum(k):kFilter==="indiv*"?["indiv","indiv_gen","indiv_comp"].some(c=>Number((k.splits||{})[c])>0):Number((k.splits||{})[kFilter])>0);
+  const ok=k=>(bankEtc(k)?(kFilter==="all"||kFilter===k.etc):(kFilter!=="card"&&kFilter!=="out"&&okX(k)))&&(!q||(String(k.memo||"")+" "+String(k.note||"")).toLowerCase().includes(q));
+  const sk=k=>String(k.dt||"")+"|"+String(k.id||"");
   $("kBanks").innerHTML=BANKS.map(bn=>{
-    const rows=inM.filter(k=>k.bank===bn&&ok(k)).sort((a,b)=>String(b.dt||"").localeCompare(String(a.dt||"")));
-    const bt=inM.filter(k=>k.bank===bn).reduce((s,k)=>s+(Number(k.amount)||0),0);
-    return '<div class="card bankgrp"><div class="bankhd"><span class="bn '+BANK_CLS[bn]+'">🏦 '+bn+'</span><span class="hint">'+inM.filter(k=>k.bank===bn).length+'건</span><span class="bt">'+fmtMoney(bt)+'원</span></div>'
-      +'<div class="tw"><table><thead><tr><th>입금일시</th><th>적요 · 비고</th><th class="num">금액</th><th>구분</th><th>새롬 수납</th><th>청구 연동</th><th></th></tr></thead><tbody>'
-      +(rows.length?rows.map(k=>{ const ln=(k.links||[]).map(l=>{ const b=data.billing.find(x=>x.id===l.billingId); return b?esc(clientOf(b).name||"-")+' '+fmtMoney(l.amount):""; }).filter(Boolean);
-          return '<tr><td style="white-space:nowrap">'+esc(String(k.dt||"").replace("T"," "))+'</td><td class="nm">'+esc(k.memo||"-")+(k.txType?' <span class="mini2" style="display:inline;color:var(--mute)">'+esc(k.txType)+'</span>':'')+(k.intl?' <span class="tag" style="background:#e3f6f8;color:#0b7f8f">🌏 국제</span>':'')+(k.note?'<div class="mini2" style="font-weight:500">'+esc(k.note)+'</div>':'')+'</td><td class="money"><b>'+fmtMoney(k.amount)+'</b></td><td>'+bankCats(k)+'</td><td>'+rcCell(k)+'</td><td class="mini2" style="white-space:nowrap">'+(ln.length?'🔗 '+ln.join("<br>🔗 "):"-")+'</td><td><button class="btn btn-sm" data-kedit="'+esc(k.id)+'">수정</button></td></tr>'; }).join("")
-        :'<tr><td colspan="7" class="empty">'+bn+' 입금 내역이 없습니다.</td></tr>')
-      +'</tbody></table></div>'+(()=>{ const E=etcM.filter(k=>k.bank===bn).sort((a,b)=>String(b.dt||"").localeCompare(String(a.dt||""))); if(!E.length) return "";
-        const sc=E.filter(k=>k.etc==="card"), so=E.filter(k=>k.etc==="out"), sm=a=>a.reduce((t,k)=>t+(Number(k.amount)||0),0);
-        return '<div class="ketc"><button type="button" class="ketc-h" data-ketc>'+(kEtcOpen?"▲":"▼")+' 기타 '+E.length+'건 <span>카드결제대금 '+sc.length+'건 '+fmtMoney(sm(sc))+'원 · 출금 '+so.length+'건 '+fmtMoney(sm(so))+'원</span></button>'
-          +(kEtcOpen?'<div class="tw"><table><thead><tr><th>거래일시</th><th>기타 구분</th><th>기재내용</th><th>적요</th><th class="num">금액</th><th></th></tr></thead><tbody>'+E.map(k=>'<tr><td style="white-space:nowrap">'+esc(String(k.dt||"").replace("T"," "))+'</td><td><span class="tag '+(k.etc==="card"?"t-blu":"t-gry")+'">'+ETC_LBL[k.etc]+'</span></td><td class="nm">'+esc(k.memo||"")+'</td><td class="mini2">'+esc(k.txType||"")+'</td><td class="money">'+(k.etc==="out"?'<span style="color:var(--red)">-'+fmtMoney(k.amount)+'</span>':fmtMoney(k.amount))+'</td><td><button class="btn btn-sm" data-kedit="'+esc(k.id)+'">수정</button></td></tr>').join("")+'</tbody></table></div>':'')+'</div>'; })()+'</div>'; }).join("");
+    const B=inAll.filter(k=>k.bank===bn), rows=B.filter(ok).sort((a,b)=>kAsc?sk(a).localeCompare(sk(b)):sk(b).localeCompare(sk(a)));
+    const bIn=B.filter(k=>k.etc!=="out").reduce((t,k)=>t+(Number(k.amount)||0),0), bOut=B.filter(k=>k.etc==="out").reduce((t,k)=>t+(Number(k.amount)||0),0);
+    return '<div class="card bankgrp"><div class="bankhd"><span class="bn '+BANK_CLS[bn]+'">🏦 '+bn+'</span><span class="hint">'+B.length+'건</span><button type="button" class="btn btn-sm" data-ksort title="정렬 바꾸기">'+(kAsc?"↑ 과거순":"↓ 최근순")+'</button><span class="bt">입금 '+fmtMoney(bIn)+'원'+(bOut?' · <span style="color:var(--red)">출금 '+fmtMoney(bOut)+'원</span>':'')+'</span></div>'+bankRecon(bn)
+      +'<div class="tw"><table><thead><tr><th>거래일시</th><th>적요 · 비고</th><th class="num">금액</th><th>구분</th><th>새롬 수납</th><th>청구 연동</th><th class="num">거래후잔액</th><th></th></tr></thead><tbody>'
+      +(rows.length?rows.map(k=>{ const bal=k.balance!=null&&k.balance!==""?fmtMoney(k.balance):"", memo='<td class="nm">'+esc(k.memo||"-")+(k.txType?' <span class="mini2" style="display:inline;color:var(--mute)">'+esc(k.txType)+'</span>':'')+(k.intl?' <span class="tag" style="background:#e3f6f8;color:#0b7f8f">🌏 국제</span>':'')+(k.note?'<div class="mini2" style="font-weight:500">'+esc(k.note)+'</div>':'')+'</td>';
+          if(bankEtc(k)) return '<tr class="'+(k.etc==="out"?"krow-out":"krow-card")+'"><td style="white-space:nowrap">'+esc(String(k.dt||"").replace("T"," "))+'</td>'+memo+'<td class="money">'+(k.etc==="out"?'<b style="color:var(--red)">-'+fmtMoney(k.amount)+'</b>':'<b>'+fmtMoney(k.amount)+'</b>')+'</td><td><span class="tag '+(k.etc==="card"?"t-blu":"t-red")+'">'+ETC_LBL[k.etc]+'</span></td><td class="mini2">-</td><td class="mini2">-</td><td class="money mini2">'+bal+'</td><td><button class="btn btn-sm" data-kedit="'+esc(k.id)+'">수정</button></td></tr>';
+          const ln=(k.links||[]).map(l=>{ const b=data.billing.find(x=>x.id===l.billingId); return b?esc(clientOf(b).name||"-")+' '+fmtMoney(l.amount):""; }).filter(Boolean);
+          return '<tr><td style="white-space:nowrap">'+esc(String(k.dt||"").replace("T"," "))+'</td>'+memo+'<td class="money"><b>'+fmtMoney(k.amount)+'</b></td><td>'+bankCats(k)+'</td><td>'+rcCell(k)+'</td><td class="mini2" style="white-space:nowrap">'+(ln.length?'🔗 '+ln.join("<br>🔗 "):"-")+'</td><td class="money mini2">'+bal+'</td><td><button class="btn btn-sm" data-kedit="'+esc(k.id)+'">수정</button></td></tr>'; }).join("")
+        :'<tr><td colspan="8" class="empty">'+bn+' 거래 내역이 없습니다.</td></tr>')
+      +'</tbody></table></div></div>';
+  }).join("");
 }
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-kedit]"); if(b) bankForm(data.bank.find(x=>x.id===b.dataset.kedit)); });
 function bankForm(k){
